@@ -1,0 +1,79 @@
+{template 'header', 'mobile'}
+{template 'hometopcss', 'mobile'}
+<div id="head-bar">
+<div class="head-bar">
+<div class="head-bar-back">
+<a href="{$back_link}" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>
+</div>
+<div class="head-bar-title">{$head_name}</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+<div class="{if $COM[groupid] == 8}home-head{elseif $COM[groupid] == 7}home-head{else}home-head-02{/if}"> <span class="f_l"><img src="{if $COM[thumb]}{$COM[thumb]}{else}images/img/home-logo.png{/if}" width="60" height="60" alt="" onerror="this.src='images/img/home-logo.png';"/></span>
+  <ul>
+    <li><strong>{$COM[company]}</strong></li>
+    <li>{if $COM[vip]}{VIP}&nbsp;&nbsp;V{$COM[vip]}&nbsp;&nbsp;第&nbsp;{$COM[year]}&nbsp;年{else}普通会员{/if}</li>
+    <li>店铺等级：<img src="images/img/a{$COM[vip]}.png" align="absmiddle"/></li>
+  </ul>
+</div>
+{if $COM[groupid] == 8}
+<div class="home-quick">
+  <ul>
+ <li><a href="{$HURL}"><img src="images/img/home-sp01-no.png" width="36" height="36"/><span>店铺首页</span></a></li>
+ <li><a href="{$HURL}&action=sell"><img src="images/img/home-sp02-no.png" width="36" height="36"/><span>全部商品</span></a></li>
+ <li><a href="{$HURL}&action=introduce"><img src="images/img/home-sp03.png" width="36" height="36"/><span>公司简介</span></a></li>
+ <li><a href="{$HURL}&action=contact"><img src="images/img/home-sp04-no.png" width="36" height="36"/><span>联系我们</span></a></li>
+  </ul>
+</div>
+{elseif $COM[groupid] == 7}
+<div class="home-quick">
+  <ul>
+ <li><a href="{$HURL}"><img src="images/img/home-sp01-no.png" width="36" height="36"/><span>店铺首页</span></a></li>
+ <li><a href="{$HURL}&action=sell"><img src="images/img/home-sp02-no.png" width="36" height="36"/><span>全部商品</span></a></li>
+ <li><a href="{$HURL}&action=introduce"><img src="images/img/home-sp03.png" width="36" height="36"/><span>公司简介</span></a></li>
+ <li><a href="{$HURL}&action=contact"><img src="images/img/home-sp04-no.png" width="36" height="36"/><span>联系我们</span></a></li>
+  </ul>
+</div>
+{else}
+<div class="home-quick-6">
+  <ul>
+ <li><a href="{$HURL}"><span>店铺首页</span></a></li>
+ <li><a href="{$HURL}&action=sell"><span>全部商品</span></a></li>
+ <li class="noo"><a href="{$HURL}&action=introduce"><span>公司简介</span></a></li>
+ <li><a href="{$HURL}&action=contact"><span>联系我们</span></a></li>
+</ul>
+</div>
+{/if}
+<div class="bd-b"></div>
+{if $itemid}
+<div class="main">
+	<div class="title"><strong>{$title}</strong></div>
+	<div class="info">{$date}&nbsp;&nbsp;点击:{$hits}</div>
+	{if $content}<div class="content">{$content}</div>{/if}
+</div>
+{else}
+<div class="main">
+	<div class="title"><strong>{$COM[company]}</strong></div>
+	<div class="content">
+	{if $video}
+	<center>{video5_player($video, 280, 210)}</center>
+	{/if}
+	{if $thumb}<center><img src="{$thumb}"/></center>{/if}
+	{$content}
+	</div>
+</div>
+<div class="blank-20"></div>
+<div class="list-set">
+<ul>
+<li><div style="border:none;"><a href="{$HURL}&action=credit">公司档案</a></div></li>
+<li><div><a href="{$HURL}&action=contact">联系方式</a></div></li>
+{loop $lists $k $v}
+<li><div><a href="{$HURL}&action={$action}&itemid={$v[itemid]}">{$v[title]}</a></div></li>
+{/loop}
+</ul>
+</div>
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+
+{template 'footer-gs', 'mobile'}
+{template 'footer', 'mobile'}

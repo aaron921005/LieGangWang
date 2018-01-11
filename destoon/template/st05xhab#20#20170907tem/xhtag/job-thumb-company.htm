@@ -1,0 +1,12 @@
+{loop $tags $i $t}
+{php $uinfo = userinfo($t[username]);}
+<dl{if $i==3} class="last"{/if}>
+          <a href="{$t[linkurl]}" target="_blank">
+          <dt><img src="{imgurl($uinfo[thumb], 100)}" alt=""></dt>
+          <span class="bgS"></span>
+          <p><span>{if $t[total]}{$t[total]} 名{else}若干名{/if}</span> <br>
+            在招【{$t[title]}】职位</p>
+          <dd> <span>{$t[company]}</span> </dd>
+          </a>
+</dl>
+{/loop}

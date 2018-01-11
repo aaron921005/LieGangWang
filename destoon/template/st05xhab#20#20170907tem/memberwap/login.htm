@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={DT_CHARSET}"/>
+<title>{if $seo_title}{$seo_title}{else}{if $head_title}{$head_title}{$DT[seo_delimiter]}{/if}{if $city_sitename}{$city_sitename}{else}{$DT[sitename]}{/if}{/if}</title>
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+{if $head_mobile}
+<meta http-equiv="mobile-agent" content="format=html5;url={$head_mobile}">
+{/if}
+<meta name="generator" content="template - b2b.bjlsjp.cn"/>
+<link rel="shortcut icon" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+<link rel="bookmark" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+{if $head_canonical}
+<link rel="canonical" href="{$head_canonical}"/>
+{/if}
+{if $EXT[archiver_enable]}
+<link rel="archives" title="{$DT[sitename]}" href="{$EXT[archiver_url]}"/>
+{/if}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}style.css"/>
+<link href="{DT_SKIN}login-login.css" rel="stylesheet" type="text/css" />
+{if !DT_DEBUG}<script type="text/javascript">window.onerror=function(){return true;}</script>{/if}
+<script type="text/javascript" src="{DT_STATIC}lang/{DT_LANG}/lang.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/config.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/jquery.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/common.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/page.js"></script>
+{if $lazy}<script type="text/javascript" src="{DT_STATIC}file/script/jquery.lazyload.js"></script>{/if}
+{if $JS}
+{loop $JS $js}
+<script type="text/javascript" src="{DT_STATIC}file/script/{$js}.js"></script>
+{/loop}
+{/if}
+{php $searchid = ($moduleid > 3 && $MODULE[$moduleid]['ismenu'] && !$MODULE[$moduleid]['islink']) ? $moduleid : 5;}
+<script type="text/javascript">
+{if $head_mobile && $EXT[mobile_goto]}
+GoMobile('{$head_mobile}');
+{/if}
+var searchid = {$searchid};
+{if $itemid && $DT[anticopy]}
+document.oncontextmenu=function(e){return false;};
+document.onselectstart=function(e){return false;};
+{/if}
+</script>
+<!--[以上为系统关键代码，除非您明确其含义，否则请勿修改或删除，否则会导致系统错误]-->
+<!--[模板中所有带id的元素，请勿修改或删除，否则会导致部分JS代码无法运行]-->
+<!--[以上类似的注释，在编译模板时，系统会自动移除，不会显示在实际的页面中]-->
+</head>
+<body>
+<div class="wrap"> 
+  <!--头部-->
+  <div class="top-header">
+    <div class="top-head">
+      <div class="reg-logo">
+        <p style="background:url({DT_SKIN}image/logo.gif) no-repeat;" class="index"> <a target="_blank" href="{DT_PATH}"></a> </p>
+        <a class="topic"> {$head_title} </a> </div>
+      <div class="reg">欢迎来到{$DT[sitename]}！<a href="{$EXT[guestbook_url]}" target="_self">在线客服</a>  <a href="{DT_PATH}">首页</a></div>
+    </div>
+  </div>
+  <!--头部 结束--> 
+  <!--内容开始--> 
+  <script>
+        $(document).ready(function() {
+            var uname = $("#username").val();
+            var pwd = $("#password").val();
+            var cap = $("#captcha").val();
+            $(".filter").click(function() {
+                $(this).next("input").focus();
+            })
+            if (uname != '') {
+                $("#username").siblings('.filter').find('p').hide();
+            }
+            if (pwd != '') {
+                $("#password").siblings('.mistakeTip').hide();
+            }
+            if (navigator.userAgent.toLowerCase().indexOf('chrome') >= 0) {
+                document.getElementById('username').autocomplete = 'off';
+                document.getElementById('password').autocomplete = 'off';
+            }
+            //用户名登陆
+            $('#username').bind('focus', function() {
+                $(this).siblings('.filter').find('p').hide();
+                $(this).siblings('.filter').find('.judge').hide();
+                $(this).siblings('.mistakeTip').hide();
+                $(this).removeClass('on');
+            });
+            $('#username').bind('blur', function() {
+                var flag1 = /\S{1,20}/g;
+                var flag2 = /[a-zA-Z0-9_-]/g;
+                var flag3 = /^[^\s]{4,50}$/;
+                var uname = jQuery.trim($(this).val());
+                if (uname == '') {
+                    $(this).siblings('.filter').find('p').show();
+                    $(this).parent().addClass('wrong');
+                    $(this).siblings('.filter').find('.judge').show();
+                    $(this).siblings('.mistakeTip').text("请输入用户名").show();
+                    $(this).addClass('on');
+                    $('#username').val("");
+                    return false;
+                } else {
+                    $(this).siblings('.filter').find('p').hide();
+                    $(this).parent().removeClass('wrong');
+                    $(this).siblings('.filter').find('.judge').show();
+                    $(this).siblings('.mistakeTip').hide();
+                    $(this).removeClass('on');
+                }
+            });
+            $('#password').bind('focus', function() {
+                $(this).siblings('.filter').find('p').hide();
+                $(this).siblings('.filter').find('.judge').hide();
+                $(this).siblings('.mistakeTip').hide();
+                $(this).removeClass('on');
+            });
+            $('#password').bind('blur', function() {
+                if ($(this).val() == '') {
+                    $(this).siblings('.filter').find('p').show();
+                    $(this).siblings('.filter').find('.judge').show();
+                    $(this).parent().addClass('wrong');
+                    $(this).siblings('.mistakeTip').text("请输入密码").show();
+                    $(this).addClass('on');
+                } else {
+                    $(this).siblings('.filter').find('p').hide();
+                    $(this).siblings('.filter').find('.judge').show();
+                    $(this).parent().removeClass('wrong');
+                    $(this).siblings('.mistakeTip').hide();
+                    $(this).removeClass('on');
+                }
+            });
+            $('#captcha').bind('focus', function() {
+                $(this).siblings('.filter').find('p').hide();
+                $(this).siblings('.filter').find('.judge').hide();
+                $(this).siblings('.mistakeTip').hide();
+                $(this).removeClass('on');
+            });
+            $('#captcha').bind('blur', function() {
+                if (jQuery.trim($(this).val()) == '') {
+                    $(this).siblings('.filter').find('p').show();
+                    $(this).siblings('.filter').find('.judge').show();
+                    $(this).addClass('on');
+                    $(this).siblings('.mistakeTip').text('请输入验证码').show();
+                    $(this).val('');
+                } else {
+                    $(this).siblings('.filter').find('p').hide();
+                    $(this).siblings('.filter').find('.judge').show();
+                    $(this).parent().removeClass('wrong');
+                    $(this).removeClass('on');
+                    $(this).siblings('.mistakeTip').text('').hide();
+                }
+            });
+            $('#save').bind('click', function() {
+                $('.loginUsual input.text').each(function() {
+                    if ($(this).val() == '') {
+                        $(this).siblings('.filter').find('p').show();
+                        $(this).siblings('.filter').find('.judge').show();
+                        $(this).parent().addClass('wrong');
+                        $(this).siblings('.mistakeTip').show();
+                        $(this).addClass('on');
+                    }
+                });
+                $("#postform").submit(function() {
+                    if ($("#username").val() != '' && $("#password").val() != '' && $("#captcha").val() != '') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            document.onkeydown = function(event) {
+                var e = event || window.event || arguments.callee.caller.arguments[0];
+                if (e && e.keyCode == 13) {
+                    if ($(".loginMobile").css("display") == "block") {
+                        $(".loginMobile").find(".enterFrame").eq(1).find(".filter p").hide();
+                        $(".loginUsual").find(".enterFrame").eq(0).find(".filter p").hide();
+                        $('#saveLogin').trigger('click');
+                    } else {
+                        $(".loginUsual").find(".enterFrame").eq(1).find(".filter p").hide();
+                        $(".loginUsual").find(".enterFrame").eq(0).find(".filter p").hide();
+                        $('#save').trigger('click');
+                    }
+                }
+            }
+        });
+        </script>
+  <form method="post" action="{$DT[file_login]}" onsubmit="return Dcheck();">
+    <input name="forward" type="hidden" value="{$forward}"/>
+    <input name="auth" type="hidden" value=""/>
+    <!--内容-->
+    <div class="main-bg">
+    <div class="contentdl" style="background-image:url('{DT_SKIN}style/login/loginbg.png');">
+    <a href="{$DT[file_register]}?forward={urlencode($forward)}" target="_self" class="banner-link">
+      <em></em></a>
+    </div>
+      <div class="firmPersonalBox">
+       <div class="regTitBox"> <span> <a href="{$DT[file_register]}?forward={urlencode($forward)}" target="_self">免费注册>></a> </span> </div>
+      </div>
+      <div class="main">
+
+          <div class="loginCon">
+            <div class="loginTit clearfix">
+              <h1>HI,欢迎登录</h1>
+            </div>
+            <div class="loginTypeu loginUsual">
+              <div class="Frame enterFrame">
+                <div class="filter"> <em class="userIconBox"><i class="userIcon"></i> </em>
+                  <p>请输入用户名</p>
+                  <i class="judge"></i> </div>
+                <input name="username" type="text" id="username" value="" class="text" autocomplete="off" />
+                <div class="mistakeTip" style="display:none">请输入用户名</div>
+              </div>
+              <div class="Frame enterFrame">
+                <div class="filter"> <em class="userIconBox"><i class="pwdIcon"></i> </em>
+                  <p>请输入密码</p>
+                  <i class="judge"></i> </div>
+                <input name="password" type="password" class="text" id="password"  value=""  autocomplete="off" />
+                <script type="text/javascript" src="{DT_PATH}file/script/md5.js"></script> 
+                <script type="text/javascript">
+                                        init_md5();
+                                        </script>
+                <div class="mistakeTip" style="display:none">请输入密码</div>
+              </div>
+                  {if $MOD[captcha_login]}
+                   <div class="Frame enterFrame">
+                <div class="filtercap filter">
+                  <p>点击显示验证码</p>
+                  <i class="judge"></i> </div>
+               <input name="captcha" id="captcha" type="text" class="text" onfocus="showcaptcha();" value="" autocomplete="off" onkeyup="checkcaptcha(this.value);" onblur="checkcaptcha(this.value);"/>
+            &nbsp;<img src="{DT_SKIN}image/loading.gif" title="验证码,看不清楚?请点击刷新&#10;字母不区分大小写" alt="" align="absmiddle" id="captchapng" onclick="reloadcaptcha();" style="display:none;cursor:pointer;height: 38px; width: 95px; margin-top: -6px;"/><span id="ccaptcha"></span> 
+      <div class="mistakeTip" style="display:none">填写验证码</div>
+            <script type="text/javascript">
+function showcaptcha() {
+if(Dd('captchapng').style.display=='none') {
+Dd('captchapng').style.display='';
+}
+if(Dd('captchapng').src.indexOf('loading.gif') != -1) {
+Dd('captchapng').src='{DT_PATH}api/captcha.png.php?action=image';
+}
+if(Dd('captcha').value=='点击显示') {
+Dd('captcha').value='';
+}
+Dd('captcha').className = '';
+}
+function reloadcaptcha() {
+Dd('captchapng').src = '{DT_PATH}api/captcha.png.php?action=image&refresh='+Math.random();
+Dd('ccaptcha').innerHTML = '';
+Dd('captcha').value = '';
+}
+function checkcaptcha(s) {
+if(!is_captcha(s)) return;
+$.post(AJPath, 'action=captcha&captcha='+s,
+function(data) {
+if(data == '0') {
+Dd('ccaptcha').innerHTML = '&nbsp;&nbsp;<img src="{DT_SKIN}image/check_right.gif" align="absmiddle"/>';
+} else {
+Dd('captcha').focus;
+Dd('ccaptcha').innerHTML = '&nbsp;&nbsp;<img src="{DT_SKIN}image/check_error.gif" align="absmiddle"/>';
+}
+}
+);
+}
+function is_captcha(v) {
+if(v == '点击显示') return false;
+if(v.match(/^[a-z0-9A-Z]{1,}$/)) {
+return v.match(/^[a-z0-9A-Z]{4,}$/);
+} else {
+return v.length > 1;
+}
+}
+</script>
+                    </div>
+                    {/if}
+              <div class="loginBtn">
+                <input type="hidden" name="option" value="username" />
+                <input type="submit" name="submit" id="save" value="登&nbsp;&nbsp;录" />
+              </div>
+            </div>
+            <div class="moreChoice clearfix">
+              <div class="auto" title="选中后 一月内不用再次登录 网吧或公共计算机请勿选">
+                <input type="checkbox" name="cookietime" value="1" id="cookietime"  checked/>
+                <label for="cookietime">记住用户名</label>
+              </div>
+              <div class="autome" title="选中后 将直接进入会员中心 不返回登录前的页面">
+                <input type="checkbox" name="goto" value="1" id="goto" />
+                <label for="goto">默认进入会员中心</label>
+              </div>
+              <a class="forgetPwd" id='foget' href="send.php">忘记密码?</a> </div>
+              {if $oa}
+            <div class="cooperate">
+              <p>使用合作账号登录</p>
+              <div class="cooperateWay clearfix">{loop $OAUTH $k $v}
+		{if $v[enable]}<a href="{DT_PATH}api/oauth/{$k}/connect.php" title="{$v[name]}"><img src="{DT_PATH}api/oauth/{$k}/ico.png" alt="{$v[name]}"/></a> &nbsp;{/if}
+		{/loop} </div>
+            </div>
+            {/if}
+          </div>
+        </div>
+      </div>
+  </form>
+  <!--内容结束--> 
+  <!--尾部开始-->
+  <div id="regfooter">
+    <div class="links"> 
+    <a href="{$MODULE[1][linkurl]}">首页</a>
+      <!--{tag("table=webpage&condition=item=1&areaid=$cityid&order=listorder desc,itemid desc&template=list-webpage")}--> 
+      <a href="{$MODULE[1][linkurl]}sitemap/">网站地图</a> | <a href="{$EXT[spread_url]}">排名推广</a> {if $EXT[ad_enable]} | <a href="{$EXT[ad_url]}">广告服务</a>{/if}
+      {if $EXT[gift_enable]} | <a href="{DT_PATH}gift/" target="_blank" rel="nofollow">积分商城</a>{/if}
+      {if $EXT[guestbook_enable]} | <a href="{$EXT[guestbook_url]}" target="_blank" rel="nofollow">留言反馈</a>{/if}</div>
+    <div class="copyright" id="copyright">{$DT[copyright]}{if $DT[icpno]}<a href="http://www.miibeian.gov.cn" target="_blank" rel="nofollow">{$DT[icpno]}</a>{/if}</div>
+  </div>
+  <!--尾部结束--> 
+</div>
+</body>
+</html>

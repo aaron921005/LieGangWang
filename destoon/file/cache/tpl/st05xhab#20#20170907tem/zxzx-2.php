@@ -1,0 +1,60 @@
+<?php defined('IN_DESTOON') or exit('Access Denied');?><link href="<?php echo DT_SKIN;?>css/zxzx-2.css" rel="stylesheet" type="text/css" />
+<div class="float-r">
+    <ul>
+        <li class="li1" id="zkl">
+        <span class="icon1"></span>
+        <div class="animat-a zktx">
+        <div class="animat-a-a">
+        <dl class="animat-a-a-a">
+        <a target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $DT['qq1'];?>&amp;site=<?php echo $DT['qq1name'];?>&amp;menu=yes" target="_blank">
+        <img src="<?php echo DT_SKIN;?>css/img/ico-qq.png" alt="">
+        <p><?php echo $DT['qq1'];?></p>
+        </a>
+        </dl>
+        <dl class="animat-a-a-b">
+        <img src="<?php echo DT_SKIN;?>images/member/ico-dianhua.png" alt="">
+        <p><?php echo $DT['telephone'];?></p>
+        </dl>
+        <dl class="animat-a-a-c">
+        <p>网站客服</p>
+        <p>法定工作日</p>
+        <p>8:30-17:30</p>
+        </dl>
+        </div>
+        <strong class="borderys1"></strong>
+        </div>
+        </li>
+        <li class="li2" id="zkl">
+            <span class="icon2"></span>
+            <div class="icon1ct zktx">
+                <div class="icon1ct-z">
+                    <img src="<?php echo $DT['erwei'];?>" alt="">
+                    <p>DT模板网</p>
+                    <p>微信扫描关注</p>
+                </div>
+                <strong class="borderys1"></strong>
+            </div>
+        </li>
+        <li class="li3" id="zkl">
+        <a target="_blank" href="<?php echo $EXT['guestbook_url'];?>"><span class="icon3"></span><div class="animat zktx"><b>用户反馈</b><strong class="borderys2"></strong></div></a></li>
+        <li class="li4" style="display: none;" id="zkl"><span class="icon4"></span><div class="animat zktx"><b>返回顶部</b><strong class="borderys2"></strong></div></li>
+    </ul>
+</div>
+<script type="text/javascript">
+<!--
+!function() {
+    var l = $(document),
+    o = $(window),
+    i = $(".float-r .li4");
+    i.click(function() {
+        $("body,html").animate({
+            scrollTop: 0
+        },
+        500)
+    });
+    o.scroll(function() {
+        l.scrollTop() >= 300 ? $(".float-r .li4").slideDown(300) : $(".float-r .li4").slideUp(100)
+    })
+} ();
+-->
+</script>

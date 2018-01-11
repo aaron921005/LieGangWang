@@ -1,0 +1,62 @@
+{template 'header-help'}
+<div class="crumb">
+	    <div class="w1200">
+	       <div class="help_list_search">
+	      <form id="destoon_search" action="{$MOD[linkurl]}search.php"  onsubmit="return Dsearch(1);">
+          <input type="hidden" name="moduleid" value="{$moduleid}" id="destoon_moduleid"/>
+          <input type="hidden" name="spread" value="0" id="destoon_spread"/>
+	      <input type="text" name="kw" id="destoon_kw" placeholder="输入问题关键词，如：忘记密码" value="{if $kw}{$kw}{else}请输入关键词{/if}" onfocus="if(this.value=='请输入关键词') this.value='';"{if $DT[search_tips]} onkeyup="STip(this.value);" autocomplete="off"{/if} x-webkit-speech speech>
+	      <input type="submit" class="btn_search" value=""/>
+	      </form>
+
+	        </div>
+	        <i></i>
+	        <a href="{$MOD[linkurl]}">{$MOD[name]}</a>
+	        <span>&gt;</span>
+	         您正在找：<span class="red">{$kw}</span> 相关解答
+	    </div>
+	</div>
+<div class="content_help qa">
+	    <div class="nav_help">
+	        <div class="tit_0">问题解答分类</div>
+	        {php $mid = $moduleid;}
+   {php $child = get_maincat(0, $mid, 1);}
+   {loop $child $i $c}
+	    <div class="tit_1" id="a{$i+1}">
+	     <h3 onclick="show('b{$i+1}')">{set_style($c[catname], $c[style])}</h3>
+	    <div class="tit_2" id="b{$i+1}">
+	      {if $c[child]}
+          {php $sub = get_maincat($c[catid], $mid, 1);}
+      {loop $sub $j $s}
+	        <li><a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}">{set_style($s[catname], $s[style])}</a></li>
+      {/loop}
+          {/if}
+	     </div>
+	     </div>
+   {/loop}
+<script type="text/javascript">
+  function show(obj){
+      var obj=document.getElementById(obj);  //获得id为b的容器
+	  //如果下面的内容显示的话就隐藏
+	  if(obj.style.display=="block"){
+	     obj.style.display="none";
+	  }else 
+	  obj.style.display="block";
+}
+ 
+ </script>
+	    </div>
+	    <!--文章内容页-->
+	    <div class="main">
+	    <input type="hidden">
+	    <div class="tit_0">您正在找：<span class="red">{$kw}</span> 相关解答</div>
+	    <div class="qa_txt">
+	     {if $tags}{template 'xiaohei-helplist', 'xhtag'}
+        {else}
+		{template 'noresult', 'message'}
+		{/if}
+	    </div>
+	    </div> 
+	</div>
+
+{template 'footer'}

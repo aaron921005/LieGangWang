@@ -1,0 +1,12 @@
+{loop $tags $k $t}
+<div class="thumbnail sell-thumbnail{if !$k==0} hide{/if}" id="product_good_{$k+1}">
+  <p class="today-recomm-ico">今日<br>推荐</p>
+  <a class="font16" href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+  <div class="imgcon">
+    <div class="imglist"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"></div>
+  </div>
+  <div class="caption text-center">{$t[title]}</div>
+  </a>
+  <div class="margin-top-30 text-center"><a class="btn-sell btn-default btn-default-sameproduct font14" href="{$t[caturl]}" target="_blank">{$t[catname]}</a></div>
+</div>
+{/loop}

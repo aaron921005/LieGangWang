@@ -1,0 +1,127 @@
+{template 'header', 'memberwap'}
+<div class="menu">
+<ul>
+<li>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="tab" id="add"><a href="?action=add"><span>添加单页</span></a></td>
+<td class="tab" id="s3"><a href="?action=index"><span>已发布<span class="px10">({$nums[3]})</span></span></a></td>
+<td class="tab" id="s2"><a href="?status=2"><span>审核中<span class="px10">({$nums[2]})</span></span></a></td>
+<td class="tab" id="s1"><a href="?status=1"><span>未通过<span class="px10">({$nums[1]})</span></span></a></td>
+</tr>
+</table>
+</li>
+</ul>
+</div>
+{if $action=='add' || $action=='edit'}
+<form method="post" action="?" id="dform" onsubmit="return check();">
+<input type="hidden" name="action" value="{$action}"/>
+<input type="hidden" name="itemid" value="{$itemid}"/>
+<input type="hidden" name="forward" value="{$forward}"/>
+<table cellpadding="6" cellspacing="1" class="tb">
+{if $action=='edit' && $status==1 && $note}
+<tr>
+<td class="tl">拒绝原因</td>
+<td class="tr f_blue">{$note}</td>
+</tr>
+{/if}
+<tr>
+<td class="tl">标题</td>
+<td class="tr">{dstyle('post[style]', $style)}&nbsp;<input name="post[title]" type="text" id="title" size="30" value="{$title}" placeholder="建议4-6个汉字,例如“总裁致辞”等"/> <br> <span id="dtitle" class="f_red"></span> </td>
+</tr>
+<tr>
+<td class="tl">内容</td>
+<td class="tr"><textarea name="post[content]" id="content" class="dsn">{$content}</textarea>
+{deditor($moduleid, 'content', $group_editor, '95%', 200)}
+<div class="basisinfo4"><p>详情：内容尽量是原创，建议50字以上。</p></div>
+<br/><span id="dcontent" class="f_red"></span>
+</td>
+</tr>
+<tr>
+<td class="tl">排序</td>
+<td class="tr"><input type="text" size="5" name="post[listorder]" id="listorder" value="{$listorder}"/> <span class="f_gray">请填写数字，数字越大越靠前</span></td>
+</tr>
+<tr>
+<td class="tl">&nbsp;</td>
+<td class="tr" height="50"><input type="submit" name="submit" value=" 提 交 " class="btn_g"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value=" 取 消 " class="btn" onclick="history.back(-1);"/></td>
+</tr>
+</table>
+</form>
+{load('clear.js')}
+<script type="text/javascript">s('page');m({if $action=='add'}'add'{else}'s{$status}'{/if});</script>
+{else}
+<form action="?">
+<input type="hidden" name="status" value="{$status}"/>
+<div class="tt">
+&nbsp;<input type="text" size="28" name="kw" value="{$kw}" title="关键词"/> &nbsp;
+<input type="submit" value=" 搜 索 " class="btn"/>
+</div>
+</form>
+<form method="post">
+<div class="ls">
+<table cellpadding="0" cellspacing="0" class="tb">
+<tr>
+<th width="20"><input type="checkbox" onclick="checkall(this.form);"/></th>
+<th>公司单页信息</th>
+<th width="90">管理(左划)</th>
+</tr>
+</table>
+{loop $lists $k $v}
+<div class="list-bian-txt3">
+<table cellpadding="0" cellspacing="0" class="tb">
+<tr>
+<td width="15">&nbsp;</td>
+<td><input type="checkbox" name="itemid[]" value="{$v[itemid]}"/></td>
+<td align="left">
+<ul style="width:340px">
+<li>&nbsp;{if $v[status]==3}<a href="index.php?moduleid=4&username={$v[username]}&action=introduce&itemid={$v[itemid]}">{else}<a href="?action=edit&itemid={$v[itemid]}" class="t">{/if}{$v[title]}</a>{if $v[status]==1 && $v[note]} <a href="javascript:" onclick="alert('{$v[note]}');"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/why.gif" title="未通过原因"/></a>{/if}</li>
+<li class="bianji-1"><div class="bianji-1-1">添加时间: {timetodate($v[addtime], 5)}</div></li>
+<li class="bianji-1"><div class="bianji-1-1">更新时间: {$v[editdate]}</div><div class="bianji-1-2">浏览：{$v[hits]}</div></li>
+</ul>
+</td>
+<td>
+<ul class="guanli-txt">
+{if $MG[delete]}<li class="guanli-3"><a href="?action=delete&itemid={$v[itemid]}" onclick="if(!confirm('确定要删除吗？此操作将不可撤销')) return false;">删除</a></li>{/if}
+<li class="guanli-1"><a href="?action=edit&itemid={$v[itemid]}">修改</a></li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+{/loop}
+</div>
+<div class="btns">
+<input type="submit" value=" 删除选中 " class="btn" onclick="if(confirm('确定要删除选中单页吗？')){this.form.action='?action=delete'}else{return false;}"/>
+</div>
+</form>
+{if $MG[page_limit]}
+<div class="limit">总共可发 <span class="f_b f_red">{$MG[page_limit]}</span> 条&nbsp;&nbsp;&nbsp;当前已发 <span class="f_b">{$limit_used}</span> 条&nbsp;&nbsp;&nbsp;还可以发 <span class="f_b f_blue">{$limit_free}</span> 条</div>
+{/if}
+<br/>
+&nbsp;说明：企业单页用于添加“总裁致辞”、“企业文化”、“发展历程”等内容，将显示在公司商铺公司介绍侧栏
+
+<div class="pages">{$pages}</div>
+<script type="text/javascript">s('page');m('s{$status}');</script>
+{/if}
+{if $action=='add' || $action=='edit'}
+<script type="text/javascript">
+function check() {
+	var l;
+	var f;
+	f = 'title';
+	l = Dd(f).value.length;
+	if(l < 2 || l > 30) {
+		Dmsg('标题应为2-30字，当前已输入'+l+'字', f);
+		return false;
+	}
+	f = 'content';
+	l = FCKLen();
+	if(l < 2 || l > 5000) {
+		Dmsg('内容应为2-5000字，当前已输入'+l+'字', f);
+		return false;
+	}
+	return true;
+}
+</script>
+{/if}
+{template 'footer', 'memberwap'}

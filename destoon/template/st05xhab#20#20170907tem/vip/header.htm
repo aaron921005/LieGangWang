@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={DT_CHARSET}"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>{if $seo_title}{$seo_title}{else}{if $head_title}{$head_title}{$DT[seo_delimiter]}{/if}{if $city_sitename}{$city_sitename}{/if}{/if} - {$DT[sitename]}</title>
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+<link rel="shortcut icon" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+<link rel="bookmark" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+<meta name="generator" content="template - b2b.bjlsjp.cn"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}style.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/header.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/footer.css"/>
+<link href="{DT_STATIC}vip/css/vip.css" rel="stylesheet" type="text/css">
+{if !DT_DEBUG}<script type="text/javascript">window.onerror=function(){return true;}</script>{/if}
+<script type="text/javascript" src="{DT_STATIC}lang/{DT_LANG}/lang.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/config.js"></script>
+<script type="text/javascript" src="{DT_SKIN}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/common.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/page.js"></script>
+<script type="text/javascript" src="{DT_STATIC}vip/js/vip_2017_st05.js"></script>
+{if $lazy}<script type="text/javascript" src="{DT_STATIC}file/script/jquery.lazyload.js"></script>{/if}
+{if $JS}
+{loop $JS $js}
+<script type="text/javascript" src="{DT_STATIC}file/script/{$js}.js"></script>
+{/loop}
+{/if}
+</head>
+<body>
+<div class="header">
+{template 'top-mini'}<!--mini顶部-->
+</div>
+<div class="nav_hd_top" id="compareDiv">
+<div class="nav_top">
+{if $head_mobile}<div id="destoon_qrcode" style="display:none;"></div>{/if}
+<div id="destoon_space"></div>
+<div class="hd_logo fl"><a href="{$MODULE[1][linkurl]}"><img src="{if $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}" alt="{$DT[sitename]}"/></a></div>
+<h1 class="seo_title">{if $seo_title}{$seo_title}{else}{$head_title}{/if}</h1>
+<div class="fr vip_nax">
+<ul>
+<li{if $xh == 1} class="enter"{/if}><a href="{$MODULE[1][linkurl]}vip/index.php">首页</a></li>
+<li{if $xh == 3} class="enter"{/if}><a href="{$MODULE[1][linkurl]}vip/hyfw.php">会员服务</a></li>
+<li class="jmmb{if $xh == 2} enter{/if}"><a href="{$MODULE[1][linkurl]}vip/jianzhan.php">建站服务</a><div class="muban"><dl><a href="{$MODULE[1][linkurl]}vip/spmuban.php">精美模板</a></dl></div></li>
+<li{if $moduleid == 2} class="enter"{/if}><a href="{$MODULE[2][linkurl]}grade.php">在线申请</a></li>
+<li><a href="{$MODULE[1][linkurl]}about/contact.html">联系我们</a></li>
+</ul>
+</div>
+ </div>
+<div class="clear"></div>
+</div>
+

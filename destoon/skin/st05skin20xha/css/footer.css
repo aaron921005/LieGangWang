@@ -1,0 +1,45 @@
+﻿/*---
+*@NAME:css 
+*@author:xiaohei 
+*@QQ: 290948585 
+*@Date: 2017-01-15 
+*@版本:st05 
+*@网站:b2b.bjlsjp.cn 
+*特注：此文件非经许可，请勿修改
+---*/
+@charset "utf-8";
+/* CSS Document */
+.bottom{width:1200px; margin:20px auto; background:#fff; overflow:hidden;border: 1px #eee solid;}
+.layout{width: 1200px;margin-left: auto;margin-right: auto;}
+.partner{padding: 20px;}
+.partner .fls-lab{line-height: 37px;}
+.bottom .fls-lab{float: left; width: 93px; font-size: 16px;}
+.partner .fls-con{height: 37px; position: relative; padding-bottom: 15px; border-bottom: 1px solid #e6e6e6;}
+.bottom .fls-con{margin-left: 93px; overflow: hidden;}
+.clf::after{visibility: hidden; display: block; font-size: 0; content: '.'; clear: both; height: 0;}
+.friend-link{padding: 20px;}
+.friend-link .a-item{color: #666; white-space: nowrap;}
+.friend-link .a-item, .friend-link span{float: left; margin-top: 3px; margin-bottom: 4px;font-size:12px;}
+.friend-link span{padding: 0 8px; color: #ccc;}
+.friend-link .a-more{color:#1269d3;}
+/*版权*/
+.footer{width:100%;color:#999;background: #262626;font-size:12px;}
+.footer .layout{background:#262626;padding-top: 15px; overflow: hidden;}
+.f-btm{padding-top: 14px; padding-bottom: 25px; text-align: center;}
+.footer .links{line-height: 26px;text-align: center;color:#666;}
+.footer .links a{color: #666;padding:0 8px;}
+.footer .copyright{color: #4c4c4c; line-height: 26px; margin-top: 8px;text-align: center;}
+.footer .copyright a{color:#666;}
+.footer_navs{background:#fff;margin-top:40px;}
+.footer_navs_mfzh{height:147px;width:100%;border-bottom:#333 2px solid;text-align: center;}
+.footer_navs_mfzh img{margin:30px auto;}
+.footer_navs_daohang{margin:0 auto;height:150px;margin-top:50px;width:1200px;overflow:hidden;padding-bottom:30px;}
+.footer_navs_daohang_block{height:149px;width:140px;padding-left:90px;padding-right:69px;border-right:#ededed 1px solid;float:left;}
+.footer_navs_daohang_block span{display:block;font-size:18px;padding:10px 0 0 20px;font-family:"Microsoft YaHei";}
+.footer_navs_daohang_block ul{overflow:hidden;margin-top:10px;}
+.footer_navs_daohang_block li{list-style-type:none; float:left;width:70px;height:30px;line-height:30px;}
+.footer_navs_daohang_block li a{font-size:12px;text-decoration:none;color:#666;font-family:"Microsoft YaHei";}
+.footer_navs_daohang_call{height:149px;width:140px;padding-left:90px;padding-right:69px;float:left;}
+.footer_navs_daohang_call span{display:block;font-size:18px;padding:10px 0 0 30px;font-family:"Microsoft YaHei";}
+.footer_navs_daohang_call p{font-size:12px;text-align: center;margin-top:10px;font-family:"Microsoft YaHei";}
+.footer_navs_daohang_call p span{padding:0px;color:#116ad0;font-weight: bold;}

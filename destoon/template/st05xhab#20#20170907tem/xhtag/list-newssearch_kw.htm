@@ -1,0 +1,3 @@
+{loop $tags $k $t}
+<li class="x_word"><a href="{$MODULE[$moduleid][linkurl]}search.php?kw={urlencode($t[word])}"{if $target} target="{$target}"{/if} rel="nofollow">{$t[word]}</a></li>
+{/loop}

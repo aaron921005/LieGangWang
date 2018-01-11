@@ -1,0 +1,75 @@
+<div class="clear">&nbsp;</div>
+<div class="footer">
+    <div class="layout">
+<div class="ft_0 ffly fl-clr">
+        <div class="ft_lf">
+        <a href="{$MODULE[1][linkurl]}" target="_blank" title="{$DT[sitename]}" rel="nofollow"><img src="{DT_SKIN}images/sell/200x44_foot_logo.png" width="200" height="44" alt="{$DT[sitename]}"></a>
+            技术支持：<a href="{$MODULE[1][linkurl]}" title="{$DT[sitename]}" rel="nofollow" target="_blank">{$DT[sitename]}</a></div>
+        <div class="ft_rt">
+            <div class="fl-clr">
+                <dl class="fl-clr">
+                    <dt>管理员入口</dt>
+                    <dd><a href="{$MODULE[2][linkurl]}home.php" title="店铺管理" target="_blank" rel="nofollow">店铺管理</a></dd>
+                    <dd><a href="{$MODULE[6][linkurl]}" title="找采购购" target="_blank" rel="nofollow">找采购</a></dd>
+                </dl>
+                <dl class="fl-clr">
+                    <dt>关于我们</dt>
+                    <dd><a href="{userurl($username, 'file=introduce')}" title="企业介绍" target="_blank" rel="nofollow">企业介绍</a></dd>
+                    <dd><a href="{userurl($username, 'file=honor')}" title="企业资质" target="_blank" rel="nofollow">企业资质</a></dd>
+                </dl>
+                <dl class="fl-clr">
+                    <dt>联系我们</dt>
+                    {if $item[qq]}<dd><a href="//wpa.qq.com/msgrd?v=3&amp;uin={$item[qq]}&amp;site={$company}客服&amp;menu=yes" title="QQ交谈" class="qjt" rel="nofollow" target="_blank">QQ交谈</a></dd>{/if}
+                    <dd><a href="{userurl($username, 'file=contact')}" target="_blank" title="联系方式" class="zxly" rel="nofollow" target="_blank">联系方式</a></dd>
+                </dl>
+                <dl class="fl-clr">
+                    <dt>主营产品</dt>
+                    <dd>{dsubstr($xhmember[business], 60, '…')} </dd>
+                </dl>
+            </div>
+            <div class="ft_dz">
+            <span><a href="{userurl($username)}" target="_blank" title="{$company}">{$company}</a></span>
+        {if $xhmember[mobile]}&nbsp;&nbsp;<span>手机：{$xhmember[mobile]}</span>{/if}
+        {if $xhmember[telephone]}&nbsp;&nbsp;<span>电话：{$xhmember[telephone]}</span>{/if}
+        <span>&nbsp;&nbsp;地址：{$xhmember[address]}</span>
+        </div>
+        </div>
+            {if DT_DEBUG}<div class="px11">{debug()}</div>{/if}
+        </div>
+    </div>
+</div>
+<!--在线咨询弹框 END-->
+<script type="text/javascript" src="{DT_SKIN}js/xh_common.js?_=20170721"></script>
+<script type="text/javascript">
+<!--
+//浮动-1种
+/*set top*/
+$('.arx_list_info').fixedDiv('#hotproduct');
+$('.detailsT').fixedDiv('#hotproduct');
+$('.right_zixun').fixedDiv('#hotproduct');  
+$('.info_list').fixedDiv('#hotproduct');
+jQuery(".hotproduct").slide({ mainCell:"ul",vis:5,scroll:1,autoPlay:true,prevCell:".sPrev",nextCell:".sNext",effect:"leftLoop"});
+/* open */
+gd_tab_open(".gright .sp_sort .sbt1","div.aRrow","iCred","iCadd",".sToggle");
+ -->
+</script>
+<!--在线咨询弹框 S-->
+{template 'zxzx-2'}
+<!--[以下为系统关键代码，请勿删除]-->
+{if $lazy}<script type="text/javascript" src="{DT_STATIC}file/script/jquery.lazyload.js"></script>{/if}
+<script type="text/javascript">
+{if $destoon_task}
+show_task('{$destoon_task}');
+{else}
+{php include DT_ROOT.'/api/task.inc.php';}
+{/if}
+{if $lazy}
+$(function(){
+  $("img").lazyload({
+    effect:'fadeIn'
+  });
+});
+{/if}
+</script>
+</body>
+</html>

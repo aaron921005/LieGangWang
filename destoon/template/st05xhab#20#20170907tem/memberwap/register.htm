@@ -1,0 +1,640 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={DT_CHARSET}"/>
+<title>{if $seo_title}{$seo_title}{else}{if $head_title}{$head_title}{$DT[seo_delimiter]}{/if}{if $city_sitename}{$city_sitename}{else}{$DT[sitename]}{/if}{/if}</title>
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+{if $head_mobile}
+<meta http-equiv="mobile-agent" content="format=html5;url={$head_mobile}">
+{/if}
+<meta name="generator" content="b2b.bjlsjp.cn"/>
+<link rel="shortcut icon" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+<link rel="bookmark" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+{if $head_canonical}
+<link rel="canonical" href="{$head_canonical}"/>
+{/if}
+{if $EXT[archiver_enable]}
+<link rel="archives" title="{$DT[sitename]}" href="{$EXT[archiver_url]}"/>
+{/if}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}style.css"/>
+<link href="{DT_SKIN}reg-login.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.tl {
+	width:60px;
+	text-align:right;
+	padding-right:10px;
+	background:#FFFFFF;
+}
+.reg_title {
+	border-bottom:#CCCCCC 1px solid;
+	font-weight:bold;
+	padding:0 0 10px 10px;
+	margin:15px 55px 0 0;
+	font-size:14px;
+	color:#FF6600;
+}
+.reg_inp {
+	border:#B2B2B2 1px solid;
+	padding:3px 0 3px 0;
+}
+</style>
+<script type="text/javascript">
+$('.head-bar-right').html('<a href="{$EXT[mobile_url]}login.php"><span>登录</span></a>');
+</script>
+{if !DT_DEBUG}<script type="text/javascript">window.onerror=function(){return true;}</script>{/if}
+<script type="text/javascript" src="{DT_STATIC}lang/{DT_LANG}/lang.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/config.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/jquery.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/common.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/page.js"></script>
+{if $lazy}<script type="text/javascript" src="{DT_STATIC}file/script/jquery.lazyload.js"></script>{/if}
+{if $JS}
+{loop $JS $js}
+<script type="text/javascript" src="{DT_STATIC}file/script/{$js}.js"></script>
+{/loop}
+{/if}
+{php $searchid = ($moduleid > 3 && $MODULE[$moduleid]['ismenu'] && !$MODULE[$moduleid]['islink']) ? $moduleid : 5;}
+<script type="text/javascript">
+{if $head_mobile && $EXT[mobile_goto]}
+GoMobile('{$head_mobile}');
+{/if}
+var searchid = {$searchid};
+{if $itemid && $DT[anticopy]}
+document.oncontextmenu=function(e){return false;};
+document.onselectstart=function(e){return false;};
+{/if}
+</script>
+<!--[以上为系统关键代码，除非您明确其含义，否则请勿修改或删除，否则会导致系统错误]-->
+<!--[模板中所有带id的元素，请勿修改或删除，否则会导致部分JS代码无法运行]-->
+<!--[以上类似的注释，在编译模板时，系统会自动移除，不会显示在实际的页面中]-->
+</head>
+<body>
+
+<div class="wrap"> 
+  <!--头部--> 
+  <div class="top-header">
+    <div class="top-head">
+      <div class="reg-logo">
+        <p style="background:url({DT_SKIN}image/logo.gif) no-repeat;" class="index"> <a target="_blank" href="{DT_PATH}"></a> </p>
+        <a class="topic"> {$head_title}</a> </div>
+      <div class="reg">欢迎来到{$DT[sitename]}！<a href="{$EXT[guestbook_url]}">在线客服</a> <a href="{DT_PATH}">首页</a></div>
+    </div>
+  </div>
+  <!--头部 结束--> 
+  <div class="w_100 of-h">
+    <div class="schedule schedule_bg3 clearfix shuax">
+        <div class="w309 ">设置用户名</div>
+        <div class="w309">注册成功</div>
+    </div>
+</div>
+  <!--内容开始--> 
+<iframe src="" name="send" id="send" style="display:none;"></iframe>
+ <div class="content_box clearfix">
+            <div class="registered clearfix">
+			<form action="{$DT[file_register]}" method="post" target="send" onsubmit="return check();">
+			<input name="action" type="hidden" id="action" value="{crypt_action('register')}"/>
+			<input name="forward" type="hidden" value="{$forward}"/>
+			<div class="reg_title">帐户信息</div>
+			<table cellpadding="5" cellspacing="5" width="100%">
+			<tr>
+			<td class="tl">会员类型 <span class="f_red">*</span></td>
+			<td>
+			<input type="radio" name="post[regid]" value="6" id="g_6" onclick="reg(1);" checked/><label for="g_6"> {$GROUP[6][groupname]}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			{loop $GROUP $k $v}
+			{if $k>6 && $v[vip]==0 && $v[reg]==1}<input type="radio" name="post[regid]" value="{$k}" id="g_{$k}" onclick="reg(1);"/><label for="g_{$k}"> {$GROUP[$k][groupname]}</label>&nbsp;&nbsp;&nbsp;&nbsp;{/if}{/loop}
+			<span{if !$GROUP[5][reg]} class="dsn"{/if}>
+			<input type="radio" name="post[regid]" value="5" id="g_5" onclick="reg(0);"/><label for="g_5"> {$GROUP[5][groupname]}</label>
+			</span>
+			</td>
+			</tr>
+			</table>
+			<table cellpadding="5" cellspacing="5" width="100%">
+			<tr onmouseover="Ds('tusername');" onmouseout="Dh('tusername');">
+			<td class="tl">会员名 <span class="f_red">*</span></td>
+			<td width="220"><input type="text" class="reg_inp" style="width:200px;" name="post[username]" id="username" onblur="validator('username');" autocomplete="off" {if $username} value="{$username}" readonly{/if}/>
+			</td>
+			<td>
+			<div class="tips leftts" id="tusername" style="display:none;">
+           <span class="onError_top">{$MOD[minusername]}-{$MOD[maxusername]}个字符，只能使用小写字母(a-z)、数字(0-9)、下划线(_)、中划线(-)，且以字母或数字开头和结尾</span><span class="onError_bot"></span>
+			</div>
+			<span id="dusername" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			{if $MOD[passport] && $passport}
+			<tr onmouseover="Ds('tpassport');" onmouseout="Dh('tpassport');">
+			<td class="tl">昵称 &nbsp;</td>
+			<td><input type="text" class="reg_inp" style="width:200px;" name="post[passport]" id="passport" onblur="validator('passport');" autocomplete="off"{if $passport} value="{$passport}" readonly{/if}/></td>
+			<td>
+			<div class="tips leftts" id="tpassport" style="display:none;">
+            <span class="onError_top">
+				支持中文名，可用于论坛等系统用户名<br/>如果不填写，则和会员名一致
+                </span><span class="onError_bot"></span>
+			</div>
+			<span id="dpassport" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			{/if}
+			<tr onmouseover="Ds('tpassword');" onmouseout="Dh('tpassword');">
+			<td class="tl">登录密码 <span class="f_red">*</span></td>
+			<td><input type="password" class="reg_inp" style="width:200px;" name="post[password]" id="password" onblur="validator('password');" autocomplete="off"{if $password} value="{$password}" readonly{/if}/></td>
+			<td>
+			<div class="tips leftts" id="tpassword" style="display:none;">
+				<span class="onError_top">{$MOD[minpassword]}-{$MOD[maxpassword]}个字符，区分大小写，推荐使用数字、字母和特殊符号组合</span><span class="onError_bot"></span>
+			</div>
+			<span id="dpassword" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			<tr onmouseover="Ds('tcpassword');" onmouseout="Dh('tcpassword');">
+			<td class="tl">重复输入 <span class="f_red">*</span></td>
+			<td><input type="password" class="reg_inp" style="width:200px;" size="30" name="post[cpassword]" id="cpassword" onblur="validate('cpassword');" autocomplete="off"{if $password} value="{$password}" readonly{/if}/></td>
+			<td>
+			<div class="tips" id="tcpassword" style="display:none;">
+				<span class="onError_top">请再输入一遍上面填写的密码</span><span class="onError_bot"></span>
+			</div>
+			<span id="dcpassword" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			</table>
+			<div class="reg_title">联系方式</div>
+
+			<table cellpadding="5" cellspacing="5" width="100%">
+			<tr onmouseover="Ds('ttruename');" onmouseout="Dh('ttruename');">
+			<td class="tl">真实姓名 <span class="f_red">*</span></td>
+			<td width="220">
+			<input type="text" class="reg_inp" style="width:80px;" name="post[truename]" id="truename" onblur="validate('truename');"/>
+			<input type="radio" name="post[gender]" value="1" checked id="gender_1"/><label for="gender_1"> 先生</label>
+			<input type="radio" name="post[gender]" value="2" id="gender_2"/><label for="gender_2"> 女士</label>
+			</td>
+			<td>
+			<div class="tips" id="ttruename" style="display:none;">
+				<span class="onError_top">请与有效身份证件上的姓名保持一致</span><span class="onError_bot"></span>
+			</div>
+			<span id="dtruename" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			<tr>
+			<td class="tl">所在地区 <span class="f_red">*</span></td>
+			<td>{ajax_area_select('post[areaid]', '请选择', $areaid, '', 2)}</td>
+			<td><span id="dareaid" class="f_red"></span>&nbsp;</td>
+			</tr>
+			<tr onmouseover="Ds('temail');" onmouseout="Dh('temail');">
+			<td class="tl">电子邮箱 <span class="f_red">*</span></td>
+			<td><input type="text" class="reg_inp" style="width:200px;" name="post[email]" id="email" onblur="validator('email');"{if $email} value="{$email}" readonly{/if}/></td>
+			<td>
+			<div class="tips" id="temail" style="display:none;">
+				<span class="onError_top">
+				{if $MOD[checkuser] == 2}
+				<span class="f_red">系统设置了邮件验证注册，请确保当前的邮件地址真实有效<br/></span>
+				{/if}
+				请使用常用常用邮箱(Email)地址，地址不会被公开且可用于登录网站			
+				</span><span class="onError_bot"></span>
+			</div>
+			<span id="demail" class="f_red"></span>&nbsp;	
+			</td>
+			</tr>
+			{if $could_emailcode}
+			<tr onmouseover="Ds('temailcode');" onmouseout="Dh('temailcode');">
+			<td class="tl">邮件验证码 <span class="f_red">*</span></td>
+			<td><input type="text" class="reg_inp" style="width:80px;" name="post[emailcode]" id="emailcode" onblur="validator('emailcode');"/>
+			<input type="button" value="立即发送" id="send_code" onclick="SendCode();"/>
+			</td>
+			<td>
+			<div class="tips" id="temailcode" style="display:none;">
+				<span class="onError_top">
+				点击"立即发送"按钮，系统将会发送一组6位数字验证码至您填写的电子邮箱，请接收邮件获取验证码后，填写在左侧的输入框内，继续完成注册
+				</span><span class="onError_bot"></span>
+			</div>
+			<span id="demailcode" class="f_red"></span>&nbsp;	
+			</td>
+			</tr>
+			<tr id="sendok" style="display:none;">
+			<td class="tl">&nbsp;</td>
+			<td id="dsendok">&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+			{/if}
+
+			<tr onmouseover="Ds('tmobile');" onmouseout="Dh('tmobile');">
+			<td class="tl">手机号码 {if $could_mobilecode}<span class="f_red">*</span>{else}&nbsp;{/if}</td>
+			<td><input type="text" class="reg_inp" style="width:200px;" name="post[mobile]" id="mobile"{if $could_mobilecode} onblur="validator('mobile');"{/if}/></td>
+			<td>
+			<div class="tips" id="tmobile" style="display:none;">
+				<span class="onError_top">{if !$could_mobilecode}推荐填写，以便直接与您取得联系<br/>{/if}号码可用于登录网站和接收本站短信</span><span class="onError_bot"></span>
+			</div>
+			<span id="dmobile" class="f_red"></span>&nbsp;	
+			</td>
+			</tr>
+
+			{if $could_mobilecode}
+			<tr onmouseover="Ds('tmobilecode');" onmouseout="Dh('tmobilecode');">
+			<td class="tl">手机验证码 <span class="f_red">*</span></td>
+			<td><input type="text" class="reg_inp" style="width:80px;" name="post[mobilecode]" id="mobilecode" onblur="validator('mobilecode');"/>
+			<input type="button" value="立即发送" id="send_scode" onclick="SendSCode();"/>
+			</td>
+			<td>
+			<div class="tips" id="tmobilecode" style="display:none;">
+				<span class="onError_top">
+				点击"立即发送"按钮，系统将会发送一组6位数字验证码至您填写的手机，请接收短信获取验证码后，填写在左侧的输入框内，继续完成注册
+				</span><span class="onError_bot"></span>
+			</div>
+			<span id="dmobilecode" class="f_red"></span>&nbsp;	
+			</td>
+			</tr>
+			<tr id="sendsok" style="display:none;">
+			<td class="tl">&nbsp;</td>
+			<td id="dsendsok">&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+			{/if}
+
+			<tr onmouseover="Ds('tqq');" onmouseout="Dh('tqq');">
+			<td class="tl">QQ号码 &nbsp;</td>
+			<td><input type="text" class="reg_inp" style="width:200px;" name="post[qq]" id="qq"/></td>
+			<td>
+			<div class="tips" id="tqq" style="display:none;">
+				<span class="onError_top">推荐填写，以便即时在线与您取得联系</span><span class="onError_bot"></span>
+			</div>
+			<span id="dqq" class="f_red"></span>&nbsp;	
+			</td>
+			</tr>
+			</table>
+
+			<div id="company_detail">
+				<div class="reg_title">公司信息</div>
+				<table cellpadding="5" cellspacing="5" width="100%">
+				<tr onmouseover="Ds('tcompany');" onmouseout="Dh('tcompany');">
+				<td class="tl">公司名称 <span class="f_red">*</span></td>
+				<td width="300"><input type="text" class="reg_inp" style="width:280px;" name="post[company]" id="company" onblur="validator('company');"/></td>
+				<td>
+				<div class="tips" id="tcompany" style="display:none;">
+					<span class="onError_top">请填写公司全称，与营业执照保持一致，注册之后将不可更改</span><span class="onError_bot"></span>
+				</div>
+				<span id="dcompany" class="f_red"></span>&nbsp;
+				</td>
+				</tr>
+				<tr onmouseover="Ds('ttype');" onmouseout="Dh('ttype');">
+				<td class="tl">公司类型 <span class="f_red">*</span></td>
+				<td>{dselect($COM_TYPE, 'post[type]', '请选择', '', 'id="type"', 0)}</td>
+				<td>
+				<div class="tips" id="ttype" style="display:none;">
+					<span class="onError_top">如果没有匹配的类型，请选择其它</span><span class="onError_bot"></span>
+				</div>
+				<span id="dtype" class="f_red"></span>&nbsp;
+				</td>
+				</tr>
+				<tr onmouseover="Ds('ttelephone');" onmouseout="Dh('ttelephone');">
+				<td class="tl">公司电话 <span class="f_red">*</span></td>
+				<td><input type="text" class="reg_inp" style="width:200px;" name="post[telephone]" id="telephone" onblur="validate('telephone');"/></td>
+				<td>
+				<div class="tips" id="ttelephone" style="display:none;">
+					<span class="onError_top">国内用户请加区号，国外用户请加国家码<br/>格式范例：86-010-88889999</span><span class="onError_bot"></span>
+				</div>
+				<span id="dtelephone" class="f_red"></span>&nbsp;
+				</td>
+				</tr>
+				</table>
+			</div>
+			<table cellpadding="5" cellspacing="5" width="100%">
+			{if $MOD[question_register]}
+			<tr onmouseover="Ds('tanswer');" onmouseout="Dh('tanswer');">
+			<td class="tl">验证问题 <span class="f_red">*</span></td>
+			<td>{template 'question', 'chip'}</td>
+			<td>
+			<div class="tips" id="tanswer" style="display:none;">
+				<span class="onError_top">请把问题的答案填写到输入框中</span><span class="onError_bot"></span>
+			</div>
+			<span id="danswer" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			{/if}
+			{if $MOD[captcha_register]}
+			<tr onmouseover="Ds('tcaptcha');" onmouseout="Dh('tcaptcha');">
+			<td class="tl">验证码 <span class="f_red">*</span></td>
+			<td>{template 'captcha', 'chip'}</td>
+			<td>
+			<div class="tips" id="tcaptcha" style="display:none;">
+				<span class="onError_top">请把图形中的字符填写到输入框中<br/>如果看不清楚，请点击图片刷新</span><span class="onError_bot"></span>
+			</div>
+			<span id="dcaptcha" class="f_red"></span>&nbsp;
+			</td>
+			</tr>
+			{/if}
+			<tr>
+			<td class="tl">&nbsp;</td>
+			<td width="300"><input type="checkbox" checked="checked" onclick="if(this.checked){Ds('sbm');}else{Dh('sbm');}"/> <a href="?read=1" target="_blank" class="b">我已阅读并同意服务条款</a></td>
+			<td>&nbsp;</td>
+			</tr>
+			<tr id="sbm">
+			<td class="tl"></td>
+			<td>
+			<input type="submit" name="submit" value="立即注册" style="background:#c60a09;color:#FFFFFF;font-size:14px;width:120px;line-height:28px;border:none;border-radius:4px;text-align:center;"/>
+			</td>
+			<td>&nbsp;</td>
+			</tr>
+			</table>
+			</form>
+            </div>
+<div class="content_right">
+        <div class="_top">
+            已有账号？<a href="{$MODULE[2][linkurl]}{$DT[file_login]}">立即登录</a>
+        </div>
+        <div class="cooperation">
+            <div class="tit">使用合作网账号</div>
+            <a class="qq" href="{DT_PATH}api/oauth/qq/connect.php">QQ登录</a>
+            <ul class="list">
+                <li>登录b2b.bjlsjp.cn</li>
+                <li>1.免费上传报价单</li>
+                <li>2.查看行业采购需求</li>
+                <li>3.免费享受撮合交易服务</li>
+                <li class="tel">&nbsp;</li>
+                <li class="rexian">如需帮助，请拨打客服热线：</li>
+                <li class="rexianli">{$DT[telephone]}</li>
+            </ul>
+        </div>
+    </div>
+
+
+      </div>
+     
+        
+<script type="text/javascript" src="{DT_STATIC}file/script/guest.js"></script>
+<script type="text/javascript">
+if(Dd('username').value == '') Dd('username').focus();
+{if $MOD[question_register]}Dd('answer').className = 'reg_inp';{/if}
+{if $MOD[captcha_register]}Dd('captcha').className = 'reg_inp';{/if}
+var vid = '';
+function dtrim(id) {
+	var str = Dd(id).value.trim();
+	if(Dd(id).value != str) Dd(id).value = str;
+}
+function validator(id) {
+	vid = id;
+	dtrim(id);
+	makeRequest('moduleid={$moduleid}&action=member&job='+id+'&value='+Dd(id).value, AJPath, '_validator');
+}
+function _validator() {
+	if(xmlHttp.readyState==4 && xmlHttp.status==200) {
+		Dd('d'+vid).innerHTML = xmlHttp.responseText ? '<img src="{DT_SKIN}image/check_error.gif" align="absmiddle"/> '+xmlHttp.responseText : '<img src="{DT_SKIN}image/check_right.gif" align="absmiddle"/> ';
+	}
+}
+function err_msg(str, id) {
+	Dd('d'+id).innerHTML = '<img src="{DT_SKIN}image/check_'+(str ? 'error' : 'right')+'.gif" align="absmiddle"/> '+str;
+}
+function validate(type) {
+	if(type == 'cpassword') {
+		if(Dd('cpassword').value != Dd('password').value) {
+			err_msg('两次输入的密码不一致', type);
+		} else {
+			err_msg('', type);
+		}
+	} else if(type == 'truename') {
+		dtrim(type);
+		if(Dd('truename').value.length < 2) {
+			err_msg('请输入真实姓名', type);
+		} else {
+			err_msg('', type);
+		}
+	} else if(type == 'telephone') {
+		dtrim(type);
+		if(Dd('telephone').value.match(/^[0-9\-\(\)\+\.]{7,}$/)) {
+			err_msg('', type);
+		} else {
+			err_msg('请输入公司电话', type);
+		}
+	}
+}
+function reg(type) {
+	if(type) {
+		Ds('company_detail');
+	} else {
+		Dh('company_detail');
+	}
+}
+function Df(ID) {
+	Dd(ID).focus();
+}
+function check() {
+	var f,p;
+	f = 'username';
+	if(Dd(f).value == '') {
+		err_msg('请填写会员登录名', f);
+		Df(f);
+		return false;
+	}
+	if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+		Df(f);
+		return false;
+	}
+	f = 'password';
+	if(Dd(f).value.length < 6) {
+		err_msg('请填写会员登录密码', f);
+		Df(f);
+		return false;
+	}
+	if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+		Df(f);
+		return false;
+	}
+	f = 'cpassword';
+	if(Dd(f).value == '') {
+		err_msg('请重复输入密码', f);
+		Df(f);
+		return false;
+	}
+	if(Dd('password').value != Dd(f).value) {
+		err_msg('两次输入的密码不一致', f);
+		Df(f);
+		return false;
+	}
+	f = 'truename';
+	if(Dd(f).value == '') {
+		err_msg('请填写真实姓名', f);
+		Df(f);
+		return false;
+	}
+	f = 'email';
+	if(Dd(f).value.length < 6) {
+		err_msg('请填写电子邮箱', f);
+		Df(f);
+		return false;
+	}
+	if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+		Df(f);
+		return false;
+	}
+	if(Dd('areaid_1').value == 0) {
+		Dmsg('请选择所在地', 'areaid');
+		return false;
+	}
+	{if $could_emailcode}
+		f = 'emailcode';
+		if(!Dd(f).value.match(/^[0-9]{6}$/)) {
+			Dmsg('请填写邮件验证码', f);
+			return false;
+		}
+	{/if}
+	if(Dd('g_5').checked == false) {
+		f = 'company';
+		if(Dd(f).value == '') {
+			err_msg('请填写公司名称', f);
+			Df(f);
+			return false;
+		}
+		if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+			Df(f);
+			return false;
+		}
+		if(Dd('type').value == '') {
+			Dmsg('请选择公司类型', 'type');
+			return false;
+		}
+		f = 'telephone';
+		if(Dd(f).value.length < 7) {
+			err_msg('请填写公司电话', f);
+			Df(f);
+			return false;
+		}
+	}
+	{if $MOD[question_register]}
+	f = 'answer';
+	if(Dd(f).value == '') {
+		Dmsg('请回答验证问题', f);
+		return false;
+	}
+	{/if}
+	{if $MOD[captcha_register]}
+	f = 'captcha';
+	if(!is_captcha(Dd(f).value)) {
+		Dmsg('请填写验证码', f);
+		return false;
+	}
+	{/if}
+	return true;
+}
+function SendCode() {
+	if(Dd('demail').innerHTML.indexOf('right') == -1) {
+		Dd('email').focus();
+		return;
+	}
+	makeRequest('action={$action_sendcode}&value='+Dd('email').value, '{$DT[file_register]}', '_SendCode');
+	Dh('sendok');
+	Dd('send_code').value = '正在发送';
+	Dd('send_code').disabled = true;
+}
+function _SendCode() {
+	var f = 'email';
+	if(xmlHttp.readyState==4 && xmlHttp.status==200) {			
+		Dd('send_code').value = xmlHttp.responseText == 1 ? '发送成功' : '立即发送';
+		Dd('send_code').disabled = xmlHttp.responseText == 1 ? true : false;
+		if(xmlHttp.responseText == 1) {
+			Ds('sendok');
+			Dd('dsendok').innerHTML = '<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/ico_mailok.gif" align="absmiddle"/> <span class="f_green">邮件发送成功，</span> <a href="goto.php?action=emailcode&email='+Dd(f).value+'" target="_blank">立即查收</a>';
+			StopCode();
+		} else if(xmlHttp.responseText == 2) {
+			err_msg('邮件格式错误，请检查', f);
+			Df(f);
+		} else if(xmlHttp.responseText == 3) {
+			err_msg('邮件地址已存在，请更换', f);
+			Df(f);
+		} else if(xmlHttp.responseText == 4) {
+			err_msg('此邮件域名已经被禁止注册，请更换', f);
+			Df(f);
+		} else if(xmlHttp.responseText == 5) {
+			alert('邮件发送过快，请稍后再试');
+		} else if(xmlHttp.responseText == 6) {
+			alert('尝试发送次数太多，请稍后再试');
+		} else {
+			alert('未知错误，请重试');
+		}
+	}
+}
+function StopCode() {
+	Dd('send_code').disabled = true;
+	var i = 60;
+	var interval=window.setInterval(
+		function() {
+			if(i == 0) {
+				Dd('send_code').value = '立即发送';
+				Dd('send_code').disabled = false;
+				clearInterval(interval);
+			} else {
+				Dd('send_code').value = '重新发送('+i+')';
+				i--;
+			}
+		},
+	1000);
+}
+
+function SendSCode() {
+	if(Dd('dmobile').innerHTML.indexOf('right') == -1) {
+		Dd('mobile').focus();
+		return;
+	}
+	makeRequest('action={$action_sendscode}&value='+Dd('mobile').value, '{$DT[file_register]}', '_SendSCode');
+	Dh('sendsok');
+	Dd('send_scode').value = '正在发送';
+	Dd('send_scode').disabled = true;
+}
+function _SendSCode() {
+	var f = 'mobile';
+	if(xmlHttp.readyState==4 && xmlHttp.status==200) {			
+		Dd('send_scode').value = xmlHttp.responseText == 1 ? '发送成功' : '立即发送';
+		Dd('send_scode').disabled = xmlHttp.responseText == 1 ? true : false;
+		if(xmlHttp.responseText == 1) {
+			Ds('sendsok');
+			Dd('dsendsok').innerHTML = '<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/ico_mailok.gif" align="absmiddle"/> <span class="f_green">短信发送成功</span>';
+			StopSCode();
+		} else if(xmlHttp.responseText == 2) {
+			err_msg('手机号码格式错误，请检查', f);
+			Df(f);
+		} else if(xmlHttp.responseText == 3) {
+			err_msg('手机号码已存在，请更换', f);
+			Df(f);
+		} else if(xmlHttp.responseText == 5) {
+			alert('短信发送过快，请稍后再试');
+		} else if(xmlHttp.responseText == 6) {
+			alert('尝试发送次数太多，请稍后再试');
+		} else {
+			alert('未知错误，请重试');
+		}
+	}
+}
+function StopSCode() {
+	Dd('send_scode').disabled = true;
+	var i = 180;
+	var interval=window.setInterval(
+		function() {
+			if(i == 0) {
+				Dd('send_scode').value = '立即发送';
+				Dd('send_scode').disabled = false;
+				clearInterval(interval);
+			} else {
+				Dd('send_scode').value = '重新发送('+i+')';
+				i--;
+			}
+		},
+	1000);
+}
+</script>
+
+    <!--内容结束--> 
+  <!--尾部开始-->
+ <div id="regfooter">
+    <div class="links"> 
+    <a href="{DT_PATH}" target="_blank" rel="nofollow">首页</a>
+      <!--{tag("table=webpage&condition=item=1&areaid=$cityid&order=listorder desc,itemid desc&template=list-webpage")}--> 
+      <a href="{$MODULE[1][linkurl]}sitemap/">网站地图</a> | <a href="{$EXT[spread_url]}">排名推广</a> {if $EXT[ad_enable]} | <a href="{$EXT[ad_url]}">广告服务</a>{/if}
+      {if $EXT[gift_enable]} | <a href="{DT_PATH}gift/" target="_blank" rel="nofollow">积分商城</a>{/if}
+      {if $EXT[guestbook_enable]} | <a href="{$EXT[guestbook_url]}" target="_blank" rel="nofollow">留言反馈</a>{/if}</div>
+    <div class="copyright" id="copyright">{$DT[copyright]}{if $DT[icpno]}<a href="http://www.miibeian.gov.cn" target="_blank" rel="nofollow">{$DT[icpno]}</a>{/if}</div>
+  </div>
+  <!--尾部结束--> 
+</div>
+
+</body>
+</html>

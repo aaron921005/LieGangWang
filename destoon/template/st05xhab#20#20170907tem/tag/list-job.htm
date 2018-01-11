@@ -1,0 +1,41 @@
+<ul class="item_con_list"> 
+{loop $tags $k $t}
+ <li class="con_list_item first_row">
+          <div class="list_item_top">
+            <div class="position">
+              <div class="p_top"> <a target="_blank" href="{$t[linkurl]}" class="position_link">
+                <h2>{$t[title]}</h2>
+                </a> <span class="format-time"> {if $t[vip] && $k < 3} <img src="{DT_SKIN}images/job/placedtop.png" alt="" title="置顶职位" style="display: inline-bock;">{/if} </span> </div>
+              <div class="p_bot"> <span class="money"> <a href="{userurl($t[username])}" target="_blank" class="underline job-company">{$t[company]}</a>{if $t[vip]}<img src="{DT_SKIN}image/vip_{$t[vip]}.gif" alt="{VIP}" title="{VIP}:{$t[vip]}级"/>{/if}</span>
+                <div class="li_b_l">[{area_pos($t[areaid], '')}]</div>
+              </div>
+            </div>
+            <div class="company">
+            <a target="_blank" href="{$t[linkurl]}"><div class="industry add_favoritesr"></div></a>
+            </div>
+            <div class="com_logo app_jobs"><a href="{$MOD[linkurl]}{rewrite('apply.php?itemid='.$t[itemid])}" target="_blank">申请职位</a></div>
+          </div>
+          <div class="list_item_bot">
+            <div class="li_b_l"><span class="wage">工薪：
+            {if $t[minsalary] && $t[maxsalary]}
+                {$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+                {elseif $t[minsalary]}
+                {$t[minsalary]}{$DT[money_unit]}/月以上
+                {elseif $t[maxsalary]}
+                {$t[maxsalary]}{$DT[money_unit]}/月以内
+                {else}
+                面议
+                {/if} </span><span>年龄： {if $t[minage] && $t[maxage]}
+                {$t[minage]}-{$t[maxage]}岁
+                {elseif $t[minage]}
+                {$t[minage]}岁以上
+                {elseif $t[maxage]}
+                {$t[maxage]}岁以内
+                {else}
+                不限年龄
+                {/if} </span><span>人数：{if $t[total]}{$t[total]}人{else}若干{/if}</span></div>
+          </div>
+        </li>
+{/loop}
+</ul>		
+{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}

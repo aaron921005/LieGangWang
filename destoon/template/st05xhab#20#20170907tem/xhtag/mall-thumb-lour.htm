@@ -1,0 +1,10 @@
+{loop $tags $i $t}
+    <li id="{$t[itemid]}"><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank" class="itemimg">
+    <img onerror="this.src='{DT_SKIN}image/sx_nopic258_258.png'" src="{$t[thumb]}" alt="{$t[alt]}" title="{$t[alt]}" style="opacity: 1;"></a>
+    <p class="t_text"><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></p>
+    <div class="itemInfo clearfix">
+      <p class="price"><span class="symbol">{$DT[money_sign]}</span>{$t[price]}</p>
+      <a href="{$t[linkurl]}#comment" target="_blank" class="comment">{$t[comments]} 人已评价</a>
+    </div>
+    </li>
+{/loop}

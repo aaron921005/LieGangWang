@@ -1,0 +1,63 @@
+﻿/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170707
+*/
+@charset "utf-8";
+body{background: #ffffff;position: relative;}
+.fl{float: left;}
+.fr{float: right;}
+a.red{color:#e60000}
+.mt20{margin-top:20px}
+/*nax*/
+.nav_hd_top{width: 100%; background: #fff; height: 55px; padding: 18px 0; position: relative; min-width: 1200px; border-bottom: 1px solid #ededed;}
+.seo_title{float: left; height: 35px; line-height: 35px; font-size: 26px; font-weight: bold; border-left: 1px solid #ddd; margin-left: 20px; display: block; padding-left: 20px; margin-top: 10px;}
+.vip_nax{height: 30px;line-height: 30px;margin-top: 13px;}
+.vip_nax ul{height: 30px;line-height: 30px;font-size: 15px;}
+.vip_nax ul li{float:left;padding-left:30px;height:30px;line-height: 30px;}
+.vip_nax ul li.enter{display:block;}
+.vip_nax ul li.enter a,.vip_nax ul li:hover a{display: block;background:#1168d2;padding: 0 18px;height:30px;line-height:30px;color: #fff;/* border-radius: 5px; */}
+.vip_nax ul li a{height:30px;line-height:30px;padding: 0 18px;}
+
+.vip_nax ul li.jmmb{position:relative;}
+.vip_nax ul li.jmmb .muban{position:absolute;display:none;width: 94px;top: 30px;left: 30px;text-align: center;border: 1px solid #ddd;border-top:0;}
+.vip_nax ul li.jmmb .muban dl a{background:#ffffff;color: #000;padding: 0 5px;height: 40px;line-height: 40px;}
+.vip_nax ul li.jmmb:hover .muban{display:block;background: #9E9E9E;}
+.vip_nax ul li.jmmb .muban dl a:hover{padding: 0 5px;height: 40px;color: #1168d2;}
+
+/*fudong*/
+.header-fixed{border-bottom: solid 1px #e2e2e2; background: #fff; position: fixed; left: 0; top: 0;}
+.header-fixed{animation: move .5s forwards; -moz-animation: move .5s forwards; -webkit-animation: move .5s forwards; -o-animation: move .5s forwards;}
+/*SHENGJI*/
+.content_vip{width:100%;min-width: 1200px; margin:0; padding:0}
+.main-group{overflow:hidden;font-size:14px;padding-top: 20px;}
+.main-group .group_list{width: 344px;float:left;text-align:center;border-right:1px solid #ddd;border: 1px solid #ddd;border-top: 4px solid #1168d2;margin-left: 20px;padding: 20px;margin-bottom: 20px;}
+.main-group .group_list.no_ml{margin-left: 0;}
+.main-group .group_list li{height:35px;line-height:35px;overflow:hidden;}
+.main-group .group_list li.groupname{font-size:16px;font-weight:700}
+.main-group .group_list li.price{font-size:14px;color:#888}
+.main-group .group_list li.price span{font-weight:700;font-size:16px}
+.main-group .group_list li.des{font-size:14px;color:#888;margin-bottom: 15px;}
+.main-group .group_list li.des span{font-size:18px;}
+.main-group .group_list li a.buy-btn{background:#0B89EE;color:#fff;padding:5px 20px;}
+.main-group .group_list li a.buy-btn:hover{opacity:.8;filter:alpha(opacity=80);}
+.form{width: 500px; margin: 50px auto 50px auto;}
+.form h2{font-size: 34px; color: #000; text-align: center; display: block; width: 440px;}
+.form ul{margin: 30px 0 0 0;}
+.form ul li{line-height: 46px; margin-bottom: 25px; overflow: hidden;}
+.form ul li label{width: 91px; float: left; font-weight: 100; font: 16px/1.8 "Microsoft Yahei",verdana; vertical-align: middle; height: 46px; line-height: 46px;}
+.form ul li label i{color: #e60000; font-style: normal; margin-right: 5px; margin-top: 20px;}
+.form ul li span{font-size: 14px;}
+.form ul li .txt{float: left; width: 331px; height: 44px; border: solid 1px #e6e6e6; border-radius: 3px; padding-left: 14px; font-size: 16px; font-weight: 100;}
+.form p{margin-left: 90px; font-size: 14px; color: #010101;}
+.form .text{margin-top: 40px;}
+.form p .check{margin-right: 7px; vertical-align: -2px;}
+.form p a{color: #064adb;}
+.form button,.form input,.form select,.form textarea{font: 16px/1.8 "Microsoft Yahei",verdana;}
+.form p .btn{width: 240px; height: 60px; display: block; background: #064adb; text-align: center; line-height: 60px; color: #fff; border-radius: 50px; font-size: 24px; margin: 15px 0 0 7px;}
+.form .error{position: absolute; color: #f33d3d; font-size: 14px; line-height: 30px; text-align: left; margin-left: 20px;}
+/*xieyi*/
+.ggcons{margin: 10px auto; width: 940px; border: 1px #e3e3e3 solid; padding: 20px 20px 30px;}
+.ggcons .gg_tit{text-align: center;}
+.ggcons h1{font-size: 22px; font-weight: bold; color: #d10504; margin-bottom: 3px; font-family: "Microsoft YaHei",SimHei,"WenQuanYi Zen Hei",STHeiti,Tahoma,Arial,STHeiti,sans-serif;}
+.ggcons .gg_infor{font-size: 12px; color: #555; padding-bottom: 10px; border-bottom: 1px #ccc dashed;}
+.ggcons .gg_nr{padding: 10px;}
+.ggcons .gg_nr p{text-indent: 24px; line-height: 28px; font-size: 14px; margin-bottom: 6px;}

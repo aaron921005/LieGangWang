@@ -1,0 +1,42 @@
+﻿/*--------------------------------------------------
+ *@NAME:css *@author:xiaohei *@QQ: 290948585 *@Date: 2017-01-15 *@版本:st05 *@网站:b2b.bjlsjp.cn *特注：此文件非经许可，请勿修改
+--------------------------------------------------*/
+@charset "utf-8";
+/*new-右侧浮动*/
+.float-r{position: fixed;z-index:9;right:0%;bottom:110px;}
+.float-r.on{display:block}
+.float-r ul{height:163px}
+.float-r li{position:relative;width:40px;height:30px;cursor:pointer;background:#949494;border-top:1px solid #fff;padding-top:10px}
+.float-r li span{display:block;width:20px;height:20px;margin:0 auto;}
+.float-r li.li1{border-top:0}
+.float-r li .icon1{background:url(img/float_r_icon.png) no-repeat -20px 0}
+.float-r li .icon2{background:url(img/float_r_icon.png) no-repeat 0 0}
+.float-r li .icon3{background:url(img/float_r_icon.png) no-repeat -40px 0}
+.float-r li .icon4{background:url(img/float_r_icon.png) no-repeat -60px 0}
+.float-r li:hover{background:#494949;overflow:inherit;}
+
+.float-r li .zktx{top:0;position:absolute;z-index: 9999;display:none}
+.float-r li.li1:hover .zktx,.float-r li.li2:hover .zktx,.float-r li.li3:hover .zktx,.float-r li.li4:hover .zktx{display: block;}
+.float-r li .animat{left:-110px;}
+.float-r li .animat-a{left:-160px;}
+.float-r li .icon1ct{left:-170px;}
+.float-r li b{display:block;float:left;background:#007de4;height:40px;font-weight:normal;color:#fff;font-size:12px;line-height:40px;text-align:center}
+.float-r li strong{display:block;float:left;display:inline;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-top:13px}
+.float-r li .borderys1{border-left:8px solid #fff;}
+.float-r li .borderys2{border-left:8px solid #007de4;}
+.float-r li.li1:hover .animat-a{left: -122px;}
+.float-r li.li2:hover .icon1ct{left: -132px;}
+.float-r li.li3:hover .animat,.float-r li.li4:hover .animat{left: -79px;}
+.float-r li.li3:hover .animat b,.float-r li.li4:hover .animat b{width: 79px;}
+.float-r li.li4{display:none}
+.float-r li.li2{}
+.float-r .icon1ct{height:163px}
+.float-r .icon1ct .icon1ct-z{background:#fff;width:130px;float:left;display:inline;padding-bottom:10px;border: 1px solid #dddddd;}
+.float-r .icon1ct .icon1ct-z img{width:98px;height:98px;}
+.float-r .icon1ct img{display:block;margin:10px auto 3px}
+.float-r .icon1ct p{text-align:center;font-size:12px;color:#007de4}
+.float-r .animat-a .animat-a-a{background:#fff;width:120px;float:left;text-align: center;border: 1px solid #dddddd;}
+.float-r .animat-a .animat-a-a dl{border-bottom:1px dotted #dddddd;padding:15px 0;}
+.float-r .animat-a .animat-a-a .animat-a-a-a p,.float-r .animat-a .animat-a-a .animat-a-a-b p{padding-top:5px;font-size:14px;color:#1269D3;font-weight:700}
+.float-r .animat-a .animat-a-a .animat-a-a-a p{color:#F66400}
+.float-r .animat-a .animat-a-a dl.animat-a-a-c{border-bottom:0}

@@ -1,0 +1,94 @@
+{template 'header-zhuce'}
+<style type="text/css">
+.footer{margin-top: -17px;}
+</style>
+<div class="login_dl">
+    <div class="w1050">
+    <div class="focus">
+        <!--img src="{DT_SKIN}images/member/focus.jpg" width="665" height="500" alt=""-->
+          <li class="login_content_left">
+                            <img style="width:115px;padding:10px;background:#fff" src="{$DT[waperwei]}">
+                            <div>扫描上方二维码</div>
+                            <div>手机上查看{$DT[sitename]}</div>
+                            <img src="{DT_SKIN}images/member/login_img1.png">
+                        </li>
+                        <li>
+                            <img src="{DT_SKIN}images/member/login_people.png">
+                        </li>
+    </div>
+        <div class="d">
+        <form method="post" action="{$DT[file_login]}" onsubmit="return Dcheck();">
+          <input name="forward" type="hidden" value="{$forward}"/>
+          <input name="auth" type="hidden" value="{$auth}"/>
+            <div class="p1">
+                <span class="p1_r">没有账号？<a href="{$DT[file_register]}?forward={urlencode($forward)}">免费注册</a></span><h3>会员登录</h3>
+            </div>
+            <div class="login_s">
+            <ul class="mt10">
+                <li>
+                  <input placeholder="请输入用户名" type="text" class="text" name="username" id="username">
+                  <i class="icon icon_username"></i>
+                </li>
+                <li>
+                    {template 'password-new', 'chip'}
+                </li>
+                {if $MOD[captcha_login]}
+                 <li>
+                    {template 'captcha-new', 'chip'}
+                </li>
+                {/if}
+            </ul>
+            <div class="b">
+                <p class="button_su"><input type="submit" name="submit" value="登录" class="button"></p>
+                <p><span class="a"><input type="checkbox" name="goto" value="1" id="goto"{if $MOD[login_goto]} checked{/if}/>
+              <label for="goto">进入商务室</label></span>
+                <input type="checkbox" style="vertical-align:middle;" name="cookietime" value="1" id="cookietime"{if $MOD[login_remember]} checked{/if}/>
+                <label for="cookietime">记住密码</label>
+                </p>
+                <p><span class="qq_login"><a href="send.php">忘记密码？</a></span></p>
+            </div>
+          </div>
+          <div class="other-login">
+          <div class="other-login-name">
+           <h3>使用合作帐号登录</h3>
+           </div>
+           <ul class="other-login-ico">
+           {loop $OAUTH $k $v}
+            {if $v[enable]}<a href="{DT_PATH}api/oauth/{$k}/connect.php" title="{$v[name]}"><img src="{DT_PATH}api/oauth/{$k}/ico_dl.png" alt="{$v[name]}"/></a> &nbsp;{/if}
+            {/loop} 
+            </ul>
+            </div>
+        </div>
+           </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+if(Dd('username').value == '') {
+	Dd('username').focus();
+} else {
+	Dd('password').focus();
+}
+function Dcheck() {
+	if(Dd('username').value == '') {
+		confirm('请输入登录名称');
+		Dd('username').focus();
+		return false;
+	}
+	if(Dd('password').value == '') {
+		confirm('请输入密码');
+		Dd('password').focus();
+		return false;
+	}
+{if $MOD[captcha_login]}
+	if(!is_captcha(Dd('captcha').value)) {
+		confirm('请填写验证码');
+		Dd('captcha').focus();
+		return false;
+	}
+{/if}
+	return true;
+}
+</script>
+{template 'footer'} 

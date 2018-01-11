@@ -1,0 +1,136 @@
+{template 'header', 'mobile'}
+<div id="head-bar">
+<div class="head-bar posn">
+<div class="head-bar-back">
+<a href="{$back_link}" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>
+</div>
+<div class="head-bar-title">{$head_name}</div>
+<div class="head-bar-right">
+<a href="my.php" data-transition="slideup"><span>我的</span></a>
+</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+<div class="qiandao_content w qiandao_no">
+  	<a href="javascript:void(0);" class="m_qiandao">
+    	<div class="qiandao_icon"><img src="images/img/qiandao.png"></div>
+        <span class="color_luse">您今天还未签到哦！点击签到</span>
+    </a>
+  </div>
+  <div class="qiandao_content w qiandao_ok">
+  	<div class="qiandao_icon"><img src="images/img/qiandao_ok.png"></div>
+    <span class="color_red">您今天已签到，记得明天再来哦！</span>
+  </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	{if $signed==1}
+	$(".qiandao_no").hide();
+	$(".qiandao_ok").show();
+	{else}
+	$(".qiandao_no").show();
+	$(".qiandao_ok").hide();
+	{/if}
+		$(".m_qiandao").click(function(){
+			
+		var action = "add";
+		$.ajax({
+			type:"POST",
+			url:"wapqiandao.php",
+			data: {"action":action},
+			dataType:'json',
+			async : false,
+			success:function(data){
+				if(data.status==0){
+					$(".qiandao_list").empty();
+					qiandao();
+					Dtoast('签到成功！连续签到'+data.signday+'天获得'+data.signget+'积分！');
+					$(".qiandao_no").hide();
+					$(".qiandao_ok").show();
+				}else{
+					Dtoast(data.content);
+				}
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败
+			   Dtoast(XMLHttpRequest);
+			   //Dtoast('签到失败，请重新签到');
+			}
+		});
+	});
+});
+</script>
+
+{if $action=='add' || $action == 'edit'}
+{else}
+<div class="main_info">
+<div class="qiandaojilu w">
+   <div class="qiandao_top">
+   <span class="qiandaolist"><a href="javascript:;" class="qzqiandao">全站签到</a></span>
+   <span class="qd_tag"><a href="javascript:void(0);" class="myqiandao">我的签到</a></span>
+    <div class="qiandao_num">今日签到：<span class="color_red">{$items}人</span></div>
+    </div>
+  	<ul class="qiandao_list"></ul>
+  	<div class="m_more"><a href="javascript:void(0);" class="news_more" style="margin-top: 0px;">加载更多</a></div>
+  </div>
+  </div>
+<script type="text/javascript">
+function qiandao(page,uid){
+	$(".news_more").html("<img src='/mobile/static/img/my_loading.gif' />");
+	var aciton = "list";
+	$.ajax({
+		type:"post",
+		url:"wapqiandao.php",
+		dataType:'text',
+		data:{'action':aciton,'page':page,'uid':uid},
+		success:function(data){
+			$(".qiandao_list").append(data);
+			if(data == ''){
+				$(".news_more").html('已全部加载完成');
+			}else{
+				$(".news_more").html('加载更多');
+			}
+		}
+	});
+}
+
+$(document).ready(function(){
+	qiandao();
+	var page = 1;
+	var uid = '';
+	$(".qzqiandao").click(function(){
+		location.reload();
+	});
+	$(".myqiandao").click(function(){
+		$(".qiandao_list").empty();
+		uid = {$_userid};
+		page = 1;
+		qiandao(page,uid);
+	});
+	$(".news_more").click(function(){
+		page++;
+		qiandao(page,uid);
+	});	
+});
+
+$(function(){
+    $(".qd_tag").click(function(){
+        $(this).removeClass("qd_tag");
+        $(this).addClass("qd_tag_no");
+        $(this).siblings().removeClass("qd_tag_no");
+        $(this).siblings().addClass("qd_tag");
+    });
+});
+
+$(function(){
+    $(".qiandaolist").click(function(){
+        $(this).removeClass("qd_tag");
+        $(this).addClass("qd_tag_no");
+        $(this).siblings().removeClass("qd_tag_no");
+        $(this).siblings().addClass("qd_tag");
+    });
+});
+
+</script>
+{/if}
+
+</div>
+{template 'footer', 'mobile'}

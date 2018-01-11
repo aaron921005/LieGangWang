@@ -1,0 +1,7 @@
+{loop $tags $i $t}
+ <li>
+ <div class="v-target"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}><img src="{$t[thumb]}" width="266" height="171" alt="{$t[alt]} ({$t[hits]}播放)"></a>
+ <div class="v-btn1"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}><img src="{DT_SKIN}images/video/v_biao.png"></a></div><span>{$t[catname]}</span></div>
+   <span><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}>{$t[title]}</a></span><em>{dsubstr($t[introduce], 30, '…')} </em>
+</li>
+{/loop}

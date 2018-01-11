@@ -1,0 +1,40 @@
+/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170524
+*/
+@charset "utf-8";
+.company2{width: 947px;height: 160px;padding:15px;margin-bottom: 15px;border: 1px solid #ebebeb;border-bottom-color: #cfd0d3;overflow: hidden;background-color: #ffffff;}
+.company2:hover{box-shadow: 0 1px 0px #666666;}
+.company2-l{float:left;border: 1px solid #ddd;padding:3px;width: 152px;height: 153px;overflow:hidden;position: relative;}
+.company2-l .company2-l-img{width:152px;height: 153px;display: table-cell;vertical-align: middle;text-align: center;overflow: hidden;}
+.company2-l .company2-l-img img{max-height: 149px;max-width: 152px;_height:152px;_width:152px;overflow: hidden;}
+.company2-l .company2-l-text{display:none}
+.company2-l:hover .company2-l-text{display:block;text-align:center;}
+.company2-l .company2-l-text{margin-top: -153px;position: absolute;width:152px;height:153px;line-height:153px;text-align:center;background: inherit;background-color: rgba(0, 0, 0, 0.7);}
+.company2-l .company2-l-text a{font-size:14px;color:#ffffff;vertical-align:middle;background-color:#ff6600;padding:3px 8px;}
+.company2-c{width:400px;float: left;overflow: hidden;margin-left: 30px;margin-right: 45px;}
+.company2-c h1{height: 45px; z-index:1;}
+.company2-c h1 a{color: #333; font-size: 18px; font-weight: 200; max-width: 370px; height: 45px; line-height: 45px; float:left; white-space: nowrap; -webkit-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -o-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden;}
+.company2-c h1 a:hover{color:#f60;}
+.company2-c h1 i.icon-code{float:left;position:relative;margin-left:10px;height: 18px;width: 18px;background: url('images/ico-code.png') no-repeat;margin-top: 14px;vertical-align:middle;}
+.company2-c h1 .codeBox{display:none;text-align: center;position: absolute;right: 0;top: 20px;z-index: 30;background: #fff;border: 1px solid #ddd;padding: 5px;}
+.company2-c h1 .codeBox p{height:20px;line-height: 20px;font-style: normal;}
+.company2-c h1 i.icon-code:hover .codeBox{display: block!important;z-index:9999;}
+.company2-c p{font-size: 14px;color: #888;line-height: 30px;white-space: nowrap; -webkit-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -o-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden;}
+.company2-c p img{display: block;float: left;margin-top: 8px;margin-right: 3px;width: 15px;height: 15px;vertical-align: middle;}
+.company2-r{width: 310px;float: left;text-align: center;}
+.company2-r-t{height: 40px;}
+.company2-r-t-l{height: 22px;border-bottom:1px solid #ddd;float: left;width: 98px;margin-left: 5px;}
+.company2-r-t-c{font-size: 14px;color: #000;float: left;margin: 0 19px;line-height: 40px;}
+.company2-r-bs{line-height:24px;color:#999;}
+.company2-r-bs li{float:left;text-align:center;padding: 0 5px;}
+.company2-r-bs li img{border: #ddd solid 1px;}
+.company2-r-bs li:hover img{border: #1269d3 solid 1px;}
+.company2-r-bs li:hover a{color: #1269d3;}
+.company2-r-bs li dl dd{font-size:14px;}
+.company2-r-bs li dl dd a{color: #888;}
+.company3{margin-left: 50px;}
+.company4{margin-right: 50px;}
+.company2r{width: 205px;padding: 0px 10px 10px;border-top: #48b400 solid 3px;border-bottom: #ddd solid 1px;border-left: #ddd solid 1px;border-right: #ddd solid 1px;margin-top: 13px;}
+.company2r h1{/* padding:0px 15px; */font-size: 14px;margin-bottom: 10px;font-weight: 500;border-bottom: dashed 1px #ddd;line-height: 40px; height:40px; overflow:hidden;}
+.company2r p{line-height: 28px;color: #666;}
+.company2r p span{color: #333;}

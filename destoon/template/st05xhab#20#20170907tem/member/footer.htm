@@ -1,0 +1,61 @@
+</td>
+</tr>
+</table>
+</div>
+{if $DT_TOUCH}
+{else}
+<div class="clear">&nbsp;</div>
+<div class="footer">
+    <div class="layout">
+        <div class="f-btm">
+            <div class="links">
+               <a href="{$MODULE[1][linkurl]}">网站首页</a>
+    <!--{tag("table=webpage&condition=item=1&areaid=$cityid&order=listorder desc,itemid desc&template=list-webpage")}-->
+    | <a href="{$MODULE[1][linkurl]}sitemap/" target="_blank">网站地图</a>
+    | <a href="{$EXT[spread_url]}" target="_blank">排名推广</a>
+    {if $EXT[ad_enable]} | <a href="{$EXT[ad_url]}" target="_blank">广告服务</a>{/if}
+    {if $EXT[gift_enable]} | <a href="{$EXT[gift_url]}" target="_blank">积分换礼</a>{/if}
+    {if $EXT[guestbook_enable]} | <a href="{$EXT[guestbook_url]}" target="_blank">网站留言</a>{/if}
+    {if $EXT[feed_enable]} | <a href="{$EXT[feed_url]}" target="_blank">RSS订阅</a>{/if}
+            </div>
+            <p class="copyright" id="copyright">{$DT[copyright]}</p>
+      {if $DT[icpno]}<p class="copyright"><a href="http://www.miibeian.gov.cn" target="_blank" rel="nofollow">{$DT[icpno]}</a></p>{/if}
+            {if DT_DEBUG}<div class="px11">{debug()}</div>{/if}
+        </div>
+    </div>
+</div>
+{template 'zxzx-2'}
+<!--[以下为系统关键代码，请勿删除]-->
+<!--div class="back2top"><a href="javascript:void(0);" title="返回顶部">&nbsp;</a></div-->
+<script type="text/javascript">
+if(document.body.clientHeight > Dd('main').scrollHeight) Dd('main').style.height=document.body.clientHeight+'px';
+if(get_local('m_side') == 'Y' && Dd('side_oh').className == 'side_h') {Dh('side');Dd('side_oh').className = 'side_s';}
+var destoon_message = {$_message};
+var destoon_chat = {$_chat};
+{if $_message && $_sound}
+if(window.location.href.indexOf('message.php') == -1) $('#destoon_space').html(sound('message_{$_sound}'));
+{/if}
+{if $_chat}
+if(window.location.href.indexOf('chat.php') == -1) $('#destoon_space').html(sound('chat_new'));
+{/if}
+{if $_message}
+Dnotification('new_message', '{$MODULE[2][linkurl]}message.php', '{useravatar($_username, 'large')}', '站内信 ({$_message})', '收到新的站内信件，点击查看');
+{/if}
+{if $_chat}
+Dnotification('new_chat', '{$MODULE[2][linkurl]}chat.php', '{useravatar($_username, 'large')}', '新对话 ({$_chat})', '收到新的对话请求，点击交谈');
+{/if}
+{if $_userid && $DT[pushtime]}
+window.setInterval('PushNew()',{$DT[pushtime]}*1000);
+{/if}
+if($('#mini_profile').length > 0) {
+	$('#my_profile').mouseover(function(){
+		$('#mini_profile').show('fast');
+		$('#my_profile').bind('mouseleave',function(){ 
+			$('#mini_profile').hide(); 
+		});
+	}); 
+}
+</script>
+{/if}
+</body>
+</html>

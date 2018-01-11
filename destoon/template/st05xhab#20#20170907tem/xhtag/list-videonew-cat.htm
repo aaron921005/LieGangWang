@@ -1,0 +1,7 @@
+{loop $tags $i $t}
+<li>
+   <div class="v-target1"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if} class="fl mr10" title="{$t[alt]} ({$t[hits]}播放)"><img src="{$t[thumb]}" width="142" height="91" alt="{$t[alt]} ({$t[hits]}播放)"><em>{$t[title]}</em></a></div>
+   <p><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}>{dsubstr($t[introduce], 30, '…')} </a></p>
+   <span>{$t[hits]} 次</span>
+</li>
+{/loop}

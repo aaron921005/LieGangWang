@@ -1,0 +1,11 @@
+{loop $tags $k $t}
+<li{if $k%4==3} class="last"{/if}>
+<div class="pic"><a href="{$t[linkurl]}" target="_blank"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic107_57.png'"></a></div>
+<div class="text">
+<a href="{$t[linkurl]}" target="_blank"><p>品牌名：<span>{$t[title]}</span></p>
+<p>公司：<span>{$t[company]}</span></p>
+<p>地区：<span>{area_pos($t[areaid], '', 0)}</span></p>
+<h5>点击进入</h5></a>
+</div>
+</li>
+{/loop}

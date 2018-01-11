@@ -1,0 +1,25 @@
+{if $typeid==1}
+{$code}
+{elseif $typeid==2}
+<a href="{$url}" title="{$text_title}" target="_blank">{$text_name}</a>
+{elseif $typeid==3}
+{if $url}<a href="{$url}" target="_blank">{/if}<img src="{$image_src}" width="{$width}" height="{$height}" alt="{$image_alt}"/>{if $url}</a>{/if}
+{elseif $typeid==4}
+{if $url}<a href="{$url}" target="_blank"><img src="{DT_SKIN}image/spacer.gif" width="{$width}" height="{$height}" alt="" style="position:absolute;z-index:2;"/></a>{/if}<embed src="{$flash_src}" quality="high" loop="{if $flash_loop}true{else}false{/if}" extendspage="http://get.adobe.com/flashplayer/" type="application/x-shockwave-flash" width="{$width}" height="{$height}"></embed>
+{elseif $typeid == 5}
+<ul id="slide_a{$pid}">
+{loop $tags $i $t}
+<li style="background:url({$t[thumb]}) #CCE1F3 center 0 no-repeat;">
+ <div class="siteWidth">
+ <a target="{if $t[linkurl]}_blank{else}_self{/if}" href="{if $t[linkurl]}{$t[linkurl]}{else}###{/if}" class="txt" alt="{$t[alt]}">{$t[alt]}</a>
+ </div>
+</li>
+{/loop}
+</ul>
+{elseif $typeid==6}
+{if $tags}
+<div id="adword">
+<div class="adword">{template 'list-'.$ad_module.'-aword', 'tag'}</div>
+</div>
+{/if}
+{/if}

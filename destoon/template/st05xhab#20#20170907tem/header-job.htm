@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=http://www.w3.org/1999/xhtml>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={DT_CHARSET}"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>{if $seo_title}{$seo_title}{else}{if $head_title}{$head_title}{$DT[seo_delimiter]}{/if}{if $city_sitename}{$city_sitename}{else}{$DT[sitename]}{/if}{/if}</title>
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+{if $head_mobile}
+<meta http-equiv="mobile-agent" content="format=html5;url={$head_mobile}">
+{/if}
+<meta name="generator" content="Template - b2b.bjlsjp.cn"/>
+<link rel="shortcut icon" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+<link rel="bookmark" type="image/x-icon" href="{DT_STATIC}favicon.ico"/>
+{if $head_canonical}
+<link rel="canonical" href="{$head_canonical}"/>
+{/if}
+{if $EXT[archiver_enable]}
+<link rel="archives" title="{$DT[sitename]}" href="{$EXT[archiver_url]}"/>
+{/if}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}style.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/header.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/footer.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/css_index.css"/>
+{if $moduleid>4}<link rel="stylesheet" type="text/css" href="{DT_SKIN}{$module}.css"/>{/if}
+{if $CSS}
+{loop $CSS $css}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}{$css}.css"/>
+{/loop}
+{/if}
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}ie6.css"/>
+<![endif]-->
+{if !DT_DEBUG}<script type="text/javascript">window.onerror=function(){return true;}</script>{/if}
+<script type="text/javascript" src="{DT_STATIC}lang/{DT_LANG}/lang.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/config.js"></script>
+<script type="text/javascript" src="{DT_SKIN}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/common.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/page.js"></script>
+<script type="text/javascript" src="{DT_SKIN}js/jquery.SuperSlide.2.1.1.js"></script>
+{if $JS}
+{loop $JS $js}
+<script type="text/javascript" src="{DT_STATIC}file/script/{$js}.js"></script>
+{/loop}
+{/if}
+{php $searchid = ($moduleid > 3 && $MODULE[$moduleid]['ismenu'] && !$MODULE[$moduleid]['islink']) ? $moduleid : 9;}
+<script type="text/javascript">
+{if $head_mobile && $EXT[mobile_goto]}
+GoMobile('{$head_mobile}');
+{/if}
+var searchid = {$searchid};
+{if $itemid && $DT[anticopy]}
+document.oncontextmenu=function(e){return false;};
+document.onselectstart=function(e){return false;};
+{/if}
+</script>
+<!--[以上为系统关键代码，除非您明确其含义，否则请勿修改或删除，否则会导致系统错误]-->
+<!--[模板中所有带id的元素，请勿修改或删除，否则会导致部分JS代码无法运行]-->
+<!--[以上类似的注释，在编译模板时，系统会自动移除，不会显示在实际的页面中]-->
+</head>
+<body>
+<div class="header">
+{template 'top-mini'}<!--mini顶部-->
+</div>
+<div class="nav_hd_top">
+<div class="nav_top">
+{if $head_mobile}<div id="destoon_qrcode" style="display:none;"></div>{/if}
+<div id="destoon_space"></div>
+<div class="hd_logo fl"><a href="{$MODULE[1][linkurl]}"><img src="{if $MODULE[$moduleid][logo]}{DT_SKIN}image/logo_{$moduleid}.gif{elseif $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}" alt="{$DT[sitename]}"/></a></div>
+{if $DT[city]}
+<div class="city_top_select">
+<div class="oncity"><a href="javascript:;" id="destoon_city">{$city_name}</a></div>
+<div class="citylist">
+<div class="cybt">
+<span class="fl">已有以下省开通了 {$DT[sitename]} 分站</span>
+<a class="fr" href="http://wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site={$DT[qq1name]}&amp;menu=yes" target="_blank" rel="nofollow">申请开通分站</a>
+</div>
+<div class="clear"></div>
+<ul>
+<li><a href="javascript:gocity('');"{if $cityid == 0} class="cur"{/if}>{$L[allcity]}</a></li>
+<!--{php $xhbq=tag("table=city&order=listorder&template=null");}-->
+{loop $xhbq $k $s}
+<li><a href="{if $s[linkurl]}{$s[linkurl]}{else}javascript:gocity('areaid={$s[areaid]}');{/if}"{if $cityid == $s[areaid]} class="cur"{/if}>{set_style($s[name], $s[style])}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+{else}
+{if $moduleid>4}
+<div class="logo-ft-modname">{$MOD[name]}</div>
+{else}
+<div class="logo-ft"><img src="{DT_SKIN}css/img/logo-ft.png" width="100" height="53" /></div>
+{/if}
+{/if}
+<div class="main_uc fl mtb">
+<div class="head_search"  onmouseout="Dh('search_module');">
+<div id="search_module" class="search_module" style="display:none;" onmouseout="Dh('search_module');" onmouseover="Ds('search_module');">
+{loop $MODULE $m}{if $m[ismenu] && !$m[islink]}<a href="javascript:void(0);" onclick="setModule('{$m[moduleid]}','{$m[name]}')">{$m[name]}</a>{/if}{/loop}
+</div>
+<!--[if IE]>
+<div id="search_tips" class="search_tips" style="display:none;"></div>
+<![endif]-->
+<div id="search_tips" class="search_tips" style="display:none;" onmouseout="this.style.display='none';" onmouseover="this.style.display='block';"></div>
+<form id="destoon_search" action="{$MODULE[$searchid][linkurl]}search.php"  onsubmit="return Dsearch(1);" class="search_form">
+<input type="hidden" name="moduleid" value="{$searchid}" id="destoon_moduleid"/>
+<input type="hidden" name="spread" value="0" id="destoon_spread"/>
+<div class="hsit" id="hsit">
+<input type="text" id="destoon_select" class="search_m" value="{$MODULE[$searchid][name]}" readonly onfocus="this.blur();" onclick="$('#search_module').fadeIn('fast');"/>
+<input name="kw" id="destoon_kw" type="text" class="search_i" value="{if $kw}{$kw}{else}请输入关键词{/if}" onfocus="if(this.value=='请输入关键词') this.value='';"{if $DT[search_tips]} onkeyup="STip(this.value);" autocomplete="off"{/if} x-webkit-speech speech/>
+<div class="hotkw" id="destoon_word">
+<!--{tag("moduleid=$searchid&table=keyword&condition=moduleid=$searchid and status=3&pagesize=2&order=total_search desc&template=list-search_kwnew")}-->
+</div>
+</div>
+<input type="submit" value="搜索" class="hsbn"/>
+</form> 
+<div class="clear"></div>
+</div>
+</div>
+<div class="fr fabu">
+<div class="head_bprice fl mtb">
+<a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=9&action=add" target="_blank" rel="nofollow">发布招聘</a>
+</div>
+<div class="head_bprice fl mtb">
+<a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=9&action=add&resume=1" target="_blank" rel="nofollow">发布求职</a>
+</div>
+</div>
+ </div>
+<div class="clear"></div>
+</div>
+<div class="btcolor"></div>
+<div class="clear mt10"></div>

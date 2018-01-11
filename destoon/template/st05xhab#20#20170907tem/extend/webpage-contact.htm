@@ -1,0 +1,45 @@
+{template 'header-about'}
+<div class="service_xh">
+	<div class="m help_service">
+	    <div class="service_box">
+	        <ul class="service_list">
+	            <li>
+	                <div class="tit_se">电话客服</div>
+	                <p>预约客服，主动回电</p>
+	                <div class="tel">
+	                    {$DT[telephone]}<br>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="tit_se">在线客服</div>
+	                <p>在线解答您的咨询，高效、便捷</p>
+	                <a class="btn_se" href="http://wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site=qq&amp;menu=yes" target="_blank">点击咨询</a>
+	            </li>
+	            <li class="last">
+	                <div class="tit_se">提建议</div>
+	                <p>对帮助中心提建议|邮件留言 {$DT[emaill]}</p>
+	                <a class="btn_se" href="mailto:{$DT[emaill]}">我要留言</a>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+<div class="m company_contact">
+					<div class="company">
+						<h2>{$DT[gongsi]}</h2>
+						<p class="no_indent">
+							咨询电话：{$DT[telephone]}<br>
+							投诉电话：{$DT[telephone_tou]}<br>
+							邮 编：{$DT[youbian]}<br>
+							地 址：{$DT[dizhi]}<br>
+							邮 箱：<a href="mailto:{$DT[emaill]}">{$DT[emaill]}</a><br>
+							企业QQ：<a style="margin-left: 6px;" class="qq" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site=qq&amp;menu=yes">
+									<i></i>{$DT[qq1]}</a><br>
+						</p>
+					</div>
+					<div class="mail">
+						<a href="mailto:{$DT[emaill]}"><img alt="CEO" src="{DT_SKIN}images/help/contact_mail.jpg"></a>
+					</div>
+				</div>
+</div>
+<script type="text/javascript">try{Dd('webpage_{$itemid}').className='on';}catch(e){}</script>
+{template 'footer'}

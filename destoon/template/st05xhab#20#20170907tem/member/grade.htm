@@ -1,0 +1,113 @@
+{template 'header', 'vip'}
+<div class="m mt20">
+  <div class="main-group fl-clr">
+{loop $GROUPS $k $v}
+  {if $k > 4}
+    <div class="group_list{if $k%3==2} no_ml"{/if} style="{$percent}">
+      <li class="groupname">{$v[groupname]}</li>
+      <li class="price">收费模式: {if $v[fee_mode]}<span class="f_red">包年</span>{else}<span class="f_green">免费</span>{/if}</li>
+      <li class="des">年 费: {if $v[fee]}<span class="f_red"><strong>{$v[fee]}</strong> {$DT[money_unit]}/年</span>{else}--{/if}</li>
+     {if $UP}<li>{if isset($UP[$k])}<a href="?groupid={$v[groupid]}#up" class="buy-btn">选择此升级</a>{else}&nbsp;{/if}</li>{/if}
+    </div>
+    {/if}
+   {/loop}
+  </div>
+</div>
+<div class="content_vip">
+  <form method="post" action="?" onsubmit="return check();">
+    <input type="hidden" name="groupid" value="{$groupid}"/>
+    <div class="form">
+      <h2>在线提交申请</h2>
+      <ul>
+        <li>
+          <label><i>*</i>想升级为</label>
+          <span class="f_orange f_b groupname"> {if $UP}
+          {if $groupid}
+          {$UP[$groupid][groupname]}
+          {else}
+          请选择升级会员组
+          {/if}
+          {else}
+          暂时没有供您升级的会员组
+          {/if} </span> &nbsp;&nbsp;
+          {if $_userid}
+          您的当前会员组为<strong class="f_red">{$GROUP[$_groupid][groupname]}</strong> {else}
+          您还没有登录，建议您先 <a href="{$DT[file_login]}" class="f_b red">登录</a > 或 <a href="{$DT[file_register]}" class="f_b red">注册会员</a> {/if}</li>
+        {if $fee}
+        <li>
+          <label><i>*</i>所需费用</label>
+          <span class="f_red f_b">{$fee}{$DT[money_unit]}/年</span></li>
+        <li>
+          <label>优惠码</label>
+          <input name="promo_code" type="text" class="txt" id="promo_code" size="20" value="" onblur="pcode(this.value);"/>
+          <span class="error f_gray" id="code">使用优惠码可充抵部分费用或获赠一段有效期</span></li>
+        {/if}
+        {if $need_fee}
+        <li>
+          <label><i>*</i>账户余额</label>
+          <span class="f_blue f_b">{$_money} {$DT[money_unit]}</span> {if $fee>$_money}&nbsp;&nbsp;您的余额不足， <a href="charge.php?action=pay" target="_blank" class="f_b">请充值</a>{/if}</li>
+        {/if}
+        <li>
+          <label><i>*</i>公司名称</label>
+          <input type="text" class="txt" name="company" id="company" placeholder="请填写您的公司名称" value="{$company}" validation-group="default">
+          <span id="dcompany" class="error f_red"></span></li>
+        <li>
+          <label><i>*</i>联系人</label>
+          <input type="text" class="txt" name="truename" id="truename" placeholder="请填写您的姓名" value="{$truename}" validation-group="default">
+        </li>
+        <li>
+          <label><i>*</i>电话号码</label>
+          <input type="text" class="txt" name="telephone" id="telephone" placeholder="请填写您的手机/联系电话" value="{$telephone}" validation-group="default">
+          <span id="dtelephone" class="error f_red"></span></li>
+        <li>
+          <label>我要附言</label>
+          <textarea style="width: 335px;height:60px;padding: 5px;border: solid 1px #e6e6e6;border-radius: 3px;" name="content" id="content" placeholder="500字内"></textarea>
+          <span id="dcontent" class="error f_red"></span></li>
+      </ul>
+      <p class="text">
+        <input type="checkbox" class="check" checked="checked" onclick="if(this.checked){Ds('sbm');}else{Dh('sbm');}">
+        我已经阅读并同意<a href="{$MODULE[1][linkurl]}vip/xieyi.php" target="_blank">《{VIP}服务协议》</a></p>
+      <p id="sbm">
+        <input type="submit" class="btn" name="submit" value="提交申请"{if !$could_up} disabled{/if}/>
+      </p>
+    </div>
+  </form>
+</div>
+</div>
+<script type="text/javascript" src="{DT_STATIC}file/script/marquee.js"></script> 
+<script type="text/javascript">
+new dmarquee(22, 20, 2000, 'vips');
+function pcode(s) {
+	if(s.length > 4) {
+		makeRequest('action={crypt_action('promo')}&code='+s, '?', '_pcode');
+	}
+}
+function _pcode() {
+	if(xmlHttp.readyState==4 && xmlHttp.status==200) {
+		if(xmlHttp.responseText) Dd('code').innerHTML = '<span class="f_red">'+xmlHttp.responseText+'</span>';
+	}
+}
+function check() {
+	{if !$could_up}
+	return false;
+	{/if}
+	if(Dd('company').value.length < 2) {
+		Dmsg('请填写公司全称', 'company');
+		return false;
+	}
+	if(Dd('truename').value.length < 2) {
+		Dmsg('请填写联系人', 'truename');
+		return false;
+	}
+	if(Dd('telephone').value.length < 6) {
+		Dmsg('请填写电话号码', 'telephone');
+		return false;
+	}
+	if(Dd('content').value.length > 500) {
+		Dmsg('附言最多500字 当前已输入'+Dd('content').value.length+' 字', 'content');
+		return false;
+	}
+	return confirm('确认填写无误，提交此升级申请吗？');
+}
+</script> 
+{template 'footer'}

@@ -1,0 +1,12 @@
+{loop $tags $k $t}
+<div class="col-xs-4 col-xs-4-236 padding-none">
+          <div class="thumbnail sell-thumbnail sell-thumbnail2"> <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+            <div class="imgcon">
+              <div class="imglist"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"></div>
+            </div>
+            <div class="product font16"><span class="em2"></span>{$t[title]}</div>
+            </a>
+            <div class="name"><a href="{userurl($t[username])}" target="_blank" title="{$t[company]}">{$t[company]}</a></div>
+            <a href="{$t[caturl]}" target="_blank" class="btn-sell btn-default btn-w2">同类产品</a> </div>
+</div>
+{/loop}

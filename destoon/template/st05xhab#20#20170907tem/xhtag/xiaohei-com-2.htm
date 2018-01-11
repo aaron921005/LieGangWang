@@ -1,0 +1,26 @@
+{loop $tags $i $t}
+{if $i%3==0}<li class="sl-itm">{/if}
+  <div class="s-item unit">
+    <div class="s-img"> <a href="{$t[linkurl]}" target="_blank" class="a-block s-a">
+      <div class="com-img">
+        <div class="img-wrap"> <img src="{imgurl($t[thumb], 1)}" alt="{$t[company]}" onerror="this.src='{DT_SKIN}image/sx_nopic197_157.png'"> </div>
+      </div>
+      <div class="s-cover">
+        <p class="com-name">{$t[company]}</p>
+        <div class="line"></div>
+        <p class="com-desc">{$t[business]}</p>
+      </div>
+      </a> </div>
+    <div class="s-product mt-20 clf"> 
+      <!--{php $xhbq=tag("moduleid=5&length=20&condition=status=3 and thumb<>''and username='".$t[username]."'&areaid=$cityid&pagesize=3&order=edittime desc&template=null");}--> 
+      {loop $xhbq $k $v}
+      <div class="pro-item"> <a href="{$v[linkurl]}" target="_blank" title="{$v[alt]}">
+        <div class="img-wrap">
+          <div class="img-box"> <img src="{$v[thumb]}" alt="{$v[alt]}"> </div>
+        </div>
+        </a> </div>
+      {/loop}
+       </div>
+  </div>
+  {if $i%3==2}</li>{/if}
+{/loop}

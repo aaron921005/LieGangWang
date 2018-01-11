@@ -1,0 +1,20 @@
+{loop $tags $k $t}
+{if $t[thumb]}
+<div class="news-item-new topnews yesimg" id="item_{$t[itemid]}">
+<div class="text-list">
+            <div class="img-list news-box-img"> <a target="_blank" title="{$t[alt]}" href="{$t[linkurl]}"> <img src="{$t[thumb]}" style="display: inline;"> </a> </div>
+            <h3 class="news-tit2"><span class="topnews-ico">置顶</span><a target="_blank" title="{$t[alt]}" href="{$t[linkurl]}">{$t[title]}</a></h3>
+            <div class="mess">{dsubstr($t[introduce], 200, '…')} </div>
+            <div class="time"><span class="time_ico">{timetodate($t[addtime], 5)}</span><span class="f10"></span><span>类目：<a target="_blank" title="{cat_name($t[catid])}" href="{cat_url($t[catid])}"><em class="font-none2">{cat_name($t[catid])}</em></a></span> </div>
+</div>
+</div>
+{else}
+<div class="news-item-new topnews yesimg" id="item_{$t[itemid]}">
+<div class="text-list">
+            <h3 class="news-tit2"><span class="topnews-ico">置顶</span><a target="_blank" title="{$t[alt]}" href="{$t[linkurl]}">{$t[title]}</a></h3>
+            <div class="mess">{dsubstr($t[introduce], 200, '…')} </div>
+            <div class="time"><span class="time_ico">{timetodate($t[addtime], 5)}</span><span class="f10"></span><span>类目：<a target="_blank" title="{cat_name($t[catid])}" href="{cat_url($t[catid])}"><em class="font-none2">{cat_name($t[catid])}</em></a></span></div>
+</div>
+</div>
+{/if}
+{/loop}

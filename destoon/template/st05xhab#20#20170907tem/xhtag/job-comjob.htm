@@ -1,0 +1,12 @@
+{loop $tags $i $t}
+ <dl{if $i==5} class="no_br"{/if}>
+      <a href="{$t[linkurl]}" target="_blank">
+      {php $uinfo = userinfo($t[username]);}
+      <dt><img src="{imgurl($uinfo[thumb], 100)}"/></dt>
+      <dd><span class="jobName">{$t[company]}</span></dd>
+      <span class="bgS"></span>
+      <p class="bgSt"><span>{if $t[total]}{$t[total]} 名{else}若干名{/if}</span> <br>
+        在招【{$t[title]}】职位</p>
+      </a>
+</dl>
+{/loop}

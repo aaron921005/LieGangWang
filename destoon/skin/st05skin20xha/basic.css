@@ -1,0 +1,37 @@
+/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170503
+*/
+@charset "utf-8";
+
+/* CSS Document */
+.clear{ clear:both;}
+.clear_two{ clear:both;}
+.newborder{border-right:1px solid #eee; }
+.newheadBg{height:99px; background:#fff; border-bottom:1px solid #eee;}
+.newhead{ width:1200px; height:100%; margin:0 auto;}
+.newlogo{ width:160px; height:60px; margin-top:20px; display:block; float:left;}
+.newnavlogo img{ width:160px; height:60px;}
+.newnav{ margin-left:100px; margin-top:33px; float:left;}
+.newnav ul li{ width:auto; margin-right:10px; height:34px; float:left; line-height:34px; text-align:center; }
+.newnav ul li a{ padding:0 30px; height:34px; color:#333; display:inline-block; width:auto;}
+.newnav ul li a:hover{ height:34px; color:#fff; background:#ec3901; display:block; }
+.newnavlibg{ background:#ec3901;}
+.newlogin{ width:60px; height:60px; float:right; margin-top:20px; background:url(images/newlogin.png) top center no-repeat;}
+.newlogin a{ width:100%; height:100%; display:block; font-size:12px; line-height:100px; color:#666; text-align:center;}
+.newcopyrightBg{ width:100%; height:480px; background:#243a51; margin:60px auto 0;}
+.newcopyright{ width:1200px; height:420px; padding-top:55px; margin:0 auto; color:#ddd; }
+.newcopyrightT h4{ width:100%; height:30px; display:block; font-size: 18px; color:#eee; font-weight:100; margin-bottom:-10px; text-align:left; line-height:30px; text-indent:40px; }
+.newcopyrightT{ width:100%; height:219px; border-bottom:1px solid #2b4055;}
+.newcopyrightT ul li{ width:200px; float:left; margin-left:40px; text-align:left; line-height:26px;}
+.libg1{ background:url(images/copyrightTicon1.png) top left no-repeat;}
+.libg2{ background:url(images/copyrightTicon2.png) top left no-repeat;}
+.libg3{ background:url(images/copyrightTicon3.png) top left no-repeat;}
+.libg4{ background:url(images/copyrightTicon4.png) top left no-repeat;}
+.libg5{ background:url(images/copyrightTicon5.png) top left no-repeat;}
+.newcopyrightT a{ width:100%; font-size:14px; color:#ddd; margin-left:40px;}
+.newcopyrightT a:hover{ color:#fff; }
+.newcopyrightB{ width:100%; margin:0 auto;}
+.newcopyrightB p{ margin-top:30px; font-size:12px; width:100%; line-height:26px; text-align:center;}
+.newcopyrightB p a{ color:#ddd;}
+.newcopyrightB p a:hover{ color:#fff;}
+.newcopyrightB img{ width:120px; height:40px; float:left; margin:0 8px;}

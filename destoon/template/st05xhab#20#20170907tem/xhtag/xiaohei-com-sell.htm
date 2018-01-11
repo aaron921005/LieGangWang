@@ -1,0 +1,13 @@
+ {loop $tags $i $t}
+  {if $i%4==0}<li class="rl-item">{/if}
+   <div class="rl-itm unit unit_2">
+     <div class="img-wrap">
+      <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+        <div class="img-box"><img src="{$t[thumb]}" onerror="this.src='{DT_SKIN}image/sx_nopic197_157.png'"></div>
+      </a>
+      </div>
+     <p class="com_tit"><a href="{$t[linkurl]}" target="_blank">{$t[title]}</a></p>
+    <p class="desc">高精度高效率尊享出厂价</p>
+</div>
+   {if $i%4==3} </li>{/if}
+{/loop}

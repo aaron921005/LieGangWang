@@ -1,0 +1,82 @@
+{if $action != 'ajax'}
+{template 'header', 'mobile'}
+<div id="head-bar">
+<div class="head-bar">
+<div class="head-bar-back">
+{if $itemid || $catid || $areaid || $kw}
+<a href="{$back_link}" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>
+{else}
+<a href="channel.php" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>频道</span></a>
+{/if}
+</div>
+<div class="head-bar-title">{if $itemid}[{$head_name}品牌]{$title}{else}{$head_name}{/if}</div>
+<div class="head-bar-right">
+<a href="javascript:{if $itemid}Dsheet('{if $could_message}<a href=&#34;message.php?action=send&typeid=3&touser={$username}&title={encrypt('愿加盟“'.$title.'”品牌', DT_KEY.'SEND')}&#34; data-transition=&#34;slideup&#34;><span>留言加盟</span></a>|{/if}<a href=&#34;{if $DT_MOB[browser]=='weixin'||$DT_MOB[browser]=='qq'}javascript:share_tips();{else}share.php?moduleid={$moduleid}&itemid={$itemid}{/if}&#34;  data-transition=&#34;slideup&#34;><span>分享好友</span></a>|<a href=&#34;{mobileurl($moduleid)}&#34; data-direction=&#34;reverse&#34;><span>{$MOD[name]}首页</span></a>|<a href=&#34;channel.php&#34; data-direction=&#34;reverse&#34;><span>频道列表</span></a>', '取消');{else}Dsheet('<a href=&#34;search.php?action=mod{$moduleid}&catid={$catid}&areaid={$areaid}&#34;><span>{$MOD[name]}搜索</span></a>|<a href=&#34;category.php?moduleid={$moduleid}&#34;><span>按分类浏览</span></a>|<a href=&#34;area.php?moduleid={$moduleid}&#34;><span>按地区浏览</span></a>', '取消');{/if}"><img src="static/img/icon-action.png" width="24" height="24"/></a>
+</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+{/if}
+{if $itemid}
+<div class="main">
+	<div class="title"><strong>{$title}</strong></div>
+	<div class="info">{$editdate}&nbsp;&nbsp;点击:{$hits}</div>
+	<div class="content">
+	{if $thumb}<center><img src="{$thumb}" alt="{$title}"/></center>{/if}
+	{if $vip}{VIP}:{$vip}级<br/>{/if}
+	{if $homepage}PC端网站:<a href="{$homepage}" target="_blank" rel="external" class="b">{$homepage}</a><br/>{/if}
+	{if $could_message}
+	<a href="message.php?action=send&typeid=3&touser={$username}&title={encrypt('愿加盟“'.$title.'”品牌', DT_KEY.'SEND')}" data-transition="slideup"><div class="btn-blue" style="margin:10px 0;">留言加盟</div></a>
+	{/if}
+	{$content}
+	</div>
+	<div class="head bd-b"><strong>联系方式</strong></div>
+	<div class="contact">{template 'chip-contact', 'mobile'}</div>
+</div>
+<!-- 版权开始 -->
+{template 'footer_banquanshow', 'mobile'} 
+<!-- 版权结束 -->
+{if $DT_MOB[browser] == 'weixin' ||  $DT_MOB[browser] == 'qq'}{template 'chip-share', 'mobile'}{/if}
+<!-- 购物车开始 -->
+<div class="foot-bar-fix"></div>
+<div class="foot-bar">
+  <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td width="15%" class="icon-1"><a onclick="Go('message.php?action=send&touser={$username}');"><p>交谈</p></a></td>
+      <td width="15%" class="icon-2"><a onclick="Go('index.php?moduleid=4&username={$username}');"><p>商家</p></a></td>
+        {if in_array($moduleid, explode(',', $EXT['comment_module']))}
+       <td width="15%" class="icon-4"><a onclick="Go('comment.php?mid={$moduleid}&itemid={$itemid}');"><p>评论</p></a></td>
+       {else}
+        <td width="15%" class="icon-3"><a onclick="Go('share.php?moduleid={$moduleid}&itemid={$itemid}');"><p>分享</p></a></td>
+        {/if}
+   {if $could_message}
+        <td width="56%"><a href="message.php?action=send&typeid=3&touser={$username}&title={encrypt('我对您发布的 '.$title.' 很感兴趣', DT_KEY.'SEND')}" data-transition="slideup"><div class="btn-blue" style="line-height:51px;font-size:16px;">留言加盟</div></a></td>
+      {/if}	
+    </tr>
+  </table>
+</div>
+
+<!-- 购物车结束 -->
+{else}
+{template 'xh-option', 'mobile'}
+{template 'xh-list-tong', 'mobile'}
+	{if $lists}
+	{loop $lists $v}
+	<div class="list-img100">
+	<a href="{mobileurl(13, 0, $v[itemid])}"><img src="{if $v[thumb]}{$v[thumb]}{else}image/nopic-120.png{/if}" width="120" height="80" alt="" onerror="this.src='static/img/nopic-120.png';"/></a>
+	<ul onclick="window.location.href='index.php?moduleid={$moduleid}&itemid={$v[itemid]}'">
+	<li><strong>{$v[title]}</strong></li>
+	<li{if $v[vip]} class="vip" title="{VIP}:{$v[vip]}"{/if}><span>{$v[company]}</span></li>
+    <li>更新时间：<em>{$v[date]}</em></li>
+    <li><em>{area_pos($v[areaid], '-')}</em> <em class="f_r qgg"><a href="{$v[linkurl]}">我要代理</a></em> </li>
+	</ul>
+	</div>
+	{/loop}
+	{else}
+	{template 'chip-empty', 'mobile'}
+	{/if}
+{/if}
+{if $action != 'ajax'}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+{template 'footer', 'mobile'}
+{/if}

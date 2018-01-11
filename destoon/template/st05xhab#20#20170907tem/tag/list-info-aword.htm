@@ -1,0 +1,26 @@
+{loop $tags $k $t}
+<div class="data-list" id="item_{$t[itemid]}">
+<i class="pictj3"></i>
+			<div class="info-project-list">
+				<div class="left-img-con">
+					<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" class="info-img-tit">
+						<img alt="{$t[alt]}" src="{if $t[thumb]}{$t[thumb]}{else}{DT_SKIN}image/nopic550_250.gif{/if}">
+					</a>
+				</div>
+				<div class="right-text-con">
+					<div class="time">发布时间：<span class="color-red">{date('Y', $t[edittime])}</span>年<span class="color-red">{date('m', $t[edittime])}</span>月<span class="color-red">{date('j', $t[edittime])}</span>日</div>
+					<div class="info-tit3"><a href="{$t[linkurl]}" class="font20" target="_blank" title=""><strong>{$t[title]}</strong></a></div>
+					<div class="color-666">公司：{if $t[vip]}<img src="{DT_SKIN}image/vip_{$t[vip]}.gif" alt="{VIP}" title="{VIP}:{$t[vip]}级" align="absmiddle"/> {/if}<a href="{userurl($t[username])}" target="_blank">{$t[company]}</a>&nbsp;
+			<span class="f_gray">
+			{if $t[validated]}[已核实]{else}[未核实]{/if}
+			{if !$t[username]} [未注册]{/if}
+			</span>
+			</div>
+			<div class="color-666">所在地：{area_pos($t[areaid], ' ', 2)}</div>
+			{if $t[tzed]}<div class="btn-default may-join-btn-fl">投资额度：<em>{$DT[money_sign]}{$t[tzed]}</em></div>{/if}
+			<a class="btn-default may-join-btn" href="javascript:;" onclick="Go('{$MOD[linkurl]}{rewrite('message.php?itemid='.$t[itemid])}');" target="_blank">我要加盟</a>
+				 </div>
+			</div>
+</div>
+{/loop}		
+{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}

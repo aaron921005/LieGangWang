@@ -1,0 +1,32 @@
+$(function(){
+    //导航
+	$(".nav li").hover(
+	    function(){
+	       $(this).addClass("current");
+        },
+	    function(){
+	       $(this).removeClass("current");
+	    }
+	);
+	//客服
+	$(".close_btn").click(function(){
+        $(".service_con").hide();
+	    $(".service_div").show();
+	})
+	$(".service_div").click(function(){
+	    $(this).hide();
+	    $(".service_con").show();
+    })
+	//回到顶部
+	var topwidth=$(window).width()/2+500+30;
+	$(".back_top").css('left',topwidth);
+	$(window).scroll(function(){
+	    if($(window).scrollTop()>172)
+	        $(".back_top").show();
+	    else
+	        $(".back_top").hide();
+    })
+	$(".back_top").click(function(){
+	    $(window).scrollTop(0);
+    })
+})

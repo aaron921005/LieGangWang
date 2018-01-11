@@ -1,0 +1,45 @@
+</td>
+</tr>
+</table>
+</div>
+{if $foot}
+<div class="foot-bar-fix"></div>
+<div class="foot-bar">
+<ul>
+<li class="icon-home{if $foot=='home'}-on{/if}"><a href="index.php" data-transition="none" data-ajax="false"><span>首页</span></a></li>
+<li class="icon-channel"><a href="channel.php" data-transition="none"><span>频道</span></a></li>
+<li class="icon-my2-on"><a href="my.php?action=info" data-transition="none" data-ajax="false"><span>发布</span></a></li>
+<li class="icon-cart{if $foot=='cart'}-on{/if}"><a href="cart.php" data-transition="none" data-ajax="false"><span>购物车</span></a>{if $_cart}<i>{if $_cart>99}99{else}{$_cart}{/if}</i>{/if}</li>
+<li class="icon-my{if $foot=='my'}-on{/if}"><a href="my.php" data-transition="none"><span>我的</span></a>{if $_message || $_chat || $_cart}<em></em>{/if}</li>
+</ul>
+</div>
+{/if}
+</div>
+<script type="text/javascript">
+$('.tb tr').find('>th:last').css('border-right', '#dedede 1px solid');
+if(get_cookie('m_side') == 11 && Dd('side_oh').className == 'side_h') {Dh('side');Dd('side_oh').className = 'side_s';}
+var destoon_message = {$_message};
+var destoon_chat = {$_chat};
+{if $_message && $_sound}
+if(window.location.href.indexOf('message.php') == -1) $('#destoon_space').html(sound('message_{$_sound}'));
+{/if}
+{if $_chat}
+if(window.location.href.indexOf('chat.php') == -1) $('#destoon_space').html(sound('chat_new'));
+{/if}
+{if $_userid && $DT[pushtime]}
+window.setInterval('PushNew()',{$DT[pushtime]}*1000);
+{/if}
+{if $DT_MOB[browser] == 'weixin' || $DT_MOB[browser] == 'qq'}
+$(document).on('pageshow', function(event) {
+	$("[data-role='page']").each(function(i) {
+		if($(this).attr('class').indexOf('-active') != -1) {
+			$(this).find('.share_icon img').css('display', 'block');
+		} else {
+			$(this).find('.share_icon img').css('display', 'none');
+		}
+	});
+});
+{/if}
+</script>
+</body>
+</html>

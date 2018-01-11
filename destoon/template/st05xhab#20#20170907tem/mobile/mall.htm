@@ -1,0 +1,339 @@
+{if $action != 'ajax'}
+{template 'header', 'mobile'}
+<div id="head-bar">
+  <div class="head-bar">
+    <div class="head-bar-back"> {if $itemid || $catid || $areaid || $kw} <a href="{$back_link}" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span></a> {else} <a href="channel.php" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>频道</span></a> {/if} </div>
+    <div class="head-bar-title">{if $itemid}{$title}{else}{$head_name}{/if}</div>
+    <div class="head-bar-right"> <a href="javascript:{if $itemid}Dsheet('<a href=&#34;javascript:BuyNow();&#34;><span>立即购买</span></a>|<a href=&#34;javascript:AddCart();&#34;><span>加入购物车</span></a>|<a href=&#34;{if $DT_MOB[browser]=='weixin'||$DT_MOB[browser]=='qq'}javascript:share_tips();{else}share.php?moduleid={$moduleid}&itemid={$itemid}{/if}&#34;  data-transition=&#34;slideup&#34;><span>分享好友</span></a>|<a href=&#34;{mobileurl($moduleid)}&#34; data-direction=&#34;reverse&#34;><span>{$MOD[name]}首页</span></a>|<a href=&#34;channel.php&#34; data-direction=&#34;reverse&#34;><span>频道列表</span></a>', '取消');{else}Dsheet('<a href=&#34;search.php?action=mod{$moduleid}&catid={$catid}&areaid={$areaid}&#34;><span>{$MOD[name]}搜索</span></a>|<a href=&#34;category.php?moduleid={$moduleid}&#34;><span>按分类浏览</span></a>|<a href=&#34;area.php?moduleid={$moduleid}&#34;><span>按地区浏览</span></a>', '取消');{/if}"><img src="static/img/icon-action.png" width="24" height="24"/></a> </div>
+  </div>
+  <div class="head-bar-fix"></div>
+</div>
+{/if}
+{if $itemid}
+<style type="text/css">
+.relate_1,.relate_2 {width:65px;height:60px;float:left;}
+.relate_1 img,.relate_2 img{width:50px;height:50px;}
+.relate_1 a:link,.relate_1 a:visited,.relate_1 a:active,.relate_1 a:hover {display:block;width:50px;height:50px;border:#B2B2B2 1px solid;border-radius:4px;}
+.relate_2 a:link,.relate_2 a:visited,.relate_2 a:active,.relate_2 a:hover {display:block;width:50px;height:50px;border:red 1px solid;border-radius:4px;}
+.step_price {background:#F8F8F8;text-align:center;}
+.step_price td {border-right:#FFFFFF 1px solid;}
+.nv_1,.nv_2 {float:left;padding:5px;margin:0 5px 5px 0;cursor:pointer;    font-size: 12px;}
+.nv_1 {border:#B2B2B2 1px solid;border-radius:4px;}
+.nv_2 {border:red 1px solid;background:red;border-radius:4px;color: #974C19;background: url(images/img/test.gif) no-repeat right bottom;}
+.tl {width:50px;text-align:center;}
+</style>
+<div class="main-new">
+  {if $thumb}{template 'chip-album', 'mobile'}{/if}
+ <section class="detail">
+    <div class="left"> {if !$a2} <b>{$DT[money_sign]}{$price}</span></b> {/if}</div>
+    <div class="right">
+      <ul>
+        <li class="fav"><a href="{if $DT_MOB[browser]=='weixin'||$DT_MOB[browser]=='qq'}javascript:share_tips();{else}share.php?moduleid={$moduleid}&itemid={$itemid}{/if}"  data-transition="slideup">分享</a></li>
+      </ul>
+    </div>
+    <article>{$title}</article>
+    <p></p>
+    <!-- 保障区域开始  如果是电子书没有保障区域--> 
+    <!-- 保障区域结束 --> 
+  </section>
+  {if $a2}
+  <section class="promotion"> 
+  <div class="step_price">
+    <table width="100%" cellpadding="6" cellspacing="0">
+      <tr>
+        <td>起批</td>
+        <td>{$a1}-{$a2}{$unit}</td>
+        {if $a3}
+        <td>{$a2+1}-{$a3}{$unit}</td>
+        <td>{$a3}{$unit}以上</td>
+        {else}
+        <td>{$a2+1}{$unit}以上</td>
+        {/if} </tr>
+      <tr>
+        <td class="f_red">价格</td>
+        <td class="f_red"><b>{$DT[money_sign]}{$p1}</b></td>
+        {if $a3}
+        <td class="f_red"><b>{$DT[money_sign]}{$p2}</b></td>
+        <td class="f_red"><b>{$DT[money_sign]}{$p3}</b></td>
+        {else}
+        <td class="f_red"><b>{$DT[money_sign]}{$p2}</b></td>
+        {/if} </tr>
+    </table>
+  </div>
+  </section>
+  {/if}
+  <section class="pr2 promotion"><span class="f_l f_red">销量: {$sales}</span> <span class="f_r">评价: {$comments}</span> </section>
+ <section class="promotion"> 
+  <table width="100%" cellpadding="6" cellspacing="0" style="background: #ffffff;">
+    {if $express_name_1 == '包邮'}
+    <tr>
+      <td class="tl">物流:</td>
+      <td> {if $fee_start_1>0}
+        {if $fee_start_2>0} {$express_name_2}:{$fee_start_2}&nbsp;&nbsp;{/if}
+        {if $fee_start_3>0} {$express_name_3}:{$fee_start_3}&nbsp;&nbsp;{/if}
+        满{$fee_start_1}包邮
+        {else}
+        包邮
+        {/if}</td>
+    </tr>
+    {elseif $fee_start_1>0 || $fee_start_2>0 || $fee_start_3>0}
+    <tr>
+      <td class="tl">物流:</td>
+      <td> {if $fee_start_1>0} {$express_name_1}:{$fee_start_1}&nbsp;&nbsp;{/if}
+        {if $fee_start_2>0} {$express_name_2}:{$fee_start_2}&nbsp;&nbsp;{/if}
+        {if $fee_start_3>0} {$express_name_3}:{$fee_start_3}&nbsp;&nbsp;{/if} </td>
+    </tr>
+    {/if}
+    {if $cod}
+    <tr>
+      <td class="tl">到付:</td>
+      <td>支持货到付款</td>
+    </tr>
+    {/if}
+    <tr>
+      <td class="tl">库存:</td>
+      <td>{$amount}{$unit}</td>
+    </tr>
+    <tr>
+      <td class="tl">品牌:</td>
+      <td>{if $brand}{$brand}{else}未填写{/if}</td>
+    </tr>
+        <tr>
+      <td class="tl">发货地:</td>
+      <td>
+    {area_pos($areaid, '-')}
+   </td>
+    </tr>
+    {if $RL}
+    <tr>
+      <td class="tl">{$relate_name}:</td>
+      <td> {loop $RL $v}
+        <div class="relate_{if $itemid==$v[itemid]}2{else}1{/if}">{if $itemid==$v[itemid]}<em></em>{/if}<a href="{mobileurl($moduleid, 0, $v[itemid])}"><img src="{$v[thumb]}" alt="" title="{$v[relate_title]}"/></a></div>
+        {/loop} </td>
+    </tr>
+    {/if}
+    {if $P1}
+    <tr>
+      <td class="tl">{$n1}:</td>
+      <td id="p1"><ul>
+          {loop $P1 $i $v}
+          <li class="nv_{if $i==0}2{else}1{/if}">{$v}</li>
+          {/loop}
+        </ul></td>
+    </tr>
+    {/if}
+    {if $P2}
+    <tr>
+      <td class="tl">{$n2}:</td>
+      <td id="p2"><ul>
+          {loop $P2 $i $v}
+          <li class="nv_{if $i==0}2{else}1{/if}">{$v}</li>
+          {/loop}
+        </ul></td>
+    </tr>
+    {/if}
+    {if $P3}
+    <tr>
+      <td class="tl">{$n3}:</td>
+      <td id="p3"><ul>
+          {loop $P3 $i $v}
+          <li class="nv_{if $i==0}2{else}1{/if}">{$v}</li>
+          {/loop}
+        </ul></td>
+    </tr>
+    {/if}
+    {if $amount}
+    {if $status == 3}
+    {else}
+    <tr>
+      <td></td>
+      <td><strong class="f_red px14">该商品已下架</strong></td>
+    </tr>
+    {/if}
+    {else}
+    <tr>
+      <td></td>
+      <td><strong class="f_red px14">该商品库存不足</strong></td>
+    </tr>
+    {/if}
+  </table>
+  </section> 
+   <section class="pr2 promotion"> <span class="f_l">更新时间：{$editdate}</span> <span class="f_r f_red">{if $vip}高级会员{else}免费会员{/if}</span> </section>
+  <section class="shop"> <a href="index.php?moduleid=4&username={$username}">
+    <div class="shop_con arrow_con">
+      <div class="arrow"> {if $member}
+        <div class="logo"><img src="{if $member[thumb]}{$member[thumb]}{else}static/img/home-logo.png{/if}" width="34" height="34" onerror="this.src='static/img/home-logo.png';" alt="{$company}"></div>
+        {/if}
+        <div class="name">{$company}</div>
+      </div>
+    </div>
+    </a>
+    <ul class="evaluation">
+      <li>
+        <p>描述相符</p>
+        <em>4.9</em> <i class="low">中</i> </li>
+      <li>
+        <p>服务态度</p>
+        <em>4.9</em> <i class="low">中</i> </li>
+      <li>
+        <p>发货速度</p>
+        <em>4.9</em> <i class="low">中</i> </li>
+      <li>
+        <p>关注人数</p>
+        <em>{$hits}</em> </li>
+    </ul>
+    <div class="shop_btn"> <span><a href="index.php?moduleid=4&username={$username}&action=sell"><img src="images/img/icon-sort-no.png" width="20" height="20"/>全部商品</a></span> <span><a href="index.php?moduleid=4&username={$username}"><img src="images/img/my-home-no.png" width="20" height="20"/>进店逛逛</a></span> </div>
+  </section>
+  <div class="list-tab bd-t">
+    <ul>
+      <li class="on" id="t_0" onclick="Mshow(0)"><span>商品详情</span></li>
+      <li id="t_1" onclick="Mshow(1)"><span>评价详情({$comments})</span></li>
+      <li id="t_2" onclick="Mshow(2)"><span>交易记录({$orders})</span></li>
+    </ul>
+  </div>
+  <div id="c_2" style="display:none;">
+    <div class="list-empty">正在加载交易记录...</div>
+  </div>
+  <div id="c_1" style="display:none;">
+    <div class="list-empty">正在加载评价详情...</div>
+  </div>
+  <div class="content" id="c_0">{$content}</div>
+  <section class="promotion">
+  <div class="head bd-b"><strong>联系方式</strong></div>
+  <div class="contact">{template 'chip-contact', 'mobile'}</div>
+  </section>
+  <section class="J_guesstop"> </section>
+  <!-- 猜你喜欢开始 -->
+  <section class="J_guess">
+    <section class="guess">
+      <div class="title_con"><span class="titlenew">本店新品</span>
+        <div class="line"></div>
+      </div>
+      <ul>
+         <!--{php $tagx=tag("moduleid=16&condition=status>2 and username='$username'&pagesize=6&order=edittime desc&fields=itemid,title,linkurl,thumb,edittime,price&template=null");}-->
+          {loop $tagx $i $v}
+        <li> <a href="{mobileurl(16, 0, $v[itemid])}">
+          <div><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}" alt="" onerror="this.src='static/img/nopic-60.png';"></div>
+          <span>{$v[title]}</span> <em>{$DT[money_sign]} {$v[price]}</em> </a> </li>
+      {/loop}
+      </ul>
+    </section>
+  </section>
+  <!-- 猜你喜欢结束 -->
+<!-- 版权开始 -->
+{template 'footer_banquanshow', 'mobile'} 
+<!-- 版权结束 -->
+{if $DT_MOB[browser] == 'weixin' ||  $DT_MOB[browser] == 'qq'}{template 'chip-share', 'mobile'}{/if}
+{if $status == 3 && $amount > 0}
+<div class="foot-bar-fix"></div>
+</div>
+<div class="foot-bar">
+  <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td width="15%" class="icon-1"><a onclick="Go('message.php?action=send&touser={$username}');"><p>交谈</p></a></td>
+      <td width="15%" class="icon-2"><a onclick="Go('index.php?moduleid=4&username={$username}');"><p>店铺</p></a></td>
+      {if in_array($moduleid, explode(',', $EXT['comment_module']))}
+       <td width="15%" class="icon-4"><a onclick="Go('comment.php?mid={$moduleid}&itemid={$itemid}');"><p>评论</p></a></td>
+       {else}
+        <td width="15%" class="icon-3"><a onclick="Go('share.php?moduleid={$moduleid}&itemid={$itemid}');"><p>分享</p></a></td>
+        {/if}
+      <td width="31%" onclick="AddCart();"><div class="btn-orange" style="line-height:51px;font-size:16px;">加入购物车</div></td>
+      <td width="24%" onclick="BuyNow();"><div class="btn-red" style="line-height:51px;font-size:16px;">立即购买</div></td>
+    </tr>
+  </table>
+</div>
+{/if} 
+<script type="text/javascript">
+var s_s = {'1':0,'2':0,'3':0};
+function Mshow(k) {
+	if($('#t_'+k).attr('class') == 'on') return;
+	for(var i = 0; i < 3; i++) {
+		if(i == k) {
+			$('#t_'+i).attr('class', 'on');
+			$('#c_'+i).show();
+			if(k == 1) load_comment(0);
+			if(k == 2) load_order(0);
+		} else {
+			$('#t_'+i).attr('class', '');
+			$('#c_'+i).hide();
+		}
+	}
+}
+function addE(i) {
+	$('#p'+i+' li').click(function() {
+		$('#p'+i+' li')[s_s[i]].className = 'nv_1';
+		this.className = 'nv_2';
+		s_s[i] = $(this).index();
+	});
+}
+function BuyNow() {
+	Go('purchase.php?moduleid={$moduleid}&itemid={$itemid}&s1='+s_s[1]+'&s2='+s_s[2]+'&s3='+s_s[3]+'&a=1');
+}
+function AddCart() {
+	$.get(AJPath+'?action=mall&job=cart&moduleid={$moduleid}&itemid={$itemid}&s1='+s_s[1]+'&s2='+s_s[2]+'&s3='+s_s[3]+'&a=1', function(data) {
+		if(data > 0) {
+			Dtoast('商品已成功加入购物车');
+			if($('.my-cart').html().indexOf('em') != -1) {
+				var t = parseInt($('.my-cart em').html());
+				$('.my-cart').html('<em>'+(t+1)+'</em>');
+			} else {
+				$('.my-cart').html('<em>1</em>');
+			}
+			setTimeout(function() {
+				Dsheet('<a href="cart.php?reload={$DT_TIME}"><span>查看购物车</span></a>|<a href="javascript:;"><span>继续购物</span></a>', '取消', '商品已成功加入购物车');
+			}, 1000);
+		} else if(data == '-2') {
+			Dtoast('购物车已存在此商品');
+		} else if(data == '-4') {
+			Dtoast('不能添加自己的商品');
+		} else if(data == '-5') {
+			Dsheet('<a href="login.php"><span>立即登录</span></a>', '取消', '请先登录');
+		} else {
+			Dtoast('操作失败，请重试'+data);
+		}
+	});
+}
+function load_comment(p) {
+	if($('#c_1').html().indexOf('list-empty') != -1 || p) {
+		$('#c_1').load('mall.php?itemid={$itemid}&action=comment&page='+p);
+	}
+}
+function load_order(p) {
+	if($('#c_2').html().indexOf('list-empty') != -1 || p) {
+		$('#c_2').load('mall.php?itemid={$itemid}&action=order&page='+p);
+	}
+}
+$(document).on('pageinit', function(event) {
+	{if $P1}addE(1);{/if}
+	{if $P2}addE(2);{/if}
+	{if $P3}addE(3);{/if}
+});
+</script> 
+{else}
+{template 'xh-option', 'mobile'}
+{template 'xh-list-tong', 'mobile'}
+	{if $lists}
+ <section class="J_guess-mall">
+    <section class="guess-mall">
+      <ul>
+	{loop $lists $v}
+  <li> <a href="{mobileurl(16, 0, $v[itemid])}">
+          <aside><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}" alt="" onerror="this.src='static/img/nopic-60.png';"></aside>
+          <span>{$v[title]}</span> <em>{$DT[money_sign]} {$v[price]}</em> </a> </li>
+{/loop}
+ </ul>
+    </section>
+  </section>
+	{else}
+	{template 'chip-empty', 'mobile'}
+	{/if}
+{/if}
+{if $action != 'ajax'}
+<div class="my-cart" onclick="Go('cart.php');">{if $_cart}<em>{$_cart}</em>{/if}</div>
+{/if}
+{if $action != 'ajax'}
+{if $pages}
+<div class="pages">{$pages}</div>
+{/if}
+{template 'footer', 'mobile'}
+{/if}

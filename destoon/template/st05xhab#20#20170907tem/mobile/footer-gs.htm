@@ -1,0 +1,30 @@
+<div class="content-wz">旺铺：<a href="index.php?moduleid=4&username={$COM[username]}" data-transition="none">{$COM[company]}</a> &raquo; 欢迎光临本店</div>
+ <div class="wb">
+<div class="buttons">
+{if $_userid}
+<a href="my.php">我的</a><a href="javascript:Dsheet('<a href=&#34;logout.php&#34;><span style=&#34;color:red&#34;>注销登录</span></a>', '取消', '确定要注销本次登录吗？');">注销</a>
+{else}
+<a href="login.php?forward=my.php" data-transition="none">登录</a><a href="register.php" data-transition="none">注册</a>
+{/if}
+ {if !in_array($DT_MOB[browser], array('app', 'b2b', 'screen'))}
+<a href="mobile.php?action=pc" rel="external">电脑版</a>
+        {/if}
+        <a href="index.php" data-transition="none" data-ajax="false">平台首页</a></div>
+<div class="copyright">&copy; 2016 {$COM[company]}&nbsp;版权所有&nbsp;<a href="my.php?action=home"  data-transition="none">管理旺铺</a></div>
+<div class="copyright">{if $DT[icpno]}<a href="http://www.miibeian.gov.cn" data-transition="none">{$DT[icpno]}</a>{/if}&nbsp;&nbsp;{$DT[sitename]} <a>技术支持</a>{if $show_stats}&nbsp;&nbsp;访问量:{$COM[hits]}{/if}	</div>
+</div>
+<!-- 商铺浮动开始 -->
+<div class="foot-bar-fix"></div>
+<div class="foot-bar-gs">
+  <table cellpadding="0" cellspacing="0" width="100%" {if $bgcolorwap}style="background:{$bgcolorwap};"{else}{if $COM[groupid] == 7 || $COM[groupid] == 8}style="background: #F29B2A;"{else}style="background: #007AFF;"{/if}{/if} >
+    <tr>
+	  <td width="25%" class="icon-1"><a href="{$HURL}" data-transition="slideup"><p>首页</p></a></td>
+      <td width="25%" class="icon-2"><a href="{$HURL}&action=contact" target="_blank" data-transition="slideup" class="map"><p>地图</p></a></td>
+	  <td width="25%" class="icon-3">
+	  {if $DT[im_web]}<a href="chat.php?touser={$COM[username]}" data-transition="slideup"><p>交谈</p></a>{else}<a href="message.php?action=send&touser={$COM[username]}" data-transition="slideup"><p>留言</p>{/if}</td>
+      <td width="25%" class="icon-4" onclick="Go('tel:{if $COM[mobile]}{$COM[mobile]}{else}{$COM[telephone]}{/if}');" data-transition="slideup"><p>电话</p></td>
+    </tr>
+  </table>
+</div>
+
+<!-- 商铺浮动结束 -->

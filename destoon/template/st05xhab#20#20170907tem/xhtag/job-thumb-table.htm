@@ -1,0 +1,19 @@
+{loop $tags $i $t}
+{php $uinfo = userinfo($t[username]);}
+<li data-url="{$t[linkurl]}" class="{if $i==0}border-right{elseif $i==1}border-bottom{elseif $i==2}border-top border-right{/if}">
+   <div class="logo"> <a href="{$t[linkurl]}" target="_blank"><img src="{imgurl($uinfo[thumb], 100)}" alt=""></a> </div>
+   <div>
+     <p> <a href="{$t[linkurl]}" class="job" target="_blank">{$t[title]}</a> <a href="" class="rightP"><em></em> <span class="codeS"> <img src="{DT_PATH}api/qrcode.png.php?auth={$t[linkurl]}" width="100" height="100" alt="二维码""> <i class="cR"></i> <em><i></i>手机扫一扫</em> <em class="padding">在手机上看招聘，联系更快捷。</em> </span> </a> <span class="time">{timetodate($t[addtime], 5)} 发布</span> </p>
+     <p> <span class="money">{if $t[minsalary] && $t[maxsalary]}
+			{$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+		{elseif $t[minsalary]}
+			{$t[minsalary]}{$DT[money_unit]}/月以上
+		{elseif $t[maxsalary]}
+			{$t[maxsalary]}{$DT[money_unit]}/月以内
+		{else}
+			面议
+		{/if}</span> <span class="ads">{area_pos($t[areaid], '', 1)}</span> </p>
+     <p> <a href="{userurl($t[username])}" class="company" target="_blank">{$t[company]}</a> </p>
+   </div>
+</li>
+{/loop}

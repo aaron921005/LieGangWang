@@ -1,0 +1,11 @@
+/*
+ST05-CSS-xiaohei -qq:290948585-b2b.bjlsjp.cn-20170901
+*/
+@charset "utf-8";
+.left_menu_a{    width: 170px;background:#ffffff;border: 1px solid #ebebeb;padding: 15px;}
+.left_menu_a li{height: 35px; line-height: 35px; font-size: 14px; margin-bottom: 15px; text-align: center;}
+.left_menu_ad{background: #AFB1B2;}
+.left_menu_adon,.left_menu_ad:hover{background: #1269d3;}
+.left_menu_ad a,.left_menu_adon a{color: #ffffff;}
+.left_box{}
+.left_box th{font-size:14px}

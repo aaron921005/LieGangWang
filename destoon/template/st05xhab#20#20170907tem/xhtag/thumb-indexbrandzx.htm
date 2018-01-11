@@ -1,0 +1,9 @@
+{loop $tags $k $t}
+<li class="hvr-wobble-horizontal {if $k==2}no_bm{/if}">
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+<img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic107_57.png'">
+<h1>{$t[title]}</h1>
+<p>{dsubstr($t[introduce], 80, '…')}</p>
+</a>
+</li>
+{/loop}

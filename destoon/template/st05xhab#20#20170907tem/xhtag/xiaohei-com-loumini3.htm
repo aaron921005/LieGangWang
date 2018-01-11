@@ -1,0 +1,8 @@
+{loop $tags $i $t}
+<li class="bl2-itm"> <a href="{$t[linkurl]}" target="_blank" class="mod-brand" title="{$t[company]}">
+  <div class="img-wrap">
+    <div class="img-box"> <img src="{if $t[comlogo]}{$t[comlogo]}{else}{DT_SKIN}images/company/no_comlogo.png{/if}" alt="{$t[company]}"> </div>
+  </div>
+  <p class="name">{$t[company]}</p>
+  </a> </li>
+{/loop}

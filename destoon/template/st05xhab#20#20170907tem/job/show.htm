@@ -1,0 +1,144 @@
+{template 'header-job'}
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<div class="m">	
+		<div class="pos">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; {cat_pos($CAT, ' &raquo; ')} &raquo; 招聘详情</div>
+</div>
+<div class="center_content">
+        <div class="mrd-left fl">
+            <div class="mrd-left-one">
+                <div class="mrd-left-center">
+                    <h2 class="mrd-left-h2" id="title">{$title}</h2>
+                    {if $username}
+                    <div class="position-apply">
+                        <button class="position-apply-btn fr app_jobs" onclick="Go('{$MOD[linkurl]}{rewrite('apply.php?itemid='.$itemid)}');">申请职位</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    {/if}
+                    <p class="position-name"><a href="{userurl($username)}" target="_blank">{$company}</a></p>
+                    <div class="mrd-left-time fl">
+                        <p><img src="{DT_SKIN}images/job/jf-icon2.png">发布时间：{$adddate}</p>
+                    </div>
+                    <div class="mrd-left-button fr">
+                        <a href="javascript:SendFav();" class="mrd-left-refresh fl add_favorites">收藏</a>
+                        <div class="share fl"><div class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1503893080325"><a href="#" class="bds_more mrd-left-editor" data-cmd="more">分享</a></div></div>
+						 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
+                        <a href="javascript:SendReport();" class="mrd-left-delete fr report_button" jobs_name="{$alt}" jobs_addtime="">举报</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="mrd-left-two">
+                <div class="mrd-left-center">
+                    <div class="mrd-left-text fl">
+                        <p class="mrd-left-text-p1 mm">{if $minsalary && $maxsalary}{$minsalary}-{$maxsalary}{$DT[money_unit]}/月{elseif $minsalary}{$minsalary}{$DT[money_unit]}/月以上{elseif $maxsalary}{$maxsalary}{$DT[money_unit]}/月以内{else}面议{/if}</p>
+                        <p class="mrd-left-text-p4">性质：{$TYPE[$type]} <i>/</i> 学历：{$EDUCATION[$education]} <i>/</i> 经验：{if $experience}{$experience}年以上{else}不限{/if} <i>/</i> 性别：{$GENDER[$gender]} <i>/</i> 年龄：{if $minage && $maxage}{$minage}-{$maxage}岁{elseif $minage}{$minage}岁以上{elseif $maxage}{$maxage}岁以内{else}不限年龄{/if}</p>
+                        <p class="mrd-left-text-p3"><span class="position-add">{area_pos($areaid, '')}</span></p>
+                        <p class="mrd-left-text-p2">招聘{if $total}{$total}人{else}若干{/if}<span>({$todate})</span>{if $expired}<span class="f_red">已过期</span>{/if}</p>
+					   <p class="mrd-left-text-p5">
+                       <a class="welfare fl"><span>招聘部门: {$department}</span></a>
+                        <a class="welfare fl"><span>婚姻要求: {$MARRIAGE[$marriage]}</span></a>
+                        <a class="welfare fl"><span>行业: {$CATEGORY[$parentid][catname]}</span></a>
+                        <a class="welfare fl"><span>职位: {$CATEGORY[$catid][catname]}</span></a>
+                        </p>
+                        <div class="clearfix"></div>
+                        <p></p>
+	                   <div class="contact-map" id="contact-map" style="display:none">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="mrd-left-three">
+                <div class="mrd-left-center">
+                    <div class="mrd-left-description">
+                        <h3 class="mrd-des-title">职位描述</h3>
+                       <div class="content" id="content">{$content}</div>
+                       <div class="b10">&nbsp;</div>        
+                      {if $CP}{template 'property', 'chip'}{/if}
+                    </div>
+                </div>
+            </div>
+            {if $com_intro}
+             <div class="mrd-left-three">
+                <div class="mrd-left-center">
+                    <div class="mrd-left-description">
+                        <h3 class="mrd-des-title">公司介绍</h3>
+                       <div class="content">{$com_intro}</div>
+                    </div>
+                </div>
+            </div>
+            {/if}
+            <div class="mrd-left-three" style="border-bottom:none;">
+                <div class="mrd-left-center">
+                    <div class="mrd-left-description">
+                    <h3 class="mrd-des-title">联系方式</h3>
+                   	<div id="contact">{template 'contact', 'chip'}</div>
+                    </div>
+                </div>
+            </div>
+            {if in_array($moduleid, explode(',', $EXT['comment_module']))}
+            <div class="clearfix"></div>
+            <div class="comment mt20">
+             {template 'comment', 'chip'}
+            </div>
+            {/if}
+        {if $username}      
+           <div class="mrd-left-four">
+                <div class="mrd-left-center">
+                    <div class="poslist-title">
+                        <ul class="position-ul fl">
+                            <li class="position-ul-li fl active">该公司其他职位</li>
+                            <div class="clearfix"></div>
+                        </ul>
+                        <div class="poslist-page fr pageminnav"><a href="{userurl($username)}" target="_blank">进入企业</a></div>
+                        <div class="clearfix"></div>
+                    </div>
+			<div class="position-list">
+  <!--{tag("moduleid=$moduleid&length=34&condition=status=3 and username='$username'&areaid=$cityid&pagesize=10&order=addtime desc&dir=xhtag&template=job-show-qyjob")}--> 
+          </div>
+
+			</div>
+            </div>
+     {/if}
+        </div>
+        <div class="mrd-right fr">
+            <div class="company-card">
+                <div class="company-card-center">
+                    <h3 class="company-card-title">公司名片</h3>
+                    {php $uinfo = userinfo($username);}
+                    <img src="{imgurl($uinfo[thumb], 200)}" alt="公司logo" width="185" height="180">
+                    <h3 class="company-card-name"><a href="{userurl($username)}" target="_blank">{$company}</a></h3>
+                    <p>资本：{if $uinfo[capital]}{$uinfo[capital]}万{$uinfo[regunit]}{else}未填写{/if}</p>
+                    <p>类型：{$uinfo[type]}{if $uinfo[mode]}（{$uinfo[mode]}）{/if}</p>
+                    <p>规模：{$uinfo[size]}</p>
+                    <p>地区：{area_pos($areaid, '', 1)}</p>
+                </div>
+            </div>
+
+            <div class="mrd-right-code">
+                <div class="mrd-right-code-img fl">
+                    <img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}" alt="扫描二维码" width="100" height="100">
+                </div>
+                <div class="mrd-right-code-text fr">
+                    <p class="mrd-right-code-p">扫描二维码即可在手机端精彩呈现职位详情，一键分享至朋友圈,为招聘助力！</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="arx_list_info">
+			<div class="conr_two">
+				<div class="conl_tit fl">推荐职位</div><span class="conl_more fr"><a href="{$MODULE[9][linkurl]}search.php?action=&kw=&catid=0&areaid=0&x=44&y=10" target="_blank"> 更多&gt;&gt;</a></span>
+				<div class="clearfix"></div>
+				<div class="leave">
+				 <!--{tag("moduleid=$moduleid&length=34&condition=status=3&areaid=$cityid&pagesize=10&order=addtime desc&dir=xhtag&template=sell-search_rank")}--> 	
+				</div>
+			</div>
+            </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<div class="clearfix"></div>
+<div id="hotproduct">&nbsp;</div>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+{template 'footer'}

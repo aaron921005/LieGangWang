@@ -1,0 +1,527 @@
+{template 'header-mall'} 
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}mall_show.css">
+<div class="wrapper pr">
+<div class="pos_new">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; {cat_pos($CAT, ' &raquo; ')} &raquo;{$title}</div>
+  <div class="ncs-detail mt10"> 
+    <!-- S 商品图片 -->
+    <div id="ncs-goods-picture" class="ncs-goods-picture image_zoom" style="width: 360px;">
+      <div class="gallery_wrap" style="height: 360px; width: 360px; position: relative; overflow: hidden;">
+        <div class="gallery levelB" onmouseover="SAlbum();" onmouseout="HAlbum();" onclick="PAlbum(Dd('mid_pic'));" style="position: absolute; overflow: hidden; opacity: 1; height: 320px; width: 320px; left: 20px; top: 20px;"><img src="{$albums[0]}" alt="" style="height: 320px; width: 320px;"></div>
+      </div>
+      <div class="controller_wrap">
+        <div class="controller">
+          <ul>
+      {loop $thumbs $k $v}
+      <li><a href="javascript:;" data-index="{$k}" class="{if $k==0}current{/if}"><img src="{$v}" height="60" width="60" onmouseover="if(this.src.indexOf('nopic60.gif')==-1)Album({$k}, '{$albums[$k]}');" id="t_{$k}"></a></li>
+         {/loop}
+          </ul>
+        </div>
+        <a href="javascript:;" class="prev"><span>«</span></a>
+        <a href="javascript:;" class="next"><span>»</span></a>
+        </div>
+      <div class="close_wrap"><a href="javascript:;" class="close" style="display: none;">×</a></div>
+    </div>
+    <!-- S 商品基本信息 -->
+    <div class="ncs-goods-summary">
+      <div class="name">
+        <h1 id="title">{$title}</h1>
+      </div>
+      <div class="ncs-meta"> 
+        <!-- S 商品品牌 -->
+        <dl>
+          <dt>品牌：</dt>
+          <dd class="cost-brand">{if $brand}<a href="{$MOD[linkurl]}search.php?fields=4&kw={urlencode($brand)}" target="_blank" rel="nofollow">{$brand}</a>{else}未填写{/if}</dd>
+        </dl>
+        <!-- E 商品品牌 --> 
+        <!-- S 商品价格 -->
+        <dl>
+        {if $a2}
+        <div class="step_price">
+        <table width="100%" cellpadding="6" cellspacing="0">
+        <tr>
+        <td>起批</td>
+        <td>{$a1}-{$a2}{$unit}</td>
+        {if $a3}
+        <td>{$a2+1}-{$a3}{$unit}</td>
+        <td>{$a3}{$unit}以上</td>
+        {else}
+        <td>{$a2+1}{$unit}以上</td>
+        {/if}
+        </tr>
+        <tr>
+        <td>价格</td>
+        <td class="f_price">{$DT[money_sign]}<span>{$p1}</span></td>
+        {if $a3}
+        <td class="f_price">{$DT[money_sign]}<span>{$p2}</span></td>
+        <td class="f_price">{$DT[money_sign]}<span>{$p3}</span></td>
+        {else}
+        <td class="f_price">{$DT[money_sign]}<span>{$p2}</span></td>
+        {/if}
+        </tr>
+        </table>
+        </div>
+        {/if}
+         {if !$a2}
+          <dt>单价：</dt>
+          <dd class="price">{$DT[money_sign]}<strong>{$price}</strong> </dd>
+          {/if}
+        </dl>
+        <dl class="rate">
+          <dt>评分：</dt>
+          <!-- S 描述相符评分 -->
+          <dd>人气(&nbsp;<span id="hits">{$hits}</span>&nbsp;)&nbsp;&nbsp;<a href="#t_comment" onclick="Mshow('comment');">共有 {$comments} 条评价</a>&nbsp;(&nbsp;<a href="#t_order" onclick="Mshow('order');">销量：{$sales}{$unit}</a>&nbsp;)</dd>
+          <!-- E 描述相符评分 -->
+        </dl>
+        <!-- E 商品价格 -->
+        <div class="ncs-goods-code">
+          <p><img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}" width="100" height="100" title="用手机扫描二维码直达商品WAP版"></p>
+          <span class="ncs-goods-code-note"><i></i>手机扫购有惊喜</span> </div>
+      </div>
+
+      <div class="ncs-logistics">
+      <!-- S 物流与运费新布局展示  -->
+      {if $express_name_1 == '包邮'}
+        <dl class="ncs-freight">
+          <dt>物流：</dt>
+          <dd class="ncs-freight_box">
+        {if $fee_start_1>0}
+        {if $fee_start_2>0} {$express_name_2}:{$fee_start_2}&nbsp;&nbsp;{/if}
+        {if $fee_start_3>0} {$express_name_3}:{$fee_start_3}&nbsp;&nbsp;{/if}
+        满{$fee_start_1}包邮
+        {else}
+        包邮
+        {/if}
+          </dd>
+        </dl>
+        {elseif $fee_start_1>0 || $fee_start_2>0 || $fee_start_3>0}
+         <dl class="ncs-freight">
+          <dt>物流：</dt>
+          <dd class="ncs-freight_box">
+        {if $fee_start_1>0} {$express_name_1}:{$fee_start_1}&nbsp;&nbsp;{/if}
+        {if $fee_start_2>0} {$express_name_2}:{$fee_start_2}&nbsp;&nbsp;{/if}
+        {if $fee_start_3>0} {$express_name_3}:{$fee_start_3}&nbsp;&nbsp;{/if}
+          </dd>
+          </dl>
+          {/if}
+        <!-- S 物流与运费新布局展示  --> 
+        {if $cod}
+       <dl class="ncs-freight">
+          <dt>到付：</dt>
+          <dd class="ncs-freight_box">
+       支持货到付款
+         </dd>
+        </dl>
+        {/if}
+      </div>
+      <!-- S 商品关联属性--> 
+      <div class="ncs-key"> 
+       {if $RL}
+       <dl>
+          <dt>{$relate_name}：</dt>
+          <dd>
+          <ul>
+        {loop $RL $v}
+        <li class="relate_{if $itemid==$v[itemid]}2{else}1{/if}">{if $itemid==$v[itemid]}<em></em>{/if}<a href="{$v[linkurl]}"><img src="{$v[thumb]}" alt="" title="{$v[relate_title]}"/></a></li>
+        {/loop} 
+        </ul>
+        </dd>
+      </dl>
+      {/if}
+      </div>
+      <!-- S 商品规格值--> 
+      <div class="ncs-key"> 
+     {if $P1}
+       <dl>
+          <dt>{$n1}：</dt>
+          <dd id="p1">
+          <ul>
+        {loop $P1 $i $v}
+        <li class="nv_{if $i==0}2{else}1{/if}">{$v}</li>
+        {/loop}
+        </ul>
+        </dd>
+      </dl>
+      {/if}
+       {if $P2}
+       <dl>
+          <dt>{$n2}：</dt>
+          <dd id="p2">
+          <ul>
+        {loop $P2 $i $v}
+        <li class="nv_{if $i==0}2{else}1{/if}">{$v}</li>
+        {/loop}
+        </ul>
+        </dd>
+      </dl>
+      {/if}
+       {if $P3}
+       <dl>
+          <dt>{$n3}：</dt>
+          <dd id="p3">
+          <ul>
+        {loop $P3 $i $v}
+        <li class="nv_{if $i==0}2{else}1{/if}">{$v}</li>
+        {/loop}
+        </ul>
+        </dd>
+      </dl>
+      {/if}
+      </div>
+      <!-- S 购买数量及库存 -->
+      <div class="ncs-buy">
+        {if $amount}
+        {if $status == 3}
+        <div style="height: 43px; margin-bottom: 20px;">
+         <div class="shuliang" style="float: left;">数量：</div>
+          <div class="ncs-figure-input" style="float: left;">
+          <input type="text" value="{$a1}" size="4" id="amount" onkeyup="Malter('', {$a1}, {$amount});" class="input-text">
+          <a href="javascript:void(0)" class="increase" onclick="Malter('+', {$a1}, {$amount});" alt="增加"/>&nbsp;</a> 
+          <a href="javascript:void(0)" class="decrease" onclick="Malter('-', {$a1}, {$amount});" alt="减少"/>&nbsp;</a> 
+          </div>
+          <em style=" display: block; float: left; margin-top: 10px;">(当前库存 <strong> {$amount} </strong> {$unit}) </em>
+        </div>
+        {else}
+        <div style="height: 43px; margin-bottom: 10px;"><strong class="f_red px14 xia">该商品已下架</strong></div>
+        {/if}
+        {else}
+        <div style="height: 43px; margin-bottom: 10px;"><strong class="f_red px14 xia">该商品库存不足</strong></div>
+        {/if}
+        <!-- S 购买按钮 -->
+        {if $amount}
+        {if $status == 3}
+        <div class="ncs-btn" colspan="2"> 
+          <!-- 加入购物车--> 
+      <a class="addcart" title="加入购物车" onclick="AddCart();" target="_blank" /><i class="icon-shopping-cart"></i>加入购物车</a> 
+          <!-- 立即购买--> 
+      <a class="buynow" title="立即购买" onclick="BuyNow();" target="_blank" />立即购买</a> 
+        </div>
+        {/if}
+        {/if}
+        <!-- E 购买按钮 --> 
+      </div>
+      <!-- E 购买数量及库存 --> 
+      <!--E 商品信息 --> 
+    </div>
+    <!-- E 商品图片及收藏分享 -->
+    <div class="ncs-handle"> 
+      <!-- S 分享 --> 
+    <li class="bd-share fl">
+      <!--baidu-share S-->
+<div class="bdsharebuttonbox btn-share bdshare-button-style0-16"><a href="#" class="bds_more" data-cmd="more">分享</a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+       <!--baidu-share END--> 
+       </li> 
+      <!-- S 收藏 --> 
+      <li class="fl">
+      <a href="javascript:SendFav();" class="favorite"><i></i>收藏商品<span>(<em nctype="goods_collect">{xh_favorite($title)}</em>)</span></a> 
+      </li>
+       <!-- S 告诉好友 --> 
+      <li class="fl">
+      <a href="javascript:SendPage();" class="friends"><i></i>告诉好友</a> 
+      </li>
+      <!-- S 举报 -->
+      <li class="fr"> 
+      <a href="javascript:SendReport();" title="举&nbsp;报" class="inform"><i></i>举&nbsp;报</a> 
+      </li>
+      <!-- End --> </div>
+    
+    <!--S 店铺信息-->
+    <div style="position: absolute;top: -1px; right: -1px;"> 
+      <!--店铺基本信息 S-->
+      
+      <div class="ncs-info">
+        <div class="title_mall">
+          <h4>{$item[company]}</h4>
+        </div>
+        <div class="content_mall">
+          <div class="btns"><a href="{userurl($username)}" class="goto">进店逛逛</a><a href="javascript:SendFav();">收藏<span>(<em nctype="store_collect">{xh_favorite($title)}</em>)</span></a></div>
+          <dl>
+            <dt>发&nbsp;货&nbsp;地：</dt>
+            <dd>{area_pos($item[areaid], '&nbsp;')}</dd>
+          </dl>
+        </div>
+      </div> 
+      <!--S 全网同类推荐 -->
+      <div class="ncs-lal">
+        <div class="title_mall">全网同类推荐</div>
+        <div class="content_mall">
+          <ul>
+          <!--{tag("moduleid=$moduleid&length=20&catid=$catid&condition=status=3 and thumb<>'' and itemid!=$itemid&pagesize=6&order=edittime desc&dir=xhtag&template=mall-showthumb-table")}-->
+          </ul>
+        </div>
+      </div>
+      <!--E 全网同类推荐 -- > 
+    </div>
+    <!--E 店铺信息 --> 
+  </div>
+  <div class="clear"></div>
+</div>
+<!-- S 店长推荐 -->
+<div class="ncs-promotion mt20">
+ <div class="title_mall"><h4>店长精品橱窗推荐</h4></div>
+ <div class="content_mall">
+<ul>
+ <!--{tag("moduleid=$moduleid&length=36&condition=status=3 and elite=1 and thumb<>'' and username='$username'&areaid=$cityid&pagesize=5&order=edittime desc&width=120&height=120&target=_blank&lazy=$lazy&dir=xhtag&template=mall-showthumb-qwt")}--> 
+</ul>
+</div>
+</div>
+<!-- E 店长推荐 -->
+<div class="ncs-goods-layout expanded">
+<!--expanded-l-S-->
+  <div class="ncs-sidebar">
+    <div class="ncs-message-bar">
+      <div id="contact">{template 'contact', 'chip'}</div>
+      {if !$username}
+      <br/>
+      &nbsp;<strong class="f_red">注意</strong>:发布人未在本站注册，建议优先选择<a href="{$MODULE[2][linkurl]}grade.php"><strong>{VIP}会员</strong></a>
+      {/if}
+    </div>
+    <div class="ncs-sidebar-container ncs-class-bar">
+      <div class="title_mall">
+        <h4>本店商品分类</h4>
+      </div>
+      <div class="content_mall">
+        <ul class="ncs-submenu">
+         {if $MTYPE}
+          {loop $MTYPE $userid $v}
+          <li>
+            <span class="ico-none"><em>-</em></span><a href="{userurl($username, 'file='.mall.'&typeid='.$v['typeid'], $domain)}" title="{$v[typename]}">{set_style($v[typename], $v0[style])}</a>
+          </li>
+          {/loop}
+        <div class="supply_more"><a href="{userurl($username, 'file=mall')}" title="查看全部分类">查看全部分类<i></i></a></div>
+          {else}
+          <li><span class="ico-none"><em>-</em></span>暂无分类</li>
+          {/if}
+        </ul>
+      </div>
+    </div>
+    <div class="ncs-sidebar-container ncs-top-bar">
+      <div class="title_mall">
+        <h4>本店商品排行</h4>
+      </div>
+      <div class="content_mall">
+        <ul class="ncs-top-tab pngFix">
+          <li id="hot_sales_tab" class="current"><a href="javascript:void(0);">热销商品排行</a></li>
+          <li id="hot_collect_tab" class=""><a href="javascript:void(0);">热门点击排行</a></li>
+        </ul>
+        <div id="hot_sales_list" class="ncs-top-panel">
+          <ol>
+   <!--{tag("moduleid=$moduleid&length=30&condition=status=3 and thumb<>'' and username='$username'&pagesize=5&order=orders desc&dir=xhtag&template=mall-showthumb-rankorders")}-->
+          </ol>
+        </div>
+         <div id="hot_collect_list" class="ncs-top-panel hide">
+          <ol>
+    <!--{tag("moduleid=$moduleid&length=30&condition=status=3 and thumb<>'' and username='$username'&pagesize=5&order=hits desc&dir=xhtag&template=mall-showthumb-rankhits")}-->
+          </ol>
+        </div>
+   {if !$username}
+   {else}
+   <p><a href="{userurl($username, 'file=mall')}">查看本店其他商品</a></p>
+   {/if}
+      </div>
+    </div>
+    
+  </div>
+<!--expanded-r-S-->
+  <div class="ncs-goods-main" id="mall_tag">
+    <div class="tabbar fl-clr">
+    <div class="ncs-goods-title-nav">
+  <ul>
+    <li class="mall_tab_2" id="t_detail"><a href="#detail" onclick="Mshow('detail');">商品详情</a></li>
+    <li class="mall_tab_1" id="t_comment"><a href="#comment" onclick="Mshow('comment');">商品评价<em>({$comments})</em></a></li>
+    <li class="mall_tab_1" id="t_order"><a href="#order" onclick="Mshow('order');">交易记录({$orders})</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--商品详情-->
+    <div class="ncs-intro" style="display:;" id="c_detail">
+      <div class="content_mall">
+        <ul class="nc-goods-sort">
+          <li>商品货号：{$itemid}</li>
+          <li>品牌：{if $brand}<a href="{$MOD[linkurl]}search.php?fields=4&kw={urlencode($brand)}" target="_blank" rel="nofollow">{$brand}</a>{else}未填写{/if}</li>
+          <li>人气：{$hits}</li>
+          <li>更新：{$editdate}</li>
+          {if $cod}<li>到付：支持货到付款</li>{/if}
+        </ul>
+      {if $CP}{template 'property', 'chip'}{/if}
+        <div class="ncs-goods-info-content">
+          <div class="content c_b" id="content">{$content}</div>
+        </div>
+      </div>
+    </div>
+    <!--评论-->
+    <div class="ncs-goods-info-content content no-bt" style="display:none;" id="c_comment">
+       <center>正在载入评论详细...</center>
+    </div>
+     <!--交易记录-->
+    <div class="ncs-goods-info-content content no-bt" style="display:none;" id="c_order">
+          <center>正在载入交易记录...</center>
+    </div>
+    
+    <!--售后说明-->
+ <div class="ncs-goods-info-content content mt20">
+  <div class="top" style="overflow: hidden;">
+  <div class="ncs-cosult-tips"> <i></i>
+    <p>因厂家更改商品包装、场地、附配件等不做提前通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不变还请谅解，谢谢！</p>
+  </div>
+    </div>
+</div>
+<!-- S 本店最新上架 -->
+<div class="ncs-recommend mt20">
+ <div class="title_mall"><h4>本店最新上架</h4></div>
+<div class="content_mall">
+<ul>
+ <!--{tag("moduleid=$moduleid&length=36&condition=status=3 and thumb<>'' and username='$username'&areaid=$cityid&pagesize=5&order=edittime desc&width=120&height=120&target=_blank&lazy=$lazy&dir=xhtag&template=mall-showthumb-qwt")}--> 
+</ul>
+</div>
+</div>
+<!-- E 本店最新上架 -->
+    <div class="ncs-recommend mt20">
+      <div class="title_mall">
+        <h4>全网为您推荐</h4>
+      </div>
+      <div class="content_mall">
+        <ul>
+ <!--{tag("moduleid=$moduleid&length=36&condition=status=3 and level>0 and thumb<>''&areaid=$cityid&pagesize=5&order=hits desc,vip desc,addtime desc&width=120&height=120&target=_blank&lazy=$lazy&dir=xhtag&template=mall-showthumb-qwt")}--> 
+        </ul>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+<!--r-E-->
+</div>
+</div>
+
+
+</div>
+<script type="text/javascript" src="{DT_STATIC}file/script/album.js"></script>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+<script type="text/javascript">
+var mallurl = '{$MOD[linkurl]}';
+var mallid = {$itemid};
+var n_c = {$comments};
+var n_o = {$orders};
+var c_c = Dd('c_comment').innerHTML;
+var c_o = Dd('c_order').innerHTML;
+var s_s = {'1':0,'2':0,'3':0};
+var m_l = {
+  no_comment:'暂无评论',
+  no_order:'暂无交易',
+  no_goods:'商品不存在或已下架',
+  no_self:'不能添加自己的商品',
+  lastone:''
+};
+</script>
+<script type="text/javascript" src="{DT_STATIC}file/script/mall.js"></script>
+<script type="text/javascript">
+{if $P1}addE(1);{/if}
+{if $P2}addE(2);{/if}
+{if $P3}addE(3);{/if}
+if(window.location.href.indexOf('#') != -1) {
+  var t = window.location.href.split('#');
+  try {Mshow(t[1]);} catch(e) {}
+}
+</script>
+<script type="text/javascript">
+/** 辅助浏览 **/
+jQuery(function($){
+  //产品图片
+  $.getScript('{DT_SKIN}js/ImageZoom.js', function(){
+    var
+    zoomController,
+    zoomControllerUl,
+    zoomControllerUlLeft = 0,
+    shell = $('#ncs-goods-picture'),
+    shellPanel = shell.parent(),
+    heightNcsDetail = $('div[class="ncs-detail"]').height();
+    heightOffset = 60,
+    minGallerySize = [360, 360],
+    imageZoom = new ImageZoom({
+      shell: shell,
+      basePath: '',
+      levelASize: [60, 60],
+      levelBSize: [320, 320],
+      gallerySize: minGallerySize,
+      onBeforeZoom: function(index, level){
+        if(!zoomController){
+          zoomController = shell.find('div.controller');
+        }
+
+        var
+        self = this,
+        duration = 320,
+        width = minGallerySize[0],
+        height = minGallerySize[1],
+        zoomFx = function(){
+          self.ops.gallerySize = [width, height];
+          self.galleryPanel.stop().animate({width:width, height:height}, duration);
+          shellPanel.stop().animate({height:height + heightOffset}, duration).css('overflow', 'visible');
+          zoomController.animate({width:width-22}, duration);
+          shell.stop().animate({width:width}, duration);
+        };
+        if(level !== this.level && this.level !== 0){
+          if(this.level === 1 && level > 1){
+            height = Math.max(480, shellPanel.height());
+            width = shellPanel.width();
+            zoomFx();
+          }
+          else if(level === 1){
+            zoomFx();
+            shellPanel.stop().animate({height:heightNcsDetail}, duration, function(){
+                $(this).removeAttr('style');
+            });
+          }
+        }
+      },
+      onZoom: function(index, level, prevIndex){
+        shell.find('a.prev,a.next')[level<3 ? 'removeClass' : 'addClass']('hide');
+        shell.find('a.close').css('display', [level>1 ? 'block' : 'none']);
+      },
+      items: [
+        { title : '', 
+        levelA : '{$thumb}',
+        levelB : '{str_replace('.thumb.', '.middle.', $thumb)}', 
+        levelC : '{str_replace('.thumb.', '.middle.', $thumb)}', 
+        levelD : '{str_replace('.thumb.'.file_ext($thumb), '',$thumb)}'},
+       {if $thumb1} { title : '', 
+        levelA : '{if $thumb1}{$thumb1}{else}{DT_SKIN}image/nopic60.gif{/if}', 
+        levelB : '{if $thumb1}{str_replace('.thumb.', '.middle.', $thumb1)}{else}{DT_SKIN}image/nopic200.gif{/if}', 
+        levelC : '{if $thumb1}{str_replace('.thumb.', '.middle.', $thumb1)}{else}{DT_SKIN}image/nopic200.gif{/if}', 
+        levelD : '{if $thumb1}{str_replace('.thumb.'.file_ext($thumb1), '', $thumb1)}{else}{DT_SKIN}image/nopic200.gif{/if}'},{/if}
+       {if $thumb2} { title : '', 
+        levelA : '{if $thumb2}{$thumb2}{else}{DT_SKIN}image/nopic60.gif{/if}', 
+        levelB : '{if $thumb2}{str_replace('.thumb.', '.middle.', $thumb2)}{else}{DT_SKIN}image/nopic200.gif{/if}', 
+        levelC : '{if $thumb2}{str_replace('.thumb.', '.middle.', $thumb2)}{else}{DT_SKIN}image/nopic200.gif{/if}', 
+        levelD : '{if $thumb2}{str_replace('.thumb.'.file_ext($thumb2), '', $thumb2)}{else}{DT_SKIN}image/nopic200.gif{/if}'} {/if}         
+        ]
+    });
+    shell.data('imageZoom', imageZoom);
+  });
+
+});
+
+  //商品排行Tab切换
+  $(".ncs-top-tab > li > a").mouseover(function(e) {
+    if (e.target == this) {
+      var tabs = $(this).parent().parent().children("li");
+      var panels = $(this).parent().parent().parent().children(".ncs-top-panel");
+      var index = $.inArray(this, $(this).parent().parent().find("a"));
+      if (panels.eq(index)[0]) {
+        tabs.removeClass("current ").eq(index).addClass("current ");
+        panels.addClass("hide").eq(index).removeClass("hide");
+      }
+    }
+  });
+  
+//触及显示缩略图
+  $('.goods-pic > .thumb_mall').hover(
+    function(){
+      $(this).next().css('display','block');
+    },
+    function(){
+      $(this).next().css('display','none');
+    }
+  );
+</script>
+{template 'footer'}

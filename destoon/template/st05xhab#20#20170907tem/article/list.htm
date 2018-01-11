@@ -1,0 +1,82 @@
+{template 'header-news'} 
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script> 
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}article-list.css">
+<!--面包屑-->
+<div class="container-fuild margin-top-20">
+  <div class="container">
+    <ul class="news-news-breadcrumb2">
+      <li class="font14">当前位置： &gt; </li><li><a href="{$MODULE[1][linkurl]}">{$DT[sitename]}</a> &gt; </li><li><a href="{$MOD[linkurl]}">{$MOD[name]}</a> &gt; </li><li>{cat_pos($CAT, ' &gt; ')}</li>
+    </ul>
+  </div>
+</div>
+<!--正文-->
+<div class="container news-news-show">
+  <div class="mod-header">
+    <h2 class="w1-ico inline-block"> {cat_name($catid)} </h2>
+    <div class="findGoodsNum"><em>找到</em><i>{$items}</i><em>条相关结果</em></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 news-col-xs-8-700">
+      <div class="news-grid-news-list">
+    {if $tags}{template 'list-news', 'xhtag'}{/if}
+      </div>
+
+      <div class="news-page-con text-center hide">
+        <div class="pagination"><div class="pagebar_quotes">{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}</div></div>
+           </div>
+    </div>
+    <div class="col-xs-4 news-col-xs-4-320">
+      <div class="news-column-right news-column-login">
+        <ul class="news-ul-login">
+         <!--会员在线状态 S-->
+        <div class="xh_dl">
+        <li><a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank"><span class="news-w1"></span><span class="news-w2 font16">免费注册</span></a></li><li><a href="{$MODULE[2][linkurl]}{$DT[file_login]}"" target="_blank"><span class="news-w1 news-login"></span><span class="news-w2 font16">登录</span></a></li>
+        </div>
+      <div class="xh_dl_2_no">
+      <li><a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=21&action=add" target="_blank"><span class="news-w1 news-member"></span><span class="news-w2 font16">商务中心</span></a></li><li><a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=21&action=add" target="_blank"><span class="news-w1 news-mess"></span><span class="news-w2 font16">免费投稿</span> </a></li>
+        </div>
+        <!--会员在线状态 END-->
+        </ul>
+      </div>
+      <div class="news-news-ad2 rel">
+       <a href="#" target="_blank"><img alt="" src="{DT_SKIN}images/aa/news/a1.jpg"></a>
+       <i class="adicon"></i>
+      </div>
+      <div class="news-column-right">
+        <h4 class="news-tit-font18 margin-top-20"> 今日头条</h4>
+        <ul class="news-ul-24hotnew news-ul-hotnew">
+         <!--{tag("moduleid=$moduleid&length=34&condition=status=3 and level=5&areaid=$cityid&order=".$MOD[order]."&pagesize=10&target=_blank&dir=xhtag&template=list-newshots")}-->
+        </ul>
+      </div>
+      <!--标签-->
+      <div class="biaoqian arx_list_info"">
+       <h4 class="news-tit-font18 margin-top-10">热门标签</h4>
+       <ul class="news-ul-24hotnew news-ul-wordnew">
+       <!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3&pagesize=20&order=total_search desc&dir=xhtag&template=list-newssearch_kw")}-->
+        </ul>
+      </div>
+      <div style="padding-left:10px;"> </div>
+   </div>
+  </div>
+  <div class="news_cat" id="hotproduct">
+  <h3>按行业找资讯</h3>
+ <div class="com-div">
+   <ul class="com-list">
+   {php $mid = $moduleid;}
+   {php $child = get_maincat(0, $mid, 1);}
+   {loop $child $i $c}
+  <li><a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}">{$c[catname]}</a></li>
+   {/loop}
+   </ul>
+ </div>
+   </div>
+</div>
+<script>
+  $(function(){
+      $('.news-ul-hotnew > li').mouseenter(function(){
+      $('.news-ul-hotnew > li').removeClass('news-active');
+      $(this).addClass('news-active');
+    });
+   });
+</script> 
+{template 'footer'}

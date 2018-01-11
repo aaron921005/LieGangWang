@@ -1,0 +1,154 @@
+{php $CSS = array('extend');}
+{template 'header-gift'}
+<div class="m">
+<div class="pos">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$url}index2.php">积分换礼</a>{if $typeid} &raquo; <a href="{$url}{list_url($typeid)}">{$TYPE[$typeid][typename]}</a>{/if}</div>
+			{if $action == 'my'}
+			   <div class="gift_my">
+			   <div class="gift_my_user fl">
+			    <div class="user_gift">
+        <i class="icon_tou" onclick="window.open('{$MODULE[2][linkurl]}')"><img src="{useravatar($_username, 'large')}&time={$DT_TIME}" width="60" height="60" alt="会员头像"/></i>
+          <p >我的{$DT[credit_name]}：{$_credit}</p>
+          <a href="{$MODULE[2][linkurl]}credit.php?action=invite" target="_blank">积分赚取</a>
+          <a href="{$MODULE[2][linkurl]}" target="_blank">我的商务中心</a>
+          <a href="{$url}">继续兑换</a>
+        </div>
+			   </div>
+				<div class="gift_my_jl fr">
+				<table cellpadding="6" cellspacing="1" width="100%" align="center" bgcolor="#E3E3E3">
+				<tr bgcolor="#F1F7FC">
+				<th>订单编号</th>
+				<th>礼品</th>
+				<th>{$DT[credit_name]}</th>
+				<th>下单时间</th>
+				<th>状态</th>
+				</tr>
+				{loop $lists $k $v}
+				<tr align="center" bgcolor="#FFFFFF">
+				<td>{$v[oid]}</td>
+				<td><a href="{$v[linkurl]}" target="_blank">{$v[title]}</a></td>
+				<td>{$v[credit]}</td>
+				<td>{$v[adddate]}</td>
+				<td>{$v[status]}</td>
+				</tr>
+				{/loop}
+				</table>
+				<div class="pages">{$pages}</div>
+				</div>
+				<div class="b10">&nbsp;</div>
+				</div>
+				<script type="text/javascript">try{Dd('type_my').className='left_menu_on';}catch(e){}</script>
+			{else}
+				{if $itemid}
+				{if isset($success)}
+					<div class="submit_success">
+					恭喜您，礼品兑换成功！请检查您的联系方式是否正确，以便工作人员与您取得联系&nbsp;&nbsp;
+					<a href="{$MODULE[2][linkurl]}edit.php" target="_blank"><strong class="red">[更新联系方式]</strong></a>
+					<a href="{$url}index.php?action=my"><strong class="red pl15">[查看订单]</strong></a>
+					</div>
+				{/if}
+            <div class="product-info-box clearfix">
+                <div class="product-imgs">
+                    <div class="product-imgbox">
+                      <img src="{$middle}" width="300" alt="{$alt}" class="g_img c_p" alt="{$alt}" title="点击查看大图" onclick="View('{$thumb}');"/>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h1>{$title}</h1>
+                    <div class="product-prop-itembox">
+                        <div class="product-prop-item">
+                            <dl class="clearfix">
+                                <dt>价格</dt>
+                                <dd class="clearfix">
+                                    <div class="price fl"><strong>{$credit}</strong>{$DT[credit_name]}</div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt>限于会员</dt>
+                                <dd class="clearfix">{if $gname}{$gname}{else}全部{/if}</dd>
+                            </dl>
+                             <dl class="clearfix">
+                                <dt>当前状态</dt>
+                                <dd class="clearfix">{if $left}<img src="{DT_STATIC}file/image/process_{get_process($fromtime, $totime)}.gif" align="absmiddle" alt="有效期：{$fromdate} 至 {$todate}"/>{else}<span class="f_red">已结束</span>{/if}</dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt>剩余名额</dt>
+                                <dd class="clearfix">{$left} 个</dd>
+                            </dl>
+                             <dl class="clearfix">
+                                <dt>上架时间</dt>
+                                <dd class="clearfix">{$adddate}</dd>
+                            </dl>
+                             <dl class="clearfix">
+                                <dt>关注人数</dt>
+                                <dd class="clearfix">{$hits}</dd>
+                            </dl>
+                        </div>
+                         <div class="product-prop-item"><div class="exchange-now" onclick="Order();"/>立即兑换</div></div>
+                        </div>
+                    </div>
+                </div>
+
+{if $content}<div class="gift_con pd20 lh18 px13">{$content}</div>{else}&nbsp;{/if}
+				<script type="text/javascript">
+				function Order() {
+					{if $process == 1}return confirm('抱歉，此兑换还没有开始');{/if}
+					{if $process == 2}if(confirm('确定要兑换吗？系统将扣除您{$credit}{$DT[credit_name]}')) Go('{$url}index.php?action=order&itemid={$itemid}'){/if}
+					{if $process == 3}return confirm('抱歉，此兑换已经过期');{/if}
+					{if $process == 4}return confirm('抱歉，此兑换名额用尽，已经结束');{/if}
+				}
+				</script>
+    </div>
+
+				{else}
+
+			<div class="filter-wrap">
+             <div class="mod-feature">
+            <div class="mf-row js-extended">
+              <div class="mf-dt">积分商城行业</div>
+            <div class="mf-dd">
+            <ul class="mf-list js-box clf">
+        {loop $_TP[0] $v0}
+		<li class="mf-itm" id="type_{$v0[typeid]}"><a href="{$url}{list_url($v0[typeid])}">{$v0[typename]}</a></li>
+		 {loop $_TP[1][$v0[typeid]] $v1}
+        <li class="mf-itm" id="type_{$v1[typeid]}"><a href="{$url}{list_url($v1[typeid])}">&nbsp;&nbsp;|- {$v1[typename]}<span></span></a></li>
+            {/loop}
+		{/loop}
+		</ul>
+            </div>
+           </div>
+            </div>
+            </div>
+            <div class="list_gift_img fr">
+            <div class="list_gift_img_1">
+              {if $lists}
+				{loop $lists $k $v}
+				{if $k%4==0}<ul class="list_ul">{/if}
+				<li class="list_gift_img_li {if $k%4==3}no_mr{/if}">
+				<div class="thumb">
+					<a href="{$v[linkurl]}" class="thumb_200"><img src="{str_replace('thumb', 'middle', $v[thumb])}" width="200" height="200" alt="{$v[alt]}" title="{$v[alt]}"/></a>
+					<ul>
+					<li><a href="{$v[linkurl]}">{$v[title]}</a></li>
+					<li><strong class="f_red">{$v[credit]}</strong> {$DT[credit_name]}</li>
+					<li>剩余 <span class="f_gray">{$v[left]}</span> 个名额</li>
+					<li style="padding:5px 0 5px 0;margin-top: 10px;"><a href="{$v[linkurl]}" class="today-get" title="立即兑换{$v[alt]}">立即兑换</a></li>
+					</ul>
+				</div>
+				</li>
+				{if $k%4==3}</ul>{/if}
+				{/loop}
+				{else}
+				<ul class="list_ul">
+				<li class="no_ts">暂无此类商品兑换</li>
+				</ul>
+				{/if}
+				</div>
+				<div class="pages">{$pages}</div>
+				{/if}
+				<script type="text/javascript">try{Dd('type_{$typeid}').className='mf-itm cur';}catch(e){}</script>
+			{/if}
+		</div>
+	</td>
+	</tr>
+	</table>
+</div>
+{template 'footer'}

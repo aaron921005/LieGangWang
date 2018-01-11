@@ -1,0 +1,1 @@
+var DTPath = "http://b2b.bjlsjp.cn/";var SKPath = "http://b2b.bjlsjp.cn/skin/st05skin20xha/";var MEPath = "http://b2b.bjlsjp.cn/member/";var DTEditor = "fckeditor";var CKDomain = "";var CKPath = "/";var CKPrex = "c6k_";

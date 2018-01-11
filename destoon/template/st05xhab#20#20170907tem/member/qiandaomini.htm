@@ -1,0 +1,60 @@
+<!--{php $qd=$db->get_one("SELECT itemid,addtime FROM ".$DT_PRE."qiandao WHERE userid=$_userid order by itemid desc");}-->
+<div class="singer">
+		<div class="singer_l_cont">
+			<a href="credit.php?action=qiandao" target="_blank"><span>签到赚积分，<b class="red">查看</b></span></a>
+		</div>
+		<div class="singer_r_r">
+        {if timetodate($qd['addtime'], 3)== timetodate($DT_TIME, 3) && $qd['addtime']}
+			<b class="singer_r_img">	
+				<span id="sing_for_number"></span>
+			</b>
+            {else}
+            <a href="qiandao.php" class="singer_r_img">	
+				<span id="sing_for_number"></span>
+			</a>
+            {/if}
+		</div>
+</div><!--singer end-->
+<script type="text/javascript">
+/*签到模块日期捕捉：*/
+function week(){
+	var objDate= new Date();
+	var week = objDate.getDay();
+	switch(week)
+		{
+			case 0:
+			week="周日";
+			break;
+			case 1:
+			week="周一";
+			break;
+			case 2:
+			week="周二";
+			break;
+			case 3:
+			week="周三";
+			break;
+			case 4:
+			week="周四";
+			break;
+			case 5:
+			week="周五";
+			break;
+			case 6:
+			week="周六";
+			break;
+		}
+	$("#sing_for_number").html( week );
+}
+
+$(document).ready(function(){
+	week();
+})
+</script>
+<script type="text/javascript">
+	{if timetodate($qd['addtime'], 3)== timetodate($DT_TIME, 3) && $qd['addtime']}
+	$(".singer_r_img").addClass("current");
+	$(".singer_r_img").removeAttr("onclick");
+	{else}
+	{/if}
+</script>

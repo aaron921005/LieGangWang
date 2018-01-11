@@ -1,0 +1,143 @@
+{template 'header', 'mobile'}
+{template 'hometopcss', 'mobile'}
+<div id="head-bar">
+  <div class="head-bar">
+    <div class="head-bar-back"> <a href="javascript:Dback('index.php?moduleid={$moduleid}', '{$DT_REF}', '{$username}');" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span></a> </div>
+    <div class="head-bar-title">{$COM[company]}</div>
+    <div class="head-bar-right"> <a href="javascript:Dsheet('<a href=&#34;{mobileurl($moduleid)}&#34; data-direction=&#34;reverse&#34;><span>{$MOD[name]}首页</span></a>|<a href=&#34;channel.php&#34; data-direction=&#34;reverse&#34;><span>频道列表</span></a>|<a href=&#34;index.php&#34; data-direction=&#34;reverse&#34;><span>平台首页</span></a>', '取消');"><img src="static/img/icon-action.png" width="24" height="24"/></a> </div>
+  </div>
+  <div class="head-bar-fix"></div>
+</div>
+<div class="{if $COM[groupid] == 8}home-head{elseif $COM[groupid] == 7}home-head{else}home-head-02{/if}"> {if $logo}<span class="f_l"><img src="{$logo}" width="60" height="60" onerror="this.src='static/img/nopic-60.png';" /></span>{/if}
+  <ul>
+    <li><strong>{$COM[company]}</strong></li>
+    <li>{if $COM[vip]}{VIP}&nbsp;&nbsp;V{$COM[vip]}&nbsp;&nbsp;第&nbsp;{$COM[year]}&nbsp;年{else}普通会员{/if}
+    <span class="f_r bq"></span></li>
+    <li>店铺等级：<img src="images/img/a{$COM[vip]}.png" align="absmiddle"/></li>
+  </ul>
+</div>
+{if $bannert || $banner}
+<div class="m">
+<div class="banner">
+{if $bannert == 2}
+<div id="slide_banner" style="width:100%;height:100%;max-width: 640px;min-width: 320px;background:#FAFAFA;overflow:hidden;margin: 0 auto;">
+<a href="###"><img src="{$banner1}" width="100%" height="100%" alt=""/></a>
+<a href="###"><img src="{$banner2}" width="100%" height="100%" alt=""/></a>
+{if $banner3}<a href="###"><img src="{$banner3}" width="100%" height="100%" alt=""/></a>{/if}
+{if $banner4}<a href="###"><img src="{$banner4}" width="100%" height="100%" alt=""/></a>{/if}
+{if $banner5}<a href="###"><img src="{$banner5}" width="100%" height="100%" alt=""/></a>{/if}
+</div>
+{load('slide.js')}
+<script type="text/javascript">new dslide('slide_banner');</script>
+{elseif $bannert == 1}
+<embed src="{$bannerf}" quality="high" loop="true" extendspage="http://get.adobe.com/flashplayer/" type="application/x-shockwave-flash" width="{$bannerw}" height="{$bannerh}" allowscriptaccess="never"></embed>
+{elseif $banner}
+<img src="{$banner}" width="100%"/>
+{/if}
+</div>
+</div>
+{/if}
+{if $COM[groupid] == 8}
+<div class="home-quick">
+  <ul>
+ <li><a href="{$HURL}"><img src="images/img/home-sp01.png" width="36" height="36"/><span>店铺首页</span></a></li>
+ <li><a href="{$HURL}&action=sell"><img src="images/img/home-sp02-no.png" width="36" height="36"/><span>全部商品</span></a></li>
+ <li><a href="{$HURL}&action=introduce"><img src="images/img/home-sp03-no.png" width="36" height="36"/><span>公司简介</span></a></li>
+ <li><a href="{$HURL}&action=contact"><img src="images/img/home-sp04-no.png" width="36" height="36"/><span>联系我们</span></a></li>
+  </ul>
+</div>
+{elseif $COM[groupid] == 7}
+<div class="home-quick">
+  <ul>
+ <li><a href="{$HURL}"><img src="images/img/home-sp01.png" width="36" height="36"/><span>店铺首页</span></a></li>
+ <li><a href="{$HURL}&action=sell"><img src="images/img/home-sp02-no.png" width="36" height="36"/><span>全部商品</span></a></li>
+ <li><a href="{$HURL}&action=introduce"><img src="images/img/home-sp03-no.png" width="36" height="36"/><span>公司简介</span></a></li>
+ <li><a href="{$HURL}&action=contact"><img src="images/img/home-sp04-no.png" width="36" height="36"/><span>联系我们</span></a></li>
+  </ul>
+</div>
+{else}
+<div class="home-quick-6">
+  <ul>
+ <li class="noo"><a href="{$HURL}"><span>店铺首页</span></a></li>
+ <li><a href="{$HURL}&action=sell"><span>全部商品</span></a></li>
+ <li><a href="{$HURL}&action=introduce"><span>公司简介</span></a></li>
+ <li><a href="{$HURL}&action=contact"><span>联系我们</span></a></li>
+</ul>
+</div>
+{/if}
+
+ <div class="head bd-b"><div class="m-header-icon"></div><strong>橱窗推荐</strong><a href="{$HURL}&action=sell" class="f_r">更多</a></div>
+    <!--{php $tags=tag("moduleid=5&length=14&condition=status=3 and username='$username' and elite=1 and thumb<>''&pagesize=6&order=edittime desc&fields=itemid,title,linkurl,thumb,edittime&template=null");}-->
+<div class="content03">
+    {loop $tags $i $v}
+<li><a href="index.php?moduleid=5&itemid={$v[itemid]}">
+   <img src="{if $v[thumb]}{$v[thumb]}{else}images/img/nopic-60.png{/if}" alt="" onerror="this.src='images/img/nopic-60.png';" />{$v[title]}</a></li>
+{/loop}
+	</div>
+
+    <div class="head bd-b bd-t"><div class="m-header-icon"></div><strong>公司简介</strong></div>
+    <div class="content">
+	企业名称: <a href="index.php?moduleid=4&username={$COM[username]}"><span class="f_red">{$COM[company]}</span></a><br/>
+    {if $COM[sell]}主营产品: {$COM[sell]}<br/>{/if}
+    {if $COM[introduce]}
+    企业介绍: <br/>
+    {$COM[introduce]}<br/>{/if}
+	</div>
+
+    <div class="head bd-b"><div class="m-header-icon"></div><strong>诚信档案</strong></div>
+    <div class="content">
+	诚信档案: <span class="f_red">{if $COM[vip]}{VIP}&nbsp;&nbsp;V{$COM[vip]}&nbsp;&nbsp;第&nbsp;{$COM[year]}&nbsp;年{else}普通会员{/if}</span> <br/>
+    会员级别: <span class="f_red">{if $COM[vip]}收费会员{else}免费会员{/if}</span><br/>
+    认证状态: <font style="color: #f58028;">{if $COM[validated]}已通过认证{else}未认证{/if}</font><br/>
+    消费保障: 已缴纳 <strong class="f_green">{$DT[money_sign]}{$COM[deposit]}</strong> {$DT[money_unit]}<br/>
+    经营范围： {$COM[business]}<br/>
+	</div>
+
+    <div class="head bd-b"><div class="m-header-icon"></div><strong>联系方式</strong></div>
+    <div class="content">
+    联系人: {$COM[truename]} （{if $COM[gender]==1}先生{else}女士{/if}）<br/>
+    手 机: <a href="tel:{$COM[mobile]}">{$COM[mobile]}</a><br/>
+    电 话: <a href="tel:{$COM[telephone]}">{$COM[telephone]}</a><br/>
+    Q  Q: {$COM[qq]}<br/>
+    邮 箱: <a href="mailto:{$COM[mail]}">{$COM[mail]}</a><br/>
+    传 真: {$COM[fax]}<br/>
+    邮 编: {$COM[postcode]}<br/>
+    地 址: <a href="map.php?auth={encrypt($COM[address], DT_KEY.'MAP')}" rel="external">{$COM[address]}</a><br/>
+    官方网址: <a href="{$COM[homepage]}" rel="external" target="_blank">{$COM[homepage]}</a><br/>
+	</div>
+
+ <div class="head bd-b"><div class="m-header-icon"></div><strong>最新供应</strong><a href="{$HURL}&action=sell" class="f_r">更多</a></div>
+    <!--{php $tags=tag("moduleid=5&length=14&condition=status=3 and username='$username' and thumb<>''&pagesize=9&order=edittime desc&fields=itemid,title,linkurl,thumb,edittime&template=null");}-->
+<div class="content03">
+    {loop $tags $i $v}
+<li><a href="index.php?moduleid=5&itemid={$v[itemid]}">
+   <img src="{if $v[thumb]}{$v[thumb]}{else}images/img/nopic-60.png{/if}" onerror="this.src='images/img/nopic-60.png';" />{$v[title]}</a></li>
+{/loop}
+  </div>
+
+	<div class="head bd-b"><div class="m-header-icon"></div><strong>公司新闻</strong></div>
+    <div class="content">
+	<!--{php $tagsxh=tag("table=news&length=40&condition=status=3 and username='$username'&pagesize=6&order=addtime desc&fields=itemid,title,addtime&template=null");}-->
+	 {loop $tagsxh $i $v}
+   <li><a href="{$HURL}&action=news&itemid={$v[itemid]}">{$v[title]}</a></li>
+{/loop}
+	</div>
+
+<div class="head bd-b"><div class="m-header-icon"></div><strong>店铺导航</strong></div>
+<div class="home-quick-7">
+<ul>
+<li><a href="{$HURL}&action=type&item=sell">商品分类</a></li>
+{loop $M $i $m}
+<li><div {if $i==0} style="border:none;"{/if}><a href="{$HURL}&action={$m[file]}">{$m[name]}</a></div></li>
+{/loop}
+</ul>
+</div>
+	<div class="head bd-b"><div class="m-header-icon"></div><strong>您可能感兴趣的公司</strong></div>
+    <div class="content">
+	<!--{php $tagsxh=tag("moduleid=4&condition=level>0 and catids<>''&areaid=$cityid&pagesize=6&order=vip desc,userid desc&fields=company,vip,userid,username&template=null");}-->
+	 {loop $tagsxh $i $v}
+   <li><a href="index.php?moduleid=4&username={$v[username]}"><i {if $v[vip]} class="vip" title="{VIP}:{$v[vip]}"{/if}></i> {$v[company]}</a></li>
+    {/loop}
+	</div>
+{template 'footer-gs', 'mobile'}
+{template 'footer', 'mobile'}

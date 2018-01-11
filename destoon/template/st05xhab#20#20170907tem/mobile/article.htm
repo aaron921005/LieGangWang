@@ -1,0 +1,144 @@
+{if $action != 'ajax'}
+{template 'header', 'mobile'}
+<div id="head-bar">
+<div class="head-bar">
+<div class="head-bar-back">
+{if $itemid || $catid || $areaid || $kw}
+<a href="{$back_link}" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>
+{else}
+<a href="channel.php" data-direction="reverse"><img src="static/img/icon-back.png" width="24" height="24"/><span>频道</span></a>
+{/if}
+</div>
+<div class="head-bar-title">{if $itemid}{$title}{else}{$head_name}{/if}</div>
+<div class="head-bar-right">
+<a href="javascript:{if $itemid}Dsheet('<a href=&#34;{if $DT_MOB[browser]=='weixin'||$DT_MOB[browser]=='qq'}javascript:share_tips();{else}share.php?moduleid={$moduleid}&itemid={$itemid}{/if}&#34;  data-transition=&#34;slideup&#34;><span>分享好友</span></a>|<a href=&#34;{mobileurl($moduleid)}&#34; data-direction=&#34;reverse&#34;><span>{$MOD[name]}首页</span></a>|<a href=&#34;channel.php&#34; data-direction=&#34;reverse&#34;><span>频道列表</span></a>', '取消');{else}Dsheet('<a href=&#34;search.php?action=mod{$moduleid}&catid={$catid}&areaid={$areaid}&#34;><span>{$MOD[name]}搜索</span></a>|<a href=&#34;category.php?moduleid={$moduleid}&#34;><span>按分类浏览</span></a>|<a href=&#34;area.php?moduleid={$moduleid}&#34;><span>按地区浏览</span></a>', '取消');{/if}"><img src="static/img/icon-action.png" width="24" height="24"/></a>
+</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+{/if}
+{if $itemid}
+<style>
+.icon-4{border-right: solid 1px #ddd;}
+</style>
+<div class="main">
+	<div class="title"><strong>{$title}</strong></div>
+	{if $islink}
+	<div class="info">{$editdate}</div>
+	<div class="content"><a href="{$linkurl}" rel="external" class="b">{$linkurl}</a><br/></div>
+	{else}
+	<div class="info">{$editdate}&nbsp;&nbsp;点击:{$hits}</div>
+	<div class="content">
+		{if $user_status == 3}
+        {if $introduce && $user_status == 3 && $page == 1}
+  <div class="introduce"><span>[摘要]</span>{$introduce}</div>
+  {/if}
+  {$content}
+  </div>
+		<section class="share cl">
+{template 'chip-other', 'mobile'}
+</section>
+		{else}
+		{template 'chip-content', 'mobile'}
+		{/if}
+	</div>
+    {if $MOD[show_np]} 
+  <!--上下一篇-->
+  <div class="new1">
+    <ul class="wrap">
+      <li><span>下一篇：</span> 
+      <!--{php $tagx=tag("moduleid=$moduleid&condition=status=3 and addtime>$addtime&areaid=$cityid&pagesize=1&order=addtime asc&template=null", -1)}-->
+        {if $tagx}
+        {loop $tagx $i $v} <a href="index.php?moduleid=21&itemid={$v[itemid]}" title="{$v[alt]}">{$v[title]}</a> {/loop}
+        {else}
+        暂无
+        {/if}
+        </li>
+         <li><span>上一篇：</span>
+      <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and addtime<$addtime&areaid=$cityid&pagesize=1&order=addtime desc&template=null", -1)}-->
+        {if $tags}
+        {loop $tags $i $v} <a href="index.php?moduleid=21&itemid={$v[itemid]}" title="{$v[alt]}">{$v[title]}</a> {/loop}
+        {else}
+        暂无
+        {/if}</li>
+    </ul>
+  </div>
+  <!--上下一篇--> 
+  {/if}
+  <!-- 相关资讯  start-->
+	<section class="xiangg"> 
+		<div class="wen_p wrap">
+	<h2 class="f_l" style="border-bottom:none;"><i></i><a href="index.php?moduleid=21&catid={$catid}" style="font-size: 16px;color:#e44b46;" title="相关资讯">相关资讯</a></h2>
+	<a href="index.php?moduleid=21" title="更多资讯" class="f_r">更多资讯</a>
+		</div>
+		<ul class="wrap answer" style="padding-bottom:7px;"> 
+         <!--{php $tagxh=tag("moduleid=21&length=38&catid=$catid&condition=status=3 and itemid!=$itemid&areaid=$cityid&pagesize=10&fields=itemid,title,addtime&order=addtime desc&template=null");}--> 
+    {loop $tagxh $i $v}
+							<li class="li1" style="height:28px;line-height:28px;">
+						<a style="color:#333;" href="index.php?moduleid=21&itemid={$v[itemid]}" title="{$v[alt]}">{$v[title]}</a>
+						<span class="f_r">{timetodate($v[addtime], 2)}</span>
+					</li>
+								{/loop}
+					
+					</ul>
+	</section>
+	<!-- 相关资讯  end-->
+	
+	{/if}
+<!-- 版权开始 -->
+{template 'footer_banquanshow', 'mobile'} 
+<!-- 版权结束 -->
+{if $DT_MOB[browser] == 'weixin' ||  $DT_MOB[browser] == 'qq'}{template 'chip-share', 'mobile'}{/if}
+<!-- 浮动底部开始 -->
+<div class="foot-bar-fix"></div>
+<div class="foot-bar">
+  <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td width="15%" class="icon-2"><a onclick="Go('index.php');"><p>首页</p></a></td>
+      <td width="15%" class="icon-4"><a onclick="Go('comment.php?mid={$moduleid}&itemid={$itemid}');"><p>评论</p></a></td>
+      <td width="15%" class="icon-3"><a onclick="Go('share.php?moduleid={$moduleid}&itemid={$itemid}');"><p>分享</p></a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- 浮动底部结束 -->
+{else}
+{template 'xh-option', 'mobile'}
+{template 'xh-list-tong', 'mobile'}
+<!--{php $tagxh=tag("moduleid=21&condition=status=3 and itemid!=$itemid and level=2 and thumb!=''&areaid=$cityid&order=addtime desc&pagesize=3&fields=itemid,title,thumb,addtime&template=null");}--> 
+<div id="slide_{$tagxh[0][itemid]}{$moduleid}" class="slide" style="width:100%;height:150px;">
+{loop $tagxh $i $v}
+<a href="{mobileurl($moduleid, 0, $v[itemid])}"><img src="{$v[thumb]}"/></a>
+{/loop}
+</div>
+{load('slide.js')}
+<script type="text/javascript">new dslide('slide_{$tagxh[0][itemid]}{$moduleid}');</script>
+	{if $lists}
+    {if !$kw}<div class="newzx"><h2><i></i>{if $catid}{cat_name($catid)}{/if}{if !$catid}最新{/if}资讯</h2></div> {/if} 
+   {loop $lists $i $v}
+   {if $i==2 || $i==3}
+   <div class="list-img100-3">
+  <ul  onclick="window.location.href='{mobileurl($moduleid, 0, $v[itemid])}'">
+    <li><a href="{mobileurl($moduleid, 0, $v[itemid])}"><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}"/></a></li>
+	<li class="text"><a href="{mobileurl($moduleid, 0, $v[itemid])}">{$v[title]}</a></li>
+  </ul>
+</div>
+{else}
+<div class="list-img100-2">{if $v[thumb]}<a href="{mobileurl($moduleid, 0, $v[itemid])}"><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}" width="100" height="80" alt="" onerror="this.src='static/img/nopic-60.png';"/></a>{/if}
+  <ul onclick="window.location.href='{mobileurl($moduleid, 0, $v[itemid])}'">
+    <li><strong>{$v[title]}</strong></li>
+    <li><em>&nbsp;&nbsp;摘要：{dsubstr($v[introduce], 60, '..')}</em></li>
+    <li><em>更新于： {timetodate($v[edittime], 5)}</em> </li>
+    <li><em class="qgg"><a href="{mobileurl($moduleid, $v['catid'])}">{cat_name($v[catid])}</a></em> <em>已有 {$v[hits]} 人浏览</em></li>
+  </ul>
+</div>
+{/if}
+{/loop}
+	{else}
+	{template 'chip-empty', 'mobile'}
+	{/if}
+{/if}
+{if $action != 'ajax'}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+{template 'footer', 'mobile'}
+{/if}

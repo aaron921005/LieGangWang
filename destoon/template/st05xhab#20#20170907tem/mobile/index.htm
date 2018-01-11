@@ -1,0 +1,219 @@
+{template 'header-index', 'mobile'}
+<link rel="stylesheet" type="text/css" href="images/xhdtwap-index.css"/>
+<div id="head-bar">
+<div class="head-bar">
+{if $DT_MOB[browser]=='b2b'}
+<div class="head-bar-back" onclick="api.execScript({name:'root',script:'Dexec({$_userid});'});api.closeWin({name:'destoon'});api.closeFrame({name:'destoon'});">
+<img src="static/img/icon-back.png" width="24" height="24"/><span>返回</span>
+</div>
+{else}
+<div class="head-bar-left">
+<a href="channel.php"><img src="static/img/icon-sort.png" width="24" height="24"/></a>
+</div>
+{/if}
+<div class="head-bar-title"><img src="images/img/wap-ico.png" width="20" height="20">{$head_name}</div>
+<div class="head-bar-right">
+<a href="login.php" data-transition="none"><img src="static/img/icon-my-on.png" width="24" height="24"/></a>
+</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+<div class="home-search">
+    <div class="f_l m_logo"><img src="images/img/m-logo.png" alt="{$head_name}" style=""/></div>
+	<div class="f_l so"><a href="search.php"><img src="static/img/ico-search.png"/><span>输入关键词搜索</span></a></div>
+</div>
+<!--大幻灯图，默认为14号位-->
+<script type="text/javascript" src="images/js/TouchSlide.js"></script>
+{if $ads}
+<div id="focus" class="focus region">
+<div class="hd">
+    <ul>
+	{loop $ads $i $t}
+	<li {if $i==0}class="on"{/if}></li>
+	{/loop}
+	</ul>
+  </div>
+  <div class="bd">
+<ul>
+{loop $ads $i $t}
+<li><a href="{$t[url]}" target="_blank" rel="external"><img src="{$t[image_src]}" width="360" height="168" border="0"/></a></li>
+{/loop}
+</ul>
+  </div>
+</div>
+{/if}
+<!--大幻灯图-->
+<div class="quick">
+	<ul>
+	<li><a href="{mobileurl(5)}" data-transition="slideup"><img src="image/home-1.png" width="46" height="46"/><span>最新供应</span></a></li>
+    <li><a href="{mobileurl(6)}" data-transition="slideup"><img src="image/home-2.png" width="46" height="46"/><span>全球采购</span></a></li>
+    <li><a href="{mobileurl(4)}" data-transition="slideup"><img src="image/home-3.png" width="46" height="46"/><span>企业名录</span></a></li>
+    <li><a href="{mobileurl(21)}" data-transition="slideup"><img src="image/home-5.png" width="46" height="46"/><span>行业资讯</span></a></li>
+
+    {if isset($MODULE[16])}
+    <li class="dh02"><a href="{mobileurl(16)}" data-transition="slideup"><img src="image/home-6.png" width="46" height="46"/><span>在线购物</span></a></li>
+    {else}
+    <li class="dh02"><a href="my.php" data-transition="slideup"><img src="image/home-15.png" width="46" height="46"/><span>会员中心</span></a></li>
+    {/if}
+    <li class="dh02"><a href="{mobileurl(8)}" data-transition="slideup"><img src="image/home-7.png" width="46" height="46"/><span>行业展会</span></a></li>  
+	<li class="dh02"><a href="{mobileurl(18)}" data-transition="slideup"><img src="image/home-8.png" width="46" height="46"/><span>以商会友</span></a></li>
+    <li class="dh02"><a href="wapcredit.php?action=qiandao" data-transition="slideup"><img src="image/home-9.png" width="46" height="46"/><span>领积分</span></a></li>
+	</ul>
+</div>
+<!--资讯快报-->
+<div class="xh-express-news">
+					<a class="J_ping xh-news-tit" href="{mobileurl(21)}"><img src="image/xh-news-tit.png"></a>
+					<div class="news-list-wrapper">
+       <div id="site_stats" style="overflow:hidden;height:44px;margin-top: 10px;">
+					<ul>
+				      <!--{php $tagsxh=tag("moduleid=21&length=40&condition=status=3&pagesize=6&fields=itemid,title,edittime&order=edittime desc&template=null");}--> 
+                    {loop $tagsxh $i $v}
+				  	<li class="news-item">
+						 <a href="{mobileurl(21, 0, $v[itemid])}">
+						  <!--span class="red">推</span-->{$v[title]}
+						</a>
+           </li>
+					{/loop}
+					</ul>
+		
+				 </div>
+				   <a class="xh-news-more" href="{mobileurl(21)}"><i class="line"></i>更多</a>
+</div>
+<script type="text/javascript" src="{DT_STATIC}file/script/marquee.js"></script>
+<script type="text/javascript">
+new dmarquee(44, 10, 3000, 'site_stats');
+</script>
+ {if isset($MODULE[16])}
+<!--秒杀-->
+<div class="miao-content box">
+   <div class="miao-index-title">
+  <div class="dt-text-color2"><span class="seckill-icon"></span> 掌上秒杀</div>
+  <span class="miao-right-more miao-text-gray fz13" onclick="window.location.href='{mobileurl(16)}'">更多秒杀</span></div>
+  <ul class="miao-list-view miao-grid-view">
+    <!--{php $tags=tag("table=mall&condition=status=3 and thumb<>''&pagesize=6&fields=itemid,title,thumb,price,hits,edittime&order=edittime desc&template=null");}--> 
+    {loop $tags $v}
+    <li class="miao-list-view-cell miao-col-xs-3" onclick="window.location.href='{mobileurl(16, 0, $v[itemid])}'">
+	<div class="miao-body"> 
+	<div class="miao-img-object">
+	<img src="{if $v[thumb]}{$v[thumb]}{else}image/nopic-60.png{/if}" onerror="this.src='image/nopic-60.png';">
+	</div>
+      <div class="miao-img-body miao-text-left"> 
+        <span class="miao-list-view-title dt-text-ellipsis">{$v[title]}</span>
+        <span class="goods-price miao-text-danger">{$DT[money_sign]}{$v[price]} {$DT[money_unit]}</span>
+        </div>
+		</div>
+    </li>
+    {/loop}
+  </ul>
+</div>
+{/if}
+<!--最新供应-->
+<div class="miao-content">
+  <div class="miao-index-title">
+    <div class="box-title">最新供应</div>
+    <span class="miao-right-more miao-text-gray fz13" onclick="window.location.href='{mobileurl(5)}'">更多</span></div>
+  <ul class="miao-list-view">
+    <!--{php $tags=tag("table=sell_5&condition=status=3 and thumb<>''&pagesize=6&fields=itemid,title,thumb,vip,username,company,hits,areaid,edittime,price,unit&order=edittime desc&template=null");}--> 
+    {loop $tags $v}
+  <div class="list-img120"> <a href="{mobileurl(5, 0, $v[itemid])}"><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}" width="100" height="100" alt="" onerror="this.src='static/img/nopic-60.png';"/></a>
+  <ul>
+  <a href="{mobileurl(5, 0, $v[itemid])}">
+    <li><a href="{mobileurl(5, 0, $v[itemid])}"><strong>{$v[title]}</strong></a></li>
+    <li class="jg">{if $v[unit] && $v[price]}<span class="f_red">{$DT[money_sign]} {$v[price]}</span>/{$v[unit]}{else}<span class="f_red">面议</span>{/if}</li>
+    <li{if $v[vip]} class="vip" title="{VIP}:{$v[vip]}"{/if}><span>{$v[company]}</span></li>
+    <li>更新时间：<em>{timetodate($v[edittime], 5)}</em></li>
+    <li><em>{area_pos($v[areaid], '-')}</em> <em class="f_r qgg"><a href="{mobileurl(5, 0, $v[itemid])}">立即购买</a></em> </li>
+	</a>
+  </ul>
+</div>
+    {/loop}
+  </ul>
+</div>
+ {if isset($MODULE[6])}
+<!--最新求购-->
+<div class="miao-content">
+  <div class="miao-index-title">
+    <div class="box-title">最新求购</div>
+    <span class="miao-right-more miao-text-gray fz13" onclick="window.location.href='{mobileurl(6)}'">更多</span></div>
+  <ul class="miao-list-view">
+    <!--{php $tags=tag("table=buy_6&condition=status=3&pagesize=6&fields=itemid,title,vip,company,hits,areaid,edittime&order=edittime desc&template=null");}--> 
+    {loop $tags $v}
+  <div class="list-txt-buy">
+  <ul>
+    <li{if $v[vip]} class="vip" title="{VIP}:{$v[vip]}"{/if}><a class="f_l indexbuy" href="{mobileurl(6, 0, $v[itemid])}"><strong>{$v[title]}</strong></a><em class="f_r qgg"><a href="{mobileurl(6, 0, $v[itemid])}">报价</a></em></li>
+  </ul>
+</div>
+    {/loop}
+  </ul>
+</div>
+{/if}
+<!--最新公司-->
+<div class="miao-content">
+  <div class="miao-index-title">
+    <div class="box-title">最新公司</div>
+    <span class="miao-right-more miao-text-gray fz13" onclick="window.location.href='{mobileurl(4)}'">更多</span></div>
+  <ul class="miao-list-view">
+     <!--{php $tags=tag("table=company&condition=groupid>5 and catids<>''&pagesize=6&fields=company,vip,business,address,areaid,thumb,mode,username,validated&order=userid desc&template=null");}--> 
+    {loop $tags $v}
+  <div class="list-img">{if $v[thumb]} <a href="index.php?moduleid=4&username={$v[username]}"><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}" width="60" height="60" alt="" onerror="this.src='static/img/nopic-60.png';"/></a>{/if}
+  <ul>
+  <a href="index.php?moduleid=4&username={$v[username]}">
+    <li{if $v[vip]} class="vip" title="{VIP}:{$v[vip]}"{/if}><a href="index.php?moduleid=4&username={$v[username]}"><strong>{$v[company]}</strong></a>
+    </li>
+    <li><span>主营：{$v[business]}</span></li>
+    <li><span>{area_pos($v[areaid], '', 2)}{if $v[mode]}&nbsp;&nbsp;({$v[mode]}){/if}&nbsp;&nbsp;{if $v[validated]}[已核实]{else}[未核实]{/if}</span></li>
+	</a>
+  </ul>
+</div>
+    {/loop}
+  </ul>
+</div>
+ {if isset($MODULE[21])}
+<!--最新资讯-->
+<div class="miao-content">
+  <div class="miao-index-title">
+    <div class="box-title">最新资讯</div>
+    <span class="miao-right-more miao-text-gray fz13" onclick="window.location.href='{mobileurl(21)}'">更多</span></div>
+  <ul class="miao-list-view">
+   <!--{php $tags=tag("moduleid=21&condition=status=3&pagesize=6&fields=itemid,title,catid,thumb,introduce,hits,edittime&order=edittime desc&template=null");}--> 
+    {loop $tags $v}
+    {if $v[thumb]}
+	<div class="list-img100 index-newsl"> 
+  <ul>
+  <a href="{mobileurl(21, 0, $v[itemid])}">
+    <li><a href="{mobileurl(21, 0, $v[itemid])}"><strong>{$v[title]}</strong></a></li>
+    <li><a href="{mobileurl(21, 0, $v[itemid])}">摘要：{dsubstr($v[introduce], 44, '..')}</a></li>
+    <li>更新时间：<em>{timetodate($v[edittime], 5)}</em></li>
+	<li><em class="red">【{cat_name($v[catid])}】</em> <em>阅读量：{$v[hits]}</em></li>
+	</a>
+  </ul>
+   <a href="{mobileurl(21, 0, $v[itemid])}"><img src="{if $v[thumb]}{$v[thumb]}{else}static/img/nopic-60.png{/if}" width="100" height="80" alt="" onerror="this.src='static/img/nopic-60.png';"/></a>
+</div>
+{else}
+  <div class="list-img100"> 
+  <ul>
+  <a href="{mobileurl(21, 0, $v[itemid])}">
+    <li><a href="{mobileurl(21, 0, $v[itemid])}"><strong>{$v[title]}</strong></a></li>
+    <li><a href="{mobileurl(21, 0, $v[itemid])}">摘要：{dsubstr($v[introduce], 64, '..')}</a></li>
+    <li>更新时间：<em>{timetodate($v[edittime], 5)}</em></li>
+  <li><em class="red">【{cat_name($v[catid])}】</em> <em>阅读量：{$v[hits]}</em></li>
+  </a>
+  </ul>
+</div>
+{/if}
+ {/loop}
+</ul>
+</div>
+{/if}
+<script type="text/javascript">
+TouchSlide({ 
+	slideCell:"#focus",
+	titCell:".hd ul", //开启自动播放 autoPage:true ，此时设置 titCell 为导航元素包裹层
+	mainCell:".bd ul", 
+	effect:"leftLoop", 
+	autoPlay:true,//自动播放
+	autoPage:true //自动分页
+});
+</script>
+{template 'footer_banquan', 'mobile'} 
+{template 'footer', 'mobile'}

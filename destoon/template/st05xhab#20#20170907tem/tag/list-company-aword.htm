@@ -1,0 +1,42 @@
+{loop $tags $k $t}
+<div class="company2">
+<i class="pictj3"></i>
+<div class="company2-l">
+<div class="company2-l-img"><img src="{imgurl($t[thumb])}" onerror="this.src='{DT_SKIN}image/sx_nopic197_157.png'"></a></div>
+<div class="company2-l-text"><a href="{$t[linkurl]}" target="_blank">进入店铺</a></div>
+</div>
+<div class="company2-c">
+<h1><a href="{$t[linkurl]}" target="_blank">{if $t[vip]}<img src="{DT_SKIN}image/vip_{$t[vip]}.gif" alt="{VIP}" title="{VIP}:{$t[vip]}级" align="absmiddle"/> {/if}{$t[company]}</a>
+<i class="icon-code ml10">
+<div class="codeBox hide">
+<img src="{DT_PATH}api/qrcode.png.php?auth={$t[linkurl]}" width="90" height="90" alt="二维码">
+<p class="f12">进入手机旺铺</p>
+</div>
+ </i>
+ </h1>
+<p><img src="{DT_SKIN}images/company/list_company3.png">企业类型：{if $t[mode]}({$t[mode]})&nbsp;&nbsp;{/if}{if $t[validated]}[已核实]{else}[未核实]{/if}</p>
+<p><img src="{DT_SKIN}images/company/list_company4.png">联系方式：{$t[telephone]}{if $t[mobile]} / {$t[mobile]}{/if}</p>
+<p><img src="{DT_SKIN}images/company/list_company6.png">经营范围：{$t[business]}</p>
+<p><img src="{DT_SKIN}images/company/list_company5.png">公司地址：{$t[address]}</p>
+</div>
+<div class="company2-r">
+<div class="company2-r-t">
+<div class="company2-r-t-l"></div>
+<div class="company2-r-t-c">主营产品</div>
+<div class="company2-r-t-l"></div>
+</div>
+<div class="company2-r-bs">
+ <!--{php $xhbq=tag("moduleid=5&length=10&condition=status=3 and username='".$t[username]."'&areaid=$cityid&pagesize=3&order=edittime desc&template=null");}--> 
+  {loop $xhbq $k $v}
+  <li>
+  <dl>
+ <dt><a href="{$v[linkurl]}" target="_blank"><img src="{if $v[thumb]}{str_replace('thumb', 'middle', $v[thumb])}{else}{DT_SKIN}image/nopic100.gif{/if}" alt="{$v[alt]}" width="90" height="90" onerror="this.src='{DT_SKIN}image/sx_nopic90_90.png'"></a></dt>
+<dd><a href="{$v[linkurl]}" title="{$v[alt]}" target="_blank">{$v[title]}</a></dd>
+   </dl>
+   </li>
+  {/loop}
+</div>
+</div>
+</div>
+{/loop}		
+{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}

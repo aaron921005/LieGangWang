@@ -1,0 +1,300 @@
+{php $CSS = array('company-list');}
+{template 'header'} 
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}list_new.css">
+<div class="product_content">
+<div class="product_list">
+<div class="product_option">
+  <div class="product_option1">
+    <div class="product_option1L">
+      <h3>当前位置：</h3>
+    </div>
+    <div class="product_add_nav"><a href="{$MODULE[1][linkurl]}">首页</a> &gt; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &gt; {cat_pos($CAT, ' &gt; ')}</div>
+    <div class="findGoodsNum"><em>找到</em><i>{$items}</i><em>结果</em></div>
+  </div>
+ {php $mid = $moduleid;}
+ {php $barea=get_cat($catid,$mid,1);} 
+ {if $barea[parentid]}
+ {php $caid=$barea['parentid'];}
+ {else}
+ {php $caid=$catid;}
+ {/if}
+  <div class="product_search">
+    <div class="product_option1L">
+      <h3>已选：</h3>
+    </div>
+    <div class="product_searchC">
+      <ul>
+        <li class="on" {if $catid==0}style="display:none"{/if}><a href="{$MOD[linkurl]}{rewrite('search.php?catid=0&areaid='.$areaid)}">行业：
+          <h1 style="font-size:14px;font-weight:normal;float:right">{cat_name($caid)}</h1>
+          </a></li>
+         <li class="on" {if !$barea[parentid]}style="display:none"{/if}><a href="{$MOD[linkurl]}{rewrite('list.php?catid='.$barea[parentid].'&areaid='.$areaid)}"><span style="display:block;float:left;">子类：</span><h1 style="font-size:14px;font-weight:normal;float:left;">{cat_name($catid)}</h1></a></li>
+        <li class="on" {if !$areaid}style="display:none"{/if}><a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid)}">地区：{ar_name($areaid)}</a></li>
+        <li>
+            <form action="{$MOD[linkurl]}search.php" id="fsearch" onsubmit="buy_check()">
+            <input type="hidden" name="catid" id="catid" value="{$catid}"/>
+            <input class="product_search_input1" name="kw" id="buy_kw" type="text" value="{if $kw}{$kw}{else}输入关键词{/if}" onfocus="if(this.value=='输入关键词') this.value='';">
+            <div class="ie6_border">
+              <input class="product_search_input2" name="" type="submit" value="">
+            </div>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="product_searchR"> <a href="{$MOD[linkurl]}{rewrite('search.php?kw=&catid=0')}">重选</a> </div>
+  </div>
+  <div class="product_option1">
+    <div class="product_option1L">
+      <h3>行业：</h3>
+    </div>
+    <div class="product_option1C">
+      <ul{if $catid} class="side_option2"{else} class="side_option"{/if} id="a_lx">
+        <li class="{if !$catid}product_option1C3{else}product_option1C2{/if}"><a href="{$MOD[linkurl]}{rewrite('search.php?catid=0&areaid='.$areaid)}">全部</a></li>
+     <!--{php $tagsx=tag("table=category&condition=moduleid=4 and parentid=0&order=catid ASC&pagesize=100&template=null");}-->
+        {loop $tagsx $c}
+        <li class="{if $catid==$c[catid] || $barea[parentid]==$c[catid]}product_option1C3{else}product_option1C1{/if}"><a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$c[catid].'&areaid='.$areaid)}">{$c[catname]}</a></li>
+         {/loop}
+      </ul>
+    </div>
+    <div class="product_option1R"> <a id="b_lx" onclick="set_toggle('lx','side_option');" {if $catid}class="cur"{/if}>{if $catid}收起{else}更多{/if}</a> </div>
+  </div>
+   {if $catid}
+    {php $zcat = get_maincat($catid, $mid, 1);}
+    {if $zcat}
+  <div class="product_option1">
+    <div class="product_option1L">
+      <h3>子类：</h3>
+    </div>
+    <div class="product_option1C">
+      <ul{if $caid} class="side_option2"{else} class="side_option"{/if} id="a_zl">
+        <li class="{if !$barea[parentid]}product_option1C3{else}product_option1C2{/if}"><a href="{$MOD[linkurl]}{rewrite('search.php?catid=0&areaid='.$areaid)}">全部</a></li>
+  {loop $zcat $v}
+   <li class="{if $catid==$v[catid]}product_option1C3{else}product_option1C1{/if}"><a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$v[catid].'&areaid='.$areaid)}">{$v[catname]}</a></li>
+  {/loop}
+      </ul>
+    </div>
+    <div class="product_option1R"> <a id="b_zl" onclick="set_toggle('zl','side_option');" {if $caid}class="cur"{/if}>{if $caid}收起{else}更多{/if}</a> </div>
+  </div>
+    {/if}
+  {/if}
+  {if $CP}
+  {loop $PPT $p}
+  <div class="product_option1">
+ <div class="product_option1L"><h3>{$p[name]}：</h3></div>
+  <div class="product_option1C">
+      <ul class="side_option">
+      <li class="{if $p[select]==''}product_option1C3{else}product_option1C2{/if}"><a href="{$MOD[linkurl]}search.php?catid={$catid}&areaid={$areaid}&ppt_{$p[oid]}">全部</a></li>
+      {loop $p[options] $o}
+      <li class="product_option1C1"><a href="{$MOD[linkurl]}search.php?catid={$catid}&areaid={$areaid}&ppt_{$p[oid]}={urlencode($o)}">{$o}</a></li>
+      {/loop}
+      </ul>
+    </div>
+  </div>
+  {/loop}
+  {/if}
+  <div class="product_option1">
+    <div class="product_option1L">
+      <h3>地区：</h3>
+    </div>
+    <div class="product_option1C">
+      <ul class="side_option" id="a_sf">
+        <li class="{if !$areaid}product_option1C3{else}product_option1C2{/if}"><a href="{$MOD[linkurl]}search.php?catid={$catid}">全部</a></li>
+         {php $mainarea = get_mainarea(0)}
+          {loop $mainarea $k $v}
+        <li class="{if $v[areaid]==$areaid}product_option1C3{else}product_option1C1{/if}"><a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&areaid='.$v[areaid])}">{$v[areaname]}</a></li>
+         {/loop}
+      </ul>
+    </div>
+    <div class="product_option1R"> <a id="b_sf" onclick="set_toggle('sf','side_option');" {if $areaid}class="cur"{/if}>{if $areaid}收起{else}展开{/if}</a> 
+    </div>
+  </div>
+
+<div class="product_listT">
+       <div class="tool">
+      <form action="{$MOD[linkurl]}search.php" id="fsearch2">
+      <input type="hidden" name="catid" id="catid" value="{$catid}"/>
+        <div class="sort-inner">
+          <div class="sort fl">
+            <ul class="clearfix">
+              <li class="first"> <a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&order=0')}');" title="综合排序" class="link active">综合排序</a> </li>
+              <li class="droplist hoverSelf"><a class="link" title="VIP指数">{if $vip==1}指数v1{elseif $vip==2}指数v2{elseif $vip==3}指数v3{elseif $vip==4}指数v4{elseif $vip==5}指数v5{elseif $vip==6}指数v6{elseif $vip==7}指数v7{elseif $vip==8}指数v8{elseif $vip==9}指数v9{elseif $vip==10}指数v10{else}VIP指数{/if}<span class="icon"></span> </a>
+                <ul onchange="Go(sh+'&vip='+this.value)">
+                  {if $vip==1 || $vip==2 || $vip==3 || $vip==4 || $vip==5 || $vip==6 || $vip==7 || $vip==8 || $vip==9 || $vip==10}
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&type=0')}');">选择VIP指数</a></li>
+                  {/if}
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=1')}');">指数v1</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=2')}');">指数v2</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=3')}');">指数v3</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=4')}');">指数v4</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=5')}');">指数v5</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=6')}');">指数v6</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=7')}');">指数v7</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=8')}');">指数v8</a></li>
+              <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=9')}');">指数v9</a></li>
+            <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&vip=10')}');">指数v10</a></li>
+                </ul>
+              </li>
+              <li class="droplist hoverSelf"><a class="link" title="公司类型">{if $type==1}企业单位{elseif $type==2}事业单位或社会团体{elseif $type==3}个体经营{else}公司类型{/if}<span class="icon"></span></a>
+                <ul onchange="Go(sh+'&type='+this.value)">
+                {if $type==1 || $type==2 || $type==3}
+                 <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&type=0')}');">选择公司类型</a></li>
+                 {/if}
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&type=1')}');">企业单位</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&type=2')}');">事业单位或社会团体</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&type=3')}');">个体经营</a></li>
+                </ul>
+              </li>
+              <li class="droplist hoverSelf"><a class="link" title="经营模式">{if $mode==1}制造商{elseif $mode==2}贸易商{elseif $mode==3}服务商{elseif $mode==4}其他机构{else}经营模式{/if}<span class="icon"></span> </a>
+                 <ul onchange="Go(sh+'&mode='+this.value)">
+                 {if $mode==1 || $mode==2 || $mode==3 || $mode==4}<li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&mode=0')}');">选择经营模式</a></li>
+                 {/if}
+                  <li{if $mode==1} class="on"{/if}><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&mode=1')}');">制造商</a></li>
+                  <li{if $mode==2} class="on"{/if}><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&mode=2')}');">贸易商</a></li>
+                  <li{if $mode==3} class="on"{/if}><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&mode=3')}');">服务商</a></li>
+                   <li{if $mode==4} class="on"{/if}><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&mode=4')}');">其他机构</a></li>
+                </ul>
+              </li>
+              <li class="droplist hoverSelf"><a class="link" title="公司规模">{if $size==1}1-49人{elseif $size==2}50-99人{elseif $size==3}100-499人{elseif $size==4}500-999人{elseif $size==5}1000-3000人{elseif $size==6}3000-5000人{elseif $size==7}5000-10000人{elseif $size==8}10000人以上{else}公司规模{/if}<span class="icon"></span> </a>
+                <ul onchange="Go(sh+'&size='+this.value)">
+                {if $size==1 || $size==2 || $size==3 || $size==4 || $size==5 || $size==6 || $size==7 || $size==8}
+                 <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=0')}');">选择公司规模</a></li>
+                 {/if}
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=1')}');">1-49人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=2')}');">50-99人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=3')}');">100-499人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=4')}');">500-999人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=5')}');">1000-3000人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=6')}');">3000-5000人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=7')}');">5000-10000人</a></li>
+                  <li><a href="javascript:Go('{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$typeid.'&areaid='.$areaid.'&size=8')}');">10000人以上</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="prices hoverSelf fl">
+          <div class="inner_name">注册资本</div>
+            <div class="inner">
+              <ul class="clearfix">
+                <li class="item">
+                <input type="text" name="mincapital" value="{$mincapital}" class="input" placeholder="1"/> 万
+                </li>
+                <li class="sep">-</li>
+                <li class="item">
+                <input type="text" name="maxcapital" value="{$maxcapital}" class="input" placeholder="1000"/> 万
+                </li>
+                <li class="submit"><span class="btnso" onclick="Dd('fsearch2').submit();">确定</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+</div>
+
+ <div class="b10">&nbsp;</div>
+<div class="m">
+  <div class="m_l_1 f_l">
+      <div class="img_tip" id="img_tip" style="display:none;">&nbsp;</div>
+      {if $page == 1}{ad($moduleid,$catid,$kw,6)}{/if}
+     {if $tags}
+    {template 'list-'.$module, 'tag'}
+    {else}
+    <div class="newPurchaseList">
+    <div class="nonoresult">
+    {template 'noresult', 'message'}
+    </div>
+    </div>
+    {/if}
+    <br/>
+  </div>
+  <div class="m_n f_l">&nbsp;</div>
+  <div class="m_r_1 f_l">
+  <div class="part">
+      <h2 class="channel_pur_tit_1">我是供应商</h2>
+    <a class="channel_pur_btn_1" target="_blank" href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=5&action=add" rel="nofollow">免费注册发布产品</a>
+      <p>发布优质产品信息获得更多大宗采购推荐匹配的机会</p>
+    </div>
+    <div class="b10">&nbsp;</div>
+  <div class="part">
+      <h2 class="channel_pur_tit_2">我是采购商</h2>
+        <a class="channel_pur_btn_2" target="_blank" href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=6&action=add" rel="nofollow">免费注册发布采购</a>
+      <p>发布询价单信息坐等大量优质供应商主动联系</p>
+    </div>
+    <div class="b10">&nbsp;</div>
+    <div class="sponsor">{ad($moduleid,$catid,$kw,7)}</div>
+    <div class="box_head">
+      <div><i></i><strong>本周搜索排行</strong></div>
+    </div>
+    <div class="box_body">
+      <div class="rank_list"> 
+        <!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3 and updatetime>$today_endtime-86400*7&pagesize=10&order=week_search desc&key=week_search&template=list-search_rank")}--> 
+      </div>
+    </div>
+    <div class="b10">&nbsp;</div>
+    <div class="box_head">
+      <div><i></i><strong>最新入驻商家</strong></div>
+    </div>
+    <div class="box_body_new">
+      <!--{php $xhbq=tag("moduleid=$moduleid&condition=groupid>5 and catids<>''&length=34&areaid=$cityid&pagesize=10&order=userid desc&template=null");}--> 
+      {loop $xhbq $v}
+      <li><a href="{$v[linkurl]}" title="{$v[company]}" target="_blank">{$v[company]}</a></li>
+      {/loop}
+    </div>
+    <div class="b10">&nbsp;</div>
+     <div class="arx_list_info">
+    <div class="box_head">
+      <div><i></i><strong>最新供应</strong></div>
+    </div>
+    <div class="box_body_new">
+      <!--{php $xhbq=tag("moduleid=5&length=34&condition=status=3&areaid=$cityid&pagesize=10&order=addtime desc&template=null");}--> 
+      {loop $xhbq $v}
+      <li><a href="{$v[linkurl]}" title="{$v[alt]}" target="_blank">{$v[title]}</a></li>
+      {/loop}
+    </div>
+      </div>
+  </div>
+</div>
+
+</div>
+
+<!--内容部分结束-->
+<div class="clear"></div>
+<!--热销产品推荐开始-->
+<div class="hotproduct" id="hotproduct">
+<div class="hotproductT">
+<h2>热销产品推荐</h2>
+<a class="hotproductT_Ar prev"></a>
+<a class="hotproductT_Al next"></a>
+</div>
+<div class="hotproductC">
+<div class="tempWrap">
+<ul>
+  <!--{tag("moduleid=5&length=36&condition=status=3 and level>0 and thumb<>''&areaid=$cityid&pagesize=15&order=hits desc,vip desc,addtime desc&width=180&height=180&cols=5&target=_blank&dir=xhtag&lazy=$lazy&template=xh-thumb-table")}--> 
+  </ul>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+jQuery(".hotproduct").slide({titCell:".hotproductT ul",mainCell:".hotproductC ul",autoPage:true,effect:"left",autoPlay:true,vis:6,easing:"easeOutCirc",delayTime:700,trigger:"click"});
+</script>
+<!---热销产品推荐结束-->
+<div class="warn_wrap mt_20">
+    <div class="warn_ico fl-clr">
+        <div class="warn-pic fl-left"></div>
+        <div class="warn-detail-rig fl-right fl-clr">
+            <dl class="fl-clr">
+              <dt>免责声明：</dt>
+              <dd>当前页为{cat_name($caid)}价格信息展示，该页所展示的{cat_name($caid)}批发价格、{cat_name($caid)}报价等相关信息均有企业自行提供，{cat_name($caid)}价格真实性、准确性、合法性由店铺所有企业完全负责。{$DT[sitename]}对此不承担任何保证责任。</dd>
+            </dl>
+            <dl class="fl-clr">
+              <dt>友情提醒：</dt>
+              <dd>建议您通过拨打{cat_name($caid)}厂家联系方式确认最终价格，并索要{cat_name($caid)}样品确认产品质量。如{cat_name($caid)}报价过低，可能为虚假信息，请确认{cat_name($caid)}报价真实性，谨防上当受骗。</dd>
+            </dl>
+        </div>
+    </div>
+    </div>
+    
+<div class="clear"></div>
+</div>
+{template 'footer'}

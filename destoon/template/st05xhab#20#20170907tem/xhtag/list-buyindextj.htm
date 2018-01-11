@@ -1,0 +1,32 @@
+{loop $tags $k $t}
+<li {if $k==4}class="no_br" {/if}id="item_{$t[itemid]}">
+<div class="buy_mq_1">
+<p><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></p>
+<p>采购数量：{if $t[amount]}{$t[amount]}{else}大量{/if}</p>
+</div>
+<div class="buy_mq_2">
+<div class="buy_mq_2_1">
+<p>发布时间：{timetodate($t[addtime], 3)}</p>
+<p>截止时间：{if !$t[expired]}{if $t[totime]}{timetodate($t[totime], 3)}{else}长期有效{/if}{else}已过期{/if}</p>
+<p>采购类型：{$t[catname]}</p>
+<p>已有报价：<span class="red">{$t[pricenums]}</span> 条</p>
+</div>
+<div class="buy_mq_2_2">
+<p>{if !$t[username]}[未注册]{else}{t_companyname($t[company])}{/if}</p>
+<div class="buy_btn2">
+<?php $lasted_day =(strtotime(timetodate($t[totime], 3))-strtotime(date('Y-m-d')))/3600/24;?>
+<span class="time fl">{if $t[totime]}{if $t[totime] < $DT_TIME}<strong>已过期</strong>{else}还剩<strong>{$lasted_day}</strong>天{/if}{else}长期有效{/if}</span>
+ {if $t[totime]}
+ {if $t[totime] > $DT_TIME}
+<a href="{$t[linkurl]}" target="_blank" rel="nofollow"><div class="ml-btn fr">立即报价</div></a>
+ {else}
+ <a href="javascript:;" class="baojiajs"><div class="ml-btn-js fr">停止报价</div></a>
+ {/if}
+{else}
+<a href="{$t[linkurl]}" target="_blank" rel="nofollow"><div class="ml-btn fr">立即报价</div></a>
+{/if}
+</div>
+</div>
+</div>
+</li>
+{/loop}

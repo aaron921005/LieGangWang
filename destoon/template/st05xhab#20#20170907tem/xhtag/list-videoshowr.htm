@@ -1,0 +1,17 @@
+{loop $tags $i $t}
+<div class="td-listbox_list_item">
+<a href="{$t[linkurl]}" title="{$t[alt]}" class="td-video">
+<div class="td-video_thumb">
+<img src="{$t[thumb]}" alt="{$t[alt]}" class="td-video_thumb_pic">
+
+<div class="td-video_thumb_pos-bl">
+<span class="td-video_num">{$t[catname]}</span>
+</div>
+</div>
+<div class="td-video_meta">
+<div class="td-video_meta_title">{$t[title]}</div>
+<div class="td-video_meta_other"><span class="td-video_meta_num">{$t[hits]} 次播放</span></div>
+</div>
+</a>
+</div>
+{/loop}

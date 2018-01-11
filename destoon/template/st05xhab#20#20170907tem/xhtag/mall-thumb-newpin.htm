@@ -1,0 +1,14 @@
+{loop $tags $i $t}
+{if $i==0}
+<li class="itm itm-brand" id="{$t[itemid]}"><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">
+<p class="desc">{$t[title]}</p>
+<p class="profix"><span>{$DT[money_sign]}<i>{$t[price]}</i>{$DT[money_unit]}</span></p>
+<p class="btn_mall f-hover">立即抢购</p>
+</a></li>
+<li class="itm itm-pic"><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic90_90.png'"></a></li>
+{else}
+ <li class="itm itm-goods" id="{$t[itemid]}"><a class="pic" target="_blank" title="{$t[alt]}" href="{$t[linkurl]}"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic90_90.png'"></a><a class="tit" target="_blank" title="{$t[alt]}" href="{$t[linkurl]}">{$t[title]}</a>
+ <p class="price"><span class="cur">{$DT[money_sign]}<b>{$t[price]}</b></span></p>
+ </li>
+ {/if}
+{/loop}

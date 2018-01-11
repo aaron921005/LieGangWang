@@ -1,0 +1,126 @@
+{php $CSS = array('extend');}
+{template 'header-gift'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}ppad_gift.css">
+<div class="vip">
+    <div class="top clearfix">
+      <div class="t_left clearfix">
+        <div class="menu">
+     {loop $_TP[0] $k $v0}
+    <a href="{$url}{list_url($v0[typeid])}" target="_blank"><i class="icon icon{$k+1}"></i>{$v0[typename]}</a>
+     {/loop}
+        </div>
+        <div class="banner">
+          <div class="slides_container" id="banner">
+          <div class="imgs rel" id="focus">
+          <ul>
+        <li><a href="/." target="_blank"><img src="{DT_SKIN}images/gift/1483435047254.jpg" width="720" height="490" alt=""></a></li>
+        <li><a href="/." target="_blank"><img src="{DT_SKIN}images/gift/1494232171181.jpg" width="720" height="490" alt=""></a></li>
+        <li><a href="/." target="_blank"><img src="{DT_SKIN}images/gift/1494578077622.jpg" width="720" height="490" alt=""></a></li>
+        <li><a href="/." target="_blank"><img src="{DT_SKIN}images/gift/1495703162123.jpg" width="720" height="490" alt=""></a></li>
+          </ul>
+           <i class="adicon"></i>
+         </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="t_right">
+      {if !$_userid}
+        <div class="user_gift nologin">
+          <a href="{$MODULE[2][linkurl]}{$DT[file_login]}" id="login"><i class="icon"></i>你好，请登录</a>
+        </div>
+        {else}
+        <div class="user_gift">
+        <i class="icon_tou" onclick="window.open('{$MODULE[2][linkurl]}')"><img src="{useravatar($_username, 'large')}&time={$DT_TIME}" width="60" height="60" alt="会员头像"/></i>
+          <p >我的{$DT[credit_name]}：{$_credit}</p>
+          <a href="{$MODULE[2][linkurl]}credit.php?action=invite" target="_blank">积分赚取</a>
+          <a href="{rewrite('index.php?action=my')}" target="_blank">我的兑换记录</a>
+        </div>
+        {/if}
+        <div class="gift_gg">
+          <div class="title_gift">
+            <h2><i class="icon"></i>积分商城公告</h2>
+          </div>
+          <div class="list_gift">
+          <ul>
+ <!--{tag("table=announce&condition=typeid=16&areaid=$cityid&pagesize=5&order=listorder desc,addtime desc&dir=xhtag&template=xh-gift-gg")}-->
+          </ul>
+          </div>
+        </div>
+        <div class="love">
+          <div class="title_gift">
+            <a id="changes" href="javascript:;"><i class="icon"></i>换一换</a>
+            <h2><i class="icon"></i>猜你喜欢</h2>
+          </div>
+          <div class="list_gift list_gift_tj">
+  <!--{php $xhtags=tag("table=gift&length=24&condition=level=1&areaid=$cityid&pagesize=6&order=hits desc&template=null");}-->
+      {loop $xhtags $i $t}
+      {if $i%2==0}<ul{if $i>0} style="display: none;"{/if}>{/if}
+          <li class="one {if $i%2==1}even{/if}">
+          <a href="{$t[linkurl]}" target="_blank">
+          <img src="{$t[thumb]}"></a>
+          <h4 class="elli">{$t[title]}</h4><p><b>{$t[credit]}</b>{$DT[credit_name]}</p>
+          </li>
+      {if $i%2==1}</ul>{/if}
+      {/loop}
+          </div>
+        </div>
+        <script>
+$(function(){
+var tit = $("#changes"),
+con = $(".list_gift_tj>ul"),
+page = con.length,
+index = 0;
+if (page>=2) {
+tit.click(function(){
+if(index < (page-1)){
+index++;
+}else{
+index = 0;
+}
+con.eq(index).show(500).siblings().hide(500);
+});
+}
+});
+</script>
+      </div>
+    </div>
+    <div class="center">
+      <div class="box picScroll-left">
+        <div class="title_gift new">
+          <h2 class="icon icon1">新品推荐</h2>
+        </div>
+        <div class="list_gift clearfix slides_container bd_2">
+        <ul>
+          <!--{tag("table=gift&length=34&condition=level=1&areaid=$cityid&pagesize=10&order=addtime desc&dir=xhtag&template=xh-thumb-tablegift")}-->
+          </ul>  
+        <div class="hd_2">
+        <a class="slidesjs-previous slidesjs-navigation prev">Previous</a>
+        <a class="slidesjs-next slidesjs-navigation next">Next</a>
+        </div>
+<script type="text/javascript">
+jQuery(".picScroll-left").slide({titCell:".hd_2 ul",mainCell:".bd_2 ul",autoPage:true,effect:"left",scroll:5,vis:5});
+</script>
+        </div>
+      </div>
+    
+    <!--lou S-->  
+     {loop $_TP[0] $i $v0}
+     {php $catidd = $v0[typeid]}
+      <div class="box">
+        <div class="title_gift title{$i+1}">
+          <h2 class="icon icon1">{$v0[typename]}</h2>
+          <a href="{$url}{list_url($v0[typeid])}" target="_blank">更多&nbsp;&gt;</a>
+        </div>
+        <div class="list_gift clearfix">
+   <!--{tag("table=gift&condition=typeid=$catidd&length=34&areaid=$cityid&pagesize=5&order=addtime desc&dir=xhtag&template=xh-thumb-giftlou")}-->
+        </div>
+      </div>
+      {/loop}
+<!--lou END-->
+
+    </div>
+  </div>
+{template 'footer'}

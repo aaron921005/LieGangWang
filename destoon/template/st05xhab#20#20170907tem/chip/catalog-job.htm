@@ -1,0 +1,42 @@
+{php $mid = $moduleid;}
+{php $child = get_maincat(0,$mid,1);$cols=7}
+{loop $child $i $c}
+{if $i < $cols}
+ <li data-type="{$i}" class="nav-list-fl hnl-first">
+          <p class="title_2"><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}">{$c[catname]}</a><em></em> </p>
+          <p class="hn-detail-title">
+  {php $sub = get_maincat($c[catid],$mid,1);}
+  {loop $sub $j $s}
+    {if $j < 10}
+  {php $subc = get_maincat($s[catid],$mid,2);}
+  {loop $subc $k $s}
+<a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}">{set_style($s[catname], $s[style])}</a>
+  {/loop}
+  {/if}
+  {/loop}
+         </p>
+          <div class="hn-detail-con">
+            <div class="hn-detail-con-content">
+  {php $sub = get_maincat($c[catid],$mid,1);}
+  {loop $sub $j $s}
+              <div class="leftBox">
+                <h3><a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}">{set_style($s[catname], $s[style])}</a></h3>
+                <ul class="hn-detail-list">
+{php $subx = get_maincat($s[catid],$mid);}
+  {loop $subx $j $x}
+   <li><a href="{$MODULE[$mid][linkurl]}{$x[linkurl]}" target="_blank">{set_style($x[catname], $x[style])}</a> </li>
+   {/loop}
+                </ul>
+              </div>
+   {/loop}
+            </div>
+            <dl class="ad_0">
+              <dd><span>名企推荐</span></dd>
+              <dt><a href="" target="_blank"><img src="{DT_SKIN}images/aa/job/fenl-aa.png" alt=""></a></dt>
+              <dt><a href="" target="_blank"><img src="{DT_SKIN}images/aa/job/fenl-aa.png" alt=""></a></dt>
+              <dt><a href="" target="_blank"><img src="{DT_SKIN}images/aa/job/fenl-aa.png" alt=""></a></dt>
+            </dl>
+          </div>
+        </li>
+{/if}
+{/loop}

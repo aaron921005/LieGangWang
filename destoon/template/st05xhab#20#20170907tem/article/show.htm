@@ -1,0 +1,157 @@
+{template 'header-news'}
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}article-list.css">
+<!--面包屑-->
+<div class="container-fuild margin-top-20">
+  <div class="container">
+    <ul class="news-news-breadcrumb2">
+      <li class="font14">当前位置： &gt; </li><li><a href="{$MODULE[1][linkurl]}">{$DT[sitename]}</a> &gt; </li><li><a href="{$MOD[linkurl]}">{$MOD[name]}</a> &gt; </li><li>{cat_pos($CAT, ' &gt; ')} &gt; </li><li>正文 &gt; </li>{$title}
+    </ul>
+  </div>
+</div>
+<!--正文-->
+<div class="container news-news-show news-news-detail">
+    <div class="mod-header">
+    </div>
+    <div class="row">
+        <div class="col-xs-9 news-col-xs-9-800">
+            <h1 class="news-h1-tit" id="title">{$title}</h1>
+            <div class="text-center font16 margin-top-20">
+                {$adddate}{if $copyfrom}<span class="em2"></span>来源：{if $fromurl}<a href="{$fromurl}" target="_blank">{/if}{$copyfrom}{if $fromurl}</a>{/if}{else}<span class="em2"></span>来源：<a class="font16" target="_blank" href="{$MODULE[1][linkurl]}">{$DT[sitename]}</a>{/if}
+                {if $level}
+                <span class="em2"></span>
+                <span class="ui star rating" title="{$level}星推荐资讯"><i class="fa-star-level{$level}"></i></span>
+                {/if}
+        </div>
+        <div class="news-details-con">
+        {if $introduce && $user_status == 3 && $page == 1}<div class="introduce">核心摘要：{$introduce} </div>{/if}
+        {if $CP}{template 'property', 'chip'}{/if}
+        <div id="content">{template 'content', 'chip'}</div>
+        {if $voteid}<div class="pd20">{loop $voteid $v}
+        {load('vote_'.$v.'.htm')}{/loop}</div>
+        {/if}
+        {if $pages}<div class="pages">{$pages}</div>{/if}
+    {if $subtitles}
+    <div class="subtitle margin-top-30 overflow-hidden">
+    <h3>本文导航：</h3>
+    <ul>
+    {loop $titles $i $t}
+    {if $subtitles > $i}
+    <li>
+    ({php echo $i+1;})
+    {if $page == $i+1}
+    <strong>{$t}</strong>
+    {else}
+    <a href="{$MOD[linkurl]}{if $i}{itemurl($item, $i+1)}{else}{$item[linkurl]}{/if}" title="{$t}">{$t}</a>
+    {/if}
+    </li>
+    {/if}
+    {/loop}
+    </ul>
+    <div class="c_b"></div>
+    </div>
+    {/if}
+        <div class="margin-top-30 overflow-hidden">
+        <ul class="news-relat-keyword pull-left">
+        {if $keytags}
+        {loop $keytags $t}
+         <li><a href="{$MOD[linkurl]}search.php?kw={urlencode($t)}" class="font14" target="_blank" rel="nofollow"><strong class="font-none"><i class="tag_ico"></i>{$t}</strong></a></li>
+        {/loop}
+        {/if}
+         </ul>
+             <span class="pull-right">(责任编辑：{if $author}{$author}{else}小编{/if})</span>
+                </div>
+            </div>
+               {if $keytags}         
+              <div class="text-center margin-top-20">
+                <a href="{$MOD[linkurl]}search.php?kw={urlencode($keytags[0])}" class="news-news-more font14" target="_blank">更多相关资讯&gt;&gt;</a>
+            </div>
+            {else}
+            <div class="text-center margin-top-20">
+                <a href="{$MOD[linkurl]}{$CAT[linkurl]}" class="news-news-more font14" target="_blank">更多相关资讯&gt;&gt;</a>
+            </div>
+            {/if}
+             {if $MOD[show_np]}
+             <div class="text-left margin-top-20 font20 news-next-article padding-left-30">
+                下一篇：
+                <!--{tag("moduleid=$moduleid&condition=status=3 and addtime>$addtime&areaid=$cityid&pagesize=1&order=addtime desc&dir=xhtag&template=list-newsnp", -1)}-->
+            </div>
+            <div class="text-left margin-top-10 font20 news-next-article padding-left-30">
+                上一篇：
+                <!--{tag("moduleid=$moduleid&condition=status=3 and addtime<$addtime&areaid=$cityid&pagesize=1&order=addtime desc&dir=xhtag&template=list-newsnp", -1)}-->
+            </div>
+            {/if}
+            <div class="news-collection-con margin-top-30">
+                <ul>
+                    <li class="news-width-13p"><a href="javascript:SendPage();" class="news-add-stars" title="喜欢就告诉好友"><i class="fa fa-star"></i></a></li>
+                    <li class="news-width-13p"><a href="javascript:SendFav();" class="news-add-stars" title="收藏文章"><i class="fa fa-heart"></i></a></li>
+                    <li class="news-width-13p"><a href="javascript:SendReport();" class="news-add-stars" title="违规举报"><i class="fa fa-send"></i></a></li>
+                    <li class="news-width-13p"><a href="javascript:Dqrcode();" class="news-add-stars news_code" title="二维码"><i class="fa fa-code"></i>
+                    <div class="t_code_img"><img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}" width="90" height="90" alt="信息二维码"><p class="code_text">手机看新闻</p></div>
+                    </a></li>
+                    <li class="news-width-47p">
+                    <span class="news-text-fxd">分享到</span>
+                    <div class="padding-top-8">
+                    <!--baidu-share s-->
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                 <!--baidu-share end-->
+                 </div>
+                    </li>
+                </ul>
+            </div>
+         <!--   免责声明    S  -->
+         <div class="news-statement margin-top-30">
+         <div class="zxpd_pd">
+                    <div class="zxpd_tit">免责声明</div>
+                    <dl class="fl-clr">
+                        <dt>•&nbsp;</dt>
+                        <dd>本文仅代表作者个人观点，本站未对其内容进行核实，请读者仅做参考，如若文中涉及有违公德、触犯法律的内容，一经发现，立即删除，作者需自行承担相应责任。涉及到版权或其他问题，请及时联系我们
+                            {$DT[emaill]}
+                        </dd>
+                    </dl>
+                </div>
+         </div>
+          <!--   免责声明    end  -->
+         {if $MOD[page_srelate]}
+        <div class="margin-top-10">&nbsp;</div>
+        {if $keytags}
+        <div class="left_head"><a href="{$MOD[linkurl]}search.php?kw={urlencode($keytags[0])}" rel="nofollow">同类{$MOD[name]}</a></div>
+        <div class="related"><!--{tag("moduleid=$moduleid&length=44&condition=status=3 and itemid<>$itemid and keyword like '%".$keytags[0]."%'&areaid=$cityid&pagesize=".$MOD[page_srelate]."&order=".$MOD[order]."&cols=2&template=list-table", -2)}--></div>
+        {else}
+        <div class="left_head"><a href="{$MOD[linkurl]}{$CAT[linkurl]}">同类{$MOD[name]}</a></div>
+        <div class="related"><!--{tag("moduleid=$moduleid&length=44&catid=$catid&condition=status=3 and itemid!=$itemid&areaid=$cityid&pagesize=".$MOD[page_srelate]."&order=".$MOD[order]."&cols=2&template=list-table", -2)}--></div>
+        {/if}
+        {/if}
+        <div class="margin-top-30">
+         {template 'comment', 'chip'}
+         </div>
+        </div>
+        <div class="col-xs-3 news-col-xs-3-320">
+            <div class="news-column-right news-column-login">
+    <ul class="news-ul-login">
+     <!--会员在线状态 S-->
+     <div class="xh_dl">
+     <li><a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank"><span class="news-w1"></span><span class="news-w2 font16">免费注册</span></a></li><li><a href="{$MODULE[2][linkurl]}{$DT[file_login]}"" target="_blank"><span class="news-w1 news-login"></span><span class="news-w2 font16">登录</span></a></li>
+     </div>
+      <div class="xh_dl_2_no">
+      <li><a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=21&action=add" target="_blank"><span class="news-w1 news-member"></span><span class="news-w2 font16">商务中心</span></a></li><li><a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=21&action=add" target="_blank"><span class="news-w1 news-mess"></span><span class="news-w2 font16">免费投稿</span> </a></li>
+        </div>
+        <!--会员在线状态 END-->
+                </ul>
+            </div>
+    <div class="news-news-ad3 rel">
+       <a href="#" target="_blank"><img alt="" src="{DT_SKIN}images/aa/news/a1.jpg"></a>
+       <i class="adicon"></i>
+    </div>
+            <div class="news-column-right">
+                <div class="news-tit-font18 margin-top-20">大家还关注了</div>
+                <ul class="news-ul-24hotnew news-other-new">
+                 <!--{tag("moduleid=$moduleid&length=34&condition=status=3 and thumb<>''&areaid=$cityid&order=".$MOD[order]."&pagesize=10&dir=xhtag&template=list-newsfollow")}-->
+                 </ul>
+            </div>
+        </div>
+</div>
+ </div>
+ {if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+{template 'footer'}

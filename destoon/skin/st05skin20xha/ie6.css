@@ -1,0 +1,6 @@
+/*
+	[ System] Copyright (c) 2018-2022 b2b.bjlsjp.cn
+	This is NOT a freeware, use is subject to license.txt
+*/
+body {_background-image:url('image/spacer.gif');_background-attachment:fixed;}
+#head {_position:absolute;_top:expression(documentElement.scrollTop);}

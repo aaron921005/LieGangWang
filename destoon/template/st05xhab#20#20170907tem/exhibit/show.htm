@@ -1,0 +1,172 @@
+{template 'header'}
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<div class="main">
+        <div class="mainTop">
+             <p>您现在的位置：<a href="{$MODULE[1][linkurl]}">首页</a>&gt;<a href="{$MOD[linkurl]}">{$MOD[name]}</a>&gt;{cat_pos($CAT, '&gt;')}&gt;<span>{$title}</span></p>
+        </div>
+         <!--exhiBox-->
+    <div class="mainTitle">
+    	<div class="boxTop"><h1>{$title}</h1><span class="exhfb fr"><a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=8&action=add" target="_">发布展会</a></span></div>
+        <div class="box">
+        	<div class="boxTitle">
+{php $lasted_day =(strtotime($fromtime)-strtotime(date('Y-m-d')))/3600/24;}
+{if $process==2}
+  <i class="f_green">正在进行中</i>
+   {else}
+{if $lasted_day < 0}
+<i class="f_red">已结束</i>
+{else}
+{if $lasted_day == 0}
+<i class="f_green">正在进行中</i>
+{else}
+ <i>距离开幕还有 {$lasted_day} 天</i>
+ {/if}
+  {/if}
+    {/if}
+            </div>
+            <div class="exh_img">
+            <div class="companylogo"><img src="{imgurl($thumb, 100)}" alt="{$alt}"></div>
+            </div>
+            <dl>               
+            	<dt><a href="javascript:;">展会时间</a></dt><dd>{$fromtime} 至 {$totime}</dd>
+                <dt><a href="javascript:;">展出城市</a></dt><dd>{$city}</dd>
+                <dt><a href="javascript:;">展出地址</a></dt><dd>{$address}</dd>
+                <dt><a href="javascript:;">展会场馆</a></dt><dd>{$hallname}</dd>
+                <dt><a href="javascript:;">主办单位</a></dt><dd>{$sponsor}</dd>
+                {if $undertaker}<dt><a href="javascript:;">承办单位</a></dt><dd>{$undertaker}</dd>{/if}
+                {if $homepage}<dt><a href="javascript:;">官方网站</a></dt><dd><a href="{$homepage}">{$homepage}</a></dd>{/if}
+            </dl>
+            <div class="regist">
+        {if $process==3}
+        {else}
+        {if $sign && $process == 1 && $username}
+                <a href="javascript:void(0);" onclick="Go('{$MOD[linkurl]}{rewrite('sign.php?itemid='.$itemid)}');"><img src="{DT_SKIN}images/exhibit/regist2.jpg" alt=""></a>
+                {else}
+                <a onclick="return false;" href="javascript:void(0);"><img src="{DT_SKIN}images/exhibit/regist_no.png" alt=""></a>
+        {/if}
+        {/if}
+            </div>
+        {if $process==3}
+        {else}
+        {if $sign && $process == 1 && $username}
+              <div class="orders"><em>共计<b>{$orders}</b>人已登记参展</em></div>
+        {/if}
+         {/if}
+            <div class="baidu">
+		  		<!-- Baidu Button BEGIN -->
+		  		<div class="bdsharebuttonbox btn-share bdshare-button-style0-16"><a href="javascript:void(0)" class="bds_more" data-cmd="more">分享</a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+          <em>已有<b id="hits">{$hits}</b>人围观</em>
+		  </div>
+</div>
+</div>
+    <!--exhiBox-->
+       <!--mainLeft-->
+    <div class="mainLeft">
+    	<h2 id="title">{$title}</h2>
+        <div id="content" class="content">{template 'content', 'chip'}</div>
+        {if $remark}
+        <div class="remark mt20">
+        <div class="left_head">展会备注</div>
+        <div class="content">{nl2br($remark)}</div>
+        </div>
+        {/if}
+        {if $CP}{template 'property', 'chip'}{/if}
+        <div class="center mt20">
+        <center>
+        [ <a href="{$MOD[linkurl]}search.php" rel="nofollow">{$MOD[name]}搜索</a> ]&nbsp;
+        [ <a href="javascript:SendFav();">加入收藏</a> ]&nbsp;
+        [ <a href="javascript:SendPage();">告诉好友</a> ]&nbsp;
+        [ <a href="javascript:Print();">打印本文</a> ]&nbsp;
+        [ <a href="javascript:SendReport();">违规举报</a> ]&nbsp;
+        [ <a href="javascript:window.close()">关闭窗口</a> ]
+        </center>
+       </div>
+       <div class="comment mt20">
+        {template 'comment', 'chip'}
+        </div>
+</div>
+    <!--mainLeft-->
+        <div class="mainRight">
+           <!--report-->
+   {if $MOD[cat_news_num]}
+    	<div class="newsBox report">
+            <h3></h3>
+            <div class="newsWrapper">
+            <!--{tag("moduleid=21&condition=status=3 and level=3 and thumb!=''&areaid=$cityid&catid=".$MOD['cat_news']."&pagesize=1&length=30&order=addtime desc&dir=xhtag&template=exhibit-shownewsimg")}-->
+                <ul>
+            <!--{tag("moduleid=21&condition=status=3&areaid=$cityid&catid=".$MOD['cat_news']."&pagesize=5&length=30&order=addtime desc&dir=xhtag&template=exhibit-shownewstext")}-->
+              </ul>
+            </div>
+            <i></i>
+        </div>
+ {/if}
+        <!--report-->
+            <!--query place-->
+            <div class="query">
+                <div class="CalendarWrapper">
+                <div class="CalendarHead">
+        {php for($i=1;$i<13;$i++){ $j = $i<10 ? '0'.$i : $i;}
+   <li><a href="{$MOD[linkurl]}{rewrite('search.php?month='.$i.'&catid='.$catid)}" class="g" rel="nofollow">{$j}月</a></li>
+        {php } }
+                </div>
+                </div>
+                </div>
+            <div class="place">
+                <div class="placeList">
+         {php $mainarea = get_mainarea(0)}
+        {loop $mainarea $k $v}
+        {if $k%5==0}<p>{/if}
+       <a href="{$MOD[linkurl]}search.php?areaid={$v[areaid]}&catid={$catid}" rel="nofollow">{$v[areaname]}</a>
+        {if $k%5==4}</p>{/if}
+        {/loop}
+                </div>
+            </div>
+            <!--query place-->
+           <!--topic-->
+        <div class="newsBox topic">
+            <h3></h3>
+            <!--{php $xhbq=tag("moduleid=21&condition=status=3 and level=3 and thumb!=''&areaid=$cityid&catid=".$MOD['cat_hall']."&pagesize=1&length=30&order=addtime desc&dir=xhtag&template=null");}-->
+            {loop $xhbq $t}
+            <em><a href="{$t[linkurl]}" title="{$t[alt]}">{$t[title]}</a></em>
+            {/loop}
+           <!--{tag("moduleid=21&condition=status=3 and level=3 and thumb!=''&areaid=$cityid&catid=".$MOD['cat_hall']."&pagesize=1&length=30&order=addtime desc&dir=xhtag&template=exhibit-shownewsimg")}-->
+            <ul>
+             <!--{tag("moduleid=21&condition=status=3&areaid=$cityid&catid=".$MOD['cat_hall']."&pagesize=5&length=30&order=addtime desc&dir=xhtag&template=exhibit-shownewstext")}--> 
+             </ul>
+        </div>
+        <!--topic-->
+           <!--recom-->
+        <div class="newsBox recom arx_list_info">
+            <h3></h3>
+            <div class="newsWrapper">
+                <!--{tag("moduleid=$moduleid&condition=status=3 and level=3 and thumb!=''&areaid=$cityid&pagesize=1&length=30&order=addtime desc&dir=xhtag&template=exhibit-shownewsimg")}-->
+                <ul>
+            <!--{tag("moduleid=$moduleid&condition=status=3 and level=1&areaid=$cityid&pagesize=5&length=30&order=addtime desc&dir=xhtag&template=exhibit-shownewstext")}-->
+            </ul>
+            </div>
+        </div>
+        <!--recom-->
+        </div>
+        <div class="clear"></div>
+</div>
+    <div class="main warn_wrap mt20" id="hotproduct">
+    <div class="warn_ico fl-clr">
+        <div class="warn-pic fl-left"></div>
+        <div class="warn-detail-rig fl-right fl-clr">
+            <dl class="fl-clr">
+              <dt>免责声明：</dt>
+              <dd>当前页为{$title}信息展示，该页所展示的{$title}批发价格、{$title}报价等相关信息均有企业自行提供，{$title}价格真实性、准确性、合法性由店铺所有企业完全负责。{$DT[sitename]}对此不承担任何保证责任。</dd>
+            </dl>
+            <dl class="fl-clr">
+              <dt>友情提醒：</dt>
+              <dd>建议您通过拨打{$title}厂家联系方式确认最终价格，并索要{$title}样品确认产品质量。如{$title}报价过低，可能为虚假信息，请确认{$title}报价真实性，谨防上当受骗。</dd>
+            </dl>
+        </div>
+    </div>
+    </div>
+<div class="clear"></div>
+</div>
+<script type="text/javascript" src="{DT_SKIN}js/show-copy.js?_=20170820"></script>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+{template 'footer'}

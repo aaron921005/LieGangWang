@@ -1,0 +1,39 @@
+{loop $tags $k $t}
+<div class="list" id="item_{$t[itemid]}">
+<i class="pictj3"></i>
+<div class="list_l fl">
+<div class="list_img">
+<div class="list_logo"><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" width="120" alt="{$t[alt]}"/></a></div>
+<div class="titbox"><h3 class="tith3">{$t[title]}</h3></div>
+</div>
+<div class="list_text">
+<a href="{userurl($t[username])}" class="a-1 jcom" title="{$t[coampany]}" data-id="932977"> 企业 </a>
+<a href="{$t[linkurl]}" class="a-2 jshow" title="{$t[alt]}" data-id="932977"> 详情 </a> 
+</div>
+</div>
+<div class="list_r fl">
+<div class="list_r_s">
+<ul>
+<h2>品牌：<a href="{$t[linkurl]}" target="_blank"><strong class="px18">{$t[title]}</strong></a></h2>
+<div class="list_com">
+企业：{if $t[vip]}<img src="{DT_SKIN}image/vip_{$t[vip]}.gif" alt="{VIP}" title="{VIP}:{$t[vip]}级" align="absmiddle"/> {/if}<a href="{userurl($t[username])}" target="_blank">{$t[company]}</a>&nbsp;
+<span class="f_gray">
+{if $t[validated]}[已核实]{else}[未核实]{/if}
+{if !$t[username]} [未注册]{/if}
+</span>
+</div>
+<p class="list_int">简介：{$t[introduce]}</p>
+</ul>
+</div>
+<div class="txtcon">
+{php $xhmember = userinfo($t['username']);}
+<li>品牌行业：{cat_name($t[catid])}</li>
+<li>品牌驻地：{area_pos($t[areaid], '', 1)}</li>
+{if $xhmember[mobile] || $xhmember[telephone]}<li>电话咨询：{if $xhmember[mobile]}{$xhmember[mobile]}{else}{$xhmember[telephone]}{/if}</li>{/if}
+<li>更新时间：{timetodate($t[edittime], 3)}</li>
+<li><a href="message.php?itemid={$t[itemid]}" target="_blank">在线留言</a></li>
+</div>
+</div>
+</div>
+{/loop}		
+{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}

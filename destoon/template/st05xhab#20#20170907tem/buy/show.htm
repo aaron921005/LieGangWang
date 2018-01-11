@@ -1,0 +1,201 @@
+﻿{template 'header'}
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}buy/main.css" />
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}basic.css" />
+<div id="wrap_1" class="clearfix">
+<div class="position"> <a href="{$MODULE[1][linkurl]}" target="_blank">当前位置：首页</a> <span>&gt;</span> <a href="{$MOD[linkurl]}">{$MOD[name]}</a> <span>&gt;</span> {cat_pos($CAT, ' <span>&gt;</span> ')} <span>&gt;</span> 采购详情 <span>&gt;</span> {$title}</div>
+ <!--1ping s-->
+<!--show-left-->
+  <div class="purchase_l">
+    <h1 class="pur_tit" id="title">{$title}</h1>
+    <div class="pur_con">
+      <p class="pur_time">
+	  开采时间：{$editdate}<br />
+    报价截止：{if $expired}<font color="#ff0101;">[已过期]</font>{else}{if $todate}{$todate}{else}长期有效期{/if}{/if}<br />
+	  浏览次数：<span id="hits">{$hits}</span> 次<br />
+      </p>
+    <div class="zhongju">
+    <li class="zhongju_list_1"><a href="javascript:SendReport();" target="_blank" rel="nofollow">举报</a></li>
+    <li class="zhongju_list_2"><a href="javascript:SendFav();" target="_blank" rel="nofollow">收藏</a></li>
+    <li class="zhongju_list_3"><a href="javascript:SendPage();"" target="_blank" rel="nofollow">推荐</a></li>
+    </div>
+
+      <div class="pur_price">
+      <div class="btn_line">{if $username && !$expired}<a onclick="Go('{$MOD[linkurl]}{rewrite('price.php?itemid='.$itemid)}');return false;" href="javascript:;" target="_blank" rel="nofollow">立即报价</a> {else} <b>{if $username}采购结束{else}不支持报价{/if}</b>{/if}</div>
+         <div class="price">剩余 :
+         {if $username && !$expired}
+         <span id="timer"></span>
+          {if $totime} 
+ <script type="text/javascript">
+          function TimeTo(dd){  
+    var t = new Date(dd),//取得指定时间的总毫秒数  
+        n = new Date().getTime(),//取得当前毫秒数  
+        c = t - n;//得到时间差  
+    if(c<=0){//如果差小于等于0  也就是过期或者正好过期，则推出程序  
+        document.getElementById('timer').innerHTML ='本次采购已经结束';  
+        clearInterval(window['ttt']);//清除计时器  
+        return;//结束执行  
+    }  
+    var ds = 60*60*24*1000,//一天共多少毫秒  
+        d = parseInt(c/ds),//总毫秒除以一天的毫秒 得到相差的天数  
+        h = parseInt((c-d*ds)/(3600*1000)),//然后取完天数之后的余下的毫秒数再除以每小时的毫秒数得到小时  
+        m = parseInt((c - d*ds - h*3600*1000)/(60*1000)),//减去天数和小时数的毫秒数剩下的毫秒，再除以每分钟的毫秒数，得到分钟数  
+        s = parseInt((c-d*ds-h*3600*1000-m*60*1000)/1000);//得到最后剩下的毫秒数除以1000 就是秒数，再剩下的毫秒自动忽略即可  
+        document.getElementById('timer').innerHTML = ' <b>'+d+'</b> 天 <b>'+h+'</b></b> 时 <b>'+m+'</b> 分 <b class="ss">'+s+'</b> 秒';//最后这句讲定义好的显示 更新到 ID为 timer的 div中  
+}  
+(function(){  
+    window['ttt']=setInterval(function(){  
+    TimeTo('{date('Y/m/d', $totime)} 23:59:59');//定义倒计时的结束时间，注意格  
+    },1000);//定义计时器，每隔1000毫秒 也就是1秒 计算并更新 div的显示  
+})();  
+</script>
+              {else}
+              长期有效         
+              {/if}
+              {else}
+               {if $username}
+              本次采购已经结束
+               {else}
+               发布者未注册，不计时。
+               {/if}
+              {/if}
+         </div>
+		<div class="count">已有 <font color="#f66400">{$pricenums}</font> 人报价（登录后方可对此采购进行报价）</div>
+
+    {if $username && !$expired}
+    {if $totime}<div class="jxz"></div>{else}<div class="jxz"></div>{/if}
+    {else}
+    <div class="yjs"></div>
+    {/if}
+      </div>
+
+	  
+      <div class="sblock40"></div>
+
+      <h3 class="s_tit">基本要求<span></span></h3>
+      <div class="pur_text">
+	  <div class="buyattr">
+	  	<ul>
+	  	 {if $bareaid && $areaid}
+			<li>
+			<span>收 货 地：</span>
+			{if $bareaid}
+				{php $areaname = get_area($bareaid);}
+				{$areaname[areaname]}
+			{elseif $areaid}
+            	{php $areaname = get_area($areaid);}
+                {$areaname[areaname]}
+            {/if}
+			</li>
+            {/if}
+			{if $amount}<li><span>需求数量：</span>{$amount}</li>{/if}
+			{if $price}<li><span>价格要求：</span>{$price}</li>{/if}
+			{if $pack}<li><span>包装要求：</span>{$pack}</li>{/if}
+		</ul>
+	  </div>
+	  </div>
+
+	   {if ($n1 && $v1) || ($n2 && $v2) || ($n3 && $v3)}
+    <h3 class="s_tit">补充说明</h3>
+	  <div class="buyattr">
+	  	<ul>
+			{if $n1 && $v1}
+			<li><span>{$n1}：</span>{$v1}</li>
+			{/if}
+			
+			{if $n2 && $v2}
+			<li><span>{$n2}：</span>{$v2}</li>
+			{/if}
+			
+			{if $n3 && $v3}
+			<li><span>{$n3}：</span>{$v3}</li>
+			{/if}
+		</ul>
+	  </div>
+	  {/if}
+	  {if $thumb}
+      <h3 class="s_tit">采购样品图</h3>
+      <div class="img_show">
+		  {if $thumb}<li style="text-align:center;"><img src="{$thumb}" /></li>{/if}
+		  {if $thumb1}<li style="text-align:center;"><img src="{$thumb1}" /></li>{/if}
+		  {if $thumb2}<li style="text-align:center;"><img src="{$thumb2}" /></li>{/if}
+      </div>
+	  {/if}
+	  <h3 class="s_tit">采购详情</h3>
+    <div class="pur_tips">
+    {if $CP}{template 'property', 'chip'}{/if}
+		  <div class="content" id="content">{$content}</div>
+    {template 'comment_buy', 'chip'}
+		  </div>
+		</div>
+	
+	
+  </div>
+  <!--right-->
+   <div class="purchase_r">
+  <div class="qgtj_r_user">
+  <h2>采购商资料</h2>
+    <div class="show_contact" id="contact">{template 'contact', 'chip'}</div>
+      {if !$username}
+      <br/>
+      &nbsp;<strong class="f_red">注意</strong>:发布人未在本站注册，建议优先选择<a href="{$MODULE[2][linkurl]}grade.php"><strong>{VIP}会员</strong></a>
+      {/if}
+  </div>
+  <div class="qgtj_r qgtj_20">
+  <h2>我还想采购</h2>
+    <ul>
+  <!--{php $xhbq=tag("moduleid=$moduleid&length=28&condition=status=3 and username='$username'&areaid=$cityid&pagesize=10&order=edittime desc&&template=null", -2)}-->
+  {loop $xhbq $k $v}
+      <li><a href="{$v[linkurl]}">{$v[title]}</a></li>
+  {/loop}
+
+    </ul>
+</div>
+
+<div class="qgtj_r qgtj_20">
+	<h2>最新求购</h2>
+    <ul>
+	<!--{php $xhbq=tag("moduleid=$moduleid&length=28&condition=status=3&areaid=$cityid&pagesize=10&order=vip desc,edittime desc&&template=null", -2)}-->
+	{loop $xhbq $k $v}
+    	<li><a href="{$v[linkurl]}">{$v[title]}</a></li>
+	{/loop}
+
+    </ul>
+	</div>
+	
+  </div>
+    <!--1ping END-->
+  <!--2ping S-->
+  <div class="sblock20"></div>
+  <div class="btm_pur">
+    <div class="tit">
+      <ul>
+        <li class="cur">您是不是在找...</li>
+      </ul>
+    </div>
+    <div class="con">
+      <ul class="clearfix">
+	 	<!--{tag("moduleid=$moduleid&length=26&condition=status=3 and level>0&catid=$catid&areaid=$cityid&pagesize=5&order=vip desc,edittime desc&showcat=1&dir=xhtag&template=list-buyindextj")}-->
+      </ul>
+    </div>
+  </div>
+  <!--3ping S-->
+<div class="warn_wrap mt_20">
+    <div class="warn_ico fl-clr">
+        <div class="warn-pic fl-left"></div>
+        <div class="warn-detail-rig fl-right fl-clr">
+            <dl class="fl-clr">
+              <dt>免责声明：</dt>
+              <dd>当前页为{$title}价格信息展示，该页所展示的{$title}批发价格、{$title}报价等相关信息均有企业自行提供，{$title}价格真实性、准确性、合法性由店铺所有企业完全负责。{$DT[sitename]}对此不承担任何保证责任。</dd>
+            </dl>
+            <dl class="fl-clr">
+              <dt>友情提醒：</dt>
+              <dd>建议您通过拨打{$title}厂家联系方式确认最终价格，并索要{$title}样品确认产品质量。如{$title}报价过低，可能为虚假信息，请确认{$title}报价真实性，谨防上当受骗。</dd>
+            </dl>
+        </div>
+    </div>
+    </div>
+<!--3ping END-->
+</div>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+{template 'footer'}

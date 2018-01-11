@@ -1,0 +1,2 @@
+<?php defined('IN_DESTOON') or exit('Access Denied');?><link rel="stylesheet" type="text/css" href="images/assets/css/xhuicss.css"/>
+<script type="text/javascript" src="images/js/jquery-1.9.1.min.js"></script>

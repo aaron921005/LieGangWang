@@ -1,0 +1,52 @@
+{template 'header-job'}
+<div class="m">
+<div class="pos">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; {$item[title]} &raquo; 投递简历</div>
+</div>
+<div class="m mt20">
+<div class="title_ap"><h1 class="pr_title">您正在给要招聘【{$item[title]}】的企业投递简历</h1></div>
+
+		<div class="left_box_apply fl">		
+			<div style="padding:20px;">				
+				<form method="post" action="{$MOD[linkurl]}apply.php" id="dform">
+				<input type="hidden" name="itemid" value="{$itemid}"/>
+				<table cellpadding="8" cellspacing="1" width="100%" bgcolor="#CDDCE4">
+				<tr>
+				<td bgcolor="#FBFCFD" width="120" align="center">选择简历</td>
+				<td bgcolor="#FFFFFF">
+				{loop $lists $k $v}
+				<div class="lists"><input type="radio" name="resumeid" value="{$v[itemid]}"{if $k==0} checked{/if}/> <a href="{$v[linkurl]}" target="_blank">{$v[title]}</a></div>
+				{/loop}
+				</td>
+				</tr>
+				<tr>
+				<td bgcolor="#FBFCFD"> </td>
+				<td bgcolor="#FFFFFF"><input type="submit" name="submit" value=" 确定 "/>&nbsp;&nbsp;<input type="button" value=" 返回 " onclick="Go('{$linkurl}');"/></td>
+				</tr>
+				</table>
+				</form>	
+			</div>
+			<br/>
+		</div>
+	<div class="apply_show fr">
+	 <ul class="com-inf">
+	              {php $uinfo = userinfo($item[username]);}
+                    <li><div class="vertical-img"><img src="{$uinfo[thumb]}" width="100" height="100">
+                        </div></li>
+                    <li><span>投递职位：</span><a href="{$MOD[linkurl]}{$item[linkurl]}" class="blue-mark" target="_blank">{$item[title]}</a></li>
+                    {if $_userid}
+                    <li><span>所属公司：</span><a href="{userurl($item[username])}" class="blue-mark" target="_blank">{$item[company]}</a></li>
+                    <li><span>联 系 人：</span>{$item[truename]}</li>
+                    <li><span>联系电话：</span>{$item[telephone]}</li>
+                    <li><span>联系手机：</span>{$item[mobile]}</li>
+                    {if $item[qq]}
+                    <li><span>客服：</span><a href="tencent://message/?uin={$item[qq]}&Site={$item[title]}&Menu=yes" rel="nofollow"><img src="//wpa.qq.com/pa?p=1:{$item[qq]}:17" width="25" height="17" title="点击QQ交谈/留言" alt=""/>{$item[qq]}</a></li>{/if}
+                    {else}
+                    <li><span>所属公司：</span>{t_companyname($item[company])}</li>
+                    <li><span>联 系 人：</span>***</li>
+                    <li><span>联系电话：</span>{hideStar($item[telephone])}</li>
+                    <li><span>联系手机：</span>{hideStar($item[mobile])}</li>
+                     {/if}
+        </ul>
+	</div>
+</div>
+{template 'footer'}

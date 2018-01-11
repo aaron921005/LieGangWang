@@ -1,0 +1,30 @@
+<ul class="extension_ul">
+{loop $tags $k $t}
+  <li id="item_{$t[itemid]}"> 
+    <!--ioc_vip(VIP会员),ioc_qyhy(企业会员),ioc_grhy(个人会员),special(有特别推荐加上这个样式)-->
+    <div class="img"><a href="{$t[linkurl]}" target="_blank" data-scode="{$t[itemid]}" title="{$t[alt]}"><img src="{imgurl($t[thumb])}" alt="{$t[alt]}" title="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"/> </a></div>
+    <h3 class="title_list"><a href="{$t[linkurl]}" data-scode="{$t[itemid]}" title="{$t[alt]}" target="_blank">{$t[title]}</a> </h3>
+    <dl class="extension_dl">
+      {if $t[brand]}<dt>品牌</dt><dd>{$t[brand]}</dd>{/if}
+      {if $t[n1] && $t[v1]}<dt>{$t[n1]}</dt><dd>{$t[v1]}</dd>{/if}
+      {if $t[n2] && $t[v2]}<dt>{$t[n2]}</dt><dd>{$t[v2]}</dd>{/if}
+      {if $t[n3] && $t[v3]}<dt>{$t[n3]}</dt><dd>{$t[v3]}</dd>{else}<dt>更新时间</dt><dd>{timetodate($t[edittime], $datetype)}</dd>{/if}
+      <dt>总共成交</dt><dd>{$t[orders]}笔</dd>
+      <dt>已有</dt><dd>{$t[comments]}条评价</dd>
+    </dl>
+    {php $xhmember = userinfo($t[username]);}
+    <div class="main_products">主营产品： <span>{$xhmember[business]}</span></div>
+    <div class="extension_right">
+     <span class="su-price"><font class="redpc">{$DT[money_sign]}</font>{$t[price]}</span>
+      <p><a href="{userurl($t[username])}" target="_blank">{$t[company]}</a>{if !$t[username]} [未注册]{/if}</p>
+      <p>所在地：{area_pos($t[areaid], '-')}</p>
+      <p class="ico_img">{if $xhmember[vip]}<i class="ioc_vip" alt="{VIP}" title="{VIP}:{$xhmember[vip]}级"></i>{else}<i class="ioc_qyhy" title="企业会员"></i>{/if}</p>
+      <p><input type="checkbox" id="check_{$t[itemid]}" name="itemid[]" value="{$t[itemid]}" onclick="sell_tip(this, {$t[itemid]});"/>对比/批量</p>
+      <a href="javascript:void(0);" class="inquiry_a" onclick="Go('{$MODULE[$moduleid][linkurl]}{rewrite('buy.php?itemid='.$t['itemid'])}');" title="立即购买" target="_blank">立即购买</a>
+       </div>
+  </li>
+{/loop}	
+</ul>	
+{if $showpage && $pages}
+<div class="pages">{$pages}</div>
+{/if}

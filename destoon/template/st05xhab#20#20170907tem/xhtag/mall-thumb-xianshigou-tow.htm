@@ -1,0 +1,23 @@
+{loop $tags $i $t}
+<li class="goods f-cb" id="{$t[itemid]}">
+    <a href="{$t[linkurl]}" class="pic" target="_blank">
+    <img src="{$t[thumb]}" title="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic90_90.png'">
+    {if $i==2}<span class="custom-corner"><b>超级推荐</b></span>{/if}               
+    </a>
+    <div class="detail_mall">
+     <h3 class="intro"><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></h3>
+     <h3 class="shortTitle"><a href="{$t[linkurl]}" target="_blank">{dsubstr($t[introduce], 60, '…')} </a></h3>
+     <p class="price"><b>{$DT[money_sign]}</b>{$t[price]}</p>
+     {if $i==0}
+      <div class="process"><b style="width: 10%;"></b><p class="text">剩余90%</p></div>
+      {elseif $i==1}
+       <div class="process"><b style="width: 5%;"></b><p class="text">剩余95%</p></div>
+      {elseif $i==2}
+       <div class="process"><b style="width: 30%;"></b><p class="text">剩余70%</p></div>
+      {elseif $i==3}
+       <div class="process"><b style="width: 12%;"></b><p class="text">剩余88%</p></div>
+      {/if}
+      <a class="btn_mall f-hover" href="{$t[linkurl]}" target="_blank">立即抢购</a>
+      </div>
+</li>
+{/loop}

@@ -1,0 +1,20 @@
+{loop $tags $i $t}
+<dl>
+  <dd><img src="{if $t[thumb]}{$t[thumb]}{else}{DT_SKIN}images/job/man.png{/if}"></dd>
+  <dt>
+  <div class="t_position_name"><a href="{$t[linkurl]}">{$t[truename]}</a>
+  <img src="{DT_SKIN}images/job/bj_3{if $t[gender]==1}1{else}2{/if}.png">
+  </div>
+  <p>{if $t[experience]}{$t[experience]}年经验{else}无工作经验{/if}</p>
+  <p>{if $t[minsalary] && $t[maxsalary]}
+      {$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+    {elseif $t[minsalary]}
+      {$t[minsalary]}{$DT[money_unit]}/月以上
+    {elseif $t[maxsalary]}
+      {$t[maxsalary]}{$DT[money_unit]}/月以内
+    {else}
+      面议
+    {/if}</p>
+  </dt>
+</dl>
+{/loop}

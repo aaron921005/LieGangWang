@@ -1,0 +1,68 @@
+{template 'header', 'vip'}
+<link href="{DT_STATIC}vip/css/vip-index.css" rel="stylesheet" type="text/css">
+ <!--vip-S-->
+<div class="content_vip topv">
+ <!--vip-1-->
+    <div class="screen-one" style="height: 632px;">
+        <div class="one-content">
+            <p class="p-big font_one">超强体验 高品质推广</p>
+            <p class="p-text">快速享有全年多项特权服务 让您网络贸易更轻松</p>
+            <p class="price">2880元/年</p>
+            <p><a href="//wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site=qq&amp;menu=yes"><em></em></a></p>
+            <div class="link-bar">
+                <ul>
+                    <li><a href="#screenTwo">服务优势</a></li>
+                    <li><a href="#screenThree">新增服务<em></em></a></li>
+                    <li><a href="#screenfour">{VIP}服务</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+       <!--vip-2-->
+    <div class="screen-two" id="screenTwo">
+        <p>服务优势</p> 
+        <div class="scroll-area">
+            <div class="scrollArea">
+                <div class="scroll-box">
+                    <ul class="fl-clr">
+                    <li><img src="{DT_STATIC}vip/images/vips-1.png"><em><p>领先的B2B电商平台</p>受欢迎的B2B平台之一<br>成立多年来，一直专注于B2B</em></li>
+                    <li><img src="{DT_STATIC}vip/images/vips-2.png"><p>各大搜索引擎优先收录</p><em>产品收录快<br>百万级流量给您带来大生意</em></li>
+                    <li><img src="{DT_STATIC}vip/images/vips-3.png"><em><p>多处展示 让生意更好做</p>特别推荐、全站推广<br>生意机会无处不在</em></li>
+                    <li><img src="{DT_STATIC}vip/images/vips-4.png"><em><p>精准推广 优先传播</p>专注的访问群体<br>高质量的买卖家达到90%以上</em></li>
+                    <li><img src="{DT_STATIC}vip/images/vips-5.png"><em><p>一对一的精选秘籍传授</p>传授商铺管理秘籍<br>教您SEO技巧 协助管理商铺</em></li>
+                    </ul>
+                </div>
+                <div class="opacity"></div>
+                <div class="opacity1"></div>
+                <span class="prev"></span>
+                <span class="next"></span>
+            </div>
+        </div>  
+    </div>
+        <!--vip-3-->
+    <div class="screen-three" id="screenThree">
+        <p>新增服务</p> 
+        <div class="tabs">
+            <ul class="fl-clr">
+              <li class="current"><a href="javascript:void(0);" class="a1"></a><span>建站服务</span></li>
+              <li class=""><a href="javascript:void(0);" class="a2"></a>行业牛人</li>
+              <li class=""><a href="javascript:void(0);" class="a3"></a>移动端优先权</li>
+              <li class=""><a href="javascript:void(0);" class="a4"></a>在线询盘</li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-detail tab1" style="display: block;"><img src="{DT_STATIC}vip/images/vip_tab1.png"><span>免费送专属<em>一级域名独立</em>网站<br>优化更强势</span></div>
+            <div class="tab-detail tab2" style="display: none;"><img src="{DT_STATIC}vip/images/vip_tab2.png"><span>针对采购商访问页面<em>精准投放广告</em><br>让咨询来得更猛烈一些</span></div>
+            <div class="tab-detail tab3" style="display: none;"><img src="{DT_STATIC}vip/images/vip_tab3.png"><span>移动端 排名更靠前<br><em>优先展示</em>{VIP}会员产品</span></div>
+            <div class="tab-detail tab4" style="display: none;"><img src="{DT_STATIC}vip/images/vip_tab4.png"><span>支持在线咨询<br>随时随地把<em>最新商机握在手里</em></span></div>
+        </div>
+    </div>
+       <!--vip-4-->
+    <div class="screen-four" id="screenfour">
+        <p class="big">{VIP}会员</p> 
+        <p class="">快速享有全年多项特权服务 让您网络贸易更轻松</p>   
+        <p class="btn_vip"><a href="{$MODULE[2][linkurl]}grade.php?groupid=7#up">立即申请</a>{if $DT[qq1]}<a href="//wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site=qq&amp;menu=yes" target="_blank" class="qq">立即咨询</a>{else}<a href="javascript:;" target="_blank" class="qq">暂无客服</a>{/if}</p>
+    </div>
+
+</div>
+{template 'footer', 'vip'}

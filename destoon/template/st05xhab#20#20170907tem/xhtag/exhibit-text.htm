@@ -1,0 +1,23 @@
+{loop $tags $i $t}
+<tr>
+<td class="title"><a href="{$t[linkurl]}" target="_blank">{$t[title]}</a></td>
+<td class="date">{timetodate($t[fromtime], 3)}~{timetodate($t[totime], 3)}</td>
+<td class="address">{$t[city]}</td>
+<td class="time">
+{php $lasted_day =(strtotime(timetodate($t[fromtime], 3))-strtotime(date('Y-m-d')))/3600/24;}
+{if $lasted_day < 0}
+{if $t[totime] > $DT_TIME}
+ <span class="f_green">正在进行中</span>
+   {else}
+<span class="f_red">已结束</span>
+  {/if}
+{else}
+{if $lasted_day == 0}
+<span class="f_green">正在进行中</span>
+{else}
+ 距离开幕<span>{$lasted_day}</span>天
+ {/if}
+  {/if}
+</td>
+</tr>
+{/loop}

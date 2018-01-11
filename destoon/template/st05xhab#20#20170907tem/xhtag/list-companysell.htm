@@ -1,0 +1,8 @@
+{loop $tags $k $v}
+  <li>
+  <dl>
+ <dt><a href="{$v[linkurl]}" target="_blank"><img src="{if $v[thumb]}{str_replace('thumb', 'middle', $v[thumb])}{else}{DT_SKIN}image/nopic100.gif{/if}" alt="{$v[alt]}" width="90" height="90" onerror="this.src='{DT_SKIN}image/sx_nopic90_90.png'"></a></dt>
+<dd><a href="{$v[linkurl]}" title="{$v[alt]}" target="_blank">{$v[title]}</a></dd>
+   </dl>
+   </li>
+  {/loop}

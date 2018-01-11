@@ -1,0 +1,7 @@
+{loop $tags $i $t}
+<li class="newborder {if $i<1}clone{/if}">
+            <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" class="li_img"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic258_258.png'"></a>
+            <p class="newborder_price">{if $t[unit] && $t[price]>0}<i class="sign">{$DT[money_sign]}</i>{$t[price]}<i class="unit">/{$t[unit]}</i>{else}面议{/if}</p>
+            <p class="newborder_text"><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></p>
+        </li>
+{/loop}

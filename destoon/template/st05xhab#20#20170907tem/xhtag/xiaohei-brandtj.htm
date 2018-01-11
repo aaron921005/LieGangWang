@@ -1,0 +1,11 @@
+{loop $tags $i $t}
+{if $i%16==0}<ul{if $i>0} style="display: none;"{/if}>{/if}
+<li class="fl">
+<img alt="{$t[alt]}" title="{$t[alt]}" src="{$t[thumb]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_108.png'">
+<span>
+<p>{$t[title]}</p>
+<p><a href="{$t[linkurl]}" target="_blank" rel="nofollow">点击进入</a></p>
+</span>
+</li>
+{if $i%16==15}</ul>{/if}
+{/loop}  

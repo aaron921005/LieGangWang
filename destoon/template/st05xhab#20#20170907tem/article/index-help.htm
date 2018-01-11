@@ -1,0 +1,98 @@
+{template 'header-help'}
+<div class="help_banner">
+	    <div class="banner_box">
+	       <div class="help_search">
+	    <i></i>
+	   <form id="destoon_search" action="{$MOD[linkurl]}search.php" onsubmit="return Dsearch(1);">
+      <input type="hidden" name="moduleid" value="{$moduleid}" id="destoon_moduleid"/>
+      <input type="hidden" name="spread" value="0" id="destoon_spread"/>
+      <input type="text" name="kw" id="destoon_kw" placeholder="请简单描述您的问题或问题关键词，如：忘记密码" value="{if $kw}{$kw}{else}请简单描述您的问题或问题关键词，如：忘记密码{/if}" onfocus="if(this.value=='请简单描述您的问题或问题关键词，如：忘记密码') this.value='';"{if $DT[search_tips]} onkeyup="STip(this.value);" autocomplete="off"{/if} x-webkit-speech speech/>
+      <input type="submit" class="btn_so" value="查找"/>
+	    </form>
+	      </div>
+	    </div>
+	</div>
+<div class="help-center-underlay">
+    <div class="help-center-content">
+     <!--功能快捷- S--> 
+        <div class="help-center-title">
+            <h2>功能快捷</h2>
+        </div>
+        <div class="introduction-wrapper">
+           <ul class="introduction-ul clearfix">
+          <li class="l"><a title="找回密码<" class="ellipsis" href="{$MODULE[2][linkurl]}send.php">找回密码</a></li>
+          <li class="l"><a title="找回用户名" class="ellipsis" href="{$MODULE[2][linkurl]}send.php">找回用户名</a></li>
+          <li class="l"><a title="店铺管理" class="ellipsis" href="{$MODULE[2][linkurl]}home.php">店铺管理</a></li>
+          <li class="l"><a title="装修店铺" class="ellipsis" href="{$MODULE[2][linkurl]}style.php">装修店铺</a></li>
+          <li class="l"><a title="发布信息" class="ellipsis" href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=5">发布信息</a></li>
+          <li class="l"><a title="充值服务" class="ellipsis" href="{$MODULE[2][linkurl]}charge.php?action=pay">充值服务</a></li>
+          <li class="l last"><a title="企业资料" class="ellipsis" href="{$MODULE[2][linkurl]}edit.php">企业资料</a></li>
+           </ul>
+        </div>
+  <!--功能快捷- E--> 
+  <!--在线咨询- S--> 
+        <div class="help-center-title">
+            <h2>帮助指南</h2>
+        </div>
+        <div class="operating-guide-wrapper">
+            <ul>
+        {loop $childcat $k $c}
+               <li class="l">
+              <div class="{if $k%3==2}operating-guide-li-wrapper-nomr {/if}operating-guide-li-wrapper">
+              <span class="r bianhao">{$k+1}</span>
+            <a href="{$MOD[linkurl]}{$c[linkurl]}" class="operations-guide-tab">{$c[catname]}</a>
+        <ul>
+      <!--{php $xhbq=tag("moduleid=$moduleid&catid=".$c[catid]."&length=30&condition=status=3&areaid=$cityid&order=".$MOD[order]."&pagesize=5&template=null");}-->
+       {loop $xhbq $k $t}
+        <li class="ellipsis"><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+       {/loop}          
+      <li class="ellipsis"><a class="operations-guide-li-more r" href="{$MOD[linkurl]}{$c[linkurl]}">查看更多&gt;</a></li>
+        </ul>
+             </div>
+            </li>
+          {/loop}
+           </ul>
+        </div>
+<!--在线咨询- S--> 
+ <div class="online-consulting">
+            <h2>在线咨询</h2>
+            <div class="consulting-box fl-clr">
+                <div class="consulting-block consulting-block1"> <span></span>
+                    <ul>
+                        <li>QQ咨询（极速）</li>
+                        <li class="btn_help">{if $DT[qq1]}<a href="//wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site=qq&amp;menu=yes" target="_blank">立即咨询</a>{else}暂无客服{/if}</li>
+                    </ul>
+                </div>
+                <div class="consulting-block consulting-block2"> <span></span>
+                    <ul>
+                        <li class="number">{$DT[telephone]}</li>
+                        <li class="time">（周一到周五9:00-18:00）</li>
+                    </ul>
+                </div>
+                <div class="consulting-block consulting-block3"> <span></span>
+                    <ul>
+                        <li>留言反馈</li>
+                        <li class="btn_help"><a href="{$EXT[guestbook_url]}">立即反馈</a></li>
+                    </ul>
+                </div>
+                <div class="border-small"></div>
+                <div class="border-small border-small1"></div>
+            </div>
+        </div>
+   <!--在线咨询- E-->  
+  <!--热门文档- S-->  
+        <div class="help-center-title tongji-class-title">
+           <h2>热门文档</h2>
+        </div>
+        <div class="tongji-class-wrapper">
+            <ul class="clearfix">
+    <!--{php $xhtag=tag("moduleid=$moduleid&length=30&condition=status=3&areaid=$cityid&order=".$MOD[order]."&showcat=1&pagesize=30&template=null");}-->
+       {loop $xhtag $k $t}
+        <li class="l ellipsis last"><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+       {/loop}
+            </ul>
+        </div>
+   <!--热门文档- E-->  
+    </div>
+</div>
+{template 'footer'}

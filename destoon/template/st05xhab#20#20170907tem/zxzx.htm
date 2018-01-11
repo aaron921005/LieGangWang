@@ -1,0 +1,45 @@
+<link href="{DT_SKIN}css/zxzx.css" rel="stylesheet" type="text/css" />
+<div class="zixun_content_min zixun_d_n" id="zixun_min" onclick="openzx();" style="display: block;"><img src="{DT_SKIN}images/zx_min.png"></div>
+<div class="zixun_content zixun_d_b" id="zixun_max" style="display: none;">
+    <div class="zixun">
+        <div class="zx_title">在线咨询<div class="zx_close"><a href="javascript:void(0);" rel="nofollow" onclick="closezx();"></a></div></div>
+        {if $DT[qq1]}
+        <div class="zixun_button1">
+            <a rel="nofollow" href="//wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq1]}&amp;site={$DT[qq1name]}&amp;menu=yes" target="_blank">采购助理</a>
+        </div>
+        {/if}
+        {if $DT[qq2]}
+        <div class="zixun_button1">
+            <a rel="nofollow" href="//wpa.qq.com/msgrd?v=3&amp;uin={$DT[qq2]}&amp;site={$DT[qq2name]}&amp;menu=yes" target="_blank">供货助理</a>
+        </div>
+        {/if}
+        <p><span>{$DT[telephone]}</span><br />（周一至周五 9:00-18:00）</p>
+    </div>
+    <div class="zx_ewm">
+    <img src="{DT_SKIN}images/footer_weixin.png" width="120" height="120">
+    <div class="zx_title zx_p14">模板网微信</div>
+</div>
+</div>
+<script type="text/javascript">
+    document.getElementById("callBtn").onclick = function () { 
+        lxb.call(document.getElementById("telInput"));
+    };
+$(document).ready(function(){
+    if($(window).width()<1400){
+        $("#zixun_max").css("display","none");
+        $("#zixun_min").css("display","block");
+    }else{
+        $("#zixun_max").css("display","block");
+        $("#zixun_min").css("display","none");
+    }
+});
+function closezx(){
+        $("#zixun_max").css("display","none");
+        $("#zixun_min").css("display","block");
+}
+function openzx(){
+        $("#zixun_max").css("display","block");
+        $("#zixun_min").css("display","none");
+}
+
+</script>

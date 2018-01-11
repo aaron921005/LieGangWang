@@ -1,0 +1,257 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}brand_index.css">
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}ppad_brand.css">
+<!--1p-->
+<div id="wrap_1">
+  <div id="banner">
+    <div class="imgs rel" id="focus">
+      <ul>
+      <li><a href="/." target="_blank"><img src="{DT_SKIN}images/aa/brand/banner1.jpg" width="815" height="388" alt=""></a></li>
+      <li><a href="/." target="_blank"><img src="{DT_SKIN}images/aa/brand/banner2.jpg" width="815" height="388" alt=""></a></li>
+      <li><a href="/." target="_blank"><img src="{DT_SKIN}images/aa/brand/banner3.jpg" width="815" height="388" alt=""></a></li>
+      </ul>
+      <i class="adicon"></i> </div>
+    <div class="tabs js-tab">
+    <div class="hd">
+      <ul class="tit">
+        <li class="on">推荐品牌</li>
+        <li class="">最新品牌</li>
+      </ul>
+      </div>
+       <div class="bd">
+      <div class="con">
+        <ul class="hot-brand-list"><!--推荐级别大于0-->
+        <!--{tag("moduleid=$moduleid&condition=status=3 and level>0&areaid=$cityid&pagesize=3&order=".$MOD[order]."&dir=xhtag&lazy=$lazy&template=thumb-indexbrand")}-->
+        </ul>
+      </div>
+      <div class="con">
+        <ul class="hot-brand-list">
+         <!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&pagesize=3&order=".$MOD[order]."&dir=xhtag&lazy=$lazy&template=thumb-indexbrandzx")}-->
+        </ul>
+      </div>
+</div>
+<script type="text/javascript">
+    jQuery(".js-tab").slide({});
+</script>
+      <div class="btn-wrap clf">
+      <!--会员在线状态 S-->
+        <div class="xh_dl">
+        <a href="{$MODULE[2][linkurl]}{$DT[file_login]}" class="sign-in" target="_blank">登录</a><a href="{$MODULE[2][linkurl]}{$DT[file_register]}" class="sign-up" target="_blank">注册</a>
+        </div>
+        <div class="xh_dl_2_no">
+        <a href="{$MODULE[2][linkurl]}" class="sign-in" target="_blank" rel="nofollow">商务中心</a><a href="{$MODULE[2][linkurl]}logout.php" class="sign-up" rel="nofollow">退出</a>
+        </div>
+        <!--会员在线状态 END-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--2p-->
+<div class="brand" id="lous">
+<div class="brand_title">
+   <h2>品牌推荐专区</h2>
+   <a id="changes" style="cursor:pointer;">换一批</a>
+</div>
+    <div class="brand_content">
+  <!--推荐级别1-->
+  <!--{tag("moduleid=$moduleid&length=20&condition=status=3 and level=1&areaid=$cityid&pagesize=32&order=addtime desc&dir=xhtag&lazy=$lazy&template=xiaohei-brandtj")}--> 
+        </div>
+        <div class="brand_content_line"></div>
+</div>
+<script>
+$(function(){
+var tit = $("#changes"),
+con = $(".brand_content>ul"),
+page = con.length,
+index = 0;
+if (page>=2) {
+tit.click(function(){
+if(index < (page-1)){
+index++;
+}else{
+index = 0;
+}
+con.eq(index).show(500).siblings().hide(500);
+});
+}
+});
+</script>
+<!--3p-楼层 S-->
+  {php $mid=$moduleid}
+  {php $child = get_maincat(0,$mid,1);}
+  {loop $child $i $c}
+  {php $kk=$i+1}
+  {php $catid=$c[catid]}
+{if $i < 5}
+<div class="m brand_3">
+<div class="plate-tle">
+  <h2><em>{$kk}F</em><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank">{$c[catname]}</a></h2>
+  <i class="hvr-buzz-out"><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank">更多&gt;</a></i>
+   <h3>
+   {if $c[child]}
+    {php $sub = get_maincat($c[catid], $mid, 1);}
+    {loop $sub $j $s}{if $j < 4}
+     <a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}" target="_blank" class="hvr-buzz-out">{set_style($s[catname], $s[style])}</a></li>
+      {/if}{/loop}
+    {/if}
+  </h3>
+ <div class="clearfix"></div>
+</div>
+<div class="plate-left">
+            <div class="plate-tle-right">
+                <h1>推荐品牌</h1>
+                <div class="clearfix"></div>
+            </div>
+            <div class="plate-left-pic">
+{if $kk==1} 
+      <a href="#" target="_blank">
+<img src="{DT_SKIN}images/aa/brand/lou_1.jpg" alt="莎斯莱思SASLAX">
+<div class="plate-left-text">
+<h1>莎斯莱思SASLAX</h1>
+<p>莎斯莱思SASLAX为都市中热衷于追求国际化、都市化精英形象的时尚年轻人提供休闲、年轻，高品味以及高品质的时尚服饰，将时尚男士高尚的品味无限释放，体现出男人雅致的生活态度。</p>
+</div>
+</a>
+      {elseif $kk==2}
+     <a href="#" target="_blank">
+<img src="{DT_SKIN}images/aa/brand/lou_2.jpg" alt="莎斯莱思SASLAX">
+<div class="plate-left-text">
+<h1>莎斯莱思SASLAX</h1>
+<p>莎斯莱思SASLAX为都市中热衷于追求国际化、都市化精英形象的时尚年轻人提供休闲、年轻，高品味以及高品质的时尚服饰，将时尚男士高尚的品味无限释放，体现出男人雅致的生活态度。</p>
+</div>
+</a>
+      {elseif $kk==3}
+      <a href="#" target="_blank">
+<img src="{DT_SKIN}images/aa/brand/lou_3.jpg" alt="莎斯莱思SASLAX">
+<div class="plate-left-text">
+<h1>莎斯莱思SASLAX</h1>
+<p>莎斯莱思SASLAX为都市中热衷于追求国际化、都市化精英形象的时尚年轻人提供休闲、年轻，高品味以及高品质的时尚服饰，将时尚男士高尚的品味无限释放，体现出男人雅致的生活态度。</p>
+</div>
+</a>
+      {elseif $kk==4}
+     <a href="#" target="_blank">
+<img src="{DT_SKIN}images/aa/brand/lou_4.jpg" alt="莎斯莱思SASLAX">
+<div class="plate-left-text">
+<h1>莎斯莱思SASLAX</h1>
+<p>莎斯莱思SASLAX为都市中热衷于追求国际化、都市化精英形象的时尚年轻人提供休闲、年轻，高品味以及高品质的时尚服饰，将时尚男士高尚的品味无限释放，体现出男人雅致的生活态度。</p>
+</div>
+</a>
+      {elseif $kk==5}
+    <a href="#" target="_blank">
+<img src="{DT_SKIN}images/aa/brand/lou_5.jpg" alt="莎斯莱思SASLAX">
+<div class="plate-left-text">
+<h1>莎斯莱思SASLAX</h1>
+<p>莎斯莱思SASLAX为都市中热衷于追求国际化、都市化精英形象的时尚年轻人提供休闲、年轻，高品味以及高品质的时尚服饰，将时尚男士高尚的品味无限释放，体现出男人雅致的生活态度。</p>
+</div>
+</a>
+      {else}
+      <a href="#" target="_blank">
+<img src="{DT_SKIN}images/aa/brand/lou_6.jpg" alt="莎斯莱思SASLAX">
+<div class="plate-left-text">
+<h1>莎斯莱思SASLAX</h1>
+<p>莎斯莱思SASLAX为都市中热衷于追求国际化、都市化精英形象的时尚年轻人提供休闲、年轻，高品味以及高品质的时尚服饰，将时尚男士高尚的品味无限释放，体现出男人雅致的生活态度。</p>
+</div>
+</a>
+      {/if}
+  </div>
+</div>
+<div class="plate-center">
+            <div class="hd">
+                <ul class="plate-center-nav">
+                    <li>最新品牌</li>
+                    <li class="on">活跃品牌</li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <div class="bd">
+   <ul class="plate-center-brand" style="display: none;">
+<!--{tag("moduleid=$moduleid&catid=$catid&condition=status=3 and thumb<>''&areaid=$cityid&pagesize=16&length=30&order=addtime desc&showcat=1&dir=xhtag&lazy=$lazy&template=list-brandindexlou")}--> 
+  </ul>
+   <ul class="plate-center-brand">
+<!--{tag("moduleid=$moduleid&catid=$catid&condition=status=3 and thumb<>''&areaid=$cityid&pagesize=16&length=30&order=vip desc,hits desc&showcat=1&dir=xhtag&lazy=$lazy&template=list-brandindexlou")}--> 
+  
+                </ul>
+            </div>
+</div>
+<div class="plate-right">
+            <div class="plate-tle-right">
+                <h1>品牌推荐</h1>
+                <i><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank">更多&gt;</a></i>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="busy-list">
+   <!--{tag("moduleid=$moduleid&catid=$catid&condition=status=3 and level>0&areaid=$cityid&pagesize=5&order=vip desc,addtime desc&dir=xhtag&template=list-brandindexlourtext")}-->
+            </ul>
+            <div class="plate-tle-right">
+                <h1>最新品牌</h1>
+                <i><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank">更多&gt;</a></i>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="news-list">
+<!--{tag("moduleid=$moduleid&catid=$catid&condition=status=3&areaid=$cityid&pagesize=5&order=vip desc,edittime desc&dir=xhtag&template=list-brandindexlourtext_2")}-->
+</ul>
+</div>
+</div>
+  {/if}
+  {/loop} 
+<!--3p END-->
+<!--4ping-->
+<div class="m com-cat margin-top-10">
+<h3>按行业找品牌</h3>
+ <div class="com-div">
+   <ul class="com-list">
+   {php $mid = $moduleid;}
+   {php $child = get_maincat(0, $mid, 1);}
+   {loop $child $i $c}
+  <li><a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}" rel="nofollow">{$c[catname]}</a></li>
+   {/loop}
+   </ul>
+ </div>
+</div>
+<!--5ping-->
+<div class="m com-cat margin-top-10">
+<h3>按地区找品牌</h3>
+ <div class="com-div">
+   <ul class="com-list">
+  {php $mainarea = get_mainarea(0)}
+  {loop $mainarea $k $v}
+  <li><a href="{$MOD[linkurl]}search.php?areaid={$v[areaid]}" title="{$v[areaname]}" rel="nofollow">{$v[areaname]}</a></li>
+   {/loop}
+   </ul>
+ </div>
+</div>
+<!--6p热销产品推荐开始-->
+<div class="m margin-top-10 hotproduct">
+<div class="hotproductT">
+<h2>热销产品推荐</h2>
+<a class="hotproductT_Ar prev"></a>
+<a class="hotproductT_Al next"></a>
+</div>
+<div class="hotproductC">
+<ul>
+  <!--{tag("moduleid=5&length=36&condition=status=3 and level>0 and thumb<>''&areaid=$cityid&pagesize=15&order=hits desc,vip desc,addtime desc&width=180&height=180&cols=5&target=_blank&lazy=$lazy&dir=xhtag&template=xh-thumb-table")}--> 
+  </ul>
+</div>
+</div>
+<script type="text/javascript">
+jQuery(".hotproduct").slide({titCell:".hotproductT ul",mainCell:".hotproductC ul",autoPage:true,effect:"left",autoPlay:true,vis:6,easing:"easeOutCirc",delayTime:700,trigger:"click"});
+</script>
+<!---热销产品推荐结束-->
+<!--1P-TAG 切换--> 
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+  $(".tabs>ul.tit>li").click(function(){
+$(".tabs>ul.tit>li").removeClass('cur').eq($(this).index()).addClass('cur');
+$(".tabs>.con").hide().eq($(this).index()).show();
+  });
+  $(".f_shop>.tit>ul>li").click(function(){
+$(".f_shop>.tit>ul>li").removeClass('cur').eq($(this).index()).addClass('cur');
+$(".f_shop>.con").hide().eq($(this).index()).show();
+  });
+});
+-->
+</script> 
+<script type="text/javascript">
+jQuery(".plate-center").slide({trigger:"mouseover"});
+</script> 
+{template 'footer'}

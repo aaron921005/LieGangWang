@@ -1,0 +1,6 @@
+{loop $tags $k $t}
+<li class="{if $k < 3}hots{/if}{if $k==0} news-active{/if}"><em class="news-num">{$k+1}</em><a title="{$t[alt]}" href="{$t[linkurl]}" class="font14 news-text" target="_blank">{$t[title]}</a>
+<div class="news-w1">{dsubstr($t[introduce], 60, '…')}</div>
+<div class="news-w2"> <span>{timetodate($t[addtime], 5)}</span> </div>
+</li>
+{/loop}

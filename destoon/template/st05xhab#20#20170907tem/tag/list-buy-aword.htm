@@ -1,0 +1,64 @@
+<div class="newPurchaseList">
+{loop $tags $k $t}
+<li id="item_{$t[itemid]}">
+<i class="pictj3"></i>
+  <dl>
+    <dt>
+      <div class="companyInfo">
+        <p class="g-d-n">
+            <span class="leftName">地区：</span>
+            <span>{area_pos($t[areaid], '-', 2)}</span>
+          </p>
+          <p class="g-d-n">
+            <span class="leftName">行业：</span>
+            <span>{cat_name($t[catid])}</span>
+          </p>
+          <p class="g-d-n">
+            <span class="leftName">公司：</span>
+            <span class="g-d-n-2">{t_companyname($t[company])}</span>
+          </p>
+          {if !$t[username]}
+          <p class="g-d-n">
+            <span class="leftName"> 提示：</span>
+            <span class="red">未注册</span>
+          </p>
+          {/if}
+      </div>
+    </dt>
+   <dt class="biaojia">
+       <div class="bjBox">
+       <p>{if $t[totime]}{if $t[totime] > $DT_TIME}还剩 <strong class="red">{dtime($t[totime])}</strong> 天{else}<strong class="red">已结束</strong>{/if}{else}长期有效{/if}</p>
+       <p>已有<span>{$t[pricenums]}</span>家报价</p>
+       <p>
+     {if $t[totime]}{if $t[totime] > $DT_TIME}
+     <a class="org_fie" href="{$t[linkurl]}" target="_blank">立即报价</a>
+     {else}
+     <a class="not_fie" href="javascript:;">采购结束</a>
+     {/if}{else}
+     <a class="org_fie" href="{$t[linkurl]}" target="_blank">立即报价</a>
+     {/if}
+       </p> 
+       </div> 
+    </dt>
+    <dd>
+      <div class="pur-hd">
+        <h3>{if $t[vip]}<img src="{DT_SKIN}image/vip_{$t[vip]}.gif" alt="{VIP}" title="{VIP}:{$t[vip]}级"/> {/if}<a href="{$t[linkurl]}" target="_blank">{$t[title]}</a></h3>
+        </div>
+      <div class="pur-Main">
+        <div class="imgs "> <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" class=""> <img src="{imgurl($t[thumb])}"  width="120" height="90" alt="{$t[alt]}" onmouseover="img_tip(this, this.src);" onmouseout="img_tip(this, '');" onerror="this.src='{DT_SKIN}image/sx_nopic120_90.png'"/></a> </div>
+        <div class="purInfo">
+          <div class="pur-box">
+            <div class="titlenew">
+              <div>采购时间：</div>
+            </div>
+            <div class="listnew"><span>{timetodate($t[edittime], $datetype)} ~ {if $t[totime]}{timetodate($t[totime], $datetype)}{else}长期有效{/if}{if $t[totime]}{if $t[totime] < $DT_TIME}<i class="f_red">[已结束]</i>{/if}{else}{/if}</span></div>
+          </div>
+          <span class="int">简介：{$t[introduce]}</span>
+           </div>
+         </div>
+    </dd>
+  </dl>
+</li>
+{/loop}
+  </div>
+{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}

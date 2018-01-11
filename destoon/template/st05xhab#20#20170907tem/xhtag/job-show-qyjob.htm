@@ -1,0 +1,26 @@
+{loop $tags $i $t}
+ <ul class="conl-enter active">
+    <li>
+    <p class="conl-enter-p1 fl active">
+     <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a>
+      {if $t[level]>0}<img src="{DT_SKIN}images/job/jobdetail_63.png">{/if}
+      <span class="conl-enter-p1-span">[{area_pos($t[areaid], '', 1)}]</span>
+    </p>
+      <span class="conl-enter-p1-span2 fr">最新时间：{timetodate($t[edittime], 3)}</span>
+     <div class="clearfix"></div>
+      </li>
+     <li>
+      <span class="conl-enter-span1">{if $t[minsalary] && $t[maxsalary]}
+			{$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+		{elseif $t[minsalary]}
+			{$t[minsalary]}{$DT[money_unit]}/月以上
+		{elseif $t[maxsalary]}
+			{$t[maxsalary]}{$DT[money_unit]}/月以内
+		{else}
+			面议
+		{/if}</span>
+      <span class="conl-enter-span">经验：{if $t[experience]}{$t[experience]}年以上{else}不限工作经验{/if}</span>
+     {if $EDUCATION[$t[education]]} <span class="conl-enter-span">学历：{$EDUCATION[$t[education]]}</span>{/if}
+     </li>
+ </ul>
+{/loop}

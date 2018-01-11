@@ -1,0 +1,21 @@
+{loop $tags $i $t}
+ <div class="item_2{if $i%4==3} no_mr{/if}">
+      <div class="article-img"> <a href="{$t[linkurl]}" target="_blank"> <img src="{if $t[thumb]}{$t[thumb]}{else}{DT_SKIN}images/job/man.png{/if}" width="150" height="150" alt=""> </a></div>
+      <div class="poster clearfix">
+        <div class="inform">
+          <p><a href="{$t[linkurl]}" class="poster-name" target="_blank">{$t[truename]}</a><span class="pos">({if $t[gender]==1}男{else}女{/if})</span></p>
+          <p><span>意向行业</span> <i>·</i> <span>{$t[catname]}</span> </p>
+        </div>
+      </div>
+      <p class="item-title"><i>要求工薪：</i>{if $t[minsalary] && $t[maxsalary]}
+			{$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+		{elseif $t[minsalary]}
+			{$t[minsalary]}{$DT[money_unit]}/月以上
+		{elseif $t[maxsalary]}
+			{$t[maxsalary]}{$DT[money_unit]}/月以内
+		{else}
+			面议
+		{/if}</p>
+      <div class="ft"><span class="from-bbs">意向地区： {area_pos($t[areaid], '', 1)} </span> </div>
+ </div>
+{/loop}

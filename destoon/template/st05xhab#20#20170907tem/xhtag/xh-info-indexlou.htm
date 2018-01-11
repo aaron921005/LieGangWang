@@ -1,0 +1,16 @@
+{loop $tags $i $v}
+<li class="list_info {if $i%3==2}no_mr{/if}">
+ <div class="pic"><p class="product0"><a href="{$v[linkurl]}" target="_blank"><img src="{str_replace('thumb', 'middle', $v[thumb])}" alt="{$v[alt]}" title="{$v[alt]}" style="display: inline; opacity: 1;"></a></p><em></em><strong><a href="{userurl($v[username])}" title="{$v[alt]}" target="_blank">{$v[company]}</a></strong><span><a href="javascript:SendFav2017('{$v[linkurl]}','{$v[alt]}');">收藏商机</a></span>
+ </div>
+<div class="text"><strong><a href="{$v[linkurl]}" title="{$v[alt]}" target="_blank">{$v[title]}</a></strong>
+  <span class="share">
+   <dl class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1498662412770">
+    <dd><a href="{$v[linkurl]}" title="{$v[alt]}" class="sr1" data-cmd="weixin" data-id="{$v[linkurl]}">微信好友</a></dd>
+    <dd><a href="{$v[linkurl]}" title="{$v[alt]}" class="sr2" data-cmd="sqq" data-id="{$v[linkurl]}">QQ好友</a></dd>
+    <dd><a href="{$v[linkurl]}" title="{$v[alt]}" class="sr3" data-cmd="qzone" data-id="{$v[linkurl]}">QQ空间</a></dd>
+    <dd><a href="{$v[linkurl]}" title="{$v[alt]}" class="sr4" data-cmd="tsina" data-id="{$v[linkurl]}">新浪微博</a></dd>
+   </dl>
+  </span>
+</div>
+</li>
+{/loop}

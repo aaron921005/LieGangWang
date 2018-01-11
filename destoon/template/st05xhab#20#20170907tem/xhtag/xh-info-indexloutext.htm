@@ -1,0 +1,8 @@
+{loop $tags $i $t}
+<li class="x_info{if $i%4==3} no_mr{/if}">
+<i></i>
+<a title="{$t[alt]}" target="_blank" href="{$t[linkurl]}">
+<p class="p_1">{$t[title]}</p>
+<p class="p_2">{$t[company]}</p>
+</a></li>
+{/loop}

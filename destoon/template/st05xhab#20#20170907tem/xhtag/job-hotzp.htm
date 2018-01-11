@@ -1,0 +1,26 @@
+{loop $tags $i $t}
+<li data-url="{$t[linkurl]}">
+{if $t[level]>0}<em class="addIcon stick"></em>{/if}
+{php $uinfo = userinfo($t[username]);}
+{php $MOD = cache_read('module-9.php');}
+{php $EDUCATION = explode('|', trim($MOD['education']));}
+          <div class="logo"> <a href="{userurl($t[username])}" target="_blank"><img src="{imgurl($uinfo[thumb], 100)}" alt=""></a> </div>
+          <div class="boxCenter">
+            <p> <a href="{$t[linkurl]}" class="jobName" target="_blank">{$t[title]}</a><span class="jobType post-lt"><a href="{$t[caturl]}" target="_blank">{$t[catname]}</a></span> <span class="time">{timetodate($t[addtime], 5)} 发布</span> {if $t[level]>0}<span class="fast"></span>{/if}{if $i<3}<a class="uped"></a> {/if}</p>
+            <p> <span class="money">
+            {if $t[minsalary] && $t[maxsalary]}
+			{$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+		{elseif $t[minsalary]}
+			{$t[minsalary]}{$DT[money_unit]}/月以上
+		{elseif $t[maxsalary]}
+			{$t[maxsalary]}{$DT[money_unit]}/月以内
+		{else}
+			面议
+		{/if}</span><em>|</em> <span class="ads">{area_pos($t[areaid], '', 1)}</span><em>|</em> <span class="suffer">{if $t[experience]}{$t[experience]}年以上{else}不限工作经验{/if}</span><em>|</em> <span class="edu">学历：{$EDUCATION[$t[education]]}</span> </p>
+          </div>
+          <div class="companyMsg">
+            <p> <a href="{userurl($t[username])}" target="_blank" class="companyName">{$t[company]}</a>{if $uinfo[vip]} <span class="c"></span>{/if} </p>
+            <p> <span class="type_job">{dsubstr($uinfo[business], 20, '…')}</span>{if $uinfo[size]}<em>|</em> <span class="personNum">{$uinfo[size]}</span> {/if}</p>
+          </div>
+        </li>
+{/loop}

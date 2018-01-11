@@ -1,0 +1,151 @@
+/* 
+WAP-V1.0  xiaohei b2b.bjlsjp.cn QQ::290948585  
+*/
+.tb tr{height: 40px;border-bottom: 1px #ffffff solid;}
+.tr{padding-left:10px;line-height: 20px;height: 40px;padding-right: 5px;}
+.table-text{color: #5f5f5f; height: 24px;line-height: 24px;border: 1px solid #dedede;text-align: left;padding-left: 3px;margin-right: 5px;width: 180px;}
+.table-input{width:300px;}
+.table-height, input, select{height:30px;}
+input,textarea{border: 1px solid #dedede;border-radius:4px;vertical-align: middle;padding-left:3px;}
+.mt10{margin-top:10px}
+.ke-dialog-default{left:6px!important;width:96% !important;}
+
+/* 20161125新加样式*/
+/*.f_gray {color: green;}*/
+.red {color: #F00}
+.ke-container{width:280px !important;}
+
+/*标题提示*/
+.biaoti{margin:10px 0;border:solid 1px #ddd;line-height:25px;padding:2px 10px;}
+.biaoti h3{color:#ff2726 !important;font-size:14px;float: left;}
+
+/*发布提示*/
+.ts{width:894px;border: 1px solid #ddd;padding:10px 15px;margin-bottom:10px;}
+.ts h3{font-size: 14px;font-weight: bold;color:#ff2726;}
+.ts p{font-size:12px;line-height:25px;margin-left: 25px;color: green;}
+.ts p a{color:#dd2726;}
+
+/*详情提示*/
+.xiangxi{border:solid 1px #ddd;margin-bottom:10px;padding:10px;}
+.xiangxi li{line-height:25px;}
+.xiangxi li strong{padding-bottom: 15px;color:#FF0000!important;font-size: 14px;}
+
+/*上传图片提示*/
+.basisinfo4{margin:3px 0 5px 0;}
+.basisinfo4 p span{font-size: 14px;}
+.basisinfo4 p{line-height:25px; }
+.basisinfo4 p strong{font-weight:500}
+
+/*交易条件提示*/
+.u0{border:solid 1px #ddd; padding:5px 15px;color:#dd2726;font-size:14px}
+.u0 span{padding-left:5px;font-size:12px}
+
+/*评分*/
+.sell_pf{border:1px #e2e2e2 solid;background-color:#f0f5fb;margin-top:10px;margin-bottom:10px;}
+.sell_pf_top{height:34px;border-bottom:1px #e2e2e2 solid;float:left;padding-left: 15px;width: 96%;}
+.sell_pf_top span{line-height:34px;color:#dd2726;font-size:18px;}
+.sell_pf_top a,.sell_pf_top b{color: #F44336;line-height:34px;padding-right:25px;}
+.sell_pf_top font{white-space:nowrap;height:34px;line-height:34px;margin:0px;text-indent:20px;-padding-left:20px;}
+.sell_pf_content{padding:10px 20px;float:left;width: 88%;}
+.sell_pf_content h3{margin:0px;display:block;width:50px;float:left;height:30px;line-height:26px;font-weight:normal;font-style:normal;font-size: 16px;color: #ff2726;}
+.sell_pf_content ul{display:block;float:left;width: 83%;}
+.sell_pf_content ul li{display:block;height:26px;}
+.sell_pf_content ul li p{height:26px;float:left;line-height:26px;margin:0px;}
+.sell_pf_content ul li p span{color:#7B7B7B;padding-left:4px;}
+.sell_pf_content ul li a{display:block;height:26px;float: right;line-height:26px;color:#0B5FBB;}
+.sell_pf_content ul li a:hover{ text-decoration:underline;}
+
+
+/*各各提示*/
+.gtsi{}
+.gtsi strong{font-size: 14px;color: #ff2726;height: 28px;line-height: 28px;}
+
+/*置顶*/
+.scroll-to-fixed-fixed{background-color: #fff;}
+
+/*左侧VIP介绍*/
+.zixun{border:solid 1px #ddd;margin-top:15px;background: #fcfcfc;}
+.zixun strong{font-size:16px;height:35px;line-height:35px;padding:10px;font-weight:500;}
+.zixun ul{padding:10px 20px;color:#999;border-top:solid 1px #ddd;}
+.zixun li{height:28px;line-height:28px;}
+.zixun .shengji{background-color:#dd2726;padding:6px;text-align: center;margin:10px;font-size:14px}
+.zixun .shengji a{color:#fff;}
+.dianhua{padding-bottom:10px}
+.dianhua p.dianhua_1{padding:5px 20px;font-size: 14px;color: #666;}
+
+/*20161206xiaohei*/
+/* 上传图片*/
+.tu{color:#fff;}
+.tu .tu-1{margin-top:10px;background-color:#ff7300;width:80px;padding:3px; border-radius:3px;    color: #fff;}
+.tu .tu-2{margin-top:5px;background-color:#666;margin-bottom:5px;width:80px;padding:3px; border-radius:3px;text-align:center;    color: #fff;}
+
+/*管理*/
+.list-bian{width:97%!important;height:113px !important;overflow-x: scroll; padding: 0 5px;}
+.list-bian .thumb{margin:15px 0px 15px 5px;width:70px !important;height: 70px!important;}
+.list-bian ul{margin-left:5px;padding: 10px 0;}
+
+.list-bian-10{width:97%!important;height:121px !important;overflow-x: scroll; padding: 0 5px;}
+.list-bian-10 .thumb{margin:15px 0px 15px 5px;width:70px !important;height: 70px!important;}
+.list-bian-10 ul{margin-left:5px;padding: 10px 0;}
+
+.list-bian-txt{width:97%!important;height: 102px!important;overflow-x: scroll; padding: 0 5px;}
+.list-bian-txt .thumb{margin:15px 0px 15px 5px;width:70px !important;height: 70px!important;}
+.list-bian-txt ul{margin-left:5px;padding:10px 0px;}
+
+.list-bian-txt2{width:97%!important;height: 70px!important;overflow-x: scroll; padding: 0 5px;}
+.list-bian-txt2 .thumb{margin:15px 0px 15px 5px;width:60px !important;height: 60px!important;}
+.list-bian-txt2 ul{margin-left:5px;padding:10px 0px;}
+
+.list-bian-txt3{width:97%!important;height: 82px!important;overflow-x: scroll; padding: 0 5px;}
+.list-bian-txt3 .thumb{margin:15px 0px 15px 5px;width:60px !important;height: 60px!important;}
+.list-bian-txt3 ul{margin-left:5px;padding:10px 0px;}
+
+
+.list-bian-140{width:98%!important;padding: 5px 5px 0 5px;}
+.list-bian-140 ul{margin-left:5px;padding: 10px 0;}
+.list-bian-140 ul li{height:35px;line-height:35px}
+.list-bian-140 .bianji-1-1{width: 48%;}
+
+
+.bianji{color:#666}
+.bianji-0 a{color:#333 !important;}
+.bianji-1{color:#666}
+.bianji-1 a{font-weight:600}
+.bianji-1-1{width: 168px;float: left;}
+
+.guanli{width:185px;}
+.guanli li{float:left;padding: 5px 10px;margin-left: 5px; border-radius:3px;}
+.guanli li.guanli-1{background: #3f8dd4;border: 1px solid #3f8dd4;padding: 5px 15px;color:#fff;}
+.guanli li.guanli-2{background: #ff7300;border-color: #ff7300;border: 1px solid #ff7300;border-radius:3px;color:#fff;}
+.guanli li.guanli-3{background: #666;border-color: #666;border: 1px solid #666;border-radius:3px;color:#fff;}
+.guanli li.guanli-4{background: #9C27B0;border-color: #9C27B0;border: 1px solid #9C27B0;border-radius:3px;color:#fff;}
+.guanli li.guanli-1 a,.guanli li.guanli-2 a,.guanli li.guanli-3 a,.guanli li.guanli-4 a{color:#fff;font-size:14px; }
+
+.guanli-txt{width:135px;}
+.guanli-txt li{float:left;padding: 5px 10px;margin-left: 5px; border-radius:3px;color:#fff;}
+.guanli-txt li.guanli-1{background: #3f8dd4;border: 1px solid #3f8dd4;padding: 5px 15px;color:#fff;}
+.guanli-txt li.guanli-2{background: #ff7300;border-color: #ff7300;border: 1px solid #ff7300;border-radius:3px;color:#fff;}
+.guanli-txt li.guanli-3{background: #666;border-color: #666;border: 1px solid #666;border-radius:3px;color:#fff;}
+.guanli-txt li.guanli-4{background: #9C27B0;border-color: #9C27B0;border: 1px solid #9C27B0;border-radius:3px;color:#fff;}
+.guanli-txt li.guanli-1 a,.guanli-txt li.guanli-2 a,.guanli-txt li.guanli-3 a,.guanli-txt li.guanli-4 a{color:#fff;font-size:14px; }
+
+.guanli-txt-1{width:80px;}
+.guanli-txt-1 li{float:left;padding: 5px 10px;margin-left: 5px; border-radius:3px;color:#fff;}
+.guanli-txt-1 li.guanli-1{background: #3f8dd4;border: 1px solid #3f8dd4;padding: 5px 15px;color:#fff;}
+.guanli-txt-1 li.guanli-2{background: #ff7300;border-color: #ff7300;border: 1px solid #ff7300;border-radius:3px;color:#fff;}
+.guanli-txt-1 li.guanli-3{background: #666;border-color: #666;border: 1px solid #666;border-radius:3px;color:#fff;}
+.guanli-txt-1 li.guanli-4{background: #9C27B0;border-color: #9C27B0;border: 1px solid #9C27B0;border-radius:3px;color:#fff;}
+.guanli-txt-1 li.guanli-1 a,.guanli-txt-1 li.guanli-2 a,.guanli-txt-1 li.guanli-3 a,.guanli-txt-1 li.guanli-4 a{color:#fff;font-size:14px; }
+
+.guanli_225{width:235px;}
+.guanli_225 li{float:left;padding: 5px 10px;margin-left: 5px; border-radius:3px;color:#fff;}
+.guanli_225 li.guanli-1{background: #3f8dd4;border: 1px solid #3f8dd4;padding: 5px 15px;color:#fff;}
+.guanli_225 li.guanli-2{background: #ff7300;border-color: #ff7300;border: 1px solid #ff7300;border-radius:3px;color:#fff;}
+.guanli_225 li.guanli-3{background: #666;border-color: #666;border: 1px solid #666;border-radius:3px;color:#fff;}
+.guanli_225 li.guanli-4{background: #9C27B0;border-color: #9C27B0;border: 1px solid #9C27B0;border-radius:3px;color:#fff;}
+.guanli_225 li.guanli-1 a,.guanli_225 li.guanli-2 a,.guanli_225 li.guanli-3 a,.guanli_225 li.guanli-4 a{color:#fff;font-size:14px; }
+/*商友*/
+.t-0{background-color: #607D8B;padding:3px 10px;}
+.t-1{background-color: #2196F3;padding:3px 10px;}
+.t-2{background-color:#333;padding:3px 10px}
+.t-0,.t-1,.t-2{color:#fff;border-radius: 3px;}

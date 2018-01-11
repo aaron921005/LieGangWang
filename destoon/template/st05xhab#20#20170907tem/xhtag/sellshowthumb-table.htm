@@ -1,0 +1,9 @@
+{loop $tags $i $t}
+ <li>
+ <div class="img">
+ <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"></a>
+</div>
+  <p class="jg">{if $t[unit] && $t[price]>0} {$DT[money_sign]}<span>{$t[price]}</span>/{$t[unit]}{else} 面议{/if}</p>
+  <p class="wz"> <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></p>
+</li>
+{/loop}

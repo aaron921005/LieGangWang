@@ -1,0 +1,12 @@
+{loop $tags $i $t} 
+<a href="{$t[linkurl]}" target="_blank" class="a-block f-hot-a">
+<div class="img-wrap-hot"> <img src="{imgurl($t[thumb], 1)}" alt="{$t[company]}" onerror="this.src='{DT_SKIN}image/sx_nopic197_157.png'"> </div>
+<div class="mod-brand">
+  <div class="img-wrap">
+    <div class="img-box"> <img src="{if $t[comlogo]}{$t[comlogo]}{else}{DT_SKIN}images/company/no_comlogo.png{/if}" alt="{$t[company]}"> </div>
+  </div>
+  <p class="name">{$t[company]}</p>
+</div>
+<i class="i-hot"></i>
+</a>
+{/loop}

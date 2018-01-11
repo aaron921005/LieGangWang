@@ -1,0 +1,127 @@
+{template 'header-job'}
+<div class="m">
+  <div class="nav_show">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; 求职简历</div>
+</div>
+<div class="m">
+  <div id="wrap">
+  <div class="fl">
+    <div class="left-main">
+      <div class="personal-info">
+        <div class="personal-pic fl">{if $thumb}<img src="{$thumb}">{else}<img src="{DT_SKIN}images/job/bman.png" style="margin-top: 0;"> {/if}</div>
+        <div class="info-text fl">
+          <h2><i id="title">{$truename}</i><span>({if $gender == 1}男{else}女{/if})</span></h2>
+          <div class="resume-time">投递时间：{$adddate}</div>
+      {php $uinfo = userinfo($username);}
+          <div class="resonal-auth">
+          {if $uinfo[vmobile]}
+            <div class="auth-item phone fl">手机已认证</div>
+          {/if}
+          {if $uinfo[vemail]}
+          <div class="auth-item email f-left">邮箱已认证</div>
+          {/if}
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="info-detail">
+            <p> <span>最高学历：{$EDUCATION[$education]}</span>&nbsp;|&nbsp; <span>工作经验：{if $experience}{$experience}年{else}无{/if}</span> &nbsp;|&nbsp;<span>专业：{$skill}</span> </p>
+            <p> <span>婚姻状况：{if $marriage == 2}已婚{else}未婚{/if}</span> </p>
+            <p> <span>现居住地：{area_pos($areaid, '')}</span></p>
+            <p><span>求职状态：{$SITUATION[$situation]}</span></p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="job-item mt20">
+        <h3>求职情况</h3>
+        <div class="percent"> <i class="right-top-angle"></i>
+          <div class="percent-block fl">
+            <div class="percent-star fl star-{$level}">推荐度：</div>
+            <div class="star-state fl">
+              <p><span>{$editdate}</span>更新</p>
+              <p>共投简历 <span>{php echo $db->count($DT_PRE.'resume', 'status=3 and open =3 and username="'.$username.'"', 1800);}</span> 份</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="percent-block last fl">
+            <div class="percent-star fl star-1" style="background: 0;padding-right: 10px;">企业关注度：</div>
+            <div class="star-state fl">
+              <p>简历被浏览 <span>{$hits}</span> 次</p>
+              <p>简历被收藏 <span>{xh_favorite($title)}</span> 次</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-box">
+          <div class="contact-box">
+            <input type="button" value="查看联系方式" class="contact-btn download" onclick="show();return false;">
+          </div>
+          <div class="yclx" id="resume_contact" style="display:none">
+          {template 'content', 'chip'}
+          </div>
+        </div>
+        <script>
+    function show() {
+        if (document.getElementById('resume_contact').style.display == 'block')
+            document.getElementById('resume_contact').style.display = 'none';
+        else
+            document.getElementById('resume_contact').style.display = 'block'
+    }
+</script>
+      </div>
+      <div class="resume-title icon1">其他介绍</div>
+      <div class="resume-block-detail">
+        <div class="rb-content">生&nbsp;&nbsp;日：{$birthday}<span>|</span>身&nbsp;&nbsp;高：{$height} cm</div>
+        <div class="rb-content">体&nbsp;&nbsp;重：{$weight} kg<span>|</span>工作性质：{$TYPE[$type]}</div>
+        <div class="rb-content">毕业院校：{$school}<span>|</span>工作经验：{if $experience}{$experience}年{else}无{/if}</div>
+        <div class="rb-content">行业意向：{$CATEGORY[$parentid][catname]}<span>|</span>职位意向：{$CATEGORY[$catid][catname]}</div>
+        <div class="rb-content">语言水平：{$language}</div>
+        <div class="rb-content">期望薪资：{if $minsalary && $maxsalary}
+    {$minsalary}-{$maxsalary}{$DT[money_unit]}/月
+  {elseif $minsalary}
+    {$minsalary}{$DT[money_unit]}/月以上
+  {elseif $maxsalary}
+    {$maxsalary}{$DT[money_unit]}/月以内
+  {else}
+    面议
+  {/if}</div>
+      </div>
+
+    <div class="resume-title icon1">自我鉴定</div>
+    <div class="resume-block-detail">
+    <div class="rb-content-div">
+    {$content}
+    </div>
+    </div>
+    </div>
+<div class="clearfix"></div>
+<div class="smbq mt20">
+<center class="f_red px14">
+  免责声明：以上信息由个人自行提供，内容的真实性、准确性和合法性由发布个人负责，本站对此不承担任何责任。
+  </center>
+</div>
+
+</div>
+    <div class="fix-control fr">
+    <div class="arx_list_info">
+      <div class="fix-wrap">
+        <div class="code-box"><img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}" alt="二维码" width="97" height="97"></div>
+        <div class="download"> <a href="javascript:;" class="download-btn">扫扫手机看</a> </div>
+        <div class="ctrl-text"></div>
+        <div class="ctrl-bar">
+        <a href="javascript:Go('{rewrite('talent.php?itemid='.$itemid)}');" class="resume-ctrl add_resume_pool add_resume_pool">加入人才库</a>
+        <a href="javascript:window.open('{rewrite('resume.php?print=1&itemid='.$itemid)}');void(0);" class="resume-ctrl">简历打印</a>
+        <a href="javascript:SendFav();" class="resume-ctrl">加入收藏</a>
+        <a href="javascript:SendPage();" class="resume-ctrl report_button">告诉好友</a>
+        <a href="javascript:SendReport();" class="resume-ctrl report_button" >违规举报</a> </div>
+      </div>
+      </div>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div id="hotproduct">&nbsp;</div>
+{template 'footer'}

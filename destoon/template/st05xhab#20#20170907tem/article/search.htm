@@ -1,0 +1,78 @@
+{template 'header-news'} 
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script> 
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}article-list.css">
+<!--面包屑-->
+<div class="container-fuild margin-top-20">
+  <div class="container">
+    <ul class="news-news-breadcrumb2">
+      <li class="font14">当前位置： &gt; </li><li><a href="{$MODULE[1][linkurl]}">{$DT[sitename]}</a> &gt; </li><li><a href="{$MOD[linkurl]}">{$MOD[name]}</a> &gt; </li><li>{if $kw}正在搜索: {$kw}{else}{$level}星推荐资讯{/if}</li>
+    </ul>
+  </div>
+</div>
+<!--正文-->
+<div class="container news-news-show">
+  <div class="mod-header">
+    <h2 class="w1-ico inline-block">{if $kw}<span class="f_red">{$kw}</span>相关的搜索结果{else}{$level}星推荐资讯{/if}</h2>
+    <div class="findGoodsNum"><em>找到</em><i>{$items}</i><em>条</em></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 news-col-xs-8-700">
+      <div class="news-grid-news-list">
+      {if $tags}
+		{template 'list-news', 'xhtag'}
+		{else}
+		{template 'noresult', 'message'}
+		{/if}
+      </div>
+
+      <div class="news-page-con text-center hide">
+        <div class="pagination"><div class="pagebar_quotes">{if $showpage && $pages}<div class="pages">{$pages}</div>{/if}</div></div>
+           </div>
+    </div>
+    <div class="col-xs-4 news-col-xs-4-320">
+      <div class="news-column-right news-column-login">
+        <ul class="news-ul-login" id="news_login"></ul>
+      </div>
+      <div class="news-news-ad2 rel">
+       <a href="#" target="_blank"><img alt="" src="{DT_SKIN}images/aa/news/a1.jpg"></a>
+       <i class="adicon"></i>
+      </div>
+      <div class="news-column-right">
+        <h4 class="news-tit-font18 margin-top-20"> 今日头条</h4>
+        <ul class="news-ul-24hotnew news-ul-hotnew">
+         <!--{tag("moduleid=$moduleid&length=34&condition=status=3 and level=5&areaid=$cityid&order=".$MOD[order]."&pagesize=10&target=_blank&dir=xhtag&template=list-newshots")}-->
+        </ul>
+      </div>
+      <!--标签-->
+      <div class="biaoqian arx_list_info"">
+       <h4 class="news-tit-font18 margin-top-10">热门标签</h4>
+       <ul class="news-ul-24hotnew news-ul-wordnew">
+       <!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3&pagesize=20&order=total_search desc&dir=xhtag&template=list-newssearch_kw")}-->
+        </ul>
+      </div>
+      <div style="padding-left:10px;"> </div>
+   </div>
+  </div>
+  <div class="news_cat" id="hotproduct">
+  <h3>按行业找资讯</h3>
+ <div class="com-div">
+   <ul class="com-list">
+   {php $mid = $moduleid;}
+   {php $child = get_maincat(0, $mid, 1);}
+   {loop $child $i $c}
+  <li><a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}">{$c[catname]}</a></li>
+   {/loop}
+   </ul>
+ </div>
+   </div>
+
+</div>
+<script>
+  $(function(){
+      $('.news-ul-hotnew > li').mouseenter(function(){
+      $('.news-ul-hotnew > li').removeClass('news-active');
+      $(this).addClass('news-active');
+    });
+   });
+</script> 
+{template 'footer'}

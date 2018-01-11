@@ -1,0 +1,191 @@
+{template 'header', $module}
+<link rel="stylesheet" type="text/css" href="{DT_STATIC}{$MODULE[2][moduledir]}/image/index.css"/>
+<div id="warn"> {if $_groupid == 4}
+  <div class="warn">尊敬的会员，您的帐号<span class="f_red">正在审核中..</span>，本站部分功能和服务可能受到一定的使用限制，{if $MOD[checkuser]==2}<a href="send.php?action=check" class="l">请点这里验证您的邮箱</a>，系统将自动审核{else}请稍候，等待网站审核<br/>
+    完善的商业信息有助于获得别人的信任，结交潜在的商业伙伴，获取商业机会，增加系统审核通过的概率&nbsp;&nbsp;<a href="edit.php?tab=2" class="t">现在就去完善&raquo;</a>{/if}</div>
+  {/if}
+  {if $_groupid > 5 && !$_edittime}
+  <div class="warn">贵公司尚未完善详细资料！完善的商业信息有助于获得别人的信任，结交潜在的商业伙伴，获取商业机会&nbsp;&nbsp;<a href="edit.php?tab=2" class="t">现在就去完善&raquo;</a></div>
+  {/if}
+  {if $vip && $havedays < 30 && $havedays > 0}
+  <div class="warn">尊敬的{$MG[groupname]}，您的{VIP}服务将在 <strong class="f_red">{$havedays}</strong> 天后到期，为了不影响您的正常使用，请您尽快续费&nbsp;&nbsp;<a href="vip.php?action=renew" class="t">立即续费&raquo;</a></div>
+  {/if} </div>
+<div class="iuser account-info">
+  <div class="text-box-main min-width-300 fl">
+    <dl>
+      <dt class="padding-big-left lists-border-list clearfix">
+        <div class="title fl padding-big-top padding-big-bottom">
+          <p>HI,{$_truename} ({$_username}) <a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}在线，点击隐身{else}隐身，点击上线{/if}"><img src="{DT_SKIN}image/user_{if $_online}on{else}off{/if}line.png" width="10" height="10" align="absmiddle"/></a></p>
+          <p class="margin-small-top clearfix"> <span class="fl">账户安全级别：{if $_groupid == 4}<em class="text-red-deep">底</em>{elseif $_groupid > 5 || !$_edittime}<em class="text-blue-deep">中</em>{elseif $_groupid > 5 || $_edittime || $_groupid == 1}<em class="text-blue-deep">高</em>{/if}</span></p>
+        </div>
+        <span class="fr icon-head"> <a href="avatar.php"> <img src="{useravatar($_username, 'large')}" alt="账户头像"> </a> </span> </dt>
+      <dd class="padding-big clearfix"> {if $MOD[vmobile]}
+        <p class="w50 fl"> <i class="fl"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vmobile}v{else}u{/if}_mobile.gif" width="16" height="16" title="{if $vmobile}已通过{else}未通过{/if}手机认证" align="absmiddle"/></i> <span class="fl margin-left"><a href="validate.php?action=mobile">手机</a>：{if $vmobile}已绑定{else}<a class="text-underline red" href="validate.php?action=mobile">立即绑定</a>{/if}</span> </p>
+        {/if}
+        {if $MOD[vemail]}
+        <p class="w50 fl"> <i class="fl"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vemail}v{else}u{/if}_email.gif" width="16" height="16" title="{if $vemail}已通过{else}未通过{/if}邮件认证" align="absmiddle"/></i> <span class="fl margin-left"><a href="validate.php?action=email">邮箱</a>：{if $vemail}已绑定{else}<a class="text-underline red" href="validate.php?action=email">立即绑定</a>{/if}</span> </p>
+        {/if}
+        {if $MOD[vbank]}
+        <p class="w50 fl"> <i class="fl"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vbank}v{else}u{/if}_bank.gif" width="16" height="16" title="{if $vbank}已通过{else}未通过{/if}银行帐号认证" align="absmiddle"/></i> <span class="fl margin-left"><a href="validate.php?action=bank">银行卡</a>：{if $vbank}已绑定{else}<a class="text-underline red" href="validate.php?action=bank">立即绑定</a>{/if}</span> </p>
+        {/if}
+        {if $MOD[vtruename]}
+        <p class="w50 fl"> <i class="fl"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vtruename}v{else}u{/if}_truename.gif" width="16" height="16" title="{if $vtruename}已通过{else}未通过{/if}真实姓名认证" align="absmiddle"/></i> <span class="fl margin-left"><a href="validate.php?action=truename">实名认证</a>：{if $vtruename}已认证{else}<a class="text-underline red" href="validate.php?action=truename">立即认证</a>{/if}</span> </p>
+        {/if}
+        {if $MOD[vcompany] && $groupid > 5}
+        <p class="w50 fl"> <i class="fl"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vcompany}v{else}u{/if}_company.gif" width="16" height="16" title="{if $vcompany}已通过{else}未通过{/if}公司资料认证" align="absmiddle"/></i> <span class="fl margin-left"><a href="validate.php?action=company">公司认证</a>：{if $vcompany}已认证{else}<a class="text-underline red" href="validate.php?action=company">立即认证</a>{/if}</span> </p>
+        {/if}
+        {if $validated}
+        <p class="w50 fl"> <i class="fl"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $validated}v{else}u{/if}_member.gif" width="16" height="16" title="{if $validated}已通过{$validator}认证{else}未通过认证{/if}" align="absmiddle"/></i> <span class="fl margin-left">{if $validated}已通过{$validator}认证{else}未通过认证{/if}</span> </p>
+        {/if} </dd>
+    </dl>
+  </div>
+  <div class="text-box-main min-width-360 fl">
+    <dl>
+      <dt class="padding-big lists-border-list clearfix">
+        <div class="fl title">
+          <p>账户余额</p>
+          <p class="margin-small-top clearfix"> <span class="fl"><em class="h3 text-red-deep">{$DT[money_sign]}{$my_money} </em>{$DT[money_unit]}</span> <a class="fl margin-left button btn-red text-white" href="charge.php?action=pay">充值</a> <a class="fl margin-left button btn-orange text-white" href="cash.php">提现</a> </p>
+        </div>
+      </dt>
+      <dd class="padding-big">
+        <div class="account-class text-hidden"> <a href="record.php">我的流水</a> <a href="trade.php">我的订单</a> <a href="charge.php?action=record">充值记录</a> <a href="deposit.php">保证金</a> </div>
+      </dd>
+    </dl>
+  </div>
+  <div class="text-box-main min-width-300 fl margin-right-none">
+    <dl>
+      <dt class="padding-big lists-border-list clearfix">
+        <div class="fl w50 title">
+          <p>{$DT[credit_name]}</p>
+          <p class="margin-small-top clearfix"> <span class="fl"><em class="h3 text-red-deep">{$_credit}</em></span> <a class="fl margin-left button btn-red text-white" href="credit.php">赚取</a> </p>
+        </div>
+        {if $DT[sms] && $MG[sms]}
+        <div class="fl w50 padding-left title">
+          <p>短信余额</p>
+          <p class="margin-small-top clearfix"> <span class="fl"><em class="h3 text-blue-deep">{$_sms} </em>条</span> <a class="fl margin-left button btn-red text-white" target="view_window" href="sms.php">购买</a> </p>
+        </div>
+        {/if} </dt>
+      <dd class="padding-big">
+        <div class="text-hidden">
+      {if $MOD[credit_qd]}
+   {template 'qiandaomini', $module}
+   {/if}
+        </div>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<div class="iuser">
+<div class="iuser fl min-width-300 text-box-main mr15">
+<div class="ihead"> <strong>旺铺相关</strong> </div>
+<div class="ibody-2">
+<li class="ibody-2-name">{$_company}&nbsp;&nbsp;<a href="{$linkurl}" target="_blank" class="red">【旺铺浏览】</a></li>
+<li>会员级别：<span class="red">{$MG[groupname]}</span>&nbsp;(<a href="{$MODULE[1][linkurl]}vip" target="_blank" class="red">会员服务</a>)</li>
+{if $MOD[vcompany] && $groupid > 5}
+<li>企业认证：{if $vtruename}已认证{else}<a href="validate.php?action=company" class="red">立即认证</a>{/if}</li>{/if}
+{if $address}<li>地址：{$address}</li>{/if}
+</div>
+</div>
+<div class="iuser fl min-width-680 text-box-main">
+<div class="ihead"> <strong>我的便笺</strong> </div>
+<div class="ibody-2">
+  <div class="inote">
+    <form method="post" action="index.php" onsubmit="return check();">
+      <table cellspacing="2" cellpadding="2" width="100%">
+        <tr>
+          <td colspan="2"><textarea name="note" id="note">{$note}</textarea></td>
+        </tr>
+        <tr>
+          <td width="80"><input type="submit" name="submit" value=" 更 新 " class="btn_g"/></td>
+          <td class="f_gray">[可记录一些文字备忘，限5000字]</td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="ihead"> <strong>基础信息</strong> </div>
+<div class="icount">
+  <table cellpadding="0" cellspacing="0">
+    <tr> {if isset($MODULE[16])}
+      <td onclick="Go('{$MODULE[16][linkurl]}cart.php');"><div>购物车</div>
+    <span class="icount_sp"><script type="text/javascript">document.write(get_cart());</script></span></td>
+      {/if}
+      <td onclick="Go('message.php');"><div>新消息</div>
+    <span class="icount_sp">{$_message}</span></td>
+      {if $DT[im_web]}
+      <td onclick="Go('chat.php');"><div>新对话</div>
+    <span class="icount_sp">{$_chat}</span></td>
+      {/if}
+      <td onclick="Go('deposit.php');"><div>保证金</div>
+    <span class="icount_sp">{$deposit}</span></td>
+      <td onclick="Go('deposit.php');"><div>总产品</div>
+    <span class="icount_sp">{php echo $db->count($DT_PRE.'sell_5', 'status=3 and username="'.$_username.'"', 1800);}</span></td>
+      <td onclick="Go('deposit.php');"><div>采购数</div>
+    <span class="icount_sp">{php echo $db->count($DT_PRE.'buy_6', 'status=3 and username="'.$_username.'"', 1800);}</span></td>
+      <td onclick="Go('deposit.php');"><div>违规产品</div>
+    <span class="icount_sp">{php echo $db->count($DT_PRE.'sell_5', 'status=1 and username="'.$_username.'"', 1800);}</span></td>
+    </tr>
+  </table>
+</div>
+<div class="ihead"> <strong>我的管家</strong> </div>
+<div class="icount">
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td onclick="Go('{$DT[file_my]}');"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/icon_add.png" width="32" height="32"/><br/>
+        <span>发布信息</span></td>
+      <td onclick="Go('trade.php');"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/icon_order.png" width="32" height="32"/><br/>
+        <span>我的订单</span></td>
+      {if $MG[homepage] || $show_menu}
+      <td onclick="Go('home.php');"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/icon_home.png" width="32" height="32"/><br/>
+        <span>商铺管理</span></td>
+      {/if}
+       {if $MOD[credit_qd]}
+      <td><a href="qiandao.php" target="_blank"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/icon_qiandao.png" width="32" height="32"/><br/>
+        <span>每日签到</span></a></td>
+        {/if}
+    </tr>
+  </table>
+</div>
+<div class="ihead"> <strong>系统消息</strong> </div>
+<div class="ibody">
+  <div class="isys">
+    <ul>
+      {if $sys}
+      {loop $sys $v}
+      <li><span class="f_r px11 f_gray">{timetodate($v[addtime], 3)}</span>&nbsp;<a href="message.php?action=show&itemid={$v[itemid]}" title="{$v[title]}" class="l">{$v[title]}</a></li>
+      {/loop}
+      {else}
+      <li>&nbsp;暂无消息</li>
+      {/if}
+    </ul>
+  </div>
+</div>
+<!--产品记录-->
+<div class="account-product margin-big-top clearfix">
+  <div class="text-box-main padding-big fl mine-product">
+    <h2 class="h6 margin-big-bottom">我的供应</h2>
+    <div class="mine-product-content clearfix">
+     <!--{php $xhbq=tag("moduleid=5&condition=status=3 and username='".$username."'&areaid=$cityid&pagesize=10&length=30&order=addtime desc&template=null")}-->
+     {loop $xhbq $i $t}
+         {if $i%1==0} <ul class="w50 fl lists">{/if}
+          <li class="w70 lists-border-list">
+          <p class="border-list-text"><a href="{$t[linkurl]}" target="_blank">{$t[title]}</a> <a class="text-main fr" href="{$t[linkurl]}" target="_blank">{timetodate($t[edittime], 3)}</a> </li>
+           {if $i%1==0}</ul>{/if}
+            {/loop}
+    </div>
+  </div>
+  <div class="text-box-main padding-big fl w25">
+    <h2 class="h6 margin-big-bottom">我的采购</h2>
+    <ul class="lists">
+     <!--{php $xhbq=tag("moduleid=6&condition=status=3 and username='".$username."'&areaid=$cityid&pagesize=6&length=30&order=addtime desc&template=null")}-->
+            {loop $xhbq $t}
+            <li class="lists-list"><a href="{$t[linkurl]}" target="_blank" >{$t[title]}<span class="fr">{timetodate($t[edittime], 3)}</span></a></li>
+            {/loop}
+    </ul>
+  </div>
+</div>
+{template 'footer', $module}

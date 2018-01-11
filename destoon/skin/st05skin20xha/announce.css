@@ -1,0 +1,17 @@
+/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170829
+*/
+
+@charset "utf-8";
+.an_menu{background:#fff;padding:15px;font-size:14px;width: 1170px;overflow: hidden;}
+.an_menu li{float: left;margin-right: 20px;line-height: 35px;height: 35px;padding: 1px 10px;}
+.an_menu li.on{font-weight: 700; padding: 1px 10px; background: #1269d3;}
+.an_menu li.on a{color: #fff;}
+.an_con{background:#fff;font-size:14px;}
+.an_con .an_list{padding:0 15px;}
+.an_con .an_list li.an_list_li{font-size:14px;height:40px;line-height:40px;overflow:hidden;background:url('image/li_dot.gif') no-repeat 0px 20px;padding: 0 5px 0 10px;}
+.an_con .an_list li.an_list_li .fr_1{width:100px;overflow: hidden;margin-right: 50px;}
+.an_show .t_c strong{height: 80px;line-height: 80px;font-size: 20px;}
+.an_show .info{margin: 0 40px 0 40px; padding: 15px 40px 15px 40px; border-top: #D0D0D0 1px solid; border-bottom: #D0D0D0 1px solid; color:#888;}
+.an_show .info a{color:#888;}
+.an_show .content{font-size: 16px; line-height: 180%; padding: 10px 40px 10px 40px;}

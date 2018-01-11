@@ -1,0 +1,295 @@
+/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170524
+*/
+@charset "utf-8";
+body{ background: #ffffff;}
+.nav_hd_top {
+    width: 100%;
+    background: #fff;
+    height: 55px;
+    padding: 18px 0;
+    position: relative;
+    min-width: 1200px;
+    border-bottom: 2px solid #3399EE;
+}
+
+/*zhuce*/
+.zhucename{
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    font-size: 26px;
+    font-weight: bold;
+    border-left: 1px solid #ddd;
+    margin-left: 20px;
+    display: block;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+.dianhua{
+    height: 55px;
+    margin-right: 80px;
+    vertical-align: middle;
+}
+.dianhua img{vertical-align: middle;margin-right:8px;margin-top: 1px;}
+.dianhua_time{ font: normal 12px/20px Verdana, Arial, "宋体";color: #777;text-indent: 5px;}
+.dianhua_tel{font: bold 27px/30px Arial, "宋体";color: #F60;}
+
+/*con*/
+.login_dl {
+    clear: both;
+    margin: 0 auto;
+    height: 500px;
+    background: url("images/member/bg.jpg") repeat-x;
+}
+.login_dl .w1050 {
+    width: 1050px;
+    margin:0 auto;
+    position: relative;
+}
+.login_dl .w1050 .focus {
+    width: 665px;
+    height: 500px;
+    float: left;
+}
+.login_dl .d {
+	position: relative;
+	display: inline;
+	float: right;
+	margin: 35px 0px 0 0;
+	width: 340px;
+	background: #ffffff;
+	border-radius: 3px;
+	border: solid 1px #0DBDD9;
+	box-shadow: 0 0 10px #0DBDD9;
+}
+.login_dl .p1 {height: 40px;line-height: 40px;margin-bottom: 10px;margin-top: 10px;}
+.login_dl .p1 h3{float:left;margin-left:15px;height: 40px;line-height: 40px; font: 18px/34px 'Microsoft YaHei';color: #1f1f1f;border-bottom: 3px solid #1269d3;}
+.login_dl .p1 span {
+    float: right;
+    font-size: 12px;
+    padding-right:10px;
+}
+.login_dl .p1 span a{color: #06c;}
+.login_dl li {
+    height: 45px;
+    position: relative;
+    margin: 0 40px;
+}
+.login_dl .focus li{
+    float:left;
+    text-align:center;
+    margin-top:50px;
+    margin-right:30px;
+}
+.login_content li img{
+    width:90%;
+}
+.login_content_left img{
+    margin-top:30px;
+}
+
+.login_dl li #kb{left:-60px!important;top: 38px !important;}
+.login_dl li .s {
+    float: left;
+    width: 80px;
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+    font-size: 14px;
+}
+.login_dl li .text {
+    padding: 0 5px;
+    width: 225px;
+    border: 1px solid #ddd;
+    padding: 0 0px 0 35px;
+    height: 35px;
+    line-height: 35px;
+}
+.login_dl li .icon {
+	background-image: url(images/member/icon_login.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+    display: inline-block;
+    font-size: 0;
+    margin-right: 5px;
+    vertical-align: sub;
+    *vertical-align: middle;
+    width: 16px;
+	height: 16px;
+}
+.login_dl li .icon_username {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-position: 0 -2px;
+}
+.login_dl li .icon_password {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-position: -16px -2px;
+}
+.login_dl li .icon_captcha {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-position: -34px -2px;
+}
+.login_dl .b {
+    margin: 15px 0 0 40px;
+    width: 260px;
+}
+
+.login_dl .b .button_su {
+	position: relative;
+	display: block;
+	margin-bottom: 10px;
+	text-align:center;
+	width: 260px;
+	height: 40px;
+	background: #1269d3;
+	border: 0;
+	color: #fff;
+	font-size: 16px;
+	-webkit-transition: all 0.15s ease-in;
+	transition: all 0.15s ease-in;
+}
+.login_dl .b .button_su:hover{background:#0088DD;}
+.login_dl .b .button_su:before {
+    content: ' ';
+    position: absolute;
+    background: #ffffff;
+    width: 10px;
+    height: 40px;
+    top: 0;
+    left: -20px;
+    opacity: 0.3;
+    -webkit-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+}
+.login_dl .b .button_su:hover:before {
+ width: 10px;
+ left: 275px;
+}
+.login_dl .b .button_su .button{border: 0;height:40px;line-height:40px;background:0;color:#ffffff;font-size:16px;display: block;width: 260px;}
+
+.login_dl .b .a {
+    float: right;
+    margin-right: 12px;
+    color: #06c;
+}
+.login_dl .b .qq_login {
+    margin-top: 10px;
+    height: 20px;
+    float: right;
+}
+.login_dl .b .qq_login a{color:#06c;}
+.login_dl .c_p,.mt10{margin-top:10px}
+.login_dl .login_s{position: relative;/* height: 265px; */margin: 0 auto;display: inline-block;}
+.login_dl .login_s ul{padding-top:10px}
+
+.login_dl .d .other-login{height: 80px;text-align: center;font-size:14px;margin-top: 10px;padding: 0 25px;}
+.login_dl .d .other-login .other-login-name{height:35px;line-height:35px;background: url("images/member/si_line.jpg") left 20px repeat-x;}
+.login_dl .d .other-login .other-login-name h3{display: block;width: 114px;margin: 0 auto;padding: 0 12px;background: #fff;font-size:14px;font-weight:500;} 
+.login_dl .d .other-login .other-login-name h3{display: block;width: 114px;height: 35px;margin: 0 auto;overflow: hidden;padding: 0 12px;background: #fff;font-size:14px;font-weight:500;color: #595959;}
+.login_dl .d .other-login .other-login-ico{height: 30px;margin-top: 3px}
+.login_dl .d .other-login .other-login-ico img{vertical-align:middle;}
+
+/*zhuce*/
+
+.status_bar {
+    width: 1100px;
+    height: 46px;
+    background: url("images/member/ico-zhuce.png") no-repeat;
+    margin: 0 auto;
+    margin-bottom:20px
+}
+.left_box{
+    border: 0;
+}
+.register {
+    clear: both;
+    margin: 0 auto;
+    width: 1100px;
+    overflow: hidden;
+}
+.register .zhuce_l {
+    float: left;
+    width: 764px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.register .zhuce_l table{font-size:16px}
+.register .r {
+    float: right;
+    width: 284px;
+    border: 1px solid #ddd;
+    padding: 30px 20px 20px 20px;
+}
+.register .r .p1 {
+    font-size: 16px;
+	height: 28px;
+}
+.register .r .p1 a.fcolor_0 {
+    color: #3399EE;
+}
+.register .r .p2 {
+    font-size: 14px;
+    line-height: 24px;
+    color: #979595;
+    margin-top: 10px;
+}
+.register .r .button1 {
+    margin: 20px 20px 20px 20px;
+    display: block;
+    width: 239px;
+    height: 48px;
+    line-height: 48px;
+    background:#0f69dc;
+    color: #ffffff;
+    font-size: 18px;
+}
+.register .r .button1:hover{background:#0f00dc;}
+.register .r .qq {
+    font-size: 14px;
+    overflow: hidden;
+    padding-top: 5px;
+}
+.register .r .kf_tel {
+    margin-top: 20px;
+    overflow: hidden;
+    border-top: solid 1px #e3e3e3;
+    padding-top: 10px;
+}
+.register .r .kf_tel .phone-title{
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+    line-height: 35px;
+}
+.register .r .kf_tel .phone-icon{background: url("images/member/ico-dianhua-2.png") no-repeat;width: 20px;height: 20px;float: left;margin-top: 5px;}
+.register .r .kf_tel .phone {
+    float: left;
+    line-height: 30px;
+    font-size: 22px;
+    margin: 0 10px 0 5px;
+}
+.register .r .kf_tel .time{
+    float: left;
+    line-height: 30px;
+}
+.fcolor_8 {
+    color: #FF7300;
+}
+.register .r .qq span {
+    float: left;
+    margin-top: 15px;
+    font-weight: 700;
+    color: #666;
+}
+.register .r .qq span.qq-name{font-size:14px;}
+.register select{height: 35px;line-height:35px;border-radius: 4px;text-indent: 1px;border: 1px solid #ddd;vertical-align:middle;margin-top:-3px}
+.register input{height: 27px;border-radius: 4px;text-indent: 10px;vertical-align:middle;margin-top:-3px}

@@ -1,0 +1,102 @@
+{template 'header-help'}
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<div class="crumb">
+	    <div class="w1200">
+	       <div class="help_list_search">
+	      <form id="destoon_search" action="{$MOD[linkurl]}search.php"  onsubmit="return Dsearch(1);">
+          <input type="hidden" name="moduleid" value="{$moduleid}" id="destoon_moduleid"/>
+          <input type="hidden" name="spread" value="0" id="destoon_spread"/>
+	      <input type="text" name="kw" id="destoon_kw" placeholder="输入问题关键词，如：忘记密码" value="{if $kw}{$kw}{else}请输入关键词{/if}" onfocus="if(this.value=='请输入关键词') this.value='';"{if $DT[search_tips]} onkeyup="STip(this.value);" autocomplete="off"{/if} x-webkit-speech speech>
+	      <input type="submit" class="btn_search" value=""/>
+	      </form>
+
+	        </div>
+	        <i></i>
+	        <a href="{$MOD[linkurl]}">{$MOD[name]}</a>
+	        <span>&gt;</span>
+	        {cat_pos($CAT, '<span>&gt;</span>')}
+	        <span>&gt;</span>
+	        {$title}
+	    </div>
+	</div>
+<div class="content_help qa">
+	    <div class="nav_help">
+	        <div class="tit_0">问题解答分类</div>
+   {php $mid = $moduleid;}
+   {php $child = get_maincat(0, $mid, 1);}
+   {loop $child $i $c}
+    <div {if $c[catid]}id="cat_{$catid}"{/if}>
+	    <div class="tit_1" id="a{$i+1}">
+	     <h3 onclick="show('b{$i+1}')">{set_style($c[catname], $c[style])}</h3>
+	    <div class="tit_2_2 tit_2" id="b{$i+1}">
+	      {if $c[child]}
+      {php $sub = get_maincat($c[catid], $mid, 1);}
+      {loop $sub $j $s}
+	    <li {if $s[catid]==$catid}class="oon"{/if}><a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}">{set_style($s[catname], $s[style])}</a></li>
+      {/loop}
+          {/if}
+	      </div>
+	      </div>
+	     </div>
+   {/loop}
+<script type="text/javascript">
+  function show(obj){
+      var obj=document.getElementById(obj);  //获得id为b的容器
+	  //如果下面的内容显示的话就隐藏
+	  if(obj.style.display=="none"){
+	     obj.style.display="block";
+	  }else 
+	  obj.style.display="none";
+}
+ </script>
+	    </div>
+	    <!--文章内容页-->
+	    <div class="main">
+	    <input type="hidden">
+	    <div class="tit_0" id="title">{$title}</div>
+	    <div class="info"><span class="f_r"><img src="{DT_SKIN}image/zoomin.gif" width="16" height="16" alt="放大字体" class="c_p" onclick="fontZoom('+', 'article');"/>&nbsp;&nbsp;<img src="{DT_SKIN}image/zoomout.gif" width="16" height="16"  alt="缩小字体" class="c_p" onclick="fontZoom('-', 'article');"/></span>
+		发布日期：{$adddate}
+		{if $copyfrom}&nbsp;&nbsp;来源：{if $fromurl}<a href="{$fromurl}" target="_blank">{/if}{$copyfrom}{if $fromurl}</a>{/if}{/if}
+		{if $author}&nbsp;&nbsp;作者：{$author}{/if}
+		&nbsp;&nbsp;浏览次数：<span id="hits">{$hits}</span>	
+		</div>
+	    <div class="qa_txt">
+	    {if $CP}{template 'property', 'chip'}{/if}
+		<div id="content">{template 'content', 'chip'}</div>
+		{if $voteid}<div class="pd20">{loop $voteid $v}
+		{load('vote_'.$v.'.htm')}{/loop}</div>
+		{/if}
+		{if $pages}<div class="pages">{$pages}</div>{/if}
+	    </div>
+	    {if $keytags}
+		<div class="keytags">
+		<strong>关键词：</strong>
+		{loop $keytags $t}
+		<a href="{$MOD[linkurl]}search.php?kw={urlencode($t)}" target="_blank" rel="nofollow">{$t}</a>
+		{/loop}
+		</div>
+		{/if}
+		{if $MOD[show_np]}
+		<div class="np">
+		<ul>
+		<li><strong>下一篇：</strong><!--{tag("moduleid=$moduleid&condition=status=3 and addtime>$addtime&areaid=$cityid&pagesize=1&order=addtime asc&template=list-np", -1)}--></li>
+		<li><strong>上一篇：</strong><!--{tag("moduleid=$moduleid&condition=status=3 and addtime<$addtime&areaid=$cityid&pagesize=1&order=addtime desc&template=list-np", -1)}--></li>
+		</ul>
+		</div>
+		<div class="b10">&nbsp;</div>
+		{/if}
+		<center>
+		[ <a href="{$MOD[linkurl]}search.php" rel="nofollow">{$MOD[name]}搜索</a> ]&nbsp;
+		[ <a href="javascript:SendFav();">加入收藏</a> ]&nbsp;
+		[ <a href="javascript:SendPage();">告诉好友</a> ]&nbsp;
+		[ <a href="javascript:Print();">打印本文</a> ]&nbsp;
+		[ <a href="javascript:SendReport();">违规举报</a> ]&nbsp;
+		[ <a href="javascript:window.close()">关闭窗口</a> ]
+		</center>
+		{template 'comment', 'chip'}
+	    </div> 
+	</div>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+<script type="text/javascript">try{Dd('cat_{$catid}').className='on';}catch(e){}</script>
+{template 'footer'}

@@ -1,0 +1,14 @@
+{loop $tags $i $t}
+<a href="{$t[linkurl]}" target="_blank" class="mod-brand" title="{$t[company]}">
+<div class="img-wrap">
+  <div class="img-box"> <img src="{if $t[comlogo]}{$t[comlogo]}{else}{DT_SKIN}images/company/no_comlogo.png{/if}" alt="{$t[company]}"> </div>
+</div>
+<p class="name">{$t[company]}<span class="new">新秀</span></p>
+</a>
+<ul class="key-list clf">
+  <!--{php $xhbq=tag("moduleid=5&length=14&condition=status=3 and username='".$t[username]."'&areaid=$cityid&pagesize=4&order=edittime desc&template=null");}--> 
+  {loop $xhbq $k $v}
+  <li class="kl-itm"> <a href="{$v[linkurl]}" target="_blank" title="{$v[alt]}">{$v[title]}</a> </li>
+  {/loop}
+</ul>
+{/loop}

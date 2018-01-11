@@ -1,0 +1,3 @@
+{loop $tags $i $v}
+<li><em class="{if $i==0}one{elseif $i==1}two{elseif $i==2}three{else}no_bg{/if}">{$i+1}</em><a href="{$v[linkurl]}" title="{$v[alt]}" target="_blank">{$v[title]}</a></li>
+{/loop}

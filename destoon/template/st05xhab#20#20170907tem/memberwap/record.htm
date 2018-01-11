@@ -1,0 +1,125 @@
+{template 'header', 'memberwap'}
+{if $action == 'login'}
+<div class="bd">
+<table cellpadding="1" cellspacing="0" class="tb">
+<tr>
+<th width="200">时间</th>
+<th>IP</th>
+<th>地区</th>
+<th>结果</th>
+</tr>
+{loop $lists $k $v}
+<tr onmouseover="this.className='on';" onmouseout="this.className='';" align="center">
+<td height="30">{$v[logintime]}</td>
+<td>{$v[loginip]}</td>
+<td>{$v[area]}</td>
+<td>{$v[message]}</td>
+</tr>
+{/loop}
+</table>
+{else}
+<script type="text/javascript">c(2);</script>
+<div class="menu">
+<table cellpadding="0" cellspacing="0">
+<tr>
+{if $DT_TOUCH && $MOD[pay_online]}
+<td class="tab" id="action_charge"><a href="charge.php?action=pay"><span>在线充值</span></a></td>
+{/if}
+<td class="tab" id="action"><a href="?action=order"><span>{$DT[money_name]}流水</span></a></td>
+<td class="tab" id="action_pay"><a href="?action=pay"><span>信息付费</span></a></td>
+</tr>
+</table>
+</div>
+{if $action == 'pay'}
+<form action="?">
+<input type="hidden" name="action" value="{$action}"/>
+<div class="tt">
+{$module_select}&nbsp;<select name="currency">
+<option value="">支付</option>
+<option value="money" {if $currency=='money'}selected{/if}>{$DT[money_name]}</option>
+<option value="credit" {if $currency=='credit'}selected{/if}>{$DT[credit_name]}</option>
+</select>
+&nbsp;
+<input type="text" size="12" name="kw" value="{$kw}" title="关键词"/>&nbsp;
+<input type="submit" value=" 搜 索 " class="btn"/>&nbsp;
+</div>
+</form>
+<div class="bd">
+<table cellpadding="1" cellspacing="0" class="tb">
+<tr>
+<th>流水号</th>
+<th>支出</th>
+<th>单位</th>
+<th>模块</th>
+<th>标题</th>
+<th width="130">支付时间</th>
+</tr>
+{loop $lists $k $v}
+<tr onmouseover="this.className='on';" onmouseout="this.className='';" align="center">
+<td height="30" class="px11">{$v[pid]}</td>
+<td class="px11 f_red">{$v[fee]}</td>
+<td>{if $v[currency] == 'money'}{$DT[money_unit]}{else}{$DT[credit_unit]}{/if}</td>
+<td><a href="{$MODULE[$v[moduleid]][linkurl]}" target="_blank">{$MODULE[$v[moduleid]][name]}</a></td>
+<td><a href="{DT_PATH}api/redirect.php?mid={$v[moduleid]}&itemid={$v[itemid]}" target="_blank" class="t">{$v[title]}</a></td>
+<td class="px11 f_gray">{$v[paytime]}</td>
+</tr>
+{/loop}
+<tr align="center">
+<td height="35"><strong>小计</strong></td>
+<td class="px11 f_blue">{$fee}</td>
+<td colspan="5">&nbsp;</td>
+</tr>
+</table>
+<div class="pages">{$pages}</div>
+<script type="text/javascript">s('record');m('action_pay');</script>
+{else}
+<form action="?">
+<input type="hidden" name="action" value="{$action}"/>
+<div class="tt">
+{$fields_select}&nbsp;
+<select name="type">
+<option value="0">类型</option>
+<option value="1" {if $type==1}selected{/if}>收入</option>
+<option value="2" {if $type==2}selected{/if}>支出</option>
+</select>
+&nbsp;
+<input type="text" size="12" name="kw" value="{$kw}" title="关键词"/>&nbsp;
+<input type="submit" value=" 搜 索 " class="btn"/>&nbsp;
+</div>
+</form>
+<div class="bd">
+<table cellpadding="1" cellspacing="0" class="tb">
+<tr>
+<th>{$DT[money_name]}流水相关信息</th>
+</tr>
+</table>
+{loop $lists $k $v}
+<div class="list-bian-140">
+<table cellpadding="0" cellspacing="0" class="tb">
+<tr onmouseover="this.className='on';" onmouseout="this.className='';" align="center">
+<td align="left">
+<ul class="bianji">
+<li class="bianji-1" style="text-align:left;"><div class="bianji-1-1 f_blue">收入：{if $v[amount] > 0}{$v[amount]}{else}&nbsp;{/if}</div><div class="bianji-1-2 f_red">支出：{if $v[amount] < 0}{$v[amount]}{else}&nbsp;{/if}</div></li>
+<li class="bianji-1"><div class="bianji-1-1">余额：{if $v[balance]}<strong>{$v[balance]}</strong>{else}&nbsp;{/if}</div><div class="bianji-1-2">银行：{$v[bank]}</div></li>
+<li class="bianji-1"><div class="bianji-1-1">流水号：{$v[itemid]}</div><div class="bianji-1-2">发生时间：{$v[addtime]}</div></li>
+<li class="bianji-1">事由：<input type="text" size="32" value="{$v[reason]}"/></li>
+<li class="bianji-1">备注：<input type="text" size="32" value="{$v[note]}"/></li>
+</ul>
+<td>
+</tr>
+</table>
+</div>
+{/loop}
+<table cellpadding="0" cellspacing="0" class="tb">
+<tr onmouseover="this.className='on';" onmouseout="this.className='';" align="center">
+<td height="35"><strong>小计</strong></td>
+<td class="px11 f_blue">收入：{$income}</td>
+<td class="px11 f_red">支出：{$expense}</td>
+<td colspan="5">&nbsp;</td>
+</tr>
+</table>
+<div class="pages">{$pages}</div>
+<script type="text/javascript">s('record');m('action');</script>
+{/if}
+{/if}
+{template 'footer', 'memberwap'}

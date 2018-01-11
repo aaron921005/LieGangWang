@@ -1,0 +1,12 @@
+{loop $tags $i $v}
+ <li class="one {if $i%5==4}first{/if}">
+                <a href="{$v[linkurl]}" target="_blank">
+                <img src="{str_replace('thumb', 'middle', $v[thumb])}" alt="{$v[alt]}" title="{$v[alt]}">
+                </a>
+                <h4 class="elli" style="cursor:pointer" onmouseout="this.style.color='';" onmouseover="this.style.color='#c7181e';" onclick="window.open('{$v[linkurl]}')" title="{$v[alt]}">{$v[title]}</h4>
+                <p><span><b class="red">{$v[credit]}</b>{$DT[credit_name]}</span>已兑换：<b>{$v[orders]}</b>份</p>
+                <div class="btn_gift clearfix">
+                 <a href="{$v[linkurl]}" class="red" target="_blank">立即兑换</a>
+                </div>
+  </li>
+{/loop}

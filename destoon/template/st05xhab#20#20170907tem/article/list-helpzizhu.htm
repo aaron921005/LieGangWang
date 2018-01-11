@@ -1,0 +1,72 @@
+{template 'header-help'}
+<div class="help_banner">
+	    <div class="banner_box">
+	       <div class="help_search">
+	    <i></i>
+	   <form id="destoon_search" action="{$MOD[linkurl]}search.php" onsubmit="return Dsearch(1);">
+      <input type="hidden" name="moduleid" value="{$moduleid}" id="destoon_moduleid"/>
+      <input type="hidden" name="spread" value="0" id="destoon_spread"/>
+      <input type="text" name="kw" id="destoon_kw" placeholder="请简单描述您的问题或问题关键词，如：忘记密码" value="{if $kw}{$kw}{else}请简单描述您的问题或问题关键词，如：忘记密码{/if}" onfocus="if(this.value=='请简单描述您的问题或问题关键词，如：忘记密码') this.value='';"{if $DT[search_tips]} onkeyup="STip(this.value);" autocomplete="off"{/if} x-webkit-speech speech/>
+      <input type="submit" class="btn_so" value="查找"/>
+	    </form>
+	      </div>
+	    </div>
+	</div>
+<div class="w1200 help_index">
+	    <h2>自助服务</h2>
+	    <ul class="self_help">
+	        <li>
+	            <a href="{$MODULE[5][linkurl]}" target="_blank">
+	                <i class="icon_dd"></i>
+	                <div class="tit_zz">快速找货</div>
+	                <p>快速查询自己想要的货源，并联系卖家。</p>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="{$MODULE[6][linkurl]}" target="_blank">
+	                <i class="icon_fp"></i>
+	                <div class="tit_zz">查找采购</div>
+	                <p>查询客户需求的商品，并联系买家。</p>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=5" target="_blank">
+	                <i class="icon_zyd"></i>
+	                <div class="tit_zz">发布供货</div>
+	                <p>发布您的现货资源</p>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=6" target="_blank">
+	                <i class="icon_ye"></i>
+	                <div class="tit_zz">发布采购单</div>
+	                <p>发布您的所需，让卖家主动联系你。</p>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="{$MODULE[4][linkurl]}" target="_blank">
+	                <i class="icon_jf"></i>
+	                <div class="tit_zz">找商家</div>
+	                <p>寻找更多有实力的企业合作。</p>
+	            </a>
+	        </li>
+	        <li>
+	            <a href="{$MODULE[2][linkurl]}edit.php" target="_blank">
+	                <i class="icon_aq"></i>
+	                <div class="tit_zz">账户安全</div>
+	                <p>修改密码、绑定手机、提高账户安全等</p>
+	            </a>
+	        </li>
+	    </ul>
+	    
+	    <h2>最新问题解答</h2>
+    	<div class="qa_box">
+    	<!--{php $xhbq=tag("moduleid=$moduleid&length=50&condition=status=3&areaid=$cityid&order=".$MOD[order]."&pagesize=15&template=null");}-->
+       {loop $xhbq $i $t}
+       {if $i%5==0}<dl class="">{/if}
+        <dd><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></dd>
+        {if $i%5==4}</dl>{/if}
+       {/loop}          
+    	</div>
+    </div>
+{template 'footer'}

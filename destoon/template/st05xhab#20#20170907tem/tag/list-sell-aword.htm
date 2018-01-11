@@ -1,0 +1,41 @@
+<ul class="extension_ul">
+{loop $tags $k $t}
+  <li id="item_{$t[itemid]}"> 
+   <i class="pictj3"></i>
+    <!--ioc_vip(VIP会员),ioc_qyhy(企业会员),ioc_grhy(个人会员),special(有特别推荐加上这个样式)-->
+    <div class="img"><a href="{$t[linkurl]}" target="_blank" data-scode="{$t[itemid]}" title="{$t[alt]}"><img src="{imgurl($t[thumb])}" alt="{$t[alt]}" title="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"/> </a></div>
+    <h3 class="title_list"><a href="{$t[linkurl]}" data-scode="{$t[itemid]}" title="{$t[alt]}" target="_blank">{$t[title]}</a> <span class="special_s"><em class="z">特别推荐</em></span></h3>
+    <dl class="extension_dl">
+      <dt>供货总量</dt><dd>{if $t[amount]}{$t[amount]} {$t[unit]}{else}大量{/if}</dd>
+      {if $t[minamount]}<dt>最少起订</dt><dd>{$t[minamount]} {$t[unit]}</dd>{/if}
+      {if $t[brand]}<dt>品牌</dt><dd>{$t[brand]}</dd>{/if}
+      {if $t[n1] && $t[v1]}<dt>{$t[n1]}</dt><dd>{$t[v1]}</dd>{/if}
+      {if $t[n2] && $t[v2]}<dt>{$t[n2]}</dt><dd>{$t[v2]}</dd>{/if}
+      {if $t[n3] && $t[v3]}<dt>{$t[n3]}</dt><dd>{$t[v3]}</dd>{else}<dt>更新时间</dt><dd>{timetodate($t[edittime], $datetype)}</dd>{/if}
+    </dl>
+     {php $xhmember = userinfo($t[username]);}
+    <div class="main_products">经营范围： <span>{$xhmember[business]}</span></div>
+    <div class="extension_right">
+     <span class="su-price">
+     {if $t[unit] && $t[price]>0} 
+     <font class="redpc">{$DT[money_sign]}</font>{$t[price]}<font class="fts"><span>/{$t[unit]}</span></font>
+     {else} 
+     面议
+     {/if}
+     </span>
+      <p><a href="{userurl($t[username])}" target="_blank">{$t[company]}</a>{if !$t[username]} [未注册]{/if}</p>
+      <p>所在地：{area_pos($t[areaid], '-')}</p>
+      <p class="ico_img">{if $xhmember[vip]}<i class="ioc_vip" alt="{VIP}" title="{VIP}:{$xhmember[vip]}级"></i>{else}<i class="ioc_qyhy" title="企业会员"></i>{/if}</p>
+      <p><input type="checkbox" id="check_{$t[itemid]}" name="itemid[]" value="{$t[itemid]}" onclick="sell_tip(this, {$t[itemid]});"/>对比/批量</p>
+       {if SELL_ORDER && $t[username] && $t[price]>0 && $t[minamount]>0 && $t[amount]>0 && $t[unit]} 
+      <a href="javascript:void(0);" class="inquiry_a" onclick="Go('{$MODULE[$moduleid][linkurl]}{rewrite('buy.php?itemid='.$t['itemid'])}');" title="立即购买">立即购买</a>
+      {else}
+      <a href="javascript:void(0);" class="inquiry_a open" onclick="Go('{$MODULE[$moduleid][linkurl]}{rewrite('inquiry.php?itemid='.$t['itemid'])}');" title="在线询价">在线询价</a>
+      {/if}
+       </div>
+  </li>
+{/loop}	
+</ul>	
+{if $showpage && $pages}
+<div class="pages">{$pages}</div>
+{/if}

@@ -1,0 +1,176 @@
+{php $CSS = array('guestbook');}
+{template 'header-guestbook'}
+<div id="top">
+  <div class="top"><a href="{$MODULE[1][linkurl]}" target="_blank"><img src="{if $MODULE[$moduleid][logo]}{DT_SKIN}image/logo_{$moduleid}.gif{elseif $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}" alt="{$DT[sitename]}"></a>
+    <h3>留言反馈</h3>
+    <form id="gk_search" action="{$EXT[guestbook_url]}index.php">
+        <input type="text" name="kw" value="{if $kw}{$kw}{else}请输入您想搜索的问题{/if}" onfocus="this.value=this.value=='请输入您想搜索的问题'?'':this.value" onblur="this.value=this.value==''?'请输入您想搜索的问题':this.value">
+    </form>
+    <button onclick="document.getElementById('gk_search').submit();"></button>
+   {if $DT[qq1]} <a href="tencent://message/?uin={$DT[qq1]}&amp;Site={$DT[sitename]}&amp;Menu=yes" class="question"></a>{/if}
+   </div>
+</div>
+<div class="guestbanner"><img src="{DT_SKIN}/images/guestbook/guestbanner.jpg"></div>
+<div class="main">
+  <div class="maintop">请把您的问题/意见告诉我们</div>
+  <form action="{$EXT[guestbook_url]}index.php" method="post" onsubmit="return check();">
+  <div class="main_1">
+  <dl>
+    <dt><em>*</em>留言内容</dt>
+    <dd>
+     <textarea name="post[content]" placeholder="如果您遇到问题，请在此处反馈， 本网会尽快给您回复！" rows="5" cols="70" id="content">{$content}</textarea>
+   <div id="dcontent" class="wrong_2 f_red"></div>
+      </dd>
+  </dl>
+  <dl>
+    <dt><em>*</em>留言类型</dt>
+    <dd>
+    <select name="post[type]" id="type">
+  <option value="请选择类型">请选择类型</option>
+    {loop $TYPE $k $v}
+  <option value="{$v}">{$v}</option>
+  {/loop}
+  </select>
+  请选择留言类型
+    </dd>
+  </dl>
+  <dl>
+    <dt>与您联系</dt>
+    <dd>
+    <div class="sex"><input type="radio" name="my" value="1" id="my_1" onclick="Ds('gb_contact');"/> <label for="my_1">需要</label></div>
+    <div class="sex"><input type="radio" name="my" value="0" id="my_0" checked onclick="Dh('gb_contact');"/> <label for="my_0">不需要</label></div>       
+    </dd>
+  </dl>
+  </div>
+  <div id="gb_contact" style="display:none;">
+  <dl>
+    <dt>联系人</dt>
+    <dd>
+      <p style="color:#5c5c5c;"><input type="text" name="post[truename]" size="10" id="truename" value="{$truename}"/>&nbsp;
+	<input type="checkbox" name="post[hidden]" value="1" id="hidden" checked/><label for="hidden" title="选择匿名后,联系人姓名仅网站工作人员可见"> 匿名留言</label></p>
+	<div id="dtruename" class="wrong_2 f_red"></div>
+    </dd>
+  </dl>
+  <dl>
+    <dt>联系电话</dt>
+    <dd>
+    <p style="color:#5c5c5c;"><input type="text" name="post[telephone]" size="30" id="telephone" value="{$telephone}"/></p>
+	<div id="dtelephone" class="wrong_2 f_red"></div
+    </dd>
+  </dl>
+  <dl>
+    <dt>电子邮件</dt>
+    <dd>
+    <p style="color:#5c5c5c;"><input type="text" name="post[email]" size="30" id="email" value="{$email}"/></p>
+	<div id="demail" class="wrong_2 f_red"></div>
+    </dd>
+  </dl>
+  {if $DT[im_qq]}
+  <dl>
+    <dt>QQ</dt>
+    <dd>
+    <p style="color:#5c5c5c;"><input type="text" size="20" name="post[qq]" id="qq" value="{$qq}"/></p>
+    </dd>
+  </dl>
+  {/if}
+  {if $DT[im_ali]}
+  <dl>
+    <dt>阿里旺旺</dt>
+    <dd>
+    <p style="color:#5c5c5c;"><input type="text" size="20" name="post[ali]" id="ali" value="{$ali}"/></p>
+    </dd>
+  </dl>
+  {/if}
+  {if $DT[im_msn]}
+  <dl>
+    <dt>MSN</dt>
+    <dd>
+    <p style="color:#5c5c5c;"><input type="text" size="30" name="post[msn]" id="msn" value="{$msn}"/></p>
+    </dd>
+  </dl>
+  {/if}
+  {if $DT[im_skype]}
+  <dl>
+    <dt>Skype</dt>
+    <dd>
+    <p style="color:#5c5c5c;"><input type="text" size="20" name="post[skype]" id="skype" value="{$skype}"/></p>
+    </dd>
+  </dl>
+  {/if}
+  </div>
+{if $MOD[guestbook_captcha]}
+<div>
+  <dl>
+    <dt><em>*</em>验证码</dt>
+    <dd><p style="color:#5c5c5c;margin-top: -10px;">{template 'captcha', 'chip'}</p>
+  <div id="dcaptcha" class="wrong_2 f_red"></div>
+    </dd>
+  </dl>
+  </div>
+  {/if}
+  <div>
+  <dl>
+    <dt></dt>
+    <dd>
+   <input type="submit" name="submit" class="submit" value=" 提交 "/>&nbsp;<input type="reset" class="submit02" value=" 重写 "/>
+    </dd>
+  </dl>
+  <dl>
+    <dt></dt>
+    <dd>
+      <p>注：您在此页面提交的问题，工作人员将会尽快处理，如您希望在问题处理完毕后得到回复，请勾选提交按钮上方的选项
+        感谢您对{$DT[sitename]}的支持!</p>
+    </dd>
+  </dl>
+  <br class="clear">
+</div>
+</form>
+<div class="gk_list">
+{if $lists}
+{loop $lists $k $v}
+<div class="b10">&nbsp;</div><div class="b10">&nbsp;</div>
+<table width="100%" cellpadding="8" cellspacing="1" bgcolor="#E3EEF5">
+<tr>
+<td align="right" bgcolor="#F1F7FC" width="200">{if $v[hidden]}匿名{else}{$v[truename]}{/if} <span class="px11">{$v[adddate]}</span> 提问：&nbsp;&nbsp;</td>
+<td bgcolor="#FFFFFF" class="lh18">{$v[content]}</td>
+</tr>
+{if $v[reply]}
+<tr>
+<td align="right" bgcolor="#F1F7FC">网站 <span class="px11">{$v[editdate]}</span> 回复：&nbsp;&nbsp;</td>
+<td bgcolor="#FFFFFF" style="color:#D9251D;">{$v[reply]}</td>
+</tr>
+{/if}
+</table>
+{/loop}		
+{if $pages}<div class="pages">{$pages}</div>{/if}
+{/if}		
+</div>
+</div>
+
+{load('guest.js')}
+<script type="text/javascript">
+function check() {
+	var l;
+	var f;
+	f = 'content';
+	l = Dd(f).value.length;
+	if(l < 5 || l > 1000) {
+		Dmsg('内容应为5-1000字，当前已输入'+l+'字', f);
+		return false;
+	}
+	{if $MOD[guestbook_captcha]}
+	f = 'captcha';
+	l = Dd(f).value;
+	if(!is_captcha(l)) {
+		Dmsg('请填写验证码', f);
+		return false;
+	}
+	{/if}
+	return true;
+}
+{if $action == 'report'}
+$('#type').val('举报不良信息');
+Dd('content').value = Dd('content').value+"\n-------------------------------\n举报理由：\n";
+{/if}
+</script>
+{template 'footer'}

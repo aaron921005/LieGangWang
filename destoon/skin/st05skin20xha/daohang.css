@@ -1,0 +1,31 @@
+/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170603
+*/
+
+/*daohang*/
+
+#box{
+	    position: fixed;
+		left: 30px;
+		top: 160px;
+		display: none;
+	}
+#box ul li{
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		border: 1px dotted #666;
+		text-align: center;
+		border-bottom:none;
+	}
+#box ul li.last{
+		border-bottom: 1px dotted #666;
+	}
+#box ul li .num{
+		color: #666;
+		/*display: none;*/
+	}
+#box ul li .word{
+		display: none;
+		color: #CB1C39;
+	}

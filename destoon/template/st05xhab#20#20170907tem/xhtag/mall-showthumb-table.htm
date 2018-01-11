@@ -1,0 +1,6 @@
+{loop $tags $i $t}
+ <li>
+  <div class="goods-pic"><a title="{$t[alt]}" href="{$t[linkurl]}"> <img alt="{$t[alt]}" src="{$t[thumb]}" onerror="this.src='{DT_SKIN}image/sx_nopic90_90.png'"> </a></div>
+  <div class="goods-price">{$DT[money_sign]}{$t[price]}</div>
+</li>
+{/loop}

@@ -1,0 +1,86 @@
+/*
+ST05-CSS-xiaohei-b2b.bjlsjp.cn-20170503
+*/
+@charset "utf-8";
+
+/*guestbook*/
+#top{width: 100%;height: 78px;margin: 0px auto;background: #ffffff;}
+.top{ width: 1200px; height: 78px; margin: 0px auto; position: relative; }
+.top img{display: block;position: absolute;top: 13px;width:148px;height:53px;}
+.top h3{display: block;position: absolute;top: 26px;left: 170px; color: #555555; font: normal 20px/30px "Microsoft Yahei","simhei"; padding: 0px 0 0 18px; border-left: 1px solid #d2d2d2; }
+.top input{ width: 396px; height: 35px; display: block; position: absolute; top: 21px; left: 373px; border: 0px; font: normal 14px/35px "\5b8b\4f53"; color: #b4b4b4; padding: 0px 0 0 12px; background: url(images/guestbook/guest.png) no-repeat 0 0; }
+.top button{ width: 41px; height: 35px; display: block; position: absolute; top: 21px; left: 781px; border: 0px; cursor: pointer; background: url(images/guestbook/guest.png) no-repeat -408px 0; }
+.top a.question{ width: 139px; height: 30px; display: block; position: absolute; top: 23px; right: 100px; background: url(images/guestbook/guest.png) no-repeat 0 -40px; }
+.guestbanner{ width: 100%; height: 181px; margin: 0px auto; position: relative; text-align: center; background: url(images/guestbook/guest.png) repeat-x 0 -235px; }
+.main{ width: 1104px; margin: -43px auto 0 auto; border: 1px solid #ebebeb; position: relative; z-index: 2; padding: 22px 48px; background: #fff; }
+.maintop{ width: 1104px; height: 55px; float: left; border-bottom: 1px solid #ebebeb; text-indent: 37px; color: #555555; margin-bottom: 10px; font: normal 20px/55px "Microsoft Yahei","simhei"; background: url(images/guestbook/guest.png) no-repeat 0 -70px; }
+.main dl{ width: 904px; display: block; float: left; }
+.main dl dt{ width: 86px; height: 45px; display: block; float: left; text-align: right; color: #666666; font: normal 14px/45px "\5b8b\4f53"; }
+.main dl dt em{ font: normal 12px "Tahoma"; color: #ff6600; margin-right: 8px; }
+.main dl dd{ width: 799px; display: block; float: right; padding: 8px 0; position: relative; }
+.main dl dd select,.main dl dd textarea{ vertical-align: middle; margin: -3px 8px 0 0; padding:6px;border:1px solid #dddddd;}
+.main dl dd input.text{ width: 260px; height: 27px; display: block; float: left; border-bottom: 1px solid #ebebeb; border-right: 1px solid #ebebeb; border-top: 1px solid #b5b5b5; border-left: 1px solid #b5b5b5; font: normal 12px/27px "Tahoma"; padding: 0px 0 0 6px; }
+.selectlist{ width: 160px; height: 27px; display: block; float: left; border-bottom: 1px solid #ebebeb; border-right: 1px solid #ebebeb; border-top: 1px solid #b5b5b5; border-left: 1px solid #b5b5b5; font: normal 12px/27px "\5b8b\4f53"; color: #aaaaaa; padding: 0px 0 0 6px; background: url(images/guestbook/guest.png) 100% -130px; }
+.main dl dd textarea{width: 740px;height: 230px;display: block;float: left;font: normal 12px/22px "Tahoma";color: #333333;padding: 3px 0 0 8px;overflow-y: auto;}
+.sex{ padding: 6px 15px; float: left; font: normal 14px "\5b8b\4f53"; color: #666666; }
+.sex input{ margin: -2px 3px 0 0; vertical-align: middle; }
+.main dl dd p{ width: 640px; display: block; float: left; line-height: 22px; color: #aaaaaa; }
+.main dl dd p input{ vertical-align: middle; margin: -3px 8px 0 0; padding:6px;border:1px solid #dddddd;}
+.main dl dd button{ width: 114px; height: 34px; display: block; float: left; border: 0px; font: normal 14px/34px "\5b8b\4f53"; color: #fff; cursor: pointer; background: #0092d1; }
+
+.wrong{ width: 520px; height: 29px; float: right; line-height: 29px; text-indent: 23px; background: url(images/guestbook/guest.png) no-repeat -434px -166px; }
+.wrong_2{width: 520px; height: 29px; float: left; line-height: 29px;}
+
+.divUpfile{ width: 799px; float: right; position: relative; height: 30px; }
+.divUpfile a.add{ width: 83px; display: block; position: absolute; z-index: 1; text-indent: 21px; font: normal 14px/24px "\5b8b\4f53"; color: #333333; background: url(images/guestbook/guest.png) no-repeat -149px -44px; }
+.divUpfile input.upfile{ display: block; position: absolute; z-index: 2; left: 20px; border: 1px solid #eee; background: aqua; width: 59px; height: 20px; }
+.right{ width: 520px; height: 29px; float: right; background: url(images/guestbook/guest.png) no-repeat -434px -195px; }
+.selectlist input{ border: 0px; width: 160px; height: 27px; display: block; float: left; line-height: 27px; background: none; cursor: pointer; }
+.productlists{ border: 1px #dddddd solid; width: 166px; background: #fff; z-index: 999; position: absolute; top: 36px; left: 0px; }
+.productlists iframe{ position: absolute; top: 36px; left: 0px; }
+.productlists span{ display: block; font: normal 12px/24px "\5b8b\4f53"; text-indent: 8px; cursor: pointer; color: #575859; }
+#foot{ width: 100%; height: 114px; margin: 20px auto 0; background: url(images/guestbook/guest.png) repeat-x 0 -420px; }
+.bottom{ width: 1000px; height: 114px; margin: 0px auto; position: relative; text-align: center; font: normal 12px/28px "Tahoma"; color: #aaaaaa; }
+.bottom p{ font: normal 14px/28px "\5b8b\4f53"; color: #aaaaaa; display: block; padding-top: 30px; }
+.bottom p a{ color: #666666; margin: 0px 5px; }
+.bottom p a:hover{ color: #ff6600; text-decoration: underline; }
+.bottom b{ width: 160px; height: 53px; display: block; position: absolute; top: 0px; right: 0px; background: url(images/guestbook/guest.png) no-repeat 0 -126px; }
+
+.main .submit02 {
+	height:38px;
+	border:0;
+	width:114px;
+	background:#333333;
+	font-size:16px;
+	color:#fff;
+	font-family:"microsoft yahei", "\5B8B\4F53", arial, sans-serif;
+	cursor:pointer;
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#333333', endColorStr='#666666', gradientType='0');
+	background:-webkit-linear-gradient(top, #333333, #666666);
+	background:-moz-linear-gradient(top, #333333, #666666);
+	background:-o-linear-gradient(top, #333333, #666666);
+	background:-ms-linear-gradient(top, #333333, #666666);
+	background:linear-gradient(top, #333333, #666666)
+}
+.main .submit02:hover {
+	background:#666666
+}
+.main .submit {
+	height:38px;
+	border:0;
+	width:114px;
+	background:#c60a09;
+	font-size:16px;
+	color:#fff;
+	font-family:"microsoft yahei", "\5B8B\4F53", arial, sans-serif;
+	cursor:pointer;
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#dd2726', endColorStr='#c60a09', gradientType='0');
+	background:-webkit-linear-gradient(top, #dd2726, #c60a09);
+	background:-moz-linear-gradient(top, #dd2726, #c60a09);
+	background:-o-linear-gradient(top, #dd2726, #c60a09);
+	background:-ms-linear-gradient(top, #dd2726, #c60a09);
+	background:linear-gradient(top, #dd2726, #c60a09)
+}
+.main .submit:hover {
+	background:#c60a09
+}

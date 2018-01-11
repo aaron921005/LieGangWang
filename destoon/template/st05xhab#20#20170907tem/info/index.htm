@@ -1,0 +1,216 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}ppad_brand.css">
+<script type="text/javascript" src="{DT_SKIN}js/info.js"></script>
+<!--主体-->
+<!--1p-->
+<div id="wrap_1" class="m mt20">
+  <div id="banner">
+    <div class="imgs rel" id="focus">
+      <ul>
+      <li><a href="/." target="_blank"><img src="{DT_SKIN}images/aa/info/banner1.jpg" width="815" height="388" alt=""></a></li>
+      <li><a href="/." target="_blank"><img src="{DT_SKIN}images/aa/info/banner2.jpg" width="815" height="388" alt=""></a></li>
+      <li><a href="/." target="_blank"><img src="{DT_SKIN}images/aa/info/banner3.jpg" width="815" height="388" alt=""></a></li>
+      </ul>
+      <i class="adicon"></i> </div>
+    <div class="tabs js-tab">
+    <div class="hd">
+      <ul class="tit">
+        <li class="on">推荐招商</li>
+        <li class="">最新招商</li>
+      </ul>
+      </div>
+       <div class="bd">
+      <div class="con">
+        <ul class="hot-brand-list"><!--推荐级别大于0-->
+        <!--{tag("moduleid=$moduleid&condition=status=3 and level>0&areaid=$cityid&pagesize=3&order=".$MOD[order]."&dir=xhtag&lazy=$lazy&template=thumb-indexbrand")}-->
+        </ul>
+      </div>
+      <div class="con">
+        <ul class="hot-brand-list">
+         <!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&pagesize=3&order=".$MOD[order]."&dir=xhtag&lazy=$lazy&template=thumb-indexbrandzx")}-->
+        </ul>
+      </div>
+</div>
+<script type="text/javascript">
+    jQuery(".js-tab").slide({});
+</script>
+      <div class="btn-wrap clf">
+      <!--会员在线状态 S-->
+        <div class="xh_dl">
+        <a href="{$MODULE[2][linkurl]}{$DT[file_login]}" class="sign-in" target="_blank">登录</a><a href="{$MODULE[2][linkurl]}{$DT[file_register]}" class="sign-up" target="_blank">注册</a>
+        </div>
+        <div class="xh_dl_2_no">
+        <a href="{$MODULE[2][linkurl]}" class="sign-in" target="_blank" rel="nofollow">商务中心</a><a href="{$MODULE[2][linkurl]}logout.php" class="sign-up" rel="nofollow">退出</a>
+        </div>
+        <!--会员在线状态 END-->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pagecontent">
+<div class="louxhinfo lou_2">
+    <div class="z3">
+        <div class="z3top"><i>热门招商•</i><span>每周不断更新</span><em>期待爆惊喜</em></div>
+        <div class="z3pic">
+        <div class="ad_all rel">
+        <a href="#">
+          <img src="{DT_SKIN}images/aa/info/aa1.jpg" alt=""></a>
+      <i class="adicon"></i>
+    </div>
+</div>
+        <div class="z4list xhlist_hot">
+            <ul>
+            <!--{tag("moduleid=$moduleid&condition=status=3 and level=1 and thumb<>''&areaid=$cityid&order=".$MOD[order]."&pagesize=3&length=38&lazy=$lazy&dir=xhtag&template=xh-info-indexlou")}-->
+            </ul>
+        </div>
+         <div class="z4list_text">
+         <div class="z4list_text_x">
+ <h3>热门招商推荐</h3>
+ <span class="fr"><a href="{$EXT[ad_url]}" target="_blank" rel="nofollow">我想出现在这里</a></span>
+ </div>
+        <ul>
+<!--{tag("moduleid=$moduleid&condition=status=3 and level=1&areaid=$cityid&order=".$MOD[order]."&pagesize=20&length=38&dir=xhtag&template=xh-info-indexloutext")}-->
+          </ul>
+          </div>
+    </div>
+ </div>
+  {php $mid=$moduleid}
+  {php $child = get_maincat(0,$mid,1);}
+  {loop $child $i $c}
+  {php $kk=$i+1}
+{if $i < 5}
+<div class="louxhinfo">
+<span t="{$kk}" id="f{$kk}" name="f{$kk}"></span>
+<div class="z4">
+   <div class="z4top"><i><a href="{$MOD[linkurl]}{$c[linkurl]}" target="_blank" rel="nofollow">{$c[catname]}</a>•</i><span class="wineico">每天不断更新</span></div>
+    <div class="z4list xhlist">
+        <ul>
+<!--{tag("moduleid=$moduleid&condition=status=3 and thumb<>''&areaid=$cityid&catid=".$c[catid]."&order=".$MOD[order]."&pagesize=9&length=38&lazy=$lazy&dir=xhtag&template=xh-info-indexlou")}-->
+          </ul>
+          </div>
+ <div class="z4list_text">
+  <div class="z4list_text_x">
+ <h3>{$c[catname]}最新招商</h3>
+ <span class="fr"><a href="{$MOD[linkurl]}{$c[linkurl]}" target="_blank" rel="nofollow">更多>></a></span>
+ </div>
+        <ul>
+<!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&catid=".$c[catid]."&order=".$MOD[order]."&pagesize=20&length=38&dir=xhtag&template=xh-info-indexloutext")}-->
+          </ul>
+          </div>
+   </div>
+</div>
+{/if}
+   {/loop}
+   
+</div>
+<!--招商排行-->
+<div class="m info-cat mt20">
+<h3>行业招商排行</h3>
+ <div class="hot-div">
+   {php $mid = $moduleid;}
+   {php $infohot = get_maincat(0, $mid, 1);}
+   {loop $infohot $i $x}
+   {if $i<4}
+ <div class="info_hot {if $i%4==3}no_mr{/if}">
+<div class="info_hot_x">
+ <h2><a href="{$MOD[linkurl]}{$x[linkurl]}" title="{$x[catname]}">{$x[catname]}</a></h2>
+<span class="fr">TOP10</span>
+ </div>
+ <ul class="info_hot_text">
+<!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&catid=".$x[catid]."&order=".$MOD[order]."&pagesize=10&length=38&dir=xhtag&template=xh-info-indexhot")}-->
+ </ul>
+ </div>
+  {/if}
+   {/loop}
+ </div>
+</div>
+<!--招商排行-->
+<div class="m info-cat mt20">
+<h3>全站招商排行</h3>
+ <div class="hot-div">
+ <!--热门排序-->
+ <div class="info_hot">
+  <div class="info_hot_x">
+ <h2>热门排行</h2>
+ <span class="fr">TOP10</span>
+ </div>
+ <ul class="info_hot_text">
+<!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=hits desc&pagesize=10&length=38&dir=xhtag&template=xh-info-indexhot")}-->
+ </ul>
+ </div>
+  <!--推荐排序-->
+ <div class="info_hot">
+   <div class="info_hot_x">
+ <h2>推荐排行</h2>
+  <span class="fr">TOP10</span>
+ </div>
+ <ul class="info_hot_text">
+<!--{tag("moduleid=$moduleid&condition=status=3 and level>0&areaid=$cityid&order=".$MOD[order]."&pagesize=10&length=38&dir=xhtag&template=xh-info-indexhot")}-->
+ </ul>
+ </div>
+  <!--最新添加时间排序-->
+ <div class="info_hot">
+   <div class="info_hot_x">
+ <h2>新入排行</h2>
+  <span class="fr">TOP10</span>
+ </div>
+ <ul class="info_hot_text">
+<!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=10&length=38&dir=xhtag&template=xh-info-indexhot")}-->
+ </ul>
+ </div>
+  <!--最新更新时间排序-->
+ <div class="info_hot no_mr">
+   <div class="info_hot_x">
+ <h2>活跃排行</h2>
+  <span class="fr">TOP10</span>
+ </div>
+ <ul class="info_hot_text">
+<!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=10&length=38&dir=xhtag&template=xh-info-indexhot")}-->
+ </ul>
+ </div>
+
+ </div>
+</div> 
+<!--按行业看招商-->
+<div class="m com-cat mt20">
+<h3>按行业看招商</h3>
+ <div class="com-div">
+   <ul class="com-list">
+   {php $mid = $moduleid;}
+   {php $child = get_maincat(0, $mid, 1);}
+   {loop $child $i $c}
+  <li><a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}">{$c[catname]}</a></li>
+   {/loop}
+   </ul>
+ </div>
+</div> 
+<!--按地区看招商-->
+<div class="m com-cat">
+<h3>按地区看招商</h3>
+ <div class="com-div">
+   <ul class="com-list">
+  {php $mainarea = get_mainarea(0)}
+  {loop $mainarea $k $v}
+  <li><a href="{$MOD[linkurl]}search.php?areaid={$v[areaid]}" title="{$v[areaname]}" rel="nofollow">{$v[areaname]}</a></li>
+   {/loop}
+   </ul>
+ </div>
+</div>
+
+<!--滚动头部 start -->
+<div id="loutinav">
+  <div class="loutinav">
+    <div class="toperleft">
+   <ul>
+   <li class="active"><span>推荐招商</span></li>
+   {loop $maincat $i $c}
+   {if $i < 5}
+      <li><span>{$c[catname]}</span></li>
+    {/if}
+    {/loop}
+       </ul>
+    </div>
+    <div class="toperright"><span class="to-top" href="#">返回顶部</span></div>
+  </div>
+    </div>
+{template 'footer'}

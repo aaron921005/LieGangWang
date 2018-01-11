@@ -1,0 +1,9 @@
+{loop $tags $i $t}
+<li>
+   <dl>
+   <dt class="goods-name"><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}<em></em></a></dt>
+   <dd class="goods-pic"><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic258_258.png'"></a></dd>
+   <dd class="goods-price">{$DT[money_sign]}{$t[price]}</dd>
+   </dl>
+</li>
+{/loop}

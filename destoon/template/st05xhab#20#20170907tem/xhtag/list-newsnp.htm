@@ -1,0 +1,7 @@
+{if $tags}
+{loop $tags $i $t}
+<h4><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if} class="font20{if $class} {$class}{/if}" title="{$t[alt]}">{$t[title]}</a></h4>
+{/loop}
+{else}
+暂无
+{/if}

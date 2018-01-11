@@ -1,0 +1,6 @@
+{loop $tags $i $t}
+<li>
+  <p class="fl mr5"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if} class="yuan-img"><img src="{DT_SKIN}images/video/v10.png"></a><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if} class="rec-img"><img src="{$t[thumb]}" width="72" height="72" alt="{$t[alt]}"></a><span>{$t[title]}</span></p>
+  <div class="fl people-word">{dsubstr($t[introduce], 70, '…')}</div>
+</li>
+{/loop}

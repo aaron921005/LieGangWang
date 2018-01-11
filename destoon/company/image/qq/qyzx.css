@@ -1,0 +1,53 @@
+/*--------------------------------------------------
+ *@名称:		相关的重要css
+ *@作者:		小黑（xiaohei）
+ *@QQ:		    290948585
+ *@Date:        2016-11-19
+ *@网站:		b2b.bjlsjp.cn
+ *特注：     此文件非经许可，请勿修改
+--------------------------------------------------*/
+/*企业在线*/
+.floater-wrap{position:fixed;_position:absolute;right:0;width:160px;background-color:#fff;font-family: "Microsoft YaHei", SimHei, "WenQuanYi Zen Hei", Tahoma, Arial, STHeiti, sans-serif;}
+.floater-hd {height:33px;background-color:#ff7d27;color:#fff;font-size:14px;padding:0 10px;line-height:33px;}
+.floater-hd span{float:left;}
+.floater-bd,.kaopur {border:1px #d4d4d4 solid;border-top:0; background:#fff;}
+.floater-hd a {float:right;width:19px;height:33px;background:url(lxkf_03.png) -111px 1px no-repeat;}
+.close_btn{ cursor: pointer;}
+.fl-img{padding-top:120px;background:url(lxkf_03.png) center -33px no-repeat;text-align:center;}
+.fl-img p {background-color:#fff;}
+.fl-img p span{color:#ff7d27;font-size:14px; line-height:22px; font-weight: 600; padding-left: 1px;}
+.q_qlink{padding:7px 0 15px 0;}
+.q_qlink a{display:block;width:79px;margin:0 auto;height:24px;background:url(lxkf_03.png) -33px -202px no-repeat;}
+
+
+a.qq{color: #e22e2e;font-size: 16px;background-color: #fff;font-weight: normal;padding-left: 0px;height: 30px;line-height: 30px;}
+a.qq:hover{background-color: #fff;}
+.bj1{ margin-top:220px;}
+.bj1 a:hover{ background:#e46f00;}
+
+/*企业在线*/
+.floater-wrap{ width:auto; top:140px; background:none;}
+.service_div{display:block; width:32px;height:124px; background:url(serbg.png) no-repeat 0px 0px; float:right;margin-left:10px;cursor:pointer;}
+.service_div:hover{ background:url(serbg.png) no-repeat 0px -126px; }
+.service_con{ float:left;width:150px;display:none; }
+
+.kaopur{text-align: center;padding: 10px 0px 10px;}
+.kaopur p{color: #ff7d27;font-size: 14px;}
+
+
+/*弹框QQ*/
+.kefy_user_01 {width:425px;position:fixed;left:50%;top:50%;margin:-100px 0 0 -210px;display:none;box-shadow:0 1px 6px rgba(0,0,0,.35);*border:1px solid #d5d5d5;border:1px solid #d5d5d5\9;}
+.kefy_user_01 .top_box {background:#F86539;padding:5px 15px 5px 15px;height:32px;overflow:hidden;}
+.kefy_user_01 .top_box .close {background:url('close.png') no-repeat;width:16px;height:16px;display:block;}
+.kefy_user_01 .top_box .left_txt {float:left;font-size:14px;font-weight:bold;color:#FFFFFF;}
+.kefy_user_01 .top_box ul {padding:8px 0px 5px 0px;}
+.kefy_user_01 .main_box {background:#FFFEFF;padding:5px 5px 0px 5px;overflow:hidden;}
+.kefy_user_01 .main_box .kf_img {background:url('kf_01.gif');width:120px;height:120px;float:left;margin:15px 20px 0px 0px;}
+.kefy_user_01 .main_box .kf_introduce {margin:25px 0px 20px 0px;font-size:14px;line-height:22px;}
+.kefy_user_01 .main_box ul {float:right;margin:0px 10px 0px 0px;}
+.kefy_user_01 .main_box li {float:left;margin:0px 0px 0px 20px;text-align:center;}
+.kefy_user_01 .main_box li a {text-decoration:none;}
+.kefy_user_01 .main_box .kf_zixun {background:#FF9900;width:80px;height:30px;line-height:30px;overflow:hidden;color:#FFFFFF;}
+.kefy_user_01 .main_box .kf_zixun:hover {background:#FF8800;width:80px;height:30px;line-height:30px;overflow:hidden;color:#FFFFFF;}
+.kefy_user_01 .main_box .kf_zixun a {color:#FFFFFF;}
+.kefy_user_01 .main_box .kf_nozixun {background:#DDDDDD;width:80px;height:30px;line-height:30px;overflow:hidden;color:#000000;}

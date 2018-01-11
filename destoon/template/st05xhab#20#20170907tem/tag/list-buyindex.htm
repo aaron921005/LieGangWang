@@ -1,0 +1,12 @@
+{loop $tags $k $t}
+ <li class="{if $k==6}no_bm {/if}clearfix" id="item_{$t[itemid]}">
+ <?php $lasted_day =(strtotime(timetodate($t[totime], 3))-strtotime(date('Y-m-d')))/3600/24;?>
+ <a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+ <span class="buy_chakan"><strong>查看详情</strong></span>
+<span class="day">{if $t[totime]}{if $t[totime] < $DT_TIME}<em>已过期</em>{else}还剩<em>{$lasted_day}</em>天{/if}{else}长期有效{/if}</span>
+<span class="time">{timetodate($t[edittime], $datetype)}</span>
+<span class="address">{area_pos($t[areaid], '/', 2)} </span>
+<span class="name">{$t[title]}</span>
+</a>
+</li>
+{/loop}

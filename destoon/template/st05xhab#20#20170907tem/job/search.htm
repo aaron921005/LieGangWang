@@ -1,0 +1,308 @@
+{template 'header-job'}
+<div class="m">
+  <div class="nav">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; <a href="{$MOD[linkurl]}search.php">搜索</a></div>
+</div>
+<div class="m">
+  <div class="left_box_so" style="border-top:none;">
+    <div class="type"> <a href="{$MOD[linkurl]}search.php?action=job&kw={urlencode($kw)}" class="{if $action=='resume'}type_2{else}type_1{/if}">职位搜索</a> <a href="{$MOD[linkurl]}search.php?action=resume&kw={urlencode($kw)}" class="{if $action=='resume'}type_1{else}type_2{/if}">人才搜索</a> </div>
+    {if $action == 'resume'}
+    <div class="list_top">
+      <form action="{$MOD[linkurl]}search.php">
+        <input type="hidden" name="action" id="action" value="{if $action=='job'}job{else}resume{/if}"/>
+        <div style="padding:10px 0 10px 10px;">
+          <table cellpadding="3" cellspacing="3">
+            <tr>
+              <td width="80" align="right">关 键 词：</td>
+              <td colspan="3"><input type="text" size="80" name="kw" value="{$kw}" /></td>
+            </tr>
+            <tr>
+              <td align="right">期望薪资：</td>
+              <td colspan="3"><input type="text" size="10" name="minsalary" value="{$minsalary}"/>
+                ~
+                <input type="text" size="10" name="maxsalary" value="{$maxsalary}"/>
+                &nbsp;&nbsp;
+                <select name="type">
+			{loop $TYPE $k $v}
+                  <option value="{$k}"{if $type==$k} selected{/if}>{$v}</option>
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="gender">
+			{loop $GENDER $k $v}
+                  <option value="{$k}"{if $gender==$k} selected{/if}>{$v}</option>
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="marriage">
+			{loop $MARRIAGE $k $v}
+                  <option value="{$k}"{if $marriage==$k} selected{/if}>{$v}</option>
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="education">
+			{loop $EDUCATION $k $v}
+                  <option value="{$k}"{if $education==$k} selected{/if}>{$v}</option>
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="experience">
+                  <option value="0"{if $experience==0} selected{/if}>工作经验</option>
+                  <script type="text/javascript">
+			for(i=1;i<21;i++) {
+				document.write('<option value="'+i+'"'+(i=={$experience} ? ' selected' : '')+'>'+i+'年以上</option>');
+			}
+			</script>
+                </select></td>
+            </tr>
+            <tr>
+              <td align="right">更新日期：</td>
+              <td>{dcalendar('fromdate', $fromdate, '')} 至 {dcalendar('todate', $todate, '')}</td>
+              <td align="right">&nbsp;&nbsp;行业/职位：</td>
+              <td>{$category_select}</td>
+            </tr>
+            <tr>
+              <td align="right">信息类型：</td>
+              <td><input type="checkbox" name="level" id="level" value="1"{if $level} checked{/if}/>
+                推荐
+                <input type="checkbox" name="thumb" id="thumb" value="1"{if $thumb} checked{/if}/>
+                有照片 </td>
+              <td align="right">&nbsp;&nbsp;所在地区：</td>
+              <td>{$area_select}</td>
+            </tr>
+            <tr>
+              <td align="right"></td>
+              <td colspan="3"><input type="image" src="{DT_SKIN}images/job/resume_search.png" style="border: 0;padding: 0;">
+                <a href="{$MOD[linkurl]}search.php?action=resume"><img src="{DT_SKIN}images/job/btn_reset_search.png"/></a> <a href="{$MODULE[2][linkurl]}{$DT[file_my]}?action=add&mid={$moduleid}&resume=1" id="add_link"><img src="{DT_SKIN}image/add_resume.gif" style="margin-left:150px;" id="add_img"/></a></td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+    <div class="m mt20">
+      <div class="job_list s_position_list fl">
+      {if $tags}
+      <ul class="item_con_list"> 
+      {loop $tags $k $t}
+     <li class="con_list_item first_row" id="meu">
+                <div class="list_item_top">
+                  <div class="position resume">
+                    <div class="p_top">
+                      <a target="_blank" href="{$t[linkurl]}" class="position_link"><h2>{$t[truename]}</h2></a>
+                    {php $uinfo = userinfo($t[username]);}
+                    {if $uinfo[vmobile]}
+                     <img class="icon icon_phone" src="{DT_SKIN}images/job/icon_phone.png" title="手机已验证">
+                    {/if}
+                      <span class="address">[{area_pos($t[areaid], '', 1)}]</span>
+                      <span class="format-time">更新时间：{timetodate($t[edittime], 3)}</span>
+                    </div>
+                    <div class="p_bot">
+                      <span class="money">{if $t[gender]==1}男{else}女{/if} | {$t[age]}岁 | {$EDUCATION[$t[education]]} | {if $t[experience]}{$t[experience]}年经验{else}无工作经验{/if}  |  {if $t[minsalary] && $t[maxsalary]}
+      {$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+    {elseif $t[minsalary]}
+      {$t[minsalary]}{$DT[money_unit]}/月以上
+    {elseif $t[maxsalary]}
+      {$t[maxsalary]}{$DT[money_unit]}/月以内
+    {else}
+      面议
+    {/if}</span>
+                    </div>
+                  </div>
+                  <div class="company">
+                  <a target="_blank" href="{$t[linkurl]}">
+                    <div class="industry add_favoritesr"></div>
+                    </a>
+                  </div>
+                  <div class="com_logo download collect"><a href="javascript:window.open('{rewrite('resume.php?print=1&itemid='.$t[itemid])}');void(0);">下载简历</a></div>
+                </div>
+                <div class="list_item_bot resume">
+                  <div class="li_b_l">{$CATEGORY[$t[parentid]][catname]}  |  {$SITUATION[$t[situation]]}</div>
+                </div>
+                <div class="logo"><img src="{if $t[thumb]}{$t[thumb]}{else}{DT_SKIN}images/job/man.png{/if}"></div>
+</li>
+      {/loop}
+      </ul>
+    {if $pages}
+    <div class="pages">{$pages}</div>
+    {/if}
+    {else}
+    <div class="noresult">
+        {template 'noresult', 'message'}
+        </div>
+        {/if}
+        </div>
+      <div class="job_tj fr">
+      <div class="t_position arx_list_info">
+          <div class="t_title"><div class="t_tit fl">推荐人才</div></div>
+              <div class="t_position_dl">
+<!--{tag("moduleid=$moduleid&table=resume&length=12&condition=status=3 and level>0 and open=3&areaid=$cityid&pagesize=5&showcat=1&order=addtime desc&dir=xhtag&template=job-list-tjresume")}-->
+          </div>
+          </div>
+</div>
+</div>
+    {else}
+    <div class="list_top">
+      <form action="{$MOD[linkurl]}search.php">
+        <input type="hidden" name="action" id="action" value="{if $action=='job'}job{else}resume{/if}"/>
+        <div style="padding:10px 0 10px 10px;">
+          <table cellpadding="3" cellspacing="3">
+            <tr>
+              <td width="80" align="right">关 键 词：</td>
+              <td colspan="3"><input type="text" size="80" name="kw" value="{$kw}" /></td>
+            </tr>
+            <tr>
+              <td align="right">待遇水平：</td>
+              <td colspan="3"><input type="text" size="10" name="minsalary" value="{$minsalary}"/>
+                ~
+                <input type="text" size="10" name="maxsalary" value="{$maxsalary}"/>
+                &nbsp;&nbsp;
+                <select name="type">  
+			{loop $TYPE $k $v}
+                  <option value="{$k}"{if $type==$k} selected{/if}>{$v}</option>
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="gender">
+			{loop $GENDER $k $v}
+                  <option value="{$k}"{if $gender==$k} selected{/if}>{$v}</option> 
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="marriage">
+			{loop $MARRIAGE $k $v}
+                  <option value="{$k}"{if $marriage==$k} selected{/if}>{$v}</option> 
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="education"> 
+			{loop $EDUCATION $k $v}
+                  <option value="{$k}"{if $education==$k} selected{/if}>{$v}</option>  
+			{/loop}
+                </select>
+                &nbsp;&nbsp;
+                <select name="experience">
+                  <option value="0"{if $experience==0} selected{/if}>工作经验</option>
+                  <script type="text/javascript">
+			for(i=1;i<21;i++) {
+				document.write('<option value="'+i+'"'+(i=={$experience} ? ' selected' : '')+'>'+i+'年以上</option>');
+			}
+			</script>
+                </select></td>
+            </tr>
+            <tr>
+              <td align="right">更新日期：</td>
+              <td>{dcalendar('fromdate', $fromdate, '')} 至 {dcalendar('todate', $todate, '')}</td>
+              <td align="right">&nbsp;&nbsp;行业/职位：</td>
+              <td>{$category_select}</td>
+            </tr>
+            <tr>
+              <td align="right">信息类型：</td>
+              <td><input type="checkbox" name="level" id="level" value="1"{if $level} checked{/if}/>
+                推荐
+                <input type="checkbox" name="vip" id="vip" value="1"{if $vip} checked{/if}/>
+                {VIP} </td>
+              <td align="right">&nbsp;&nbsp;所在地区：</td>
+              <td>{$area_select}</td>
+            </tr>
+            <tr>
+              <td align="right"></td>
+              <td colspan="3"><input type="image" src="{DT_SKIN}images/job/job_search.png" style="border: 0;padding: 0;">
+                <a href="{$MOD[linkurl]}search.php?action=job" rel="nofollow"><img src="{DT_SKIN}images/job/btn_reset_search.png"/></a> <a href="{$MODULE[2][linkurl]}{$DT[file_my]}?action=add&mid={$moduleid}" id="add_link" rel="nofollow"><img src="{DT_SKIN}image/add_job.gif" style="margin-left:150px;" id="add_img"/></a></td>
+            </tr>
+          </table>
+        </div>
+        {if $CP}
+        {loop $PPT $p}
+        <div class="ppt">
+          <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td class="ppt_l" valign="top">按{$p[name]}</td>
+              <td class="ppt_r" valign="top"><input type="hidden" name="ppt_{$p[oid]}" id="ppt_{$p[oid]}" value="{$p[select]}"/>
+                <a href="###" onclick="Dd('ppt_{$p[oid]}').value='';Dd('fsearch').submit();">{if $p[select]==''}<span>全部</span>{else}全部{/if}</a> {loop $p[options] $o}
+                &nbsp;|&nbsp;<a href="###" onclick="Dd('ppt_{$p[oid]}').value='{$o}';Dd('fsearch').submit();">{if $p[select]==$o}<span>{$o}</span>{else}{$o}{/if}</a> {/loop} </td>
+            </tr>
+          </table>
+        </div>
+        {/loop}
+        {/if}
+      </form>
+    </div>
+    {if $page==1 && $kw}
+    {ad($moduleid,$catid,$kw,6)}
+    {load('m'.$moduleid.'_k'.urlencode($kw).'.htm')}
+    {/if}
+    <div class="m mt20">
+      <div class="job_list s_position_list fl">
+      {if $tags}
+      <ul class="item_con_list"> 
+        {loop $tags $k $t}
+        <li class="con_list_item first_row">
+          <div class="list_item_top">
+            <div class="position">
+              <div class="p_top"> <a target="_blank" href="{$t[linkurl]}" class="position_link">
+                <h2>{$t[title]}</h2>
+                </a> <span class="format-time"> {if $t[vip] && $k < 3} <img src="{DT_SKIN}images/job/placedtop.png" alt="" title="置顶职位" style="display: inline-bock;">{/if} </span> </div>
+              <div class="p_bot"> <span class="money"> <a href="{userurl($t[username])}" target="_blank" class="underline job-company">{$t[company]}</a>{if $t[vip]}<img src="{DT_SKIN}image/vip_{$t[vip]}.gif" alt="{VIP}" title="{VIP}:{$t[vip]}级"/>{/if}</span>
+                <div class="li_b_l">[{area_pos($t[areaid], '')}]</div>
+              </div>
+            </div>
+            <div class="company">
+            <a target="_blank" href="{$t[linkurl]}"><div class="industry add_favoritesr"></div></a>
+            </div>
+            <div class="com_logo app_jobs"><a href="{$MOD[linkurl]}{rewrite('apply.php?itemid='.$t[itemid])}" target="_blank">申请职位</a></div>
+          </div>
+          <div class="list_item_bot">
+            <div class="li_b_l"><span>行业：{$CATEGORY[$t[parentid]][catname]}</span><span class="wage">工薪：
+            {if $t[minsalary] && $t[maxsalary]}
+                {$t[minsalary]}-{$t[maxsalary]}{$DT[money_unit]}/月
+                {elseif $t[minsalary]}
+                {$t[minsalary]}{$DT[money_unit]}/月以上
+                {elseif $t[maxsalary]}
+                {$t[maxsalary]}{$DT[money_unit]}/月以内
+                {else}
+                面议
+                {/if} </span><span>年龄： {if $t[minage] && $t[maxage]}
+                {$t[minage]}-{$t[maxage]}岁
+                {elseif $t[minage]}
+                {$t[minage]}岁以上
+                {elseif $t[maxage]}
+                {$t[maxage]}岁以内
+                {else}
+                不限年龄
+                {/if} </span><span>人数：{if $t[total]}{$t[total]}人{else}若干{/if}</span></div>
+          </div>
+        </li>
+        {/loop}
+        </ul>		
+        {if $pages}
+        <div class="pages">{$pages}</div>
+        {/if}
+        {else}
+        <div class="noresult">
+        {template 'noresult', 'message'}
+        </div>
+        {/if}
+        </div>
+      <div class="job_tj fr">
+        <div class="box_head">
+          <div><i></i><strong>最新职位</strong></div>
+        </div>
+        <div class="box_body_new"> 
+          <!--{tag("moduleid=$moduleid&length=34&condition=status=3&areaid=$cityid&pagesize=10&order=addtime desc&dir=xhtag&template=sell-search_rank")}--> 
+        </div>
+        <div class="b10">&nbsp;</div>
+        <div class="arx_list_info">
+          <div class="box_head">
+            <div><i></i><strong>推荐职位</strong></div>
+          </div>
+          <div class="box_body_new"> 
+            <!--{tag("moduleid=$moduleid&length=34&condition=status=3 and level=1&areaid=$cityid&pagesize=10&order=addtime desc&dir=xhtag&template=sell-search_rank")}--> 
+          </div>
+        </div>
+      </div>
+    </div>
+     {/if}
+  </div>
+</div>
+<div class="clearfix"></div>
+<div id="hotproduct">&nbsp;</div>
+{template 'footer'}

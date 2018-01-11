@@ -1,0 +1,5 @@
+{loop $tags $k $t}
+<a href="{$t[linkurl]}" title="{$t[alt]}"{if $target} target="_blank"{/if}><img src="{$t[thumb]}" width="{$width}" height="{$height}" alt="{$t[alt]}"/>
+<div class="news-tit">{$t[title]}</div>
+</a>
+{/loop}

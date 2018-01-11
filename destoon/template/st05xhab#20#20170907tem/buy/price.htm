@@ -1,0 +1,314 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}sell_inquiry.css">
+<div class="m">
+	<div class="nav">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; <a href="{$linkurl}">{$item[title]}</a> &raquo; 报价单</div>
+   <div class="registry-container">
+    <div class="registry-content">
+        {if !$_userid}
+        <div class="xzly">
+            <span class="xzs"></span>
+            <p class="wred">您尚未登录</p>
+            <p>注册{$DT[sitename]}会员，<span class="wreds">减少每次报价填写联系方式的麻烦</span>。同时享受供应秘书、商机推荐等服务！</p>
+            <p class="ljbj">
+            <a href="{$MODULE[2][linkurl]}{$DT[file_register]}" title="立即注册" target="_blank">立即注册</a>
+            <a href="{$MODULE[2][linkurl]}{$DT[file_login]}" title="已有账号，登录">已有账号，登录</a>
+            </p>
+            </div>
+            {/if}
+    <div class="fl-clr pdqc">
+    <form method="post" action="{$MOD[linkurl]}price.php" id="dform" onsubmit="return check();">
+    <input type="hidden" name="forward" value="{$forward}"/>
+    <input type="hidden" name="itemid" value="{$itemid}"/>
+      <div class="box-bd fldl fl-clr">
+      <h1 class="pr_title">您正在为【{$item[title]}】提供报价</h1>
+      <div class="fl-left flxt">
+     <p class="cnt"><span class="cn-tit">填写报价单内容</span></p>
+
+     <!-- controls-mod end -->
+                        <div class="controls-mod fl-clr">
+                            <div class="c1"><span class="asterisk">*</span>报价主题：</div>
+                            <div class="c2"><input type="text" name="title" value="{$title}" size="60" id="title"> <img src="{DT_SKIN}image/ico_tips.gif" alt="" title="建议您修改主题，吸引对方注意,得到优先回复!"/></div>
+                            <div class="c3"><p id="dtitle" class="erro"></p></div>
+                        </div> 
+                        <!-- controls-mod end -->
+                        <div class="controls-mod fl-clr">
+                            <div class="c1">快捷提问：</div>
+                            <div class="c2">
+                                <select onchange="if(this.value)Dd('content').value+=this.value+'\n';">
+    <option value="">请选择常用问题</option>
+    {loop $iask $v}
+    <option value="{$v}">{$v}</option>
+    {/loop}
+    </select>
+    <span class="f_gray">(不用打字 “快捷提问”帮您忙！) </span>
+                            </div>
+                           
+                        </div>
+                         <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                            <div class="c1"><span class="asterisk">*</span>主要内容：</div>
+                            <div class="c2" style="padding-bottom:0;">
+                                <div class="fl-locate">
+                                    <textarea name="content" id="content" style="width:370px; height:183px" validation-group="default"></textarea><br/>
+                                我希望在 {dcalendar('date', $date)} 日前回复 
+                            </div>
+                            </div>
+                        <div class="c3" style="margin-left: 25%;"><p id="dcontent" class="erro"></p></div>
+                    </div> 
+                    <!-- controls-mod end -->
+              {if $_userid}
+                    <p class="cnt"><span class="cn-tit">联系方式</span></p>
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">公司名称：</div>
+                        <div class="c2">{$company}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">联 系 人：</div>
+                        <div class="c2">{$truename}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">联系电话：</div>
+                        <div class="c2">{$telephone}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">电子邮箱：</div>
+                        <div class="c2">{$email}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {if $DT[im_qq]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">Q   Q：</div>
+                        <div class="c2">{$qq}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                    {if $DT[im_ali]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">阿里旺旺：</div>
+                        <div class="c2">{$ali}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                    {if $DT[im_skype]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">Skype：</div>
+                        <div class="c2">{$Skype}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                    {if $DT[im_msn]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">MSN：</div>
+                        <div class="c2">{$msn}</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+				{else}
+                 <div class="controls-mod fl-clr no_hy">
+                  还不是会员？请 <a href="{$MODULE[2][linkurl]}{$DT[file_register]}" class="f_b" target="_top">注册</a> 或 请留下您的联系方式&nbsp;&nbsp;已经是会员？请 <a href="{$MODULE[2][linkurl]}{$DT[file_login]}" class="f_b" target="_top">登录</a>
+              </div>
+                  <p class="cnt"><span class="cn-tit">联系方式</span></p>
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">公司名称：</div>
+                        <div class="c2">
+                            <input type="text" name="company" id="company" value="" validation-group="default">
+                        </div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                        <div class="c1"><span class="asterisk">*</span>联 系 人：</div>
+                        <div class="c2">
+                            <input type="text" name="truename" id="truename" value="" validation-group="default">
+                        </div>
+                        <div class="c3"><p id="dtruename" class="erro"></p></div>
+                    </div> 
+                     <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                        <div class="c1"><span class="asterisk">*</span>联系电话：</div>
+                        <div class="c2">
+                            <input type="text" name="telephone" id="telephone" value="" validation-group="default">
+                        </div>
+                        <div class="c3"><p id="dtelephone" class="erro"></p></div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">电子邮箱：</div>
+                        <div class="c2">
+                            <input type="text" name="email" id="email" value="" validation-group="default">
+                        </div>
+                        <div class="c3"><p id="demail" class="erro"></p></div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {if $DT[im_qq]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">QQ：</div>
+                        <div class="c2">
+                            <input type="text" name="qq" id="qq" value="" validation-group="default">
+                        </div>
+                        <div class="c3"><p id="qq" class="erro"></p></div>
+                    </div> 
+                    {/if}
+                    <!-- controls-mod end -->
+                    {if $DT[im_ali]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">阿里旺旺：</div>
+                        <div class="c2">
+                            <input type="text" name="ali" id="ali" value="" validation-group="default">
+                        </div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                    {if $DT[im_msn]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">M S N：</div>
+                        <div class="c2">
+                            <input type="text" name="msn" id="msn" value="" validation-group="default">
+                        </div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                     {if $DT[im_skype]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">Skype：</div>
+                        <div class="c2">
+                            <input type="text" name="skype" id="skype" value="" validation-group="default">
+                        </div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+
+                {/if}
+               {if $need_question}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1"><span class="asterisk">*</span>验证问题: </div>
+                        <div class="c2 c2_no">{template 'question', 'chip'} </div>
+                        <div class="c3"><p id="danswer" class="erro"></p></div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                   {if $need_captcha}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1"><span class="asterisk">*</span>验 证 码：</div>
+                        <div class="c2 c2_no">{template 'captcha', 'chip'}</div>
+                        <div class="c3"><p id="dcaptcha" class="erro"></p></div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+                    {if $_userid && $DT[sms]}
+                    <div class="controls-mod fl-clr">
+                        <div class="c1">短信通知：</div>
+                        <div class="c2"><input type="checkbox" name="sendsms" value="1"/> 发送短信通知至接收人手机 (<a href="{$MODULE[2][linkurl]}sms.php" target="_blank">我的可用短信 <strong class="f_blue">{$_sms}</strong> 条</a>)</div>
+                    </div> 
+                    <!-- controls-mod end -->
+                    {/if}
+
+                </div>
+
+                <div class="fl-right" style="width:32%">
+                    <ul class="com-inf">
+                    <li><div class="vertical-img"><img src="{$item[thumb]}" width="100" height="100" style="margin-top: 5px;">
+                        </div></li>
+                    <li><span>报价产品：</span><a href="{$MOD[linkurl]}{$item[linkurl]}" class="blue-mark" target="_blank">{$item[title]}</a></li>
+                    {if $_userid}
+                    <li><span>所属公司：</span><a href="{userurl($item[username])}" class="blue-mark" target="_blank">{$item[company]}</a></li>
+                    <li><span>联 系 人：</span>{$item[truename]}</li>
+                    <li><span>联系电话：</span>{$item[telephone]}</li>
+                    <li><span>联系手机：</span>{$item[mobile]}</li>
+                    {if $item[qq]}
+                    <li><span>客服：</span><a href="tencent://message/?uin={$item[qq]}&Site={$item[title]}&Menu=yes" rel="nofollow"><img src="//wpa.qq.com/pa?p=1:{$item[qq]}:17" width="25" height="17" title="点击QQ交谈/留言" alt=""/>{$item[qq]}</a></li>{/if}
+                    {else}
+                    <li><span>所属公司：</span>{t_companyname($item[company])}</li>
+                    <li><span>联 系 人：</span>***</li>
+                    <li><span>联系电话：</span>{hideStar($item[telephone])}</li>
+                    <li><span>联系手机：</span>{hideStar($item[mobile])}</li>
+                     {/if}
+        </ul>
+{if !$_userid}<div class="dl_ts">登录后可看该公司资料【<a href="{$MODULE[2][linkurl]}{$DT[file_login]}" title="已有账号，登录">登录</a>】【<a href="{$MODULE[2][linkurl]}{$DT[file_register]}" title="立即注册" target="_blank">注册</a>】</div>{/if}
+                </div>
+        </div> 
+        <!-- bd end -->
+    {if $MG[price_limit]}
+    <div class="box-bd xzts">
+    &nbsp;&nbsp;&nbsp;<span class="f_b f_red">温馨提示 </span>:
+    &nbsp;&nbsp;&nbsp;今日可报价 <span class="f_b f_red">{$MG[price_limit]}</span> 次
+    &nbsp;&nbsp;&nbsp;当前已报价 <span class="f_b">{$limit_used}</span> 次
+    &nbsp;&nbsp;&nbsp;还可以报价 <span class="f_b f_blue">{$limit_free}</span> 次
+    </div>
+    {/if}
+        <div class="box-bd">
+            <div class="sumb-btn-mod">
+              <input type="submit" name="submit" value="同意条款，立刻发送报价" class="btn_new btn-large btn-danger" />
+                <p style="margin-top:10px;"><a href="{$MODULE[1][linkurl]}about/agreement.html" class="blue-mark" target="_blank">点击阅读{$DT[sitename]}服务条款</a></p>
+            </div>
+        </div>
+        <!-- bd end -->
+    </form>
+    </div>
+    <!-- box-blank end -->
+    
+</div>
+</div>
+
+
+</div>
+{if !$_userid}<script type="text/javascript" src="{DT_STATIC}file/script/guest.js"></script>{/if}
+<script type="text/javascript">
+function check() {
+    var l;
+    var f;
+    f = 'title';
+    l = Dd(f).value.length;
+    if(l < 5 || l > 50) {
+        Dmsg('主题应为5-50字，当前已输入'+l+'字', f);
+        return false;
+    }
+    f = 'content';
+    l = Dd(f).value.length;
+    if(l < 10 || l > 2000) {
+        Dmsg('内容应为10-2000字，当前已输入'+l+'字', f);
+        return false;
+    }
+    {if !$_userid}
+    f = 'truename';
+    l = Dd(f).value.length;
+    if(l < 2) {
+        Dmsg('请填写联系人', f);
+        return false;
+    }
+    f = 'telephone';
+    l = Dd(f).value.length;
+    if(l < 7) {
+        Dmsg('请填写联系电话', f);
+        return false;
+    }
+    {/if}
+    {if $need_captcha}
+    f = 'captcha';
+    l = Dd(f).value;
+    if(!is_captcha(l)) {
+        Dmsg('请填写正确的验证码', f);
+        return false;
+    }
+    if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+        Dd(f).focus();
+        return false;
+    }
+    {/if}
+    {if $need_question}
+    f = 'answer';
+    l = Dd(f).value.length;
+    if(l < 1) {
+        Dmsg('请填写验证问题', f);
+        return false;
+    }
+    if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+        Dd(f).focus();
+        return false;
+    }
+    {/if}
+}
+</script>
+{template 'footer'}

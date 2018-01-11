@@ -1,0 +1,69 @@
+<div class="dem">
+  <li colspan="2">&nbsp;&nbsp; <strong>非会员补充信息：</strong> &nbsp;&nbsp;
+    建议 <a href="{$MODULE[2][linkurl]}{$DT[file_login]}" class="f_b t">立即登录</a> 或 <a href="{$MODULE[2][linkurl]}{$DT[file_register]}" class="f_b t">注册会员</a> 以便系统长久保存您的联系方式 </li>
+</div>
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 公司名称</div>
+<div class="fb_text"><input name="post[company]" type="text" id="company" size="50" value="{$company}" />
+    个人请填姓名 例如：张三<br/>
+    <span id="dcompany" class="f_red"></span></div>
+</div>
+{if $module != 'info'}
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 所在地区</div>
+<div class="fb_text">{ajax_area_select('post[areaid]', '请选择', $areaid)} <span id="dareaid" class="f_red"></span></div>
+</div>
+{/if}
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 联系人</div>
+<div class="fb_text"><input name="post[truename]" type="text" id="truename" size="20" value="{$truename}" />
+    <br/>
+    <span id="dtruename" class="f_red"></span></div>
+</div>
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 联系手机</div>
+<div class="fb_text"><input name="post[mobile]" id="mobile" type="text" size="30" value="{$mobile}"/>
+    <span id="dmobile" class="f_red"></span></div>
+</div>
+<div class="dem">
+<div class="fb_title">电子邮件</div>
+<div class="fb_text"><input name="post[email]" id="email" type="text" size="30" value="{$email}" />
+    <span id="demail" class="f_red"></span></div>
+</div>
+<div class="dem">
+<div class="fb_title">联系电话</div>
+<div class="fb_text"><input name="post[telephone]" id="telephone" type="text" size="30" value="{$telephone}"/>
+    <span id="dtelephone" class="f_red"></span></div>
+</div>
+<div class="dem">
+<div class="fb_title">联系地址</div>
+<div class="fb_text"><input name="post[address]" id="address" type="text" size="60" value="{$address}"/></div>
+</div>
+{if $DT[im_qq]}
+<div class="dem">
+<div class="fb_title">QQ</div>
+<div class="fb_text"><input name="post[qq]" id="qq" type="text" size="30" value="{$qq}"/></div>
+</div>
+{/if}
+{if $DT[im_ali]}
+<div class="dem">
+<div class="fb_title">阿里旺旺</div>
+<div class="fb_text"><input name="post[ali]" id="ali" type="text" size="30" value="{$ali}"/></div>
+</div>
+{/if}
+{if $DT[im_msn]}
+<div class="dem">
+<div class="fb_title">MSN</div>
+<div class="fb_text"><input name="post[msn]" id="msn" type="text" size="40" value="{$msn}"/></div>
+</div>
+{/if}
+{if $DT[im_skype]}
+<div class="dem">
+<div class="fb_title">Skype</div>
+<div class="fb_text"><input name="post[skype]" id="skype" type="text" size="30" value="{$skype}"/></div>
+</div>
+{/if}
+<div class="dsn">
+  <div class="fb_title"></div>
+<div class="fb_text"><script type="text/javascript" src="{DT_STATIC}file/script/guest.js"></script></div>
+</div>

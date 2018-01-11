@@ -1,0 +1,26 @@
+<ul class="extension_ul_img">
+{loop $tags $k $t}
+  <li {if $k%4==3}class="no_mr"{/if} id="item_{$t[itemid]}">
+    <table>
+     <tbody><tr>
+      <td><a href="{$t[linkurl]}" target="_blank" class="li_img"><img src="{imgurl($t[thumb])}" alt="{$t[alt]}" title="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"></a></td>
+        </tr>
+    </tbody></table>
+      <div onclick="Go('{$MODULE[$moduleid][linkurl]}{rewrite('buy.php?itemid='.$t['itemid'])}');" title="立即购买" href="javascript:void(0);" class="gou" target="_blank"><em></em>立即购买</div>
+     <p><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></p>
+     <div class="com"><a href="{userurl($t[username])}" target="_blank" title="{$t[company]}">{$t[company]}</a><div title="企业实名认证" class="companyAuth"></div></div>
+    {php $xhmember = userinfo($t[username]);}
+    <div class="year">{if $xhmember[vip]}<b class="topLevel">{VIP}</b><i class="fen"></i><span>第<font>{vip_year($xhmember[fromtime])}</font>年</span>{else}<b class="topLevel">企业会员</b>{/if}<span class="fr"><input type="checkbox" id="check_{$t[itemid]}" name="itemid[]" value="{$t[itemid]}" onclick="sell_tip(this, {$t[itemid]});"/>对比</span></div>
+     <div class="price"><em>{$DT[money_sign]}</em><i>{$t[price]}</i></div>
+     <div class="show_quan">
+     <span class="fl show_quan_fl">{area_pos($t[areaid], '-')}</span>
+     <span class="fr">{if $t[username] && $DT[im_web]}{im_web($t[username].'&mid='.$moduleid.'&itemid='.$t[itemid])}&nbsp;{/if}
+      {if $t[qq] && $DT[im_qq]}{im_qq($t[qq])}&nbsp;{/if}</span>
+     </div>
+      <b></b>
+      </li>
+{/loop}	
+</ul>	
+{if $showpage && $pages}
+<div class="pages">{$pages}</div>
+{/if}
